@@ -1,0 +1,33 @@
+/* Text Box */
+.text-box-wrapper {
+  padding: 25px 15px 45px;
+  text-align: center;
+}
+.text-box-wrapper.image {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.text-box-wrapper.image.light h2,
+.text-box-wrapper.image.light .text-box-content {
+  color: #fff;
+}
+.text-box-wrapper.image.dark h2,
+.text-box-wrapper.image.dark .text-box-content {
+  color: #212121;
+}
+.text-box-wrapper.red {
+  background-color: #9d2235;
+}
+.text-box-wrapper.blue {
+  background-color: #22739d;
+}
+.text-box-wrapper.gray {
+  background-color: #eee;
+}
+.text-box-wrapper.red h2,
+.text-box-wrapper.red .text-box-content,
+.text-box-wrapper.blue h2,
+.text-box-wrapper.blue .text-box-content {
+  color: #fff
+}

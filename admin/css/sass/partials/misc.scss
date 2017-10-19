@@ -1,0 +1,78 @@
+.element-left {
+  float: left !important;
+}
+
+.element-right {
+  float: right !important;
+}
+
+.element-center {
+  float: none !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  clear: both !important;
+}
+
+.textleft {
+  text-align: left;
+}
+
+.textcenter {
+  text-align: center;
+}
+
+.textright {
+  text-align: right;
+}
+
+a {
+  .right-arrow {
+    position: absolute;
+
+    svg {
+      position: absolute;
+      left: 0;
+      -webkit-transition: left .2s ease;
+      transition: left .2s ease;
+      width: 1.5em;
+      height: 1.5em;
+      margin-left: 0.25em;
+      margin-right: 0.5em;
+    }
+  }
+
+  .left-arrow {
+    position: relative;
+
+    svg {
+      position: absolute;
+      right: 0;
+      -webkit-transition: right .2s ease;
+      transition: right .2s ease;
+      width: 1.5em;
+      height: 1.5em;
+      margin-right: 0.25em;
+      margin-left: 0.5em;
+    }
+  }
+
+  &:hover, &:focus, &:active {
+    .right-arrow {
+
+      svg {
+        left: 0.25em;
+        -webkit-transition:left .2s ease;
+        transition:left .2s ease;
+      }
+    }
+
+    .left-arrow {
+
+      svg {
+        right: 0.25em;
+        -webkit-transition:right .2s ease;
+        transition:right .2s ease;
+      }
+    }
+  }
+}

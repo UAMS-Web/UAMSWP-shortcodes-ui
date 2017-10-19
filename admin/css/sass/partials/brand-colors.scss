@@ -1,0 +1,366 @@
+
+.transparentwhite {
+  background-color: none;
+  color: #fff;
+
+  svg {
+    fill: #fff;
+  }
+}
+
+.transparentblack {
+  background-color: none;
+  color: #000;
+
+  svg {
+    fill: #000;
+  }
+}
+
+.transparentred {
+  background-color: none;
+  color: #cc0000;
+
+  svg {
+    fill: #cc0000;
+  }
+}
+
+.black {
+  background-color: #000;
+  color: #fff;
+
+  svg {
+    fill: #fff;
+  }
+}
+
+.white {
+  background-color: #fff;
+  color: #000;
+
+  svg {
+    fill: #000;
+  }
+}
+
+.gray10 {
+  background-color: #f2f2f2;
+  color: #000;
+
+  svg {
+    fill: #000;
+  }
+}
+
+.gray25 {
+  background-color: #ccc;
+  color: #000;
+
+  svg {
+    fill: #000;
+  }
+}
+
+.gray60 {
+  background-color: #666;
+  color: #fff;
+
+  svg {
+    fill: #fff;
+  }
+}
+
+.gray90 {
+  background-color: #333;
+  color: #fff;
+
+  svg {
+    fill: #fff;
+  }
+}
+
+.wolfpackred {
+  background-color: #cc0000;
+  color: #fff;
+
+  svg {
+    fill: #fff;
+  }
+}
+
+.reynoldsred {
+  background-color: #990000;
+  color: #fff;
+
+  svg {
+    fill: #fff;
+  }
+}
+
+.pyromanflame {
+  background-color: #D14905;
+  color: #fff;
+
+  svg {
+    fill: #fff;
+  }
+}
+
+.huntyellow {
+  background-color: #FDD726;
+  color: #000;
+
+  svg {
+    fill: #000;
+  }
+}
+
+.genomicgreen {
+  background-color: #7D8C1F;
+  color: #fff;
+
+  svg {
+    fill: #fff;
+  }
+}
+
+.innovationblue {
+  background-color: #427E93;
+  color: #fff;
+
+  svg {
+    fill: #fff;
+  }
+}
+
+.bioindigo {
+  background-color: #4156A1;
+  color: #fff;
+  
+  svg {
+    fill: #fff;
+  }
+}
+
+/* ===== 1.2 - Brand Colors - Links ===== */
+
+.transparentwhite a {
+  color: #fff;
+
+  &:hover, &:active, &:focus {
+    color: #fff;
+  }
+}
+
+.transparentblack a {
+  color: #000;
+
+  &:hover, &:active, &:focus {
+    color: #000;
+  }
+}
+
+.transparentred a {
+  color: #cc0000;
+
+  &:hover, &:active, &:focus {
+    color: #990000;
+  }
+}
+
+.black a {
+  color: #fff;
+
+  &:hover, &:active, &:focus {
+    color: #fff;
+  }
+}
+
+.white a {
+  color: #000;
+
+  &:hover, &:active, &:focus {
+    color: #000;
+  }
+}
+
+.gray10 a {
+  color: #000;
+
+  &:hover, &:active, &:focus {
+    color: #000;
+  }
+}
+
+.gray25 a {
+  color: #000;
+
+  &:hover, &:active, &:focus {
+    color: #000;
+  }
+}
+
+.gray60 a {
+  color: #fff;
+
+  &:hover, &:active, &:focus {
+    color: #fff;
+  }
+}
+
+.gray90 a {
+  color: #fff;
+
+  &:hover, &:active, &:focus {
+    color: #fff;
+  }
+}
+
+.wolfpackred a {
+  color: #fff;
+
+  &:hover, &:active, &:focus {
+    color: #fff;
+  }
+}
+
+.reynoldsred a {
+  color: #fff;
+
+  &:hover, &:active, &:focus {
+    color: #fff;
+  }
+}
+
+.pyromanflame a {
+  color: #fff;
+
+  &:hover, &:active, &:focus {
+    color: #fff;
+  }
+}
+
+.huntyellow a {
+  color: #000;
+
+  &:hover, &:active, &:focus {
+    color: #000;
+  }
+}
+
+.genomicgreen a {
+  color: #fff;
+
+  &:hover, &:active, &:focus {
+    color: #fff;
+  }
+}
+
+.innovationblue a {
+  color: #fff;
+
+  &:hover, &:active, &:focus {
+    color: #fff;
+  }
+}
+
+.bioindigo a {
+  color: #fff;
+
+  &:hover, &:active, &:focus {
+    color: #fff;
+  }
+}
+
+a {
+  &.black {
+    &:hover, &:active, &:focus {
+      color: #fff;
+    }
+  }
+
+  &.white {
+    &:hover, &:active, &:focus {
+      background-color: #e6e6e6;
+      color: #000;
+    }
+  }
+
+  &.gray10 {
+    &:hover, &:active, &:focus {
+      background-color: #d9d9d9;
+      color: #000;
+    }
+  }
+
+  &.gray25 {
+    &:hover, &:active, &:focus {
+      background-color: #b3b3b3;
+      color: #000;
+    }
+  }
+
+  &.gray60 {
+    &:hover, &:active, &:focus {
+      background-color: #4d4d4d;
+      color: #fff;
+    }
+  }
+
+  &.gray90 {
+    &:hover, &:active, &:focus {
+      background-color: #1a1a1a;
+      color: #fff;
+    }
+  }
+
+  &.wolfpackred {
+    &:hover, &:active, &:focus {
+      background-color: #990000;
+      color: #fff;
+    }
+  }
+
+  &.reynoldsred {
+    &:hover, &:active, &:focus {
+      background-color: #660000;
+      color: #fff;
+    }
+  }
+
+  &.pyromanflame {
+    &:hover, &:active, &:focus {
+      background-color: #9f3804;
+      color: #fff;
+    }
+  }
+
+  &.huntyellow {
+    &:hover, &:active, &:focus {
+      background-color: #edc202;
+      color: #000;
+    }
+  }
+
+  &.genomicgreen {
+    &:hover, &:active, &:focus {
+      background-color: #5a6416;
+      color: #fff;
+    }
+  }
+
+  &.innovationblue {
+    &:hover, &:active, &:focus {
+      background-color: #336071;
+      color: #fff;
+    }
+  }
+
+  &.bioindigo {
+    &:hover, &:active, &:focus {
+      background-color: #32427b;
+      color: #fff;
+    }
+  }
+}

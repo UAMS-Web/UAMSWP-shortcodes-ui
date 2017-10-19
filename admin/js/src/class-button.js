@@ -1,0 +1,1 @@
+// TO DO: https://github.com/wp-shortcake/shortcake/wiki/Event-Attribute-Callbacks

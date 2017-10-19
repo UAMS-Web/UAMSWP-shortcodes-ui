@@ -1,0 +1,298 @@
+.uams-callout {
+  padding: 2em;
+  margin: 1.5em 0 1.5em 0;
+  font-size: 1.25em;
+  display: flex;
+  flex-direction: row;
+ // overflow: hidden;
+
+  .callout-heading {
+    font-size: 1.8em;
+    margin-bottom: 0.25em;
+
+    .heading-icon {
+      width: 100%;
+      display: block;
+      clear: both;
+      font-size: 2em;
+      //padding-bottom: 1em;
+      line-height: 1.25em;
+
+      svg {
+        width: 1em;
+        height: 1em;
+      }
+    }
+  }
+
+  .callout-content {
+    margin: auto;
+    flex: 1 auto;
+  }
+
+  p, h1, h2, h3 {
+    font-weight: normal;
+    margin: 0;
+  }
+
+  a, div {
+    display: block;
+  //  height: 100%;
+    width: 100%;
+  }
+
+  .textleft {
+    text-align: left;
+  }
+
+  .textcenter {
+    text-align: center;
+  }
+
+  .textright {
+    text-align: right;
+  }
+
+  &.thinmargin {
+    margin: 1em 0 1em 0;
+  }
+
+  &.nomargin {
+    margin: 0;
+  }
+
+  &.callout-media {
+    padding: 0;
+
+    &.callout-video {
+      min-height: 350px;
+    }
+
+    
+
+    .callout-content {
+      flex: 1 100%;
+      width: 50%;
+
+      &.media-left {
+        order: 1;
+        padding: 1.5em;
+      }
+
+      &.media-right {
+        order: 1;
+        padding: 1.5em;
+      }
+    }
+
+    &.callout-media-image {
+
+      .callout-content {
+        margin: auto;
+      }
+    }
+  }
+
+  .callout-img {
+    max-width: 60%;
+    max-height: 100%;
+    margin: auto;
+    flex: 1 100%;
+    position: relative;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+
+    &.media-left {
+      order: 1;
+      padding: 0;
+
+      .callout-img-caption {
+        text-align: left;
+      }
+    }
+
+    &.media-right {
+      order: 2;
+      padding: 0;
+
+      .callout-img-caption {
+        text-align: right;
+      }
+    }
+  }
+
+  .embed-responsive-item {
+    border: none;
+    width: 60%;
+    flex: 1 100%;
+  }
+
+}
+
+.callout-img-caption {
+  position: absolute;
+  bottom: -1.75em;
+  right: 0;
+  font-size: 12px;
+  color: #000;
+}
+
+.uams-callout-bgimg, .uams-callout-bgvid {
+  max-width: 1500px;
+  height: 500px;
+  position: relative;
+
+  &.thinmargin {
+    margin: 1em 0 1em 0;
+  }
+
+  &.nomargin {
+    margin: 0;
+  }
+
+  &.normal {
+    margin: 2em 0 2em 0;
+  }
+
+  .callout-media-wrapper {
+    position: absolute;
+    margin: auto;
+    height: 100%;
+    width: 100%;
+
+    .bgimg {
+      height: 100%;
+      width: 100%;
+      display: block;
+      background-position: center center !important; 
+      background-repeat: no-repeat !important; 
+      background-size: cover !important;
+    }
+
+    .embed-responsive {
+      height: 100%;
+      width: 100%;
+      display: block;
+      overflow: hidden;
+      position: relative;
+
+      .bgimg {
+        position: absolute;
+      }
+
+      video {
+        min-width: 100%; 
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        position: absolute;
+      }
+    }
+  }
+
+  .callout-content-container {
+    position: absolute;
+    display: flex;
+    padding: 2em 2em 2em 2em;
+    height: 100%;
+    width: 100%;
+  }
+
+  .uams-callout {
+    padding: 2em;
+    font-size: 1.2em;
+    display: inline-block;
+    margin: 0;
+    position: relative;
+
+    &.left {
+      margin-right: auto;
+    }
+
+    &.right {
+      margin-left: auto;
+    }
+
+    &.center {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    &.top {
+      margin-bottom: auto;
+    }
+
+    &.bottom {
+      margin-top: auto;
+    }
+
+    &.middle {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .uams-callout {
+    flex-direction: column;
+    font-size: 1em;
+
+    &.callout-media {
+      padding: 0;
+
+      .callout-content {
+        padding: 1.5em;
+        flex: 1 100%;
+        width: 100%;
+      }
+    }
+
+    .callout-img {
+      max-width: 100%;
+      max-height: 100%;
+      margin: 0;
+      flex: 1 100%;
+    }
+
+    .embed-responsive-item {
+      border: none;
+      width: 100%;
+      min-height: 400px;
+      flex: 1 100%;
+    }
+  }
+
+  .uams-callout-bgvid {
+    .callout-media-wrapper {
+      .embed-responsive {
+        video {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+
+  .callout-media-wrapper {
+    position: relative !important;
+    float: left;
+  }
+
+  .callout-content-container {
+    position: relative !important;
+    float: left;
+    height: auto !important;
+    padding: 0 !important;
+    margin-bottom: 1em;
+  }
+
+  .uams-callout-bgimg, .uams-callout-bgvid {
+    height: 300px;
+  }
+}

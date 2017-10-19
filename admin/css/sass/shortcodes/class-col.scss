@@ -1,0 +1,33 @@
+/* Col Shortcodes */
+  .row:before,
+  .row:after {
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */
+  }
+  .row:after {
+    clear: both;
+  }
+  .col-md-3, .col-md-4, .col-md-6, .col-md-8, .col-md-9 {
+    position: relative;
+    padding-left: 1%;
+    padding-right: 1%;
+    min-height: 1px;
+    float: left;
+  }
+  .col-md-9 {
+    width: 73%;
+  }
+  .col-md-8 {
+    width: 64.66666667%;
+  }
+  .col-md-6 {
+    width: 48%;
+  }
+  .col-md-4 {
+    width: 31.33333333%;
+  }
+  .col-md-3 {
+    width: 23%;
+  }

@@ -1,0 +1,34 @@
+// Minor style changes to TinyMCE previews of shortcodes
+
+#tinymce {
+	
+	.wpview {
+
+		// Display these shortcode previews as inline-block rather than block...
+		&.wpview-wrap[data-wpview-type="button"], 
+		&.wpview-wrap[data-wpview-type="basebutton"] {
+			display: inline-block;
+			width: auto;
+		}
+
+		&.wpview-wrap[data-wpview-type="pullquote"] {
+			display: inline;
+			width: auto;
+		}
+
+		&.wpview-wrap[data-wpview-type="lead"] {
+
+			p.lead {
+				font-size: 1.75em;
+				margin-bottom: 0;
+			}
+		}
+
+		// ... but if a button has displayblock value true, display it as a block.
+		&.wpview-wrap[data-wpview-text*="displayblock%3D%22true"] {
+			display: block;
+			width: 100%;
+		}
+
+	}
+}

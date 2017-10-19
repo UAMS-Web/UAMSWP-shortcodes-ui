@@ -1,0 +1,35 @@
+/**
+ * NCSU Brand Colors
+ */
+
+// grays
+$gray10: lighten(#000, 90%) !default;
+$gray25: lighten(#000, 75%) !default;
+//$gray: lighten(#000, 33.5%) !default;
+$gray60: lighten(#000, 40%) !default;
+$gray90: lighten(#000, 10%) !default;
+
+// colors by brand name
+$wolfpackred: #cc0000 !default;
+$reynoldsred: #990000 !default;
+$pyromanflame: #d14905 !default;
+$huntyellow: #FDD726 !default;
+$genomicgreen: #7D8C1F !default;
+$innovationblue: #427E93 !default;
+$bioindigo: #4156a1 !default;
+
+// colors by recognizable name
+$brand-red: $wolfpackred !default;
+$brand-reynolds: $reynoldsred !default;
+$brand-orange: $pyromanflame !default;
+$brand-yellow: $huntyellow !default;
+$brand-green: $genomicgreen !default;
+$brand-blue: $innovationblue !default;
+$brand-indigo: $bioindigo !default;
+
+// bootstrap class colors
+$brand-primary: $brand-red !default;
+$brand-success: $brand-green !default;
+$brand-info: $brand-blue !default;
+$brand-warning: $brand-orange !default;
+$brand-danger: $brand-reynolds !default;

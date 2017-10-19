@@ -1,0 +1,413 @@
+.panel {
+	box-shadow: none;
+	
+	.panel-heading {
+		padding: 0;
+	}
+
+	.panel-body {
+		padding: 1em;
+	}
+	
+	.panel-title {
+		padding: 0;
+
+		span {
+			font-size: 0.8em;
+			text-transform: uppercase;
+			font-weight: bold;
+			display: block;
+			padding: 1.25em 1em 1em 1em;
+			text-align: left;
+		}
+
+		button {
+			position: relative;
+			display: block;
+			width: 100%;
+			padding: 1.5em 1em 1em 1em;
+			text-decoration: underline;
+			border: none;
+			background: none;
+			font-size: 0.8em;
+			text-transform: uppercase;
+			font-weight: bold;
+			text-align: left;
+
+			&:hover, &:focus, &:active {
+				text-decoration: none;
+			}
+
+			span.showless {
+				display: block;
+			}
+
+			span.showmore {
+				display: none;
+			}
+
+			&.collapsed {
+
+				span.showless {
+					display: none;
+				}
+
+				span.showmore {
+					display: block !important;
+				}
+			}
+
+			span.showmore, span.showless {
+				position: absolute;
+				right: 1em;
+				top: 50%;
+				margin-top: -0.75em;
+				padding: 0;
+				font-size: 0.8em;
+
+				span {
+					display: inline;
+					position: relative;
+					top: auto;
+					right: auto;
+					margin: 0;
+					padding: 0;
+				}
+
+				svg {
+					width: 1.5em;
+					height: 1.5em;
+					vertical-align: sub;
+				}
+			}
+		}
+
+	}
+
+	&.panel-default {
+		border-color: $gray25;
+
+		.panel-heading {
+			background-color: $gray10;
+			border-color: $gray10;
+		}
+
+		.panel-title {
+
+			button {
+				color: $wolfpackred;
+				text-decoration: underline;
+
+				svg {
+					fill: $wolfpackred;
+				}
+
+				&:hover, &:focus, &:active {
+					color: $reynoldsred;
+					text-decoration: none;
+
+					svg {
+						fill: $reynoldsred;
+					}
+				}
+			}
+		}
+	}
+
+	&.panel-primary {
+
+		.panel-title {
+
+			button {
+
+				svg {
+					fill: #fff;
+				}
+
+				&:hover, &:focus, &:active {
+					background-color: $reynoldsred;
+				}
+			}
+		}
+	}
+
+	&.panel-success {
+
+		border-color: $genomicgreen;
+
+		.panel-heading {
+			background-color: $genomicgreen;
+			border-color: $genomicgreen;
+		}
+
+		.panel-title {
+			color: #fff;
+
+			button {
+				color: #fff;
+
+				svg {
+					fill: #fff;
+				}
+
+				&:hover, &:focus, &:active {
+					background-color: darken($genomicgreen, 10);
+				}
+			}
+		}
+	}
+
+	&.panel-info {
+
+		border-color: $innovationblue;
+
+		.panel-heading {
+			background-color: $innovationblue;
+			border-color: $innovationblue;
+		}
+
+		.panel-title {
+			color: #fff;
+
+			button {
+				color: #fff;
+
+				svg {
+					fill: #fff;
+				}
+
+				&:hover, &:focus, &:active {
+					background-color: darken($innovationblue, 10);
+				}
+			}
+		}
+	}
+
+	&.panel-warning {
+
+		border-color: $huntyellow;
+
+		.panel-heading {
+			background-color: $huntyellow;
+			border-color: $huntyellow;
+		}
+
+		.panel-title {
+			color: #000;
+
+			button {
+				color: #000;
+
+				svg {
+					fill: #000;
+				}
+
+				&:hover, &:focus, &:active {
+					background-color: darken($huntyellow, 10);
+				}
+			}
+		}
+	}
+
+	&.panel-danger {
+
+		border-color: $reynoldsred;
+
+		.panel-heading {
+			background-color: $reynoldsred;
+			border-color: $reynoldsred;
+		}
+
+		.panel-title {
+			color: #fff;
+
+			button {
+				color: #fff;
+
+				svg {
+					fill: #fff;
+				}
+
+				&:hover, &:focus, &:active {
+					background-color: darken($reynoldsred, 10);
+				}
+			}
+		}
+	}
+
+	&.noborder {
+		border: none;
+
+		.panel-body {
+			padding: 1em 0;
+		}
+	}
+
+	&.simple {
+		border: none;
+
+		.panel-heading {
+			background: none;
+			border: none;
+		}
+
+		.panel-title {
+			color: #000;
+
+			button {
+				color: $wolfpackred;
+				background: none;
+
+				&.hover, &.focus, &.active {
+					background: none !important;
+				}
+			}
+			
+			span, button {
+				padding: 0;
+				font-size: 1.25em;
+				font-family: inherit;
+				text-transform: inherit;
+				font-weight: bold;
+				text-align: left;
+			}
+
+			button > span.showmore, button > span.showless {
+				font-size: 0.51em;
+				text-transform: uppercase;
+				font-weight: bold;
+				border-radius: 0.5em;
+
+				svg {
+					width: 1em;
+					height: 1em;
+				}
+			}
+		}
+
+		.panel-body {
+			padding: 1em 0;
+		}
+
+		&.panel-primary {
+
+			.panel-title {
+
+				button {
+					background: none;
+
+					.showmore, .showless {
+						background-color: $wolfpackred;
+						padding: 0.25em 0.5em;
+						color: #fff;
+
+						svg {
+							fill: #fff;
+						}
+					}
+
+					&.hover, &.focus, &.active {
+						background: none;
+					}
+				}
+			}
+		}
+
+		&.panel-success {
+
+			.panel-title {
+
+				button {
+					background: none;
+
+					.showmore, .showless {
+						background-color: $genomicgreen;
+						padding: 0.25em 0.5em;
+						color: #fff;
+
+						svg {
+							fill: #fff;
+						}
+					}
+
+					&.hover, &.focus, &.active {
+						background: none;
+					}
+				}
+			}
+		}
+
+		&.panel-info {
+
+			.panel-title {
+
+				button {
+					background: none;
+
+					.showmore, .showless {
+						background-color: $innovationblue;
+						padding: 0.25em 0.5em;
+						color: #fff;
+
+						svg {
+							fill: #fff;
+						}
+					}
+
+					&.hover, &.focus, &.active {
+						background: none;
+					}
+				}
+			}
+		}
+
+		&.panel-warning {
+
+			.panel-title {
+
+				button {
+					background: none;
+
+					.showmore, .showless {
+						background-color: $huntyellow;
+						padding: 0.25em 0.5em;
+						color: #000;
+
+						svg {
+							fill: #000;
+						}
+					}
+
+					&.hover, &.focus, &.active {
+						background: none;
+					}
+				}
+			}
+		}
+
+		&.panel-danger {
+
+			.panel-title {
+
+				button {
+					background: none;
+
+					.showmore, .showless {
+						background-color: $reynoldsred;
+						padding: 0.25em 0.5em;
+						color: #fff;
+
+						svg {
+							fill: #fff;
+						}
+					}
+
+					&.hover, &.focus, &.active {
+						background: none;
+					}
+				}
+			}
+		}
+
+	}
+}

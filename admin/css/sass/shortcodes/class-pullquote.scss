@@ -1,0 +1,105 @@
+aside.pullquote {
+	display: block;
+	margin: 2em 1em;
+	padding: 1em 1em;
+	
+	.quote-content {
+		background: none;
+		font-size: 2em;
+		line-height: 1.25em;
+		quotes: "“" "”" "‘" "’";
+
+		&:before {
+			content: open-quote;
+		}
+
+		&:after {
+			content: close-quote;
+		}
+
+		&.wolfpackred {
+			color: $wolfpackred;
+		}
+
+		&.gray90 {
+			color: $gray90;
+		}
+
+		&.black {
+			color: #000;
+		}
+
+		&.reynoldsred {
+			color: $reynoldsred;
+		}
+
+		&.pyromanflame {
+			color: $pyromanflame;
+		}
+
+		&.genomicgreen {
+			color: $genomicgreen;
+		}
+
+		&.innovationblue {
+			color: $innovationblue;
+		}
+
+		&.bioindigo {
+			color: $bioindigo;
+		}
+	}
+
+	cite {
+		font-weight: bold;
+		text-align: right;
+		float: right;
+		font-size: 1.25em;
+
+		&:before {
+			content: '\2015';
+			padding-right: 0.25em;
+		}
+	}
+
+	&.alignleft {
+		text-align: left;
+	}
+
+	&.aligncenter {
+		text-align: center;
+	}
+
+	&.alignright {
+		text-align: right;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	aside.pullquote {
+
+		&.alignleft {
+			width: 40%;
+			padding-right: 2em;
+			padding-left: 0;
+		}
+		
+		&.alignright {
+			width: 40%;
+			padding-left: 2em;
+			padding-right: 0;
+		}
+
+		&.aligncenter {
+			width: 100%;
+			padding: 1em 2em;
+
+			.quote-content {
+				margin: 0 auto;
+				width: 70%;
+			}
+		}
+		
+		
+	}
+}

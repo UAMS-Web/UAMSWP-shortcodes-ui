@@ -1,4 +1,10 @@
-/* Icon Box */
+/* Full Width Option */
+.uams-full-width {
+  width: 100vw;
+  margin-left: calc( 50% - 50vw);
+  margin-right: calc( 50% - 50vw);
+}
+/* Icon Box Shortcodes */
 .icon-box-wrapper {
   text-align: center;
   padding: 15px 0;
@@ -14,7 +20,8 @@
 .icon-box-icon a:hover {
   border-bottom: none;
 }
-.icon-box-icon a span { 
+.icon-box-icon a span,
+.icon-box-icon .icon-wrap span { 
   display: inline-block;
   padding: 18px;
   border-radius: 100%;
@@ -134,25 +141,31 @@
 .icon-box-wrapper.boxed.gray .icon-box-content {
   background-color: #eee;
 }
-.icon-box-wrapper.boxed.gray .icon-box-icon a span {
+.icon-box-wrapper.boxed.gray .icon-box-icon a span,
+.icon-box-wrapper.boxed.gray .icon-box-icon .icon-wrap span  {
   border-color: #eee;
   background-color: #fff;
 }
-.icon-box-wrapper.boxed.blue .icon-box-icon a span {
+.icon-box-wrapper.boxed.blue .icon-box-icon a span,
+.icon-box-wrapper.boxed.blue .icon-box-icon .icon-wrap span {
   border-color: #22739d;
   background-color: #fff;
 }
-.icon-box-wrapper.boxed.red .icon-box-icon a span {
+.icon-box-wrapper.boxed.red .icon-box-icon a span,
+.icon-box-wrapper.boxed.red .icon-box-icon .icon-wrap span {
   border-color: #9d2235;
   background-color: #fff;
 }
-.icon-box-wrapper.framed.gray .icon-box-icon a span {
+.icon-box-wrapper.framed.gray .icon-box-icon a span,
+.icon-box-wrapper.framed.gray .icon-box-icon .icon-wrap span {
   background-color: #eee;
 }
-.icon-box-wrapper.framed.blue .icon-box-icon a span {
+.icon-box-wrapper.framed.blue .icon-box-icon a span,
+.icon-box-wrapper.framed.blue .icon-box-icon .icon-wrap span {
   background-color: #22739d;
 }
-.icon-box-wrapper.framed.red .icon-box-icon a span {
+.icon-box-wrapper.framed.red .icon-box-icon a span,
+.icon-box-wrapper.framed.red .icon-box-icon .icon-wrap span {
   background-color: #9d2235;
 }
 .icon-box-wrapper.framed.gray .icon-box-icon span:before {
@@ -162,3 +175,36 @@
 .icon-box-wrapper.framed.blue .icon-box-icon span:before {
   color: #fff;
 }
+
+/* Responsive Fixes */
+@media (min-width: 768px) {
+  .icon-box-content {
+    max-width: 750px;
+    margin: -55px auto 0;
+  }
+  .text-box-content {
+    max-width: 750px;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 992px) {
+  .icon-box-content {
+    max-width: 970px;
+    margin: -55px auto 0;
+  }
+  .text-box-content {
+    max-width: 970px;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 1200px) {
+  .icon-box-content {
+    max-width: 1170px;
+    margin: -55px auto 0;
+  }
+  .text-box-content {
+    max-width: 1170px;
+    margin: 0 auto;
+  }
+}
+

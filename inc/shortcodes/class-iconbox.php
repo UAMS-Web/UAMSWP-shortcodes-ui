@@ -104,7 +104,7 @@ class IconBox extends Shortcode
                 'description' => 'Optional. Enter a URL to make your icon and title a clickable hyperlink.',
                 'encode' => false,
                 'meta' => array(
-                    'placeholder' => 'https://oit.ncsu.edu/'
+                    'placeholder' => 'http://www.uams.edu/'
                 )
             ),
             array(
@@ -172,7 +172,7 @@ class IconBox extends Shortcode
             $urlopen = '<a href="' . esc_url( $attrs['url'] ) . '">';
             $urlclose = '</a>';
         } else {
-            $urlopen = '<span>';
+            $urlopen = '<span class="icon-wrap">';
             $urlclose = '</span>';
         }
 

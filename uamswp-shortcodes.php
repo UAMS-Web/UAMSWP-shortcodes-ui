@@ -21,9 +21,9 @@ if ( ! defined( 'WPINC' ) ) {
 if ( ! function_exists( 'is_plugin_active' ) )
      require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 // This plugin uses namespaces and requires PHP 5.3 or greater.
-if ( version_compare( PHP_VERSION, '5.3', '<' ) ) {
+if ( version_compare( PHP_VERSION, '5.4', '<' ) ) {
 	add_action( 'admin_notices', create_function( '',
-	"echo '<div class=\"error\"><p>" . __( 'UAMSWP Shortcode UI requires PHP 5.3 to function properly. Please upgrade PHP or deactivate the plugin.', 'uamswp-shortcode-ui' ) . "</p></div>';" ) );
+	"echo '<div class=\"error\"><p>" . __( 'UAMSWP Shortcode UI requires PHP 5.4 to function properly. Please upgrade PHP or deactivate the plugin.', 'uamswp-shortcode-ui' ) . "</p></div>';" ) );
 	return;
 } elseif ( ! is_plugin_active( 'shortcode-ui/shortcode-ui.php') ) {
 	add_action( 'admin_notices', create_function( '',

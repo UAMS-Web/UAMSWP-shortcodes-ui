@@ -1,6 +1,6 @@
-# NCSU Shortcodes
+# UAMS Shortcodes
 
-**Contributors:** Chris Deaton, Brian DeConinck, fusionengineering
+**Contributors:** Todd McKee, Original work from Chris Deaton, Brian DeConinck, fusionengineering
 
 **License:** GPLv2 or later
 

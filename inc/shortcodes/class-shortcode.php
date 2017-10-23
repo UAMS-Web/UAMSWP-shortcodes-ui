@@ -77,6 +77,7 @@ abstract class Shortcode
     public static function get_icon_collectiOn()
     {
         return array(
+            'noicon'                   => 'No Icon',
             'ic-address-book'          => 'Address-book',
             'ic-administration'        => 'Administration',
             'ic-book'                  => 'Book',

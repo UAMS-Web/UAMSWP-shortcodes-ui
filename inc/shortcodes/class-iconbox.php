@@ -148,8 +148,8 @@ class IconBox extends Shortcode
         $ignored_icons = self::get_ignored_icon_names();
 
         if (!empty($attrs['headingicon']) && !in_array($attrs['headingicon'], $ignored_icons)) {
-            $icon_type = explode('-', $attrs['headingicon'], 2)[0];
-            $icon_type = explode(' ', $icon_type, 2)[0]; // Changed a naming convention at one point. This extra step means old usages don't break.
+            //$icon_type = explode('-', $attrs['headingicon'], 2)[0];
+            //$icon_type = explode(' ', $icon_type, 2)[0]; // Changed a naming convention at one point. This extra step means old usages don't break.
 
             $icon_name = $attrs['headingicon'];
             //$icon_name = explode('-', $attrs['headingicon'], 2)[1]; //Original for SVG

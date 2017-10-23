@@ -89,7 +89,6 @@ class UAMS_Shortcakes
 
         add_action('enqueue_shortcode_ui', array($this, 'action_enqueue_scripts'));
         add_action('wp_enqueue_scripts', array($this, 'action_enqueue_scripts'));
-        add_editor_style( plugin_dir_url(dirname(__FILE__)) . 'admin/css/admin.css');
     }
 
     /**

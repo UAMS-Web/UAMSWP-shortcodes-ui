@@ -15,7 +15,7 @@ class UAMS_Shortcakes
         /* Originally from NCSU */
         'UAMS_Shortcakes\Shortcodes\Alert',
         'UAMS_Shortcakes\Shortcodes\BaseButton',
-        'UAMS_Shortcakes\Shortcodes\Callout',
+        //'UAMS_Shortcakes\Shortcodes\Callout',
         'UAMS_Shortcakes\Shortcodes\Pullquote',
         //'UAMS_Shortcakes\Shortcodes\Panel',
         'UAMS_Shortcakes\Shortcodes\ProgressBar',

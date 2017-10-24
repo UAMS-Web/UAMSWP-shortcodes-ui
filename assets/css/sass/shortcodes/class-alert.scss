@@ -10,8 +10,14 @@
 	button.close {
 		align-self: flex-end;
 		margin: 0 0 auto auto;
-		padding: 0.6em;
+		padding: 0 0.3em 0.4em 0.4em;
 		opacity: 0.6;
+		background: none;
+		border: 0;
+    	font-size: 32px;
+    	font-family: 'Fira Sans', sans-serif;
+    	font-weight: bold;
+    	line-height: 1em;
 
 		&:hover, &:active, &:focus {
 			opacity: 1;

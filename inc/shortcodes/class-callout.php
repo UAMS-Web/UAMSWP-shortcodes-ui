@@ -298,6 +298,13 @@ class Callout extends Shortcode
             ),
 
             array(
+                'label' => esc_html__('Fullsreen?', 'uams_shortcodes'),
+                'attr' => 'fullscreen',
+                'type' => 'checkbox',
+                'description' => '<strong>Note:</strong> This option only works on full width page template (No sidebar). You may get unintended results on pages with sidebar.',
+            ),
+
+            array(
                 'label' => esc_html__('Custom CSS classes', 'uams_shortcodes'),
                 'attr' => 'customclass',
                 'type' => 'text',
@@ -326,17 +333,9 @@ class Callout extends Shortcode
         $ignored_icons = self::get_ignored_icon_names();
 
         if (!empty($attrs['headingicon']) && !in_array($attrs['headingicon'], $ignored_icons)) {
-            //$icon_type = explode('-', $attrs['headingicon'], 2)[0];
-            //$icon_type = explode(' ', $icon_type, 2)[0]; // Changed a naming convention at one point. This extra step means old usages don't break.
-
-            //$icon_name = explode('-', $attrs['headingicon'], 2)[1];
-
-            //$icon = '<span class="heading-icon" aria-hidden="true">'. self::uams_shortcodes_get_contents( esc_url(UAMS_SHORTCAKES_PATH . 'assets/images/'. $icon_type .'/'  . $icon_name . '.svg' ) ) .'</span>';
-
             $icon_name = $attrs['headingicon'];
 
             $icon = '<span class="'. $icon_name .'" aria-hidden="true"></span>';            
-
         } else {
             $icon = null;
         }
@@ -367,6 +366,14 @@ class Callout extends Shortcode
             $customclasses = explode(",", $attrs['customclass']);
             $basic_classes = array_merge($basic_classes, $customclasses);
             $customclass = implode(" ", array_map( 'sanitize_html_class', explode( ",", $attrs['customclass'] ) ) );
+        }
+
+        if ( $attrs['fullscreen'] == true ) {
+            $fullscreen = "uams-full-width";
+            //$basic_classes = array_push($basic_classes, $fullscreen);
+            $customclass = $customclass . " " . $fullscreen;
+        } else {
+            $fullscreen = null;
         }
 
         if (!empty($attrs['img'])) {
@@ -404,7 +411,9 @@ class Callout extends Shortcode
             $overlay = esc_attr($attrs['imgoverlay']);
         } else {
             $overlay = null;
-        } 
+        }
+
+
 
         $vidsrc = null;
         $vidembed = null;
@@ -481,8 +490,9 @@ class Callout extends Shortcode
         switch ($type) {
             case 'basic':
                 return sprintf(
-                    "<div class=\"%s\">%s%s<p class=\"%s\">%s %s</p>%s</div><!-- .uams-callout -->",
+                    "<div class=\"%s %s\">%s%s<p class=\"%s\">%s %s</p>%s</div><!-- .uams-callout -->",
                     implode(' ', $basic_classes),
+                    esc_attr( $customclass ),
                     $urlopen,
                     $heading,
                     implode(' ', $body_classes),
@@ -495,8 +505,9 @@ class Callout extends Shortcode
             case 'img':
 
                 return sprintf(
-                    "<div class=\"%s callout-media callout-media-img\"><div class=\"callout-img %s\"><img class=\"img-responsive\" srcset=\"%s\" sizes=\"(min-width: 36em) 33.3vw, 100vw\" alt=\"%s\" />%s</div><div class=\"callout-content %s\">%s%s<p class=\"%s\">%s %s</p>%s</div></div><!-- .uams-callout -->",
+                    "<div class=\"%s callout-media callout-media-img %s\"><div class=\"callout-img %s\"><img class=\"img-responsive\" srcset=\"%s\" sizes=\"(min-width: 36em) 33.3vw, 100vw\" alt=\"%s\" />%s</div><div class=\"callout-content %s\">%s%s<p class=\"%s\">%s %s</p>%s</div></div><!-- .uams-callout -->",
                     implode(' ', $basic_classes),
+                    esc_attr( $customclass ),
                     $mediaposition,
                     $img,
                     $alt,
@@ -515,8 +526,9 @@ class Callout extends Shortcode
             case 'vid':
 
                 return sprintf(
-                    "<div class=\"%s callout-media callout-video\">%s<div class=\"callout-content %s\">%s%s<p class=\"%s\">%s %s</p>%s</div></div><!-- .uams-callout -->",
+                    "<div class=\"%s callout-media callout-video %s\">%s<div class=\"callout-content %s\">%s%s<p class=\"%s\">%s %s</p>%s</div></div><!-- .uams-callout -->",
                     implode(' ', $basic_classes),
+                    esc_attr( $customclass ),
                     $video,
                     $mediaposition,
                     $urlopen,
@@ -576,8 +588,9 @@ class Callout extends Shortcode
 
             default:
                 return sprintf(
-                    "<div class=\"%s\">%s%s<p class=\"%s\">%s %s</p>%s</div>",
+                    "<div class=\"%s %s\">%s%s<p class=\"%s\">%s %s</p>%s</div>",
                     implode(' ', $basic_classes),
+                    esc_attr( $customclass ),
                     $urlopen,
                     $heading,
                     implode(' ', $body_classes),

@@ -31,6 +31,13 @@
   margin-left: calc( 50% - 50vw) !important;
   margin-right: calc( 50% - 50vw) !important;
 }
+@media screen and (min-width: 1920px) {
+  .uams-full-width {
+    width: 1920px;
+    margin-left: calc(50% - 960px) !important;
+    margin-right: calc(50% - 960px) !important;
+  }
+}
 
 a {
   .right-arrow {

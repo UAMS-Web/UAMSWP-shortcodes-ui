@@ -71,6 +71,7 @@ function updateTypeListener(changed, collection, shortcode) {
         fallbackimg = attributeByName('fallbackimg'),
         mediaposition = attributeByName('mediaposition'),
         textposition = attributeByName('textposition'),
+        imgoverlay = attributeByName('imgoverlay'),
         textwidth = attributeByName('textwidth');
 
     switch (updatedVal) {
@@ -87,6 +88,7 @@ function updateTypeListener(changed, collection, shortcode) {
             fallbackimg.$el.hide();
             mediaposition.$el.hide();
             textposition.$el.hide();
+            imgoverlay.$el.hide();
             textwidth.$el.hide();
             break;
 
@@ -103,6 +105,7 @@ function updateTypeListener(changed, collection, shortcode) {
             fallbackimg.$el.hide();
             mediaposition.$el.show();
             textposition.$el.hide();
+            imgoverlay.$el.hide();
             textwidth.$el.hide();
             break;
 
@@ -119,6 +122,7 @@ function updateTypeListener(changed, collection, shortcode) {
             fallbackimg.$el.hide();
             mediaposition.$el.show();
             textposition.$el.hide();
+            imgoverlay.$el.hide();
             textwidth.$el.hide();
             break;
 
@@ -135,6 +139,7 @@ function updateTypeListener(changed, collection, shortcode) {
             fallbackimg.$el.hide();
             mediaposition.$el.hide();
             textposition.$el.show();
+            imgoverlay.$el.show();
             textwidth.$el.show();
             break;
 
@@ -151,6 +156,7 @@ function updateTypeListener(changed, collection, shortcode) {
             fallbackimg.$el.show();
             mediaposition.$el.hide();
             textposition.$el.show();
+            imgoverlay.$el.show();
             textwidth.$el.show();
             break;
 
@@ -167,6 +173,7 @@ function updateTypeListener(changed, collection, shortcode) {
             fallbackimg.$el.hide();
             mediaposition.$el.hide();
             textposition.$el.hide();
+            imgoverlay.$el.hide();
             textwidth.$el.hide();
             break;
     }

@@ -1,5 +1,5 @@
 /**
- * NCSU Brand Colors
+ * UAMS Brand Colors
  */
 
 // grays
@@ -10,26 +10,38 @@ $gray60: lighten(#000, 40%) !default;
 $gray90: lighten(#000, 10%) !default;
 
 // colors by brand name
-$wolfpackred: #cc0000 !default;
-$reynoldsred: #990000 !default;
-$pyromanflame: #d14905 !default;
-$huntyellow: #FDD726 !default;
-$genomicgreen: #7D8C1F !default;
-$innovationblue: #427E93 !default;
-$bioindigo: #4156a1 !default;
+$uamsred: #9d2235 !default;
+$accentgray: #767475 !default;
+$eggplant: #701D45 !default;
+$bluegray: #396079 !default;
+$darkblue: #1A365C !default;
+$maroon: #6C0020 !default;
+$orange: #CA4C1D !default;
+$lightblue: #01809F !default;
+$tealblue: #427F81 !default;
+
+// additional web colors
+$webgreen: #229d4d !default;
+$webblue: #22739d !default;
+$focusyellow: #ffb81c !default;
+$urgentred: #C61029 !default;
+$alertorange: #ec7330 !default;
+$fyisteel: #597286 !default;
 
 // colors by recognizable name
-$brand-red: $wolfpackred !default;
-$brand-reynolds: $reynoldsred !default;
-$brand-orange: $pyromanflame !default;
-$brand-yellow: $huntyellow !default;
-$brand-green: $genomicgreen !default;
-$brand-blue: $innovationblue !default;
-$brand-indigo: $bioindigo !default;
+$brand-red: $uamsred !default;
+$brand-gray: $accentgray !default;
+$brand-eggplant: $eggplant !default;
+$brand-bluegray: $bluegray !default;
+$brand-darkblue: $darkblue !default;
+$brand-maroon: $maroon !default;
+$brand-orange: $orange !default;
+$brand-lightblue: $lightblue !default;
+$brand-tealblue: $tealblue !default;
 
 // bootstrap class colors
-$brand-primary: $brand-red !default;
-$brand-success: $brand-green !default;
-$brand-info: $brand-blue !default;
-$brand-warning: $brand-orange !default;
-$brand-danger: $brand-reynolds !default;
+// $brand-primary: $brand-red !default;
+// $brand-success: $brand-green !default;
+// $brand-info: $brand-blue !default;
+// $brand-warning: $brand-orange !default;
+// $brand-danger: $brand-reynolds !default;

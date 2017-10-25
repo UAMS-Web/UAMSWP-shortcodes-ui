@@ -393,11 +393,13 @@ abstract class Shortcode
             'black' => 'Black',
             'uamsred' => 'Cardinal Red (Primary)',
             'accentgray' => 'Accent Gray',
-            'plum' => 'Plum',
+            'eggplant' => 'Eggplant',
             'bluegray' => 'Blue Gray',
             'darkblue' => 'Dark Blue',
+            'maroon' => 'Maroon',
             'orange' => 'Orange',
-            'lightblue' => 'Light Blue'
+            'lightblue' => 'Light Blue',
+            'tealblue' => 'Teal Blue'
         );
     }
 
@@ -407,6 +409,8 @@ abstract class Shortcode
             'transparentwhite' => 'Transparent (White Text)',
             'transparentblack' => 'Transparent (Black Text)',
             'transparentred' => 'Transparent (Red Text)',
+            'semidark' => 'Semi-transparent dark (White Text)',
+            'semilight' => 'Semi-transparent light (Black Text)',
             'uamsred' => 'Cardinal Red (Primary)',
             'white' => 'White',
             'gray10' => '10% Gray',
@@ -415,26 +419,27 @@ abstract class Shortcode
             'gray90' => '90% Gray',
             'black' => 'Black',
             'accentgray' => 'Accent Gray',
-            'accentgray' => 'Accent Gray',
-            'plum' => 'Plum',
+            'eggplant' => 'Eggplant',
             'bluegray' => 'Blue Gray',
             'darkblue' => 'Dark Blue',
+            'maroon' => 'Maroon',
             'orange' => 'Orange',
-            'lightblue' => 'Light Blue'
+            'lightblue' => 'Light Blue',
+            'tealblue' => 'Teal Blue'
         );
     }
 
     public static function get_accessible_text_brand_colors()
     {
         return array(
-            'wolfpackred' => 'Wolfpack Red',
+            'wolfpackred' => 'Cardinal Red',
             'gray90' => '90% Gray',
             'black' => 'Black',
-            'reynoldsred' => 'Reynolds Red',
-            'pyromanflame' => 'Pyroman Flame',
-            'genomicgreen' => 'Genomic Green',
-            'innovationblue' => 'Innovation Blue',
-            'bioindigo' => 'Bio-Indigo',
+            // 'reynoldsred' => 'Reynolds Red',
+            // 'pyromanflame' => 'Pyroman Flame',
+            // 'genomicgreen' => 'Genomic Green',
+            // 'innovationblue' => 'Innovation Blue',
+            // 'bioindigo' => 'Bio-Indigo',
         );
     }
 

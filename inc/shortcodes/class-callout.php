@@ -20,7 +20,7 @@ class Callout extends Shortcode
         'target' => false,
         'textalign' => 'textcenter',
         'type' => 'basic',
-        'bgcolor' => 'wolfpackred',
+        'bgcolor' => 'uamsred',
         'img' => null,
         'imgcaption' => false,
         'vidtype' => null,
@@ -29,6 +29,7 @@ class Callout extends Shortcode
         'vidsource' => null,
         'autoplay' => null,
         'fallbackimg' => null,
+        'imgoverlay' => null,
         'textbgcolor' => null,
         'mediaposition' => null,
         'textposition' => null,
@@ -109,7 +110,7 @@ class Callout extends Shortcode
                 'description' => 'Optional. Enter a URL to make your callout a clickable hyperlink.',
                 'encode' => false,
                 'meta' => array(
-                    'placeholder' => 'https://oit.ncsu.edu/'
+                    'placeholder' => 'http://www.uams.edu/'
                 )
             ),
 
@@ -129,9 +130,9 @@ class Callout extends Shortcode
                 'options' => array(
                     'basic' => 'Basic Callout',
                     'img' => 'Callout with Image',
-                  //  'vid' => 'Callout with Video',
+                    'vid' => 'Callout with Video',
                     'bgimg' => 'Callout with Background Image',
-                  //  'bgvid' => 'Callout with Background Video',
+                    'bgvid' => 'Callout with Background Video',
                 ),
             ),
 
@@ -139,7 +140,7 @@ class Callout extends Shortcode
                 'label' => esc_html__('Callout Background Color', 'uams_shortcodes'),
                 'attr' => 'bgcolor',
                 'type' => 'radio',
-                'description' => 'Review the <a href="https://brand.ncsu.edu/color/" target="_blank">NC State Brand color palette</a> for proper usage. Default font is <strong>Wolfpack Red</strong>.',
+                'description' => 'Review the <a href="https://brand.ncsu.edu/color/" target="_blank">NC State Brand color palette</a> for proper usage. Default font is <strong>UAMS Red</strong>.',
                 'encode' => false,
                 'options' => self::get_uams_brand_colors(),
             ),
@@ -213,6 +214,19 @@ class Callout extends Shortcode
                 'attr' => 'fallbackimg',
                 'type' => 'attachment',
                 'description' => 'See examples and <a href="https://design.oit.ncsu.edu/docs/ncsu-shortcodes/callouts#vid" target="_blank">recommended dimensions</a> on the <a href="https://design.oit.ncsu.edu/docs/" target="_blank">OIT Design documentation site</a>.',
+            ),
+
+            array(
+                'label' => esc_html__('Image Adjustments', 'uams_shortcodes'),
+                'attr' => 'imgoverlay',
+                'type' => 'radio',
+                'description' => 'See examples and <a href="" target="_blank">notes about video hosting</a> on the <a href="/docs/" target="_blank">Webteam documentation site</a>.',
+                'encode' => false,
+                'options' => array(
+                    '' => 'None',
+                    'darken' => 'Darken (Dark overlay for light text)',
+                    'lighten' => 'Lighten (Light overlay for dark text)',
+                ),
             ),
 
             array(
@@ -312,12 +326,16 @@ class Callout extends Shortcode
         $ignored_icons = self::get_ignored_icon_names();
 
         if (!empty($attrs['headingicon']) && !in_array($attrs['headingicon'], $ignored_icons)) {
-            $icon_type = explode('-', $attrs['headingicon'], 2)[0];
-            $icon_type = explode(' ', $icon_type, 2)[0]; // Changed a naming convention at one point. This extra step means old usages don't break.
+            //$icon_type = explode('-', $attrs['headingicon'], 2)[0];
+            //$icon_type = explode(' ', $icon_type, 2)[0]; // Changed a naming convention at one point. This extra step means old usages don't break.
 
-            $icon_name = explode('-', $attrs['headingicon'], 2)[1];
+            //$icon_name = explode('-', $attrs['headingicon'], 2)[1];
 
-            $icon = '<span class="heading-icon" aria-hidden="true">'. self::uams_shortcodes_get_contents( esc_url(UAMS_SHORTCAKES_PATH . 'assets/images/'. $icon_type .'/'  . $icon_name . '.svg' ) ) .'</span>';
+            //$icon = '<span class="heading-icon" aria-hidden="true">'. self::uams_shortcodes_get_contents( esc_url(UAMS_SHORTCAKES_PATH . 'assets/images/'. $icon_type .'/'  . $icon_name . '.svg' ) ) .'</span>';
+
+            $icon_name = $attrs['headingicon'];
+
+            $icon = '<span class="'. $icon_name .'" aria-hidden="true"></span>';            
 
         } else {
             $icon = null;
@@ -348,6 +366,7 @@ class Callout extends Shortcode
         if (!empty($attrs['customclass'])) {
             $customclasses = explode(",", $attrs['customclass']);
             $basic_classes = array_merge($basic_classes, $customclasses);
+            $customclass = implode(" ", array_map( 'sanitize_html_class', explode( ",", $attrs['customclass'] ) ) );
         }
 
         if (!empty($attrs['img'])) {
@@ -381,6 +400,12 @@ class Callout extends Shortcode
             $fallbackalt = null;
         }
 
+        if (!empty($attrs['imgoverlay'])) {
+            $overlay = esc_attr($attrs['imgoverlay']);
+        } else {
+            $overlay = null;
+        } 
+
         $vidsrc = null;
         $vidembed = null;
 
@@ -391,13 +416,13 @@ class Callout extends Shortcode
                 if (preg_match("/youtu.be\/[a-z1-9.-_]+/", $attrs['youtube'])) {
                     preg_match("/youtu.be\/([a-z1-9.-_]+)/", $attrs['youtube'], $matches);
                     if (isset($matches[1])) {
-                        $vidsrc = 'http://www.youtube.com/embed/' . $matches[1] . '?modestbranding=1&autohide=1&showinfo=0';
+                        $vidsrc = 'http://www.youtube.com/embed/' . $matches[1] . '?modestbranding=0&autohide=1&showinfo=0';
                         $vidembed = '<iframe class="embed-responsive-item ' . $mediaposition . '" src="' . esc_url( $vidsrc ) . '"></iframe>';
                     }
                 } else if (preg_match("/youtube.com(.+)v=([^&]+)/", $attrs['youtube'])) {
                     preg_match("/v=([^&]+)/", $attrs['youtube'], $matches);
                     if (isset($matches[1])) {
-                        $vidsrc = 'http://www.youtube.com/embed/' . $matches[1] . '?modestbranding=1&autohide=1&showinfo=0';
+                        $vidsrc = 'http://www.youtube.com/embed/' . $matches[1] . '?modestbranding=0&autohide=1&showinfo=0';
                         $vidembed = '<iframe class="embed-responsive-item ' . $mediaposition . '" src="' . esc_url( $vidsrc ) . '"></iframe>';
                     }
                 }
@@ -435,7 +460,7 @@ class Callout extends Shortcode
         if ($attrs['type'] === 'bgvid') {
 
             $bgimg = wp_get_attachment_image_src($attrs['img'], 'full')[0];
-            $calloutbgimg = "<div class=\"bgimg\" style=\"background: url(" . esc_url( $bgimg ) . ");\"></div> <!-- .bgimg -->";
+            $calloutbgimg = "<div class=\"bgimg\" style=\"background: url(" . esc_url( $poster ) . ");\"></div> <!-- .bgimg -->";
 
             if (!empty($attrs['vidsource']) && !empty($attrs['fallbackimg'])) {
 
@@ -506,15 +531,17 @@ class Callout extends Shortcode
             case 'bgimg':
 
                 return sprintf(
-                    "<div class=\"uams-callout-bgimg %s\">
+                    "<div class=\"uams-callout-bgimg %s %s\">
                         <div class=\"callout-media-wrapper callout-img\">%s%s</div>
-                        <div class=\"callout-content-container container\">
+                        <div class=\"callout-content-container container %s\">
                             <div class=\"callout-content %s\">%s%s<p class=\"%s\">%s %s</p>%s</div>
                         </div><!-- .callout-img -->
                     </div><!-- .uams-callout-bgimg -->",
                     $attrs['margin'],
+                    esc_attr( $customclass ),
                     $calloutbgimg,
                     $imgcap,
+                    $overlay,
                     implode(' ', $textbox_classes),
                     $urlopen,
                     $heading,
@@ -528,13 +555,15 @@ class Callout extends Shortcode
             case 'bgvid':
 
                 return sprintf(
-                    "<div class=\"uams-callout-bgvid\">
+                    "<div class=\"uams-callout-bgvid %s\">
                         <div class=\"callout-media-wrapper callout-video\">%s</div>
-                        <div class=\"callout-content-container container\">
+                        <div class=\"callout-content-container container %s\">
                             <div class=\"callout-content %s\">%s%s<p class=\"%s\">%s %s</p>%s</div>
                         </div><!-- .callout-video -->
                     </div><!-- .uams-callout-bgvig -->",
+                    esc_attr( $customclass ),
                     $video,
+                    $overlay,
                     implode(' ', $textbox_classes),
                     $urlopen,
                     $heading,

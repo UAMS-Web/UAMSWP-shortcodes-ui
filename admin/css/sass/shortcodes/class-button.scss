@@ -15,17 +15,17 @@
   }
 
   &.white {
-    color: $wolfpackred;
+    color: $uamsred;
 
     svg {
-      fill: $wolfpackred;
+      fill: $uamsred;
     }
 
     &:hover, &:focus, &:active {
-      color: $reynoldsred;
+      color: darken( $uamsred, 10 );
 
       svg {
-        fill: $reynoldsred;
+        fill: darken( $uamsred, 10 );
       }
     }
   }

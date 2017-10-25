@@ -25,6 +25,13 @@
   text-align: right;
 }
 
+/* Full Width Option */
+.uams-full-width {
+  width: 100vw;
+  margin-left: calc( 50% - 50vw) !important;
+  margin-right: calc( 50% - 50vw) !important;
+}
+
 a {
   .right-arrow {
     position: absolute;

@@ -1,10 +1,19 @@
 
+.darken {
+  background-color: rgba(0,0,0,0.5);
+}
+
+.lighten {
+  background-color: rgba(255,255,255,0.5);
+}
+
 .transparentwhite {
   background-color: none;
   color: #fff;
 
-  svg {
-    fill: #fff;
+  [class^="ic-"]:before, [class*=" ic-"],
+  .callout-heading {
+    color: #fff;
   }
 }
 
@@ -12,17 +21,39 @@
   background-color: none;
   color: #000;
 
-  svg {
-    fill: #000;
+  [class^="ic-"]:before, [class*=" ic-"],
+  .callout-heading {
+    color: #000;
   }
 }
 
 .transparentred {
   background-color: none;
-  color: #cc0000;
+  color: #9d2235;
 
-  svg {
-    fill: #cc0000;
+  [class^="ic-"]:before, [class*=" ic-"],
+  .callout-heading {
+    color: #9d2235;
+  }
+}
+
+.semidark {
+  background-color: rgba(0,0,0,0.5);
+  color: #fff;
+
+  [class^="ic-"]:before, [class*=" ic-"],
+  .callout-heading {
+    color: #fff;
+  }
+}
+
+.semilight {
+  background-color: rgba(255,255,255,0.5);
+  color: #000;
+
+  [class^="ic-"]:before, [class*=" ic-"],
+  .callout-heading {
+    color: #000;
   }
 }
 
@@ -30,8 +61,9 @@
   background-color: #000;
   color: #fff;
 
-  svg {
-    fill: #fff;
+  [class^="ic-"]:before, [class*=" ic-"],
+  .callout-heading {
+    color: #fff;
   }
 }
 
@@ -39,17 +71,19 @@
   background-color: #fff;
   color: #000;
 
-  svg {
-    fill: #000;
+  [class^="ic-"]:before, [class*=" ic-"],
+  .callout-heading {
+    color: #000;
   }
 }
 
 .gray10 {
-  background-color: #f2f2f2;
+  background-color: #f5f5f5;
   color: #000;
 
-  svg {
-    fill: #000;
+  [class^="ic-"]:before, [class*=" ic-"],
+  .callout-heading {
+    color: #000;
   }
 }
 
@@ -57,8 +91,9 @@
   background-color: #ccc;
   color: #000;
 
-  svg {
-    fill: #000;
+  [class^="ic-"]:before, [class*=" ic-"],
+  .callout-heading {
+    color: #000;
   }
 }
 
@@ -66,8 +101,9 @@
   background-color: #666;
   color: #fff;
 
-  svg {
-    fill: #fff;
+  [class^="ic-"]:before, [class*=" ic-"],
+  .callout-heading {
+    color: #fff;
   }
 }
 
@@ -75,71 +111,98 @@
   background-color: #333;
   color: #fff;
 
-  svg {
-    fill: #fff;
+  [class^="ic-"]:before, [class*=" ic-"] {
+    color: #fff;
   }
 }
 
-.wolfpackred {
-  background-color: #cc0000;
+.uamsred {
+  background-color: #9d2235;
   color: #fff;
 
-  svg {
-    fill: #fff;
+  [class^="ic-"]:before, [class*=" ic-"],
+  .callout-heading {
+    color: #fff;
   }
 }
 
-.reynoldsred {
-  background-color: #990000;
+.accentgray {
+  background-color: #767475;
   color: #fff;
 
-  svg {
-    fill: #fff;
+  [class^="ic-"]:before, [class*=" ic-"],
+  .callout-heading {
+    color: #fff;
   }
 }
 
-.pyromanflame {
-  background-color: #D14905;
+.eggplant {
+  background-color: #701D45;
   color: #fff;
 
-  svg {
-    fill: #fff;
+  [class^="ic-"]:before, [class*=" ic-"],
+  .callout-heading {
+    color: #fff;
   }
 }
 
-.huntyellow {
-  background-color: #FDD726;
-  color: #000;
-
-  svg {
-    fill: #000;
-  }
-}
-
-.genomicgreen {
-  background-color: #7D8C1F;
+.bluegray {
+  background-color: #396079;
   color: #fff;
 
-  svg {
-    fill: #fff;
+  [class^="ic-"]:before, [class*=" ic-"],
+  .callout-heading {
+    color: #fff;
   }
 }
 
-.innovationblue {
-  background-color: #427E93;
+.darkblue {
+  background-color: #1A365C;
   color: #fff;
 
-  svg {
-    fill: #fff;
+  [class^="ic-"]:before, [class*=" ic-"],
+  .callout-heading {
+    color: #fff;
   }
 }
 
-.bioindigo {
-  background-color: #4156A1;
+.maroon {
+  background-color: #6C0020;
+  color: #fff;
+
+  [class^="ic-"]:before, [class*=" ic-"],
+  .callout-heading {
+    color: #fff;
+  }
+}
+
+.orange {
+  background-color: #CA4C1D;
+  color: #fff;
+
+  [class^="ic-"]:before, [class*=" ic-"],
+  .callout-heading {
+    color: #fff;
+  }
+}
+
+.lightblue {
+  background-color: #01809F;
   color: #fff;
   
-  svg {
-    fill: #fff;
+  [class^="ic-"]:before, [class*=" ic-"],
+  .callout-heading {
+    color: #fff;
+  }
+}
+
+.tealblue {
+  background-color: #427F81;
+  color: #fff;
+  
+  [class^="ic-"]:before, [class*=" ic-"],
+  .callout-heading {
+    color: #fff;
   }
 }
 
@@ -217,7 +280,7 @@
   }
 }
 
-.wolfpackred a {
+.uamsred a {
   color: #fff;
 
   &:hover, &:active, &:focus {
@@ -225,7 +288,7 @@
   }
 }
 
-.reynoldsred a {
+.accentgray a {
   color: #fff;
 
   &:hover, &:active, &:focus {
@@ -233,7 +296,7 @@
   }
 }
 
-.pyromanflame a {
+.eggplant a {
   color: #fff;
 
   &:hover, &:active, &:focus {
@@ -241,15 +304,7 @@
   }
 }
 
-.huntyellow a {
-  color: #000;
-
-  &:hover, &:active, &:focus {
-    color: #000;
-  }
-}
-
-.genomicgreen a {
+.bluegray a {
   color: #fff;
 
   &:hover, &:active, &:focus {
@@ -257,7 +312,7 @@
   }
 }
 
-.innovationblue a {
+.maroon a {
   color: #fff;
 
   &:hover, &:active, &:focus {
@@ -265,7 +320,23 @@
   }
 }
 
-.bioindigo a {
+.orange a {
+  color: #fff;
+
+  &:hover, &:active, &:focus {
+    color: #fff;
+  }
+}
+
+.lightblue a {
+  color: #fff;
+
+  &:hover, &:active, &:focus {
+    color: #fff;
+  }
+}
+
+.tealblue a {
   color: #fff;
 
   &:hover, &:active, &:focus {
@@ -315,51 +386,65 @@ a {
     }
   }
 
-  &.wolfpackred {
+  &.uamsred {
     &:hover, &:active, &:focus {
-      background-color: #990000;
+      background-color: #9d2235;
       color: #fff;
     }
   }
 
-  &.reynoldsred {
+  &.accentgray {
     &:hover, &:active, &:focus {
-      background-color: #660000;
+      background-color: #767475;
       color: #fff;
     }
   }
 
-  &.pyromanflame {
+  &.eggplant {
     &:hover, &:active, &:focus {
-      background-color: #9f3804;
+      background-color: #701D45;
       color: #fff;
     }
   }
 
-  &.huntyellow {
+  &.bluegray {
     &:hover, &:active, &:focus {
-      background-color: #edc202;
-      color: #000;
-    }
-  }
-
-  &.genomicgreen {
-    &:hover, &:active, &:focus {
-      background-color: #5a6416;
+      background-color: #396079;
       color: #fff;
     }
   }
 
-  &.innovationblue {
+  &.darkblue {
     &:hover, &:active, &:focus {
-      background-color: #336071;
+      background-color: #1A365C;
       color: #fff;
     }
   }
 
-  &.bioindigo {
+  &.maroon {
     &:hover, &:active, &:focus {
-      background-color: #32427b;
+      background-color: #6C0020;
+      color: #fff;
+    }
+  }
+
+  &.orange {
+    &:hover, &:active, &:focus {
+      background-color: #CA4C1D;
+      color: #fff;
+    }
+  }
+
+  &.lightblue {
+    &:hover, &:active, &:focus {
+      background-color: #01809F;
+      color: #fff;
+    }
+  }
+
+  &.tealblue {
+    &:hover, &:active, &:focus {
+      background-color: #427F81;
       color: #fff;
     }
   }

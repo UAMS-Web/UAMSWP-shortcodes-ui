@@ -17,8 +17,8 @@ aside.pullquote {
 			content: close-quote;
 		}
 
-		&.wolfpackred {
-			color: $wolfpackred;
+		&.uamsred {
+			color: $uamsred;
 		}
 
 		&.gray90 {
@@ -29,24 +29,31 @@ aside.pullquote {
 			color: #000;
 		}
 
-		&.reynoldsred {
-			color: $reynoldsred;
+		&.accentgray {
+			color: $accentgray;
 		}
 
-		&.pyromanflame {
-			color: $pyromanflame;
+		&.eggplant {
+			color: $eggplant;
 		}
 
-		&.genomicgreen {
-			color: $genomicgreen;
+		&.bluegray {
+			color: $bluegray;
 		}
 
-		&.innovationblue {
-			color: $innovationblue;
+		&.maroon {
+			color: $maroon;
 		}
 
-		&.bioindigo {
-			color: $bioindigo;
+		&.orange {
+			color: $orange;
+		}
+		&.lightblue {
+			color: $lightblue;
+		}
+
+		&.tealblue {
+			color: $tealblue;
 		}
 	}
 

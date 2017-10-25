@@ -66,33 +66,33 @@
 .alert-success {
 	color: #000;
 	background-color: #fff;
-	border-color: $genomicgreen !important;
+	border-color: $webgreen !important;
 
 	.alert-icon {
 		color: #fff;
-		background-color: $genomicgreen;
+		background-color: $webgreen;
 	}
 }
 
 .alert-info {
 	color: #000;
 	background-color: #fff;
-	border-color: $innovationblue !important;
+	border-color: $bluegray !important;
 
 	.alert-icon {
 		color: #fff;
-		background-color: $innovationblue;
+		background-color: $bluegray;
 	}
 }
 
 .alert-warning {
 	color: #000;
 	background-color: #fff;
-	border-color: $huntyellow !important;
+	border-color: $focusyellow !important;
 
 	.alert-icon {
 		color: #000;
-		background-color: $huntyellow;
+		background-color: $focusyellow;
 
 		svg {
 			fill: #000;
@@ -103,22 +103,22 @@
 .alert-danger {
 	color: #000;
 	background-color: #fff;
-	border-color: $reynoldsred !important;
+	border-color: $urgentred !important;
 
 	.alert-icon {
 		color: #fff;
-		background-color: $reynoldsred;
+		background-color: $urgentred;
 	}
 }
 
 .alert-help {
 	color: #000;
 	background-color: #fff;
-	border-color: $pyromanflame !important;
+	border-color: $alertorange !important;
 
 	.alert-icon {
 		color: #fff;
-		background-color: $pyromanflame;
+		background-color: $alertorange;
 	}
 }
 

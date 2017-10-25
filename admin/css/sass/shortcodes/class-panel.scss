@@ -95,19 +95,19 @@
 		.panel-title {
 
 			button {
-				color: $wolfpackred;
+				color: $uamsred;
 				text-decoration: underline;
 
 				svg {
-					fill: $wolfpackred;
+					fill: $uamsred;
 				}
 
 				&:hover, &:focus, &:active {
-					color: $reynoldsred;
+					color: darken($uamsred, 10);
 					text-decoration: none;
 
 					svg {
-						fill: $reynoldsred;
+						fill: darken($uamsred, 10);
 					}
 				}
 			}
@@ -125,7 +125,7 @@
 				}
 
 				&:hover, &:focus, &:active {
-					background-color: $reynoldsred;
+					background-color: darken($uamsred, 10);
 				}
 			}
 		}
@@ -133,11 +133,11 @@
 
 	&.panel-success {
 
-		border-color: $genomicgreen;
+		border-color: $webgreen;
 
 		.panel-heading {
-			background-color: $genomicgreen;
-			border-color: $genomicgreen;
+			background-color: $webgreen;
+			border-color: $webgreen;
 		}
 
 		.panel-title {
@@ -151,7 +151,7 @@
 				}
 
 				&:hover, &:focus, &:active {
-					background-color: darken($genomicgreen, 10);
+					background-color: darken($webgreen, 10);
 				}
 			}
 		}
@@ -159,11 +159,11 @@
 
 	&.panel-info {
 
-		border-color: $innovationblue;
+		border-color: $bluegray;
 
 		.panel-heading {
-			background-color: $innovationblue;
-			border-color: $innovationblue;
+			background-color: $bluegray;
+			border-color: $bluegray;
 		}
 
 		.panel-title {
@@ -177,7 +177,7 @@
 				}
 
 				&:hover, &:focus, &:active {
-					background-color: darken($innovationblue, 10);
+					background-color: darken($bluegray, 10);
 				}
 			}
 		}
@@ -185,11 +185,11 @@
 
 	&.panel-warning {
 
-		border-color: $huntyellow;
+		border-color: $focusyellow;
 
 		.panel-heading {
-			background-color: $huntyellow;
-			border-color: $huntyellow;
+			background-color: $focusyellow;
+			border-color: $focusyellow;
 		}
 
 		.panel-title {
@@ -203,7 +203,7 @@
 				}
 
 				&:hover, &:focus, &:active {
-					background-color: darken($huntyellow, 10);
+					background-color: darken($focusyellow, 10);
 				}
 			}
 		}
@@ -211,11 +211,11 @@
 
 	&.panel-danger {
 
-		border-color: $reynoldsred;
+		border-color: $urgentred;
 
 		.panel-heading {
-			background-color: $reynoldsred;
-			border-color: $reynoldsred;
+			background-color: $urgentred;
+			border-color: $urgentred;
 		}
 
 		.panel-title {
@@ -229,7 +229,7 @@
 				}
 
 				&:hover, &:focus, &:active {
-					background-color: darken($reynoldsred, 10);
+					background-color: darken($urgentred, 10);
 				}
 			}
 		}
@@ -255,7 +255,7 @@
 			color: #000;
 
 			button {
-				color: $wolfpackred;
+				color: $uamsred;
 				background: none;
 
 				&.hover, &.focus, &.active {
@@ -297,7 +297,7 @@
 					background: none;
 
 					.showmore, .showless {
-						background-color: $wolfpackred;
+						background-color: $uamsred;
 						padding: 0.25em 0.5em;
 						color: #fff;
 
@@ -321,7 +321,7 @@
 					background: none;
 
 					.showmore, .showless {
-						background-color: $genomicgreen;
+						background-color: $webgreen;
 						padding: 0.25em 0.5em;
 						color: #fff;
 
@@ -345,7 +345,7 @@
 					background: none;
 
 					.showmore, .showless {
-						background-color: $innovationblue;
+						background-color: $bluegray;
 						padding: 0.25em 0.5em;
 						color: #fff;
 
@@ -369,7 +369,7 @@
 					background: none;
 
 					.showmore, .showless {
-						background-color: $huntyellow;
+						background-color: $focusyellow;
 						padding: 0.25em 0.5em;
 						color: #000;
 
@@ -393,7 +393,7 @@
 					background: none;
 
 					.showmore, .showless {
-						background-color: $reynoldsred;
+						background-color: $urgentred;
 						padding: 0.25em 0.5em;
 						color: #fff;
 

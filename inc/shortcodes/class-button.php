@@ -90,11 +90,11 @@ class Button extends Shortcode
                 'encode' => false,
                 'options' => array(
                     ''          => 'Default',
-                    'red'       => 'Red',
-                    'gray'      => 'Gray',
-                    'green'     => 'Green',
-                    'blue'      => 'Blue',
-                    'yellow'    => 'Yellow',
+                    'btn-red'       => 'Red',
+                    'btn-gray'      => 'Gray',
+                    'btn-green'     => 'Green',
+                    'btn-blue'      => 'Blue',
+                    'btn-yellow'    => 'Yellow',
                 )
             ),
             array(
@@ -115,10 +115,10 @@ class Button extends Shortcode
                 'type' => 'select',
                 'encode' => false,
                 'options' => array(
-                    'go'        => 'Default',
-                    'plus'      => 'Plus',
-                    'external'  => 'External',
-                    'play'      => 'Play',
+                    'btn-go'        => 'Default',
+                    'btn-plus'      => 'Plus',
+                    'btn-external'  => 'External',
+                    'btn-play'      => 'Play',
                 )
             ),
             array(

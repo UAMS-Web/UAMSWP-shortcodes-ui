@@ -86,7 +86,7 @@ class Button extends Shortcode
                 'label' => esc_html__('Color', 'uams_shortcodes'),
                 'attr' => 'color',
                 'type' => 'radio',
-                'description' => 'For more information, see the <a href="https://brand.ncsu.edu/color/" target="_blank">NC State color palette</a>.',
+                'description' => 'For more information, see the <a href="#" target="_blank">Coming Soon</a>.',
                 'encode' => false,
                 'options' => array(
                     ''          => 'Default',

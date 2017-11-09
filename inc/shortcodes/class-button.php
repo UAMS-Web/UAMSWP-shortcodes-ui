@@ -122,6 +122,12 @@ class Button extends Shortcode
                 )
             ),
             array(
+                'label' => esc_html__('New line?', 'uams_shortcodes'),
+                'attr' => 'newline',
+                'type' => 'checkbox',
+                'description' => 'This adds a line break after the button to move it to the next line.',
+            ),
+            array(
                 'label' => esc_html__('Custom CSS classes', 'uams_shortcodes'),
                 'attr' => 'customclass',
                 'type' => 'text',
@@ -151,18 +157,24 @@ class Button extends Shortcode
 
          $button_classes = array( 'btn', $attrs['color'], $attrs['size'], $attrs['type'] );
 
+         if ( $attrs['newline'] == true ) {
+            $newline = "<br/>";
+        } else {
+            $newline = null;
+        }
+
         if (!empty($attrs['customclass'])) {
             $customclasses = explode( ",", $attrs['customclass'] );
         }
 
         return sprintf(
-            "<a class=\"uams-btn %s %s\" href=\"%s\" target=\"%s\">%s</a>",
+            "<a class=\"uams-btn %s %s\" href=\"%s\" target=\"%s\">%s</a>%s",
             implode(' ', $button_classes),
             implode(' ', $customclasses),
             esc_url($attrs['url']),
             $attrs['target'],
-            $attrs['text']
-            //$attrs['btncontent']
+            $attrs['text'],
+            $newline
         );
 
         //return  $shortcode;//'<div class="uams-button '. esc_attr( $customclass ) .'">' . do_shortcode($shortcode) . '</div>';

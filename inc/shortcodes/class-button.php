@@ -40,7 +40,7 @@ class Button extends Shortcode
     {
         return array(
             'label' => esc_html__('UAMS Button', 'uams_shortcodes'),
-            'listItemImage' => 'dashicons-plus',
+            'listItemImage' => 'dashicons-plus-alt',
             'attrs' => self::get_attributes()
         );
     }

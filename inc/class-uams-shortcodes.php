@@ -11,6 +11,7 @@ class UAMS_Shortcakes
         /* UAMS Originals */
         'UAMS_Shortcakes\Shortcodes\Button',
         'UAMS_Shortcakes\Shortcodes\IconBox',
+        'UAMS_Shortcakes\Shortcodes\Map',
         //'UAMS_Shortcakes\Shortcodes\TextBox',
         /* Originally from NCSU */
         'UAMS_Shortcakes\Shortcodes\Alert',

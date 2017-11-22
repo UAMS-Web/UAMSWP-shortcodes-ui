@@ -40,7 +40,7 @@ class BaseButton extends Shortcode
     {
         return array(
             'label' => esc_html__('Basic Button', 'uams_shortcodes'),
-            'listItemImage' => 'dashicons-plus',
+            'listItemImage' => 'dashicons-editor-removeformatting',
             'attrs' => self::get_attributes()
         );
     }

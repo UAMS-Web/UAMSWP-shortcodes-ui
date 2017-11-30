@@ -30,15 +30,27 @@
     flex: 1 auto;
   }
 
-  p, h1, h2, h3 {
+  p.callout-heading, h1, h2, h3 {
     //font-weight: normal;
     margin: 0;
   }
 
-  a, div {
+  div {
     display: block;
   //  height: 100%;
     width: 100%;
+  }
+
+  a {
+    display: inline-block;
+    &:focus {
+      border: 1px solid;
+    }
+  }
+
+  p a:visited {
+    color: inherit;
+    border-color: inherit;
   }
 
   .textleft {

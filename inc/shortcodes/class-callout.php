@@ -490,22 +490,22 @@ class Callout extends Shortcode
         switch ($type) {
             case 'basic':
                 return sprintf(
-                    "<div class=\"%s %s\">%s%s<p class=\"%s\">%s %s</p>%s</div><!-- .uams-callout -->",
+                    "<div class=\"%s %s\"><div>%s%s%s<p class=\"%s\">%s</p></div></div><!-- .uams-callout -->",
                     implode(' ', $basic_classes),
                     esc_attr( $customclass ),
                     $urlopen,
                     $heading,
+                    //$arrow,
+                    $urlclose,
                     implode(' ', $body_classes),
-                    $content,
-                    $arrow,
-                    $urlclose
+                    wpautop( do_shortcode($content) )
                 );
                 break;
 
             case 'img':
 
                 return sprintf(
-                    "<div class=\"%s callout-media callout-media-img %s\"><div class=\"callout-img %s\"><img class=\"img-responsive\" srcset=\"%s\" sizes=\"(min-width: 36em) 33.3vw, 100vw\" alt=\"%s\" />%s</div><div class=\"callout-content %s\">%s%s<p class=\"%s\">%s %s</p>%s</div></div><!-- .uams-callout -->",
+                    "<div class=\"%s callout-media callout-media-img %s\"><div class=\"callout-img %s\"><img class=\"img-responsive\" srcset=\"%s\" sizes=\"(min-width: 36em) 33.3vw, 100vw\" alt=\"%s\" />%s</div><div class=\"callout-content %s\">%s%s%s<p class=\"%s\">%s</p></div></div><!-- .uams-callout -->",
                     implode(' ', $basic_classes),
                     esc_attr( $customclass ),
                     $mediaposition,
@@ -515,10 +515,10 @@ class Callout extends Shortcode
                     $mediaposition,
                     $urlopen,
                     $heading,
+                    //$arrow,
+                    $urlclose,
                     implode(' ', $body_classes),
-                    $content,
-                    $arrow,
-                    $urlclose
+                    wpautop( do_shortcode($content) )
                 );
                 break;
 
@@ -526,17 +526,17 @@ class Callout extends Shortcode
             case 'vid':
 
                 return sprintf(
-                    "<div class=\"%s callout-media callout-video %s\">%s<div class=\"callout-content %s\">%s%s<p class=\"%s\">%s %s</p>%s</div></div><!-- .uams-callout -->",
+                    "<div class=\"%s callout-media callout-video %s\">%s<div class=\"callout-content %s\">%s%s%s<p class=\"%s\">%s</p></div></div><!-- .uams-callout -->",
                     implode(' ', $basic_classes),
                     esc_attr( $customclass ),
                     $video,
                     $mediaposition,
                     $urlopen,
                     $heading,
+                    //$arrow,
+                    $urlclose,
                     implode(' ', $body_classes),
-                    $content,
-                    $arrow,
-                    $urlclose
+                    wpautop( do_shortcode($content) )
                 );
                 break;
 
@@ -546,7 +546,7 @@ class Callout extends Shortcode
                     "<div class=\"uams-callout-bgimg %s %s\">
                         <div class=\"callout-media-wrapper callout-img\">%s%s</div>
                         <div class=\"callout-content-container container %s\">
-                            <div class=\"callout-content %s\">%s%s<p class=\"%s\">%s %s</p>%s</div>
+                            <div class=\"callout-content %s\">%s%s%s<p class=\"%s\">%s</p></div>
                         </div><!-- .callout-img -->
                     </div><!-- .uams-callout-bgimg -->",
                     $attrs['margin'],
@@ -557,10 +557,10 @@ class Callout extends Shortcode
                     implode(' ', $textbox_classes),
                     $urlopen,
                     $heading,
+                    //$arrow,
+                    $urlclose,
                     implode(' ', $body_classes),
-                    $content,
-                    $arrow,
-                    $urlclose
+                    wpautop( do_shortcode($content) )
                 );
                 break;
 
@@ -570,7 +570,7 @@ class Callout extends Shortcode
                     "<div class=\"uams-callout-bgvid %s\">
                         <div class=\"callout-media-wrapper callout-video\">%s</div>
                         <div class=\"callout-content-container container %s\">
-                            <div class=\"callout-content %s\">%s%s<p class=\"%s\">%s %s</p>%s</div>
+                            <div class=\"callout-content %s\">%s%s%s<p class=\"%s\">%s</p></div>
                         </div><!-- .callout-video -->
                     </div><!-- .uams-callout-bgvig -->",
                     esc_attr( $customclass ),
@@ -579,24 +579,24 @@ class Callout extends Shortcode
                     implode(' ', $textbox_classes),
                     $urlopen,
                     $heading,
+                    //$arrow,
+                    $urlclose,
                     implode(' ', $body_classes),
-                    $content,
-                    $arrow,
-                    $urlclose
+                    wpautop( do_shortcode($content) )
                 );
                 break;
 
             default:
                 return sprintf(
-                    "<div class=\"%s %s\">%s%s<p class=\"%s\">%s %s</p>%s</div>",
+                    "<div class=\"%s %s\"><div>%s%s%s<p class=\"%s\">%s</p></div></div>",
                     implode(' ', $basic_classes),
                     esc_attr( $customclass ),
                     $urlopen,
                     $heading,
+                    //$arrow,
+                    $urlclose,
                     implode(' ', $body_classes),
-                    $content,
-                    $arrow,
-                    $urlclose
+                    wpautop( do_shortcode($content) )
                 );
                 break;
         }

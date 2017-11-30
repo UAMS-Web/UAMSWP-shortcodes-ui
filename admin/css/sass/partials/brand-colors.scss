@@ -210,137 +210,235 @@
 
 .transparentwhite a {
   color: #fff;
+  border-bottom-color: #fff;
 
   &:hover, &:active, &:focus {
-    color: #fff;
+    color: #f5f5f5;
+    border-bottom-color: #f5f5f5;
+  }
+  &:visited {
+    color: #eee;
+    border-bottom-color: #eee;
   }
 }
 
 .transparentblack a {
   color: #000;
+  border-bottom-color: #000;
 
   &:hover, &:active, &:focus {
-    color: #000;
+    color: #212121;
+    border-bottom-color: #212121;
+  }
+  &:visited {
+    color: #424242;
+    border-bottom-color: #424242;
   }
 }
 
 .transparentred a {
   color: #cc0000;
+  border-bottom-color: #cc0000;
 
   &:hover, &:active, &:focus {
     color: #990000;
+    border-bottom-color: #990000;
+  }
+  &:visited {
+    color: #aa0000;
+    border-bottom-color: #aa0000;
   }
 }
 
 .black a {
   color: #fff;
+  border-bottom-color: #fff;
 
   &:hover, &:active, &:focus {
-    color: #fff;
+    color: #f5f5f5;
+    border-bottom-color: #f5f5f5;
+  }
+  &:visited {
+    color: #eee;
+    border-bottom-color: #eee;
   }
 }
 
 .white a {
   color: #000;
+  border-bottom-color: #000;
 
   &:hover, &:active, &:focus {
-    color: #000;
+    color: #212121;
+    border-bottom-color: #212121;
+  }
+  &:visited {
+    color: #424242;
+    border-bottom-color: #424242;
   }
 }
 
 .gray10 a {
   color: #000;
+  border-bottom-color: #000;
 
   &:hover, &:active, &:focus {
-    color: #000;
+    color: #212121;
+    border-bottom-color: #212121;
+  }
+  &:visited {
+    color: #424242;
+    border-bottom-color: #424242;
   }
 }
 
 .gray25 a {
   color: #000;
+  border-bottom-color: #000;
 
   &:hover, &:active, &:focus {
-    color: #000;
+    color: #212121;
+    border-bottom-color: #212121;
+  }
+  &:visited {
+    color: #424242;
+    border-bottom-color: #424242;
   }
 }
 
 .gray60 a {
   color: #fff;
+  border-bottom-color: #fff;
 
   &:hover, &:active, &:focus {
-    color: #fff;
+    color: #f5f5f5;
+    border-bottom-color: #f5f5f5;
   }
 }
 
 .gray90 a {
   color: #fff;
+  border-bottom-color: #fff;
 
   &:hover, &:active, &:focus {
-    color: #fff;
+    color: #f5f5f5;
+    border-bottom-color: #f5f5f5;
+  }
+  &:visited {
+    color: #eee;
+    border-bottom-color: #eee;
   }
 }
 
 .uamsred a {
   color: #fff;
+  border-bottom-color: #fff;
 
   &:hover, &:active, &:focus {
-    color: #fff;
+    color: #f5f5f5;
+    border-bottom-color: #f5f5f5;
+  }
+  &:visited {
+    color: #eee;
+    border-bottom-color: #eee;
   }
 }
 
 .accentgray a {
   color: #fff;
+  border-bottom-color: #fff;
 
   &:hover, &:active, &:focus {
-    color: #fff;
+    color: #f5f5f5;
+    border-bottom-color: #f5f5f5;
+  }
+  &:visited {
+    color: #eee;
+    border-bottom-color: #eee;
   }
 }
 
 .eggplant a {
   color: #fff;
+  border-bottom-color: #fff;
 
   &:hover, &:active, &:focus {
-    color: #fff;
+    color: #f5f5f5;
+    border-bottom-color: #f5f5f5;
+  }
+  &:visited {
+    color: #eee;
+    border-bottom-color: #eee;
   }
 }
 
 .bluegray a {
   color: #fff;
+  border-bottom-color: #fff;
 
   &:hover, &:active, &:focus {
-    color: #fff;
+    color: #f5f5f5;
+    border-bottom-color: #f5f5f5;
+  }
+  &:visited {
+    color: #eee;
+    border-bottom-color: #eee;
   }
 }
 
 .maroon a {
   color: #fff;
+  border-bottom-color: #fff;
 
   &:hover, &:active, &:focus {
-    color: #fff;
+    color: #f5f5f5;
+    border-bottom-color: #f5f5f5;
+  }
+  &:visited {
+    color: #eee;
+    border-bottom-color: #eee;
   }
 }
 
 .orange a {
   color: #fff;
+  border-bottom-color: #fff;
 
   &:hover, &:active, &:focus {
-    color: #fff;
+    color: #f5f5f5;
+    border-bottom-color: #f5f5f5;
+  }
+  &:visited {
+    color: #eee;
+    border-bottom-color: #eee;
   }
 }
 
 .lightblue a {
   color: #fff;
+  border-bottom-color: #fff;
 
   &:hover, &:active, &:focus {
-    color: #fff;
+    color: #f5f5f5;
+    border-bottom-color: #f5f5f5;
+  }
+  &:visited {
+    color: #eee;
+    border-bottom-color: #eee;
   }
 }
 
 .tealblue a {
   color: #fff;
+  border-bottom-color: #fff;
 
   &:hover, &:active, &:focus {
-    color: #fff;
+    color: #f5f5f5;
+    border-bottom-color: #f5f5f5;
+  }
+  &:visited {
+    color: #eee;
+    border-bottom-color: #eee;
   }
 }
 
@@ -348,6 +446,7 @@ a {
   &.black {
     &:hover, &:active, &:focus {
       color: #fff;
+      border-bottom-color: #fff;
     }
   }
 
@@ -355,6 +454,7 @@ a {
     &:hover, &:active, &:focus {
       background-color: #e6e6e6;
       color: #000;
+      border-bottom-color: #000;
     }
   }
 
@@ -362,6 +462,7 @@ a {
     &:hover, &:active, &:focus {
       background-color: #d9d9d9;
       color: #000;
+      border-bottom-color: #000;
     }
   }
 
@@ -369,6 +470,7 @@ a {
     &:hover, &:active, &:focus {
       background-color: #b3b3b3;
       color: #000;
+      border-bottom-color: #000;
     }
   }
 
@@ -376,6 +478,7 @@ a {
     &:hover, &:active, &:focus {
       background-color: #4d4d4d;
       color: #fff;
+      border-bottom-color: #fff;
     }
   }
 
@@ -383,6 +486,7 @@ a {
     &:hover, &:active, &:focus {
       background-color: #1a1a1a;
       color: #fff;
+      border-bottom-color: #fff;
     }
   }
 
@@ -390,6 +494,7 @@ a {
     &:hover, &:active, &:focus {
       background-color: #9d2235;
       color: #fff;
+      border-bottom-color: #fff;
     }
   }
 
@@ -397,6 +502,7 @@ a {
     &:hover, &:active, &:focus {
       background-color: #767475;
       color: #fff;
+      border-bottom-color: #fff;
     }
   }
 
@@ -404,6 +510,7 @@ a {
     &:hover, &:active, &:focus {
       background-color: #701D45;
       color: #fff;
+      border-bottom-color: #fff;
     }
   }
 
@@ -411,6 +518,7 @@ a {
     &:hover, &:active, &:focus {
       background-color: #396079;
       color: #fff;
+      border-bottom-color: #fff;
     }
   }
 
@@ -418,6 +526,7 @@ a {
     &:hover, &:active, &:focus {
       background-color: #1A365C;
       color: #fff;
+      border-bottom-color: #fff;
     }
   }
 
@@ -425,6 +534,7 @@ a {
     &:hover, &:active, &:focus {
       background-color: #6C0020;
       color: #fff;
+      border-bottom-color: #fff;
     }
   }
 
@@ -432,6 +542,7 @@ a {
     &:hover, &:active, &:focus {
       background-color: #CA4C1D;
       color: #fff;
+      border-bottom-color: #fff;
     }
   }
 
@@ -439,6 +550,7 @@ a {
     &:hover, &:active, &:focus {
       background-color: #01809F;
       color: #fff;
+      border-bottom-color: #fff;
     }
   }
 
@@ -446,6 +558,7 @@ a {
     &:hover, &:active, &:focus {
       background-color: #427F81;
       color: #fff;
+      border-bottom-color: #fff;
     }
   }
 }

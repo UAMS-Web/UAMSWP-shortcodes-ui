@@ -145,14 +145,16 @@ class ThreeColumn extends Shortcode
 
         return sprintf(
             '<div class="row %s">
-                <div class="%s">
-                    %s
-                </div>
-                <div class="%s">
-                    %s
-                </div>
-                <div class="%s">
-                    %s
+                <div class="inner-container">
+                    <div class="%s">
+                        %s
+                    </div>
+                    <div class="%s">
+                        %s
+                    </div>
+                    <div class="%s">
+                        %s
+                    </div>
                 </div>
             </div>',
             esc_attr( $customclass ),

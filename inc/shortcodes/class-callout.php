@@ -490,7 +490,7 @@ class Callout extends Shortcode
         switch ($type) {
             case 'basic':
                 return sprintf(
-                    "<div class=\"%s %s\"><div>%s%s%s<p class=\"%s\">%s</p></div></div><!-- .uams-callout -->",
+                    "<div class=\"%s %s\"><div class=\"inner-container\">%s%s%s<p class=\"%s\">%s</p></div></div><!-- .uams-callout -->",
                     implode(' ', $basic_classes),
                     esc_attr( $customclass ),
                     $urlopen,
@@ -588,7 +588,7 @@ class Callout extends Shortcode
 
             default:
                 return sprintf(
-                    "<div class=\"%s %s\"><div>%s%s%s<p class=\"%s\">%s</p></div></div>",
+                    "<div class=\"%s %s\"><div class=\"inner-container\">%s%s%s<p class=\"%s\">%s</p></div></div>",
                     implode(' ', $basic_classes),
                     esc_attr( $customclass ),
                     $urlopen,

@@ -93,10 +93,45 @@ a {
   margin-left: calc( 50% - 50vw) !important;
   margin-right: calc( 50% - 50vw) !important;
 }
+.uams-full-width .inner-container {
+  margin: 0 auto;
+  padding: 0;
+}
+@media (min-width: 768px) {
+  .uams-full-width .inner-container {
+    max-width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .uams-full-width .inner-container {
+    max-width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .uams-full-width .inner-container {
+    max-width: 1170px;
+  }
+}
 @media screen and (min-width: 1920px) {
   .uams-full-width {
     width: 1920px;
     margin-left: calc(50% - 960px) !important;
     margin-right: calc(50% - 960px) !important;
   }
+}
+.uams-full-width.full .inner-container {
+  max-width: 100%;
+}
+/* Padding Options */
+.pad-normal {
+  padding: 1em;
+}
+.pad-large {
+  padding: 2em;
+}
+.pad-small {
+  padding: 0.5em;
+}
+.pad-none {
+  padding: 0;
 }

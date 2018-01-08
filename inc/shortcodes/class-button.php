@@ -119,6 +119,7 @@ class Button extends Shortcode
                     'btn-plus'      => 'Plus',
                     'btn-external'  => 'External',
                     'btn-play'      => 'Play',
+                    'btn-pdf'       => 'PDF',
                 )
             ),
             array(

@@ -65,7 +65,7 @@ function updateTypeListener(changed, collection, shortcode) {
         img = attributeByName('img'),
         imgcaption = attributeByName('imgcaption'),
         vidtype = attributeByName('vidtype'),
-        youtube = attributeByName('youtube'),
+        youtube = attributeByName('youtubeui'), //Updated shortcode
         vimeo = attributeByName('vimeo'),
         vidsource = attributeByName('vidsource'),
         autoplay = attributeByName('autoplay'),
@@ -195,7 +195,7 @@ function updateVidTypeListener(changed, collection, shortcode) {
     }
 
     var updatedVal = changed.value,
-        youtube = attributeByName('youtube'),
+        youtube = attributeByName('youtubeui'),
         vimeo = attributeByName('vimeo'),
         vidsource = attributeByName('vidsource'),
         autoplay = attributeByName('autoplay'),

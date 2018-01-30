@@ -32,7 +32,8 @@ class UAMS_Shortcakes
         'UAMS_Shortcakes\Shortcodes\SoundCloud',
         'UAMS_Shortcakes\Shortcodes\Twitter',
         'UAMS_Shortcakes\Shortcodes\Vimeo',
-        'UAMS_Shortcakes\Shortcodes\YouTube',
+        //'UAMS_Shortcakes\Shortcodes\YouTube', //Original
+        'UAMS_Shortcakes\Shortcodes\YouTubeUI', //Updated to new shortcode
         /* Unused from Shortcode Bakery */
         // 'UAMS_Shortcakes\Shortcodes\Facebook',
         // 'UAMS_Shortcakes\Shortcodes\GoogleDocs',

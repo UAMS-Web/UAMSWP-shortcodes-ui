@@ -2,20 +2,20 @@
 
 namespace UAMS_Shortcakes\Shortcodes;
 
-class YouTube extends Shortcode {
+class YouTubeUI extends Shortcode {
 
 	private static $valid_hosts = array( 'www.youtube.com', 'youtube.com', 'youtu.be' );
 
 	public static function get_shortcode_ui_args() {
 		return array(
-			'label'         => esc_html__( 'YouTube', 'uams_shortcodes' ),
-			'listItemImage' => '<img src="' . esc_url( UAMS_SHORTCAKES_URL_ROOT . 'assets/images/svg/icon-youtube.svg' ) . '" />',
-			'attrs'         => array(
+			'label'          => esc_html__( 'YouTube', 'uams_shortcodes' ),
+			'listItemImage'  => '<img src="' . esc_url( UAMS_SHORTCAKES_URL_ROOT . 'assets/images/svg/icon-youtube.svg' ) . '" />',
+			'attrs'          => array(
 				array(
-					'label'       => esc_html__( 'URL', 'uams_shortcodes' ),
-					'attr'        => 'url',
-					'type'        => 'text',
-					'description' => esc_html__( 'Full YouTube URL', 'uams_shortcodes' ),
+					'label'        => esc_html__( 'URL', 'uams_shortcodes' ),
+					'attr'         => 'url',
+					'type'         => 'text',
+					'description'  => esc_html__( 'Full YouTube URL', 'uams_shortcodes' ),
 				),
 			),
 		);
@@ -75,7 +75,7 @@ class YouTube extends Shortcode {
 			$embed_url = add_query_arg( 'list', $list_id, $embed_url );
 		}
 		$embed_url = apply_filters( 'uams_shortcodes_youtube_embed_url', $embed_url, $attrs );
-		return sprintf( '<iframe class="shortcake-bakery-responsive" width="640" height="360" src="%s" frameborder="0"></iframe>', esc_url( $embed_url ) );
+		return sprintf( '<div class="nc-video-player" role="region" aria-label="video" tabindex=-1><div class="tube-wrapper"><iframe class="shortcake-bakery-responsive" data-uams-youtube-type="single" data-uams-youtube="%s" width="640" height="360" frameborder="0" allowfullscreen="1" src="%s?rel=0"></iframe></div></div>', $embed_id, esc_url( $embed_url ) );
 	}
 
 }

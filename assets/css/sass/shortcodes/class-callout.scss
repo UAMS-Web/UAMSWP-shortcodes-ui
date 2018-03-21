@@ -1,7 +1,7 @@
 .uams-callout {
   padding: 2em;
   margin: 1.5em 0 1.5em 0;
-  font-size: 1.25em;
+ // font-size: 1.25em;
   display: flex;
   flex-direction: row;
  // overflow: hidden;
@@ -80,7 +80,10 @@
       min-height: 350px;
     }
 
-    
+    &.media-top,
+    &.media-bottom {
+      flex-direction: column;
+    }
 
     .callout-content {
       flex: 1 100%;
@@ -88,13 +91,22 @@
 
       &.media-left {
         order: 1;
-        padding: 1.5em;
       }
 
       &.media-right {
         order: 1;
-        padding: 1.5em;
       }
+
+      &.media-top {
+        order: 2;
+        width: 100%;
+      }
+
+      &.media-bottom {
+        order: 1;
+        width: 100%;
+      }
+
     }
 
     &.callout-media-image {
@@ -133,6 +145,16 @@
       .callout-img-caption {
         text-align: right;
       }
+    }
+
+    &.media-top {
+      order: 1;
+      max-width: 100%;
+    }
+
+    &.media-bottom {
+      order: 2;
+      max-width: 100%;
     }
   }
 

@@ -23,18 +23,19 @@ class Callout extends Shortcode
         'bgcolor' => 'uamsred',
         'img' => null,
         'imgcaption' => false,
-        'vidtype' => null,
-        'youtube' => null,
-        'vimeo' => null,
-        'vidsource' => null,
-        'autoplay' => null,
-        'fallbackimg' => null,
+        //'vidtype' => null,
+        //'youtube' => null,
+        //'vimeo' => null,
+        //'vidsource' => null,
+        //'autoplay' => null,
+        //'fallbackimg' => null,
         'imgoverlay' => null,
         'textbgcolor' => null,
         'mediaposition' => null,
         'textposition' => null,
         'textwidth' => null,
         'margin' => 'normal',
+        'padding' => 'pad-normal',
         'customclass' => null,
     );
 
@@ -130,9 +131,9 @@ class Callout extends Shortcode
                 'options' => array(
                     'basic' => 'Basic Callout',
                     'img' => 'Callout with Image',
-                    'vid' => 'Callout with Video',
+                    //'vid' => 'Callout with Video',
                     'bgimg' => 'Callout with Background Image',
-                    'bgvid' => 'Callout with Background Video',
+                    //'bgvid' => 'Callout with Background Video',
                 ),
             ),
 
@@ -159,62 +160,62 @@ class Callout extends Shortcode
                 'type' => 'checkbox',
             ),
 
-            array(
-                'label' => esc_html__('Video Type', 'uams_shortcodes'),
-                'attr' => 'vidtype',
-                'type' => 'radio',
-                'description' => 'See examples and <a href="https://design.oit.ncsu.edu/docs/ncsu-shortcodes/callouts#vid" target="_blank">notes about video hosting</a> on the <a href="https://design.oit.ncsu.edu/docs/" target="_blank">OIT Design documentation site</a>.',
-                'encode' => false,
-                'options' => array(
-                    'youtube' => 'YouTube',
-                    'vimeo' => 'Vimeo',
-                    'other' => 'Other',
-                ),
-            ),
+            // array(
+            //     'label' => esc_html__('Video Type', 'uams_shortcodes'),
+            //     'attr' => 'vidtype',
+            //     'type' => 'radio',
+            //     'description' => 'See examples and <a href="https://design.oit.ncsu.edu/docs/ncsu-shortcodes/callouts#vid" target="_blank">notes about video hosting</a> on the <a href="https://design.oit.ncsu.edu/docs/" target="_blank">OIT Design documentation site</a>.',
+            //     'encode' => false,
+            //     'options' => array(
+            //         'youtube' => 'YouTube',
+            //         'vimeo' => 'Vimeo',
+            //         'other' => 'Other',
+            //     ),
+            // ),
 
-            array(
-                'label' => esc_html__('YouTube URL', 'uams_shortcodes'),
-                'attr' => 'youtube',
-                'type' => 'url',
-                'description' => '',
-                'encode' => false,
-                'meta' => array(
-                    'placeholder' => 'https://www.youtube.com/watch?v=oi1t_jSWZN8'
-                )
-            ),
+            // array(
+            //     'label' => esc_html__('YouTube URL', 'uams_shortcodes'),
+            //     'attr' => 'youtube',
+            //     'type' => 'url',
+            //     'description' => '',
+            //     'encode' => false,
+            //     'meta' => array(
+            //         'placeholder' => 'https://www.youtube.com/watch?v=oi1t_jSWZN8'
+            //     )
+            // ),
 
-            array(
-                'label' => esc_html__('Vimeo URL', 'uams_shortcodes'),
-                'attr' => 'vimeo',
-                'type' => 'url',
-                'description' => '',
-                'encode' => false,
-                'meta' => array(
-                    'placeholder' => 'https://vimeo.com/60686233'
-                )
-            ),
+            // array(
+            //     'label' => esc_html__('Vimeo URL', 'uams_shortcodes'),
+            //     'attr' => 'vimeo',
+            //     'type' => 'url',
+            //     'description' => '',
+            //     'encode' => false,
+            //     'meta' => array(
+            //         'placeholder' => 'https://vimeo.com/60686233'
+            //     )
+            // ),
 
-            array(
-                'label' => esc_html__('Video Source URL', 'uams_shortcodes'),
-                'attr' => 'vidsource',
-                'type' => 'url',
-                'description' => 'Note: This player supports only <strong>.mp4</strong> file types. (<a href="https://design.oit.ncsu.edu/docs/ncsu-shortcodes/callouts#vid" target="_blank">Learn more.</a>)',
-                'encode' => false,
-            ),
+            // array(
+            //     'label' => esc_html__('Video Source URL', 'uams_shortcodes'),
+            //     'attr' => 'vidsource',
+            //     'type' => 'url',
+            //     'description' => 'Note: This player supports only <strong>.mp4</strong> file types. (<a href="https://design.oit.ncsu.edu/docs/ncsu-shortcodes/callouts#vid" target="_blank">Learn more.</a>)',
+            //     'encode' => false,
+            // ),
 
-            array(
-                'label' => esc_html__('Autoplay Video', 'uams_shortcodes'),
-                'attr' => 'autoplay',
-                'type' => 'checkbox',
-                'description' => 'Note: If video is set to autoplay, audio will be disabled. (<a href="https://design.oit.ncsu.edu/docs/ncsu-shortcodes/callouts#vid" target="_blank">Learn more.</a>)',
-            ),
+            // array(
+            //     'label' => esc_html__('Autoplay Video', 'uams_shortcodes'),
+            //     'attr' => 'autoplay',
+            //     'type' => 'checkbox',
+            //     'description' => 'Note: If video is set to autoplay, audio will be disabled. (<a href="https://design.oit.ncsu.edu/docs/ncsu-shortcodes/callouts#vid" target="_blank">Learn more.</a>)',
+            // ),
 
-            array(
-                'label' => esc_html__('Fallback Image', 'uams_shortcodes'),
-                'attr' => 'fallbackimg',
-                'type' => 'attachment',
-                'description' => 'See examples and <a href="https://design.oit.ncsu.edu/docs/ncsu-shortcodes/callouts#vid" target="_blank">recommended dimensions</a> on the <a href="https://design.oit.ncsu.edu/docs/" target="_blank">OIT Design documentation site</a>.',
-            ),
+            // array(
+            //     'label' => esc_html__('Fallback Image', 'uams_shortcodes'),
+            //     'attr' => 'fallbackimg',
+            //     'type' => 'attachment',
+            //     'description' => 'See examples and <a href="https://design.oit.ncsu.edu/docs/ncsu-shortcodes/callouts#vid" target="_blank">recommended dimensions</a> on the <a href="https://design.oit.ncsu.edu/docs/" target="_blank">OIT Design documentation site</a>.',
+            // ),
 
             array(
                 'label' => esc_html__('Image Adjustments', 'uams_shortcodes'),
@@ -247,6 +248,8 @@ class Callout extends Shortcode
                 'options' => array(
                     'left' => 'Left',
                     'right' => 'Right',
+                    'top' => 'Top',
+                    'bottom' => 'Bottom',
                 ),
             ),
 
@@ -290,10 +293,25 @@ class Callout extends Shortcode
                 'attr' => 'margin',
                 'type' => 'radio',
                 'encode' => false,
+                'description' => 'Distance before and after the callout box',
                 'options' => array(
                     'normal' => 'Normal',
                     'thinmargin' => 'Thin',
                     'nomargin' => 'None',
+                ),
+            ),
+
+            array(
+                'label' => esc_html__('Text Padding', 'uams_shortcodes'),
+                'attr' => 'padding',
+                'type' => 'radio',
+                'encode' => false,
+                'description' => 'Amount of room around the text',
+                'options' => array(
+                    'pad-normal' => 'Normal (1 em)',
+                    'pad-large' => 'Large (2em)',
+                    'pad-small' => 'Thin (0.5 em)',
+                    'pad-none' => 'None (0 em)',
                 ),
             ),
 
@@ -326,7 +344,7 @@ class Callout extends Shortcode
         $type = $attrs['type'];
 
         $basic_classes = array('uams-callout', $attrs['bgcolor'], $attrs['textalign'], $attrs['margin']);
-        $textbox_classes = array('uams-callout', $attrs['textbgcolor'], $attrs['textalign'], $attrs['margin'], $attrs['textwidth'], $attrs['textposition']);
+        $textbox_classes = array('uams-callout', $attrs['textbgcolor'], $attrs['textalign'], $attrs['margin'], $attrs['textwidth'], $attrs['textposition'], $attrs['mediaposition']);
 
         $body_classes = array();
 
@@ -388,6 +406,10 @@ class Callout extends Shortcode
             $mediaposition = 'media-left';
         } elseif ($attrs['mediaposition'] == 'right') {
             $mediaposition = 'media-right';
+        } elseif ($attrs['mediaposition'] == 'top') {
+            $mediaposition = 'media-top';
+        } elseif ($attrs['mediaposition'] == 'bottom') {
+            $mediaposition = 'media-bottom';
         }
 
         if ($attrs['imgcaption'] == true) {
@@ -414,6 +436,11 @@ class Callout extends Shortcode
         }
 
 
+        if(!empty($attrs['padding'])) {
+            $padding = esc_attr($attrs['padding']);
+        } else {
+            $padding = 'pad-normal';
+        }
 
         $vidsrc = null;
         $vidembed = null;
@@ -505,14 +532,16 @@ class Callout extends Shortcode
             case 'img':
 
                 return sprintf(
-                    "<div class=\"%s callout-media callout-media-img %s\"><div class=\"callout-img %s\"><img class=\"img-responsive\" srcset=\"%s\" sizes=\"(min-width: 36em) 33.3vw, 100vw\" alt=\"%s\" />%s</div><div class=\"callout-content %s\">%s%s%s<p class=\"%s\">%s</p></div></div><!-- .uams-callout -->",
+                    "<div class=\"%s callout-media callout-media-img %s %s\"><div class=\"callout-img %s\"><img class=\"img-responsive\" srcset=\"%s\" sizes=\"(min-width: 36em) 33.3vw, 100vw\" alt=\"%s\" />%s</div><div class=\"callout-content %s %s\">%s%s%s<p class=\"%s\">%s</p></div></div><!-- .uams-callout -->",
                     implode(' ', $basic_classes),
+                    $mediaposition,
                     esc_attr( $customclass ),
                     $mediaposition,
                     $img,
                     $alt,
                     $imgcap,
                     $mediaposition,
+                    $padding,
                     $urlopen,
                     $heading,
                     //$arrow,

@@ -25,6 +25,20 @@
   text-align: right;
 }
 
+/* Padding Options */
+.pad-normal {
+  padding: 1em;
+}
+.pad-large {
+  padding: 2em;
+}
+.pad-small {
+  padding: 0.5em;
+}
+.pad-none {
+  padding: 0;
+}
+
 a {
   .right-arrow {
     position: absolute;

@@ -65,7 +65,7 @@ function updateTypeListener(changed, collection, shortcode) {
         img = attributeByName('img'),
         imgcaption = attributeByName('imgcaption'),
         vidtype = attributeByName('vidtype'),
-        youtube = attributeByName('youtubeui'), //Updated shortcode
+        youtube = attributeByName('youtube'),
         vimeo = attributeByName('vimeo'),
         vidsource = attributeByName('vidsource'),
         autoplay = attributeByName('autoplay'),
@@ -81,12 +81,12 @@ function updateTypeListener(changed, collection, shortcode) {
             textbgcolor.$el.hide();
             img.$el.hide();
             imgcaption.$el.hide();
-            vidtype.$el.hide();
-            youtube.$el.hide();
-            vimeo.$el.hide();
-            vidsource.$el.hide();
-            autoplay.$el.hide();
-            fallbackimg.$el.hide();
+            // vidtype.$el.hide();
+            // youtube.$el.hide();
+            // vimeo.$el.hide();
+            // vidsource.$el.hide();
+            // autoplay.$el.hide();
+            // fallbackimg.$el.hide();
             mediaposition.$el.hide();
             textposition.$el.hide();
             imgoverlay.$el.hide();
@@ -98,12 +98,12 @@ function updateTypeListener(changed, collection, shortcode) {
             textbgcolor.$el.hide();
             img.$el.show();
             imgcaption.$el.show();
-            vidtype.$el.hide();
-            youtube.$el.hide();
-            vimeo.$el.hide();
-            vidsource.$el.hide();
-            autoplay.$el.hide();
-            fallbackimg.$el.hide();
+            // vidtype.$el.hide();
+            // youtube.$el.hide();
+            // vimeo.$el.hide();
+            // vidsource.$el.hide();
+            // autoplay.$el.hide();
+            // fallbackimg.$el.hide();
             mediaposition.$el.show();
             textposition.$el.hide();
             imgoverlay.$el.hide();
@@ -115,12 +115,12 @@ function updateTypeListener(changed, collection, shortcode) {
             textbgcolor.$el.hide();
             img.$el.hide();
             imgcaption.$el.hide();
-            vidtype.$el.show();
-            youtube.$el.hide();
-            vimeo.$el.hide();
-            vidsource.$el.hide();
-            autoplay.$el.hide();
-            fallbackimg.$el.hide();
+            // vidtype.$el.show();
+            // youtube.$el.hide();
+            // vimeo.$el.hide();
+            // vidsource.$el.hide();
+            // autoplay.$el.hide();
+            // fallbackimg.$el.hide();
             mediaposition.$el.show();
             textposition.$el.hide();
             imgoverlay.$el.hide();
@@ -132,12 +132,12 @@ function updateTypeListener(changed, collection, shortcode) {
             bgcolor.$el.hide();
             img.$el.show();
             imgcaption.$el.show();
-            vidtype.$el.hide();
-            youtube.$el.hide();
-            vimeo.$el.hide();
-            vidsource.$el.hide();
-            autoplay.$el.hide();
-            fallbackimg.$el.hide();
+            // vidtype.$el.hide();
+            // youtube.$el.hide();
+            // vimeo.$el.hide();
+            // vidsource.$el.hide();
+            // autoplay.$el.hide();
+            // fallbackimg.$el.hide();
             mediaposition.$el.hide();
             textposition.$el.show();
             imgoverlay.$el.show();
@@ -149,12 +149,12 @@ function updateTypeListener(changed, collection, shortcode) {
             bgcolor.$el.hide();
             img.$el.hide();
             imgcaption.$el.hide();
-            vidtype.$el.hide();
-            youtube.$el.hide();
-            vimeo.$el.hide();
-            vidsource.$el.show();
-            autoplay.$el.show();
-            fallbackimg.$el.show();
+            // vidtype.$el.hide();
+            // youtube.$el.hide();
+            // vimeo.$el.hide();
+            // vidsource.$el.show();
+            // autoplay.$el.show();
+            // fallbackimg.$el.show();
             mediaposition.$el.hide();
             textposition.$el.show();
             imgoverlay.$el.show();
@@ -166,12 +166,12 @@ function updateTypeListener(changed, collection, shortcode) {
             textbgcolor.$el.hide();
             img.$el.hide();
             imgcaption.$el.hide();
-            vidtype.$el.hide();
-            youtube.$el.hide();
-            vimeo.$el.hide();
-            vidsource.$el.hide();
-            autoplay.$el.hide();
-            fallbackimg.$el.hide();
+            // vidtype.$el.hide();
+            // youtube.$el.hide();
+            // vimeo.$el.hide();
+            // vidsource.$el.hide();
+            // autoplay.$el.hide();
+            // fallbackimg.$el.hide();
             mediaposition.$el.hide();
             textposition.$el.hide();
             imgoverlay.$el.hide();
@@ -195,7 +195,7 @@ function updateVidTypeListener(changed, collection, shortcode) {
     }
 
     var updatedVal = changed.value,
-        youtube = attributeByName('youtubeui'),
+        youtube = attributeByName('youtube'),
         vimeo = attributeByName('vimeo'),
         vidsource = attributeByName('vidsource'),
         autoplay = attributeByName('autoplay'),

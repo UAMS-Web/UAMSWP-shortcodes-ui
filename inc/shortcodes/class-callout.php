@@ -35,7 +35,7 @@ class Callout extends Shortcode
         'textposition' => null,
         'textwidth' => null,
         'margin' => 'normal',
-        'padding' => 'pad-normal',
+        'padding' => 'padding-one',
         'customclass' => null,
     );
 
@@ -308,10 +308,10 @@ class Callout extends Shortcode
                 'encode' => false,
                 'description' => 'Amount of room around the text',
                 'options' => array(
-                    'pad-normal' => 'Normal (1 em)',
-                    'pad-large' => 'Large (2em)',
-                    'pad-small' => 'Thin (0.5 em)',
-                    'pad-none' => 'None (0 em)',
+                    'padding-one ' => 'Normal (1 em)',
+                    'padding-two' => 'Large (2em)',
+                    'padding-halve' => 'Thin (0.5 em)',
+                    'padding-none' => 'None (0 em)',
                 ),
             ),
 
@@ -439,7 +439,7 @@ class Callout extends Shortcode
         if(!empty($attrs['padding'])) {
             $padding = esc_attr($attrs['padding']);
         } else {
-            $padding = 'pad-normal';
+            $padding = 'padding-one';
         }
 
         $vidsrc = null;

@@ -1,28 +1,18 @@
-.element-left {
-  float: left !important;
-}
+// Use theme helper classes
+// left, right
+// .element-left {
+//   float: left !important;
+// }
 
-.element-right {
-  float: right !important;
-}
+// .element-right {
+//   float: right !important;
+// }
 
 .element-center {
   float: none !important;
   margin-left: auto !important;
   margin-right: auto !important;
   clear: both !important;
-}
-
-.textleft {
-  text-align: left;
-}
-
-.textcenter {
-  text-align: center;
-}
-
-.textright {
-  text-align: right;
 }
 
 a {
@@ -122,19 +112,22 @@ a {
 .uams-full-width.full .inner-container {
   max-width: 100%;
 }
+
 /* Padding Options */
-.pad-normal {
-  padding: 1em;
-}
-.pad-large {
-  padding: 2em;
-}
-.pad-small {
-  padding: 0.5em;
-}
-.pad-none {
-  padding: 0;
-}
+// Use theme helper classes 
+// padding-none, padding-halve, padding-one, padding-two
+// .pad-normal {
+//   padding: 1em;
+// }
+// .pad-large {
+//   padding: 2em;
+// }
+// .pad-small {
+//   padding: 0.5em;
+// }
+// .pad-none {
+//   padding: 0;
+// }
 
 .shortcake-bakery-insert-embed .dashicons {
   font-size: 20px;

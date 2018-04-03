@@ -8,6 +8,20 @@
 //   float: right !important;
 // }
 
+// Depreciated: Use theme helper classes
+// text-left, text-right, text-center
+.textleft {
+  text-align: left;
+}
+
+.textcenter {
+  text-align: center;
+}
+
+.textright {
+  text-align: right;
+}
+
 .element-center {
   float: none !important;
   margin-left: auto !important;

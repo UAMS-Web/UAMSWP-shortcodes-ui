@@ -17,14 +17,17 @@
 
 // Use theme helper classes
 // text-left, text-right, text-center
+.textleft,
 .text-left {
   text-align: left;
 }
 
+.textcenter
 .text-center {
   text-align: center;
 }
 
+.textright
 .text-right {
   text-align: right;
 }

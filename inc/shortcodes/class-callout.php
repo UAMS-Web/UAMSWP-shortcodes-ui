@@ -18,7 +18,7 @@ class Callout extends Shortcode
         'headingicon' => null,
         'url' => null,
         'target' => false,
-        'textalign' => 'textcenter',
+        'textalign' => 'text-center',
         'type' => 'basic',
         'bgcolor' => 'uamsred',
         'img' => null,
@@ -98,9 +98,9 @@ class Callout extends Shortcode
                 'type' => 'radio',
                 'encode' => false,
                 'options' => array(
-                    'textleft' => 'Left',
-                    'textcenter' => 'Center',
-                    'textright' => 'Right',
+                    'text-left' => 'Left',
+                    'text-center' => 'Center',
+                    'text-right' => 'Right',
                 ),
             ),
 

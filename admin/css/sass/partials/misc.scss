@@ -17,33 +17,37 @@
 
 // Use theme helper classes
 // text-left, text-right, text-center
-// .textleft {
-//   text-align: left;
-// }
+.text-left {
+  text-align: left;
+}
 
-// .textcenter {
-//   text-align: center;
-// }
+.text-center {
+  text-align: center;
+}
 
-// .textright {
-//   text-align: right;
-// }
+.text-right {
+  text-align: right;
+}
 
 /* Padding Options */
 // Use theme helper classes 
 // padding-none, padding-halve, padding-one, padding-two
-// .pad-normal {
-//   padding: 1em;
-// }
-// .pad-large {
-//   padding: 2em;
-// }
-// .pad-small {
-//   padding: 0.5em;
-// }
-// .pad-none {
-//   padding: 0;
-// }
+.padding-one,
+.pad-normal {
+  padding: 1em;
+}
+.padding-two,
+.pad-large {
+  padding: 2em;
+}
+.padding-halve,
+.pad-small {
+  padding: 0.5em;
+}
+.padding-none,
+.pad-none {
+  padding: 0;
+}
 
 a {
   .right-arrow {

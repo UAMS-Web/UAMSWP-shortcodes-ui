@@ -20,12 +20,12 @@
 
 .transparentblack {
   background-color: none;
-  color: #000;
+  color: #212121;
 
   [class^="ic-"]:before, [class*=" ic-"], 
 [class^="i-"]:before, [class*=" i-"],,
   .callout-heading {
-    color: #000;
+    color: #212121;
   }
 }
 
@@ -53,12 +53,12 @@
 
 .semilight {
   background-color: rgba(255,255,255,0.5);
-  color: #000;
+  color: #212121;
 
   [class^="ic-"]:before, [class*=" ic-"], 
 [class^="i-"]:before, [class*=" i-"],,
   .callout-heading {
-    color: #000;
+    color: #212121;
   }
 }
 
@@ -75,39 +75,50 @@
 
 .white {
   background-color: #fff;
-  color: #000;
+  color: #212121;
 
   [class^="ic-"]:before, [class*=" ic-"], 
 [class^="i-"]:before, [class*=" i-"],,
   .callout-heading {
-    color: #000;
+    color: #212121;
+  }
+}
+
+.gray5 {
+  background-color: #FAF8F9;
+  color: #212121;
+
+  [class^="ic-"]:before, [class*=" ic-"], 
+[class^="i-"]:before, [class*=" i-"],,
+  .callout-heading {
+    color: #212121;
   }
 }
 
 .gray10 {
-  background-color: #f5f5f5;
-  color: #000;
+  background-color: #F5F3F4;
+  color: #212121;
 
   [class^="ic-"]:before, [class*=" ic-"], 
 [class^="i-"]:before, [class*=" i-"],,
   .callout-heading {
-    color: #000;
+    color: #212121;
   }
 }
 
 .gray25 {
-  background-color: #ccc;
-  color: #000;
+  background-color: #DCDADB;
+  color: #212121;
 
   [class^="ic-"]:before, [class*=" ic-"], 
 [class^="i-"]:before, [class*=" i-"],,
   .callout-heading {
-    color: #000;
+    color: #212121;
   }
 }
 
 .gray60 {
-  background-color: #666;
+  background-color: #767475;
   color: #fff;
 
   [class^="ic-"]:before, [class*=" ic-"], 
@@ -118,7 +129,7 @@
 }
 
 .gray90 {
-  background-color: #333;
+  background-color: #212121;
   color: #fff;
 
   [class^="ic-"]:before, [class*=" ic-"], 
@@ -233,26 +244,26 @@
   border-bottom-color: #fff;
 
   &:hover, &:active, &:focus {
-    color: #f5f5f5;
-    border-bottom-color: #f5f5f5;
+    color: #F5F3F4;
+    border-bottom-color: #F5F3F4;
   }
   &:visited {
-    color: #eee;
-    border-bottom-color: #eee;
+    color: #DCDADB;
+    border-bottom-color: #DCDADB;
   }
 }
 
 .transparentblack a {
-  color: #000;
-  border-bottom-color: #000;
+  color: #212121;
+  border-bottom-color: #212121;
 
   &:hover, &:active, &:focus {
-    color: #212121;
-    border-bottom-color: #212121;
+    color: #2A2829;
+    border-bottom-color: #2A2829;
   }
   &:visited {
-    color: #424242;
-    border-bottom-color: #424242;
+    color: #434142;
+    border-bottom-color: #434142;
   }
 }
 
@@ -275,54 +286,54 @@
   border-bottom-color: #fff;
 
   &:hover, &:active, &:focus {
-    color: #f5f5f5;
-    border-bottom-color: #f5f5f5;
+    color: #F5F3F4;
+    border-bottom-color: #F5F3F4;
   }
   &:visited {
-    color: #eee;
-    border-bottom-color: #eee;
+    color: #DCDADB;
+    border-bottom-color: #DCDADB;
   }
 }
 
 .white a {
-  color: #000;
-  border-bottom-color: #000;
+  color: #212121;
+  border-bottom-color: #212121;
 
   &:hover, &:active, &:focus {
-    color: #212121;
-    border-bottom-color: #212121;
+    color: #2A2829;
+    border-bottom-color: #2A2829;
   }
   &:visited {
-    color: #424242;
-    border-bottom-color: #424242;
+    color: #434142;
+    border-bottom-color: #434142;
   }
 }
 
 .gray10 a {
-  color: #000;
-  border-bottom-color: #000;
+  color: #212121;
+  border-bottom-color: #212121;
 
   &:hover, &:active, &:focus {
-    color: #212121;
-    border-bottom-color: #212121;
+    color: #2A2829;
+    border-bottom-color: #2A2829;
   }
   &:visited {
-    color: #424242;
-    border-bottom-color: #424242;
+    color: #434142;
+    border-bottom-color: #434142;
   }
 }
 
 .gray25 a {
-  color: #000;
-  border-bottom-color: #000;
+  color: #212121;
+  border-bottom-color: #212121;
 
   &:hover, &:active, &:focus {
-    color: #212121;
-    border-bottom-color: #212121;
+    color: #2A2829;
+    border-bottom-color: #2A2829;
   }
   &:visited {
-    color: #424242;
-    border-bottom-color: #424242;
+    color: #434142;
+    border-bottom-color: #434142;
   }
 }
 
@@ -331,8 +342,8 @@
   border-bottom-color: #fff;
 
   &:hover, &:active, &:focus {
-    color: #f5f5f5;
-    border-bottom-color: #f5f5f5;
+    color: #F5F3F4;
+    border-bottom-color: #F5F3F4;
   }
 }
 
@@ -341,12 +352,12 @@
   border-bottom-color: #fff;
 
   &:hover, &:active, &:focus {
-    color: #f5f5f5;
-    border-bottom-color: #f5f5f5;
+    color: #F5F3F4;
+    border-bottom-color: #F5F3F4;
   }
   &:visited {
-    color: #eee;
-    border-bottom-color: #eee;
+    color: #DCDADB;
+    border-bottom-color: #DCDADB;
   }
 }
 
@@ -355,12 +366,12 @@
   border-bottom-color: #fff;
 
   &:hover, &:active, &:focus {
-    color: #f5f5f5;
-    border-bottom-color: #f5f5f5;
+    color: #F5F3F4;
+    border-bottom-color: #F5F3F4;
   }
   &:visited {
-    color: #eee;
-    border-bottom-color: #eee;
+    color: #DCDADB;
+    border-bottom-color: #DCDADB;
   }
 }
 
@@ -369,12 +380,12 @@
   border-bottom-color: #fff;
 
   &:hover, &:active, &:focus {
-    color: #f5f5f5;
-    border-bottom-color: #f5f5f5;
+    color: #F5F3F4;
+    border-bottom-color: #F5F3F4;
   }
   &:visited {
-    color: #eee;
-    border-bottom-color: #eee;
+    color: #DCDADB;
+    border-bottom-color: #DCDADB;
   }
 }
 
@@ -383,12 +394,12 @@
   border-bottom-color: #fff;
 
   &:hover, &:active, &:focus {
-    color: #f5f5f5;
-    border-bottom-color: #f5f5f5;
+    color: #F5F3F4;
+    border-bottom-color: #F5F3F4;
   }
   &:visited {
-    color: #eee;
-    border-bottom-color: #eee;
+    color: #DCDADB;
+    border-bottom-color: #DCDADB;
   }
 }
 
@@ -397,12 +408,12 @@
   border-bottom-color: #fff;
 
   &:hover, &:active, &:focus {
-    color: #f5f5f5;
-    border-bottom-color: #f5f5f5;
+    color: #F5F3F4;
+    border-bottom-color: #F5F3F4;
   }
   &:visited {
-    color: #eee;
-    border-bottom-color: #eee;
+    color: #DCDADB;
+    border-bottom-color: #DCDADB;
   }
 }
 
@@ -411,12 +422,12 @@
   border-bottom-color: #fff;
 
   &:hover, &:active, &:focus {
-    color: #f5f5f5;
-    border-bottom-color: #f5f5f5;
+    color: #F5F3F4;
+    border-bottom-color: #F5F3F4;
   }
   &:visited {
-    color: #eee;
-    border-bottom-color: #eee;
+    color: #DCDADB;
+    border-bottom-color: #DCDADB;
   }
 }
 
@@ -425,12 +436,12 @@
   border-bottom-color: #fff;
 
   &:hover, &:active, &:focus {
-    color: #f5f5f5;
-    border-bottom-color: #f5f5f5;
+    color: #F5F3F4;
+    border-bottom-color: #F5F3F4;
   }
   &:visited {
-    color: #eee;
-    border-bottom-color: #eee;
+    color: #DCDADB;
+    border-bottom-color: #DCDADB;
   }
 }
 
@@ -439,12 +450,12 @@
   border-bottom-color: #fff;
 
   &:hover, &:active, &:focus {
-    color: #f5f5f5;
-    border-bottom-color: #f5f5f5;
+    color: #F5F3F4;
+    border-bottom-color: #F5F3F4;
   }
   &:visited {
-    color: #eee;
-    border-bottom-color: #eee;
+    color: #DCDADB;
+    border-bottom-color: #DCDADB;
   }
 }
 
@@ -453,12 +464,12 @@
   border-bottom-color: #fff;
 
   &:hover, &:active, &:focus {
-    color: #f5f5f5;
-    border-bottom-color: #f5f5f5;
+    color: #F5F3F4;
+    border-bottom-color: #F5F3F4;
   }
   &:visited {
-    color: #eee;
-    border-bottom-color: #eee;
+    color: #DCDADB;
+    border-bottom-color: #DCDADB;
   }
 }
 
@@ -472,31 +483,31 @@ a {
 
   &.white {
     &:hover, &:active, &:focus {
-      background-color: #e6e6e6;
-      color: #000;
-      border-bottom-color: #000;
+      background-color: #F0EEEF;
+      color: #212121;
+      border-bottom-color: #212121;
     }
   }
 
   &.gray10 {
     &:hover, &:active, &:focus {
-      background-color: #d9d9d9;
-      color: #000;
-      border-bottom-color: #000;
+      background-color: #DCDADB;
+      color: #212121;
+      border-bottom-color: #212121;
     }
   }
 
   &.gray25 {
     &:hover, &:active, &:focus {
-      background-color: #b3b3b3;
-      color: #000;
-      border-bottom-color: #000;
+      background-color: #A9A7A8;
+      color: #212121;
+      border-bottom-color: #212121;
     }
   }
 
   &.gray60 {
     &:hover, &:active, &:focus {
-      background-color: #4d4d4d;
+      background-color: #434142;
       color: #fff;
       border-bottom-color: #fff;
     }

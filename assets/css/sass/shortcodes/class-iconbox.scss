@@ -47,13 +47,13 @@
   background-color: transparent;
 }
 .icon-box-wrapper.default.gray {
-  background-color: #eee;
+  background-color: $gray10;
 }
 .icon-box-wrapper.default.red {
   background-color: #9d2235;
 }
 .icon-box-wrapper.default.blue {
-  background-color: #22739d;
+  background-color: $bluegray;
 }
 .icon-box-wrapper.default.red a.icon-box-tile-link,
 .icon-box-wrapper.default.red a.icon-box-tile-link:hover,
@@ -70,35 +70,35 @@
   border-bottom-color: #fff;
 }
 .icon-box-icon.default span:before {
-  color: #e0e0e0;
+  color: $gray20;
 }
 .icon-box-wrapper .icon-box-icon span:before {
-  color: #e0e0e0;
+  color: $gray20;
 }
 .icon-box-wrapper.gray .icon-box-icon span:before {
-  color: #616161;
+  color: $gray70;
 }
 .icon-box-wrapper.red .icon-box-icon span:before {
-  color: #9d2235;
+  color: $uamsred;
 }
 .icon-box-wrapper.blue .icon-box-icon span:before {
-  color: #22739d;
+  color: $bluegray;
 }
 .icon-box-wrapper.default.none .icon-box-icon span:before {
-  color: #e0e0e0;
+  color: $gray20;
 }
 .icon-box-wrapper.default.gray .icon-box-icon span:before {
-  color: #616161;
+  color: $gray70;
 }
 .icon-box-wrapper.default.red .icon-box-icon span:before,
 .icon-box-wrapper.default.blue .icon-box-icon span:before {
-  color: #fafafa;
+  color: $gray5;
 }
 .icon-box-wrapper.default.red .icon-box-icon span:hover,
 .icon-box-wrapper.default.red .icon-box-icon span:focus,
 .icon-box-wrapper.default.blue .icon-box-icon span:hover,
 .icon-box-wrapper.default.blue .icon-box-icon span:focus {
-  border-color: #fafafa;
+  border-color: $gray5;
 }
 .icon-box-wrapper.default.red a h3.icon-box-title, .icon-box-wrapper.default.red a h3,
 .icon-box-wrapper.default.blue a h3.icon-box-title, .icon-box-wrapper.default.blue a h3,
@@ -118,6 +118,12 @@
 .icon-box-wrapper.boxed.blue h3.icon-box-title {
   color: #fff;
 }
+.icon-box-wrapper.default.gray a h3.icon-box-title,
+.icon-box-wrapper.boxed.gray a h3.icon-box-title,
+.icon-box-wrapper.default.gray h3.icon-box-title,
+.icon-box-wrapper.boxed.gray h3.icon-box-title {
+  color: $gray70;
+}
 .icon-box-wrapper.default.red a.icon-box-tile-link,
 .icon-box-wrapper.default.red a.icon-box-tile-link:hover,
 .icon-box-wrapper.default.red a.icon-box-tile-link:focus,
@@ -133,44 +139,44 @@
   color: #fff;
 }
 .icon-box-wrapper.boxed.red .icon-box-content {
-  background-color: #9d2235;
+  background-color: $uamsred;
 }
 .icon-box-wrapper.boxed.blue .icon-box-content {
-  background-color: #22739d;
+  background-color: $bluegray;
 }
 .icon-box-wrapper.boxed.gray .icon-box-content {
-  background-color: #eee;
+  background-color: $gray25;
 }
 .icon-box-wrapper.boxed.gray .icon-box-icon a span,
 .icon-box-wrapper.boxed.gray .icon-box-icon .icon-wrap span  {
-  border-color: #eee;
+  border-color: $gray20;
   background-color: #fff;
 }
 .icon-box-wrapper.boxed.blue .icon-box-icon a span,
 .icon-box-wrapper.boxed.blue .icon-box-icon .icon-wrap span {
-  border-color: #22739d;
+  border-color: $bluegray;
   background-color: #fff;
 }
 .icon-box-wrapper.boxed.red .icon-box-icon a span,
 .icon-box-wrapper.boxed.red .icon-box-icon .icon-wrap span {
-  border-color: #9d2235;
+  border-color: $uamsred;
   background-color: #fff;
 }
 .icon-box-wrapper.framed.gray .icon-box-icon a span,
 .icon-box-wrapper.framed.gray .icon-box-icon .icon-wrap span {
-  background-color: #eee;
+  background-color: $gray20;
 }
 .icon-box-wrapper.framed.blue .icon-box-icon a span,
 .icon-box-wrapper.framed.blue .icon-box-icon .icon-wrap span {
-  background-color: #22739d;
+  background-color: $bluegray;
 }
 .icon-box-wrapper.framed.red .icon-box-icon a span,
 .icon-box-wrapper.framed.red .icon-box-icon .icon-wrap span {
-  background-color: #9d2235;
+  background-color: $uamsred;
 }
 .icon-box-wrapper.framed.gray .icon-box-icon a span:before,
 .icon-box-wrapper.framed.gray .icon-box-icon .icon-wrap span:before {
-  color: #616161;
+  color: $gray70;
 }
 .icon-box-wrapper.framed.red .icon-box-icon a span:before,
 .icon-box-wrapper.framed.blue .icon-box-icon a span:before,

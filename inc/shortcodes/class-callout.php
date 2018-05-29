@@ -31,6 +31,7 @@ class Callout extends Shortcode
         //'fallbackimg' => null,
         'imgoverlay' => null,
         'textbgcolor' => null,
+        'imgback' => 'front',
         'mediaposition' => null,
         'textposition' => null,
         'textwidth' => null,
@@ -254,6 +255,17 @@ class Callout extends Shortcode
             ),
 
             array(
+                'label' => 'Image layout?',
+                'attr' => 'imgback',
+                'description' => '',
+                'type' => 'radio',
+                'options' => array(
+                    'front' => 'Full image',
+                    'back' => 'Cover background',
+                ),
+            ),
+
+            array(
                 'label' => esc_html__('Text Position', 'uams_shortcodes'),
                 'attr' => 'textposition',
                 'type' => 'radio',
@@ -419,6 +431,12 @@ class Callout extends Shortcode
             $imgcap = null;
         }
 
+        if ($attrs['imgback'] == 'back') {
+            $imgback = ' bg-img';
+        } else {
+            $imgback = null;
+        }
+
         if (!empty($attrs['fallbackimg'])) {
             $fallbackimg = wp_get_attachment_image_srcset($attrs['fallbackimg']);
             $fallbackalt = get_post_meta($attrs['fallbackimg'], '_wp_attachment_image_alt', true);
@@ -532,11 +550,12 @@ class Callout extends Shortcode
             case 'img':
 
                 return sprintf(
-                    "<div class=\"%s callout-media callout-media-img %s %s\"><div class=\"callout-img %s\"><img class=\"img-responsive\" srcset=\"%s\" sizes=\"(min-width: 36em) 33.3vw, 100vw\" alt=\"%s\" />%s</div><div class=\"callout-content %s %s\">%s%s%s<p class=\"%s\">%s</p></div></div><!-- .uams-callout -->",
+                    "<div class=\"%s callout-media callout-media-img %s %s\"><div class=\"callout-img %s%s\"><img class=\"img-responsive\" srcset=\"%s\" sizes=\"(min-width: 36em) 33.3vw, 100vw\" alt=\"%s\" />%s</div><div class=\"callout-content %s %s\">%s%s%s<p class=\"%s\">%s</p></div></div><!-- .uams-callout -->",
                     implode(' ', $basic_classes),
                     $mediaposition,
                     esc_attr( $customclass ),
                     $mediaposition,
+                    $imgback,
                     $img,
                     $alt,
                     $imgcap,

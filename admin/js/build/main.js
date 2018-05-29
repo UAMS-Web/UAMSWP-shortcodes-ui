@@ -64,6 +64,7 @@ function updateTypeListener(changed, collection, shortcode) {
         textbgcolor = attributeByName('textbgcolor'),
         img = attributeByName('img'),
         imgcaption = attributeByName('imgcaption'),
+        imgback = attributeByName('imgback'),
         vidtype = attributeByName('vidtype'),
         youtube = attributeByName('youtube'),
         vimeo = attributeByName('vimeo'),
@@ -81,6 +82,7 @@ function updateTypeListener(changed, collection, shortcode) {
             textbgcolor.$el.hide();
             img.$el.hide();
             imgcaption.$el.hide();
+            imgback.$el.hide();
             // vidtype.$el.hide();
             // youtube.$el.hide();
             // vimeo.$el.hide();
@@ -98,6 +100,7 @@ function updateTypeListener(changed, collection, shortcode) {
             textbgcolor.$el.hide();
             img.$el.show();
             imgcaption.$el.show();
+            imgback.$el.show();
             // vidtype.$el.hide();
             // youtube.$el.hide();
             // vimeo.$el.hide();
@@ -115,6 +118,7 @@ function updateTypeListener(changed, collection, shortcode) {
             textbgcolor.$el.hide();
             img.$el.hide();
             imgcaption.$el.hide();
+            imgback.$el.hide();
             // vidtype.$el.show();
             // youtube.$el.hide();
             // vimeo.$el.hide();
@@ -149,6 +153,7 @@ function updateTypeListener(changed, collection, shortcode) {
             bgcolor.$el.hide();
             img.$el.hide();
             imgcaption.$el.hide();
+            imgback.$el.hide();
             // vidtype.$el.hide();
             // youtube.$el.hide();
             // vimeo.$el.hide();
@@ -166,6 +171,7 @@ function updateTypeListener(changed, collection, shortcode) {
             textbgcolor.$el.hide();
             img.$el.hide();
             imgcaption.$el.hide();
+            imgback.$el.hide();
             // vidtype.$el.hide();
             // youtube.$el.hide();
             // vimeo.$el.hide();

@@ -407,10 +407,12 @@ class Callout extends Shortcode
         }
 
         if (!empty($attrs['img'])) {
-            $img = wp_get_attachment_image_srcset($attrs['img'], 'large');
+            $img = wp_get_attachment_image($attrs['img'], 'large');
+            $imgset = wp_get_attachment_image_srcset($attrs['img'], 'large');
             $alt = get_post_meta($attrs['img'], '_wp_attachment_image_alt', true);
         } else {
             $img = null;
+            $imgset = null;
             $alt = null;
         }
 
@@ -438,12 +440,14 @@ class Callout extends Shortcode
         }
 
         if (!empty($attrs['fallbackimg'])) {
-            $fallbackimg = wp_get_attachment_image_srcset($attrs['fallbackimg']);
+            $fallbackimg = wp_get_attachment_image($attrs['fallbackimg']);
+            $fallbackimgset = wp_get_attachment_image_srcset($attrs['fallbackimg']);
             $fallbackalt = get_post_meta($attrs['fallbackimg'], '_wp_attachment_image_alt', true);
             $poster = wp_get_attachment_image_src($attrs['fallbackimg'], 'full')[0];
 
         } else {
             $fallbackimg = null;
+            $fallbackimgset = null;
             $fallbackalt = null;
         }
 
@@ -495,7 +499,7 @@ class Callout extends Shortcode
 
                 $vidembed = '<video class="callout-media-element" poster="' . esc_url( $poster ) . '" controls ' . $autoplay . '>
                         <source src="' . esc_url( $attrs['vidsource'] ) . '" type="video/mp4">
-                        <img srcset="' . $fallbackimg . '" alt="' . $fallbackalt . '" />
+                        <img src="' . $fallbackimg . '" srcset="' . $fallbackimgset . '" alt="' . $fallbackalt . '" />
                         Your browser does not support the <pre>video</pre> tag.
                         </video>';
             }
@@ -550,13 +554,14 @@ class Callout extends Shortcode
             case 'img':
 
                 return sprintf(
-                    "<div class=\"%s callout-media callout-media-img %s %s\"><div class=\"callout-img %s%s\"><img class=\"img-responsive\" srcset=\"%s\" sizes=\"(min-width: 36em) 33.3vw, 100vw\" alt=\"%s\" />%s</div><div class=\"callout-content %s %s\">%s%s%s<p class=\"%s\">%s</p></div></div><!-- .uams-callout -->",
+                    "<div class=\"%s callout-media callout-media-img %s %s\"><div class=\"callout-img %s%s\"><img class=\"img-responsive\" src=\"%s\" srcset=\"%s\" sizes=\"(min-width: 36em) 33.3vw, 100vw\" alt=\"%s\" />%s</div><div class=\"callout-content %s %s\">%s%s%s<p class=\"%s\">%s</p></div></div><!-- .uams-callout -->",
                     implode(' ', $basic_classes),
                     $mediaposition,
                     esc_attr( $customclass ),
                     $mediaposition,
                     $imgback,
                     $img,
+                    $imgset,
                     $alt,
                     $imgcap,
                     $mediaposition,

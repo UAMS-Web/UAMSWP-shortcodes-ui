@@ -407,7 +407,7 @@ class Callout extends Shortcode
         }
 
         if (!empty($attrs['img'])) {
-            $img = wp_get_attachment_image_src($attrs['img'], 'large');
+            $img = wp_get_attachment_image_src($attrs['img'], 'large')[0];
             $imgset = wp_get_attachment_image_srcset($attrs['img'], 'large');
             $alt = get_post_meta($attrs['img'], '_wp_attachment_image_alt', true);
         } else {
@@ -440,7 +440,7 @@ class Callout extends Shortcode
         }
 
         if (!empty($attrs['fallbackimg'])) {
-            $fallbackimg = wp_get_attachment_image_src($attrs['fallbackimg']);
+            $fallbackimg = wp_get_attachment_image_src($attrs['fallbackimg'])[0];
             $fallbackimgset = wp_get_attachment_image_srcset($attrs['fallbackimg']);
             $fallbackalt = get_post_meta($attrs['fallbackimg'], '_wp_attachment_image_alt', true);
             $poster = wp_get_attachment_image_src($attrs['fallbackimg'], 'full')[0];

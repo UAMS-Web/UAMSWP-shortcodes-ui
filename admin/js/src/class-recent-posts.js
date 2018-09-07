@@ -13,6 +13,10 @@ function updateTaxonomyListener(changed, collection, shortcode) {
         taxonomy = attributeByName('taxonomy'),
         taxterm = attributeByName('tax_term');
 
+    if( typeof updatedVal === 'undefined' ) {
+        return;
+    }
+
     if (updatedVal) {
         taxonomy.$el.show();
         taxterm.$el.show();

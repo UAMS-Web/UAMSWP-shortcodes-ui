@@ -15,6 +15,10 @@ function updateHeadingListener(changed, collection, shortcode) {
         headingtype = attributeByName('headingtype'),
         headingicon = attributeByName('headingicon');
 
+    if( typeof updatedVal === 'undefined' ) {
+        return;
+    }
+
     if (updatedVal) {
         headingtype.$el.show();
         headingicon.$el.show();
@@ -38,6 +42,10 @@ function updateURLListener(changed, collection, shortcode) {
 
     var updatedVal = changed.value,
         target = attributeByName('target');
+
+    if( typeof updatedVal === 'undefined' ) {
+        return;
+    }
 
     if (updatedVal) {
         target.$el.show();
@@ -74,6 +82,10 @@ function updateTypeListener(changed, collection, shortcode) {
         textposition = attributeByName('textposition'),
         imgoverlay = attributeByName('imgoverlay'),
         textwidth = attributeByName('textwidth');
+
+    if( typeof updatedVal === 'undefined' ) {
+        return;
+    }
 
     switch (updatedVal) {
         case 'basic':
@@ -205,6 +217,10 @@ function updateVidTypeListener(changed, collection, shortcode) {
         vidsource = attributeByName('vidsource'),
         autoplay = attributeByName('autoplay'),
         fallbackimg = attributeByName('fallbackimg');
+
+    if( typeof updatedVal === 'undefined' ) {
+        return;
+    }
 
     switch (updatedVal) {
         case 'youtube':

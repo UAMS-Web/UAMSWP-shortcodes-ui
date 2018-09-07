@@ -13,10 +13,14 @@ function updateColorOptionsListener(changed, collection, shortcode) {
         textcolor = attributeByName('textcolor'),
         bgcolor = attributeByName('bgcolor');
 
-    if (updatedVal == 'text') {
+    if( typeof updatedVal === 'undefined' ) {
+        return;
+    }
+
+    if ('text'=== updatedVal) {
         textcolor.$el.show();
         bgcolor.$el.hide();
-    } else if (updatedVal == 'background')  {
+    } else if ('background' === updatedVal)  {
         textcolor.$el.hide();
         bgcolor.$el.show();
     } else {

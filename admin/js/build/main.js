@@ -15,6 +15,10 @@ function updateHeadingListener(changed, collection, shortcode) {
     var updatedVal = changed.value,
         headingtype = attributeByName('headingtype'),
         headingicon = attributeByName('headingicon');
+        
+    if( typeof updatedVal === 'undefined' ) {
+        return;
+    }
 
     if (updatedVal) {
         headingtype.$el.show();
@@ -39,6 +43,10 @@ function updateURLListener(changed, collection, shortcode) {
 
     var updatedVal = changed.value,
         target = attributeByName('target');
+
+    if( typeof updatedVal === 'undefined' ) {
+        return;
+    }
 
     if (updatedVal) {
         target.$el.show();
@@ -75,6 +83,10 @@ function updateTypeListener(changed, collection, shortcode) {
         textposition = attributeByName('textposition'),
         imgoverlay = attributeByName('imgoverlay'),
         textwidth = attributeByName('textwidth');
+
+    if( typeof updatedVal === 'undefined' ) {
+        return;
+    }
 
     switch (updatedVal) {
         case 'basic':
@@ -207,6 +219,10 @@ function updateVidTypeListener(changed, collection, shortcode) {
         autoplay = attributeByName('autoplay'),
         fallbackimg = attributeByName('fallbackimg');
 
+    if( typeof updatedVal === 'undefined' ) {
+        return;
+    }
+
     switch (updatedVal) {
         case 'youtube':
             youtube.$el.show();
@@ -257,10 +273,14 @@ function updateColorOptionsListener(changed, collection, shortcode) {
         textcolor = attributeByName('textcolor'),
         bgcolor = attributeByName('bgcolor');
 
-    if (updatedVal == 'text') {
+    if( typeof updatedVal === 'undefined' ) {
+        return;
+    }
+
+    if ('text' === updatedVal) {
         textcolor.$el.show();
         bgcolor.$el.hide();
-    } else if (updatedVal == 'background')  {
+    } else if ('background' === updatedVal)  {
         textcolor.$el.hide();
         bgcolor.$el.show();
     } else {
@@ -284,6 +304,10 @@ function updateTaxonomyListener(changed, collection, shortcode) {
         taxonomy = attributeByName('taxonomy'),
         taxterm = attributeByName('tax_term');
 
+    if( typeof updatedVal === 'undefined' ) {
+        return;
+    }
+
     if (updatedVal) {
         taxonomy.$el.show();
         taxterm.$el.show();
@@ -293,38 +317,38 @@ function updateTaxonomyListener(changed, collection, shortcode) {
     }
 }
 wp.shortcake.hooks.addAction('recent-posts.limit_tax', updateTaxonomyListener);
-function updateNewsOptionsListener(changed, collection, shortcode) {
+// function updateNewsOptionsListener(changed, collection, shortcode) {
 
-    function attributeByName(name) {
-        return _.find(
-            collection,
-            function (viewModel) {
-                return name === viewModel.model.get('attr');
-            }
-        );
-    }
+//     function attributeByName(name) {
+//         return _.find(
+//             collection,
+//             function (viewModel) {
+//                 return name === viewModel.model.get('attr');
+//             }
+//         );
+//     }
 
-    var updatedVal = changed.value,
-        category = attributeByName('site_category_slug'),
-        count = attributeByName('count');
-        offset = attributeByName('offset');
-        postid = attributeByName('id');
+//     var updatedVal = changed.value,
+//         category = attributeByName('site_category_slug'),
+//         count = attributeByName('count');
+//         offset = attributeByName('offset');
+//         postid = attributeByName('postid');
 
-    if (updatedVal == 'full') {
-        postid.$el.show();
-        offset.$el.hide();
-        category.$el.hide();
-        count.$el.hide();
-    } else if (updatedVal != 'full')  {
-        postid.$el.hide();
-        offset.$el.show();
-        category.$el.show();
-        count.$el.show();
-    } else {
-        postid.$el.hide();
-        offset.$el.hide();
-        category.$el.hide();
-        count.$el.hide();
-    }
-}
-wp.shortcake.hooks.addAction('uamswp_news.output', updateNewsOptionsListener);
+//     if (updatedVal == 'full') {
+//         postid.$el.show();
+//         offset.$el.hide();
+//         category.$el.hide();
+//         count.$el.hide();
+//     } else if (updatedVal != 'full')  {
+//         postid.$el.hide();
+//         offset.$el.show();
+//         category.$el.show();
+//         count.$el.show();
+//     } else {
+//         postid.$el.hide();
+//         offset.$el.hide();
+//         category.$el.hide();
+//         count.$el.hide();
+//     }
+// }
+// wp.shortcake.hooks.addAction('uamswp_news.output', updateNewsOptionsListener);

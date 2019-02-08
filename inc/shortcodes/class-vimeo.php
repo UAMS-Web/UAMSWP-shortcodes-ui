@@ -54,7 +54,7 @@ class Vimeo extends Shortcode {
 		$parts = explode( '/', trim( $path, '/' ) );
 		$video_id = $parts[0];
 		$embed_url = 'https://player.vimeo.com/video/' . $video_id;
-		return sprintf( '<div class="nc-video-player" role="region" aria-label="video" tabindex=-1><div class="tube-wrapper"><iframe class="uams-shortcodes-responsive" width="500" height="281" src="%s" frameborder="0" allowfullscreen></iframe></div></div>', esc_url( $embed_url ) );
+		return sprintf( '<div class="nc-video-player" role="region" aria-label="video" tabindex=-1><div class="tube-wrapper"><iframe class="uams-shortcodes-responsive" width="500" height="281" src="%s" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div></div>', esc_url( $embed_url ) );
 	}
 
 }

@@ -91,7 +91,7 @@ class PDF extends Shortcode {
 	public static function callback( $attrs, $content = '' ) {
 
 		if ( ! empty( $attrs['attachment'] ) && 'application/pdf' === get_post_mime_type( absint( $attrs['attachment'] ) ) ) {
-			$url = get_attached_file( absint( $attrs['attachment'] ) );
+			$url = wp_get_attachment_url( absint( $attrs['attachment'] ) );
 		} elseif ( ! empty( $attrs['url'] ) ) {
 			$url = esc_url_raw( $attrs['url'] );
 		} else {

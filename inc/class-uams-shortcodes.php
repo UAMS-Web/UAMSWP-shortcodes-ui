@@ -31,7 +31,7 @@ class UAMS_Shortcakes
         'UAMS_Shortcakes\Shortcodes\PDF',
         'UAMS_Shortcakes\Shortcodes\SoundCloud',
         'UAMS_Shortcakes\Shortcodes\Twitter',
-        'UAMS_Shortcakes\Shortcodes\Vimeo',
+        'UAMS_Shortcakes\Shortcodes\Vimeo', //Updated to new shortcode
         //'UAMS_Shortcakes\Shortcodes\YouTube', //Original
         'UAMS_Shortcakes\Shortcodes\YouTubeUI', //Updated to new shortcode
         /* Unused from Shortcode Bakery */
@@ -41,6 +41,7 @@ class UAMS_Shortcakes
         // 'UAMS_Shortcakes\Shortcodes\Instagram',
         // 'UAMS_Shortcakes\Shortcodes\Scribd',
         // 'UAMS_Shortcakes\Shortcodes\Script',
+        'UAMS_Shortcakes\Shortcodes\LiveWhale',
     );
 
     private $registered_shortcode_classes = array();

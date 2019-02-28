@@ -1,13 +1,13 @@
 <?php
 /*
  * Plugin Name: UAMSWP Shortcodes UI
- * Version: 0.4
+ * Version: 0.5
  * Plugin URI: 
  * Description: Useful shortcodes for UAMS websites, which can be added using the Shortcake shortcode UI.
  * Author: Todd McKee, MEd, Original: OIT Design, Brian DeConinck, Chris Deaton
  * Author URI: https://www.uams.edu/
  * Requires at least: 4.6
- * Tested up to: 4.8.1
+ * Tested up to: 4.9.9
  *
  * @package WordPress
  * @since 0.3.0

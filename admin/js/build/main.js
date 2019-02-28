@@ -15,7 +15,7 @@ function updateHeadingListener(changed, collection, shortcode) {
     var updatedVal = changed.value,
         headingtype = attributeByName('headingtype'),
         headingicon = attributeByName('headingicon');
-        
+
     if( typeof updatedVal === 'undefined' ) {
         return;
     }
@@ -277,7 +277,7 @@ function updateColorOptionsListener(changed, collection, shortcode) {
         return;
     }
 
-    if ('text' === updatedVal) {
+    if ('text'=== updatedVal) {
         textcolor.$el.show();
         bgcolor.$el.hide();
     } else if ('background' === updatedVal)  {
@@ -289,6 +289,27 @@ function updateColorOptionsListener(changed, collection, shortcode) {
     }
 }
 wp.shortcake.hooks.addAction('enhanced-heading.coloroptions', updateColorOptionsListener);
+function updateNewsOptionsListener(changed, collection, shortcode) {
+
+    function attributeByName(name) {
+        return _.find(
+            collection,
+            function (viewModel) {
+                return name === viewModel.model.get('attr');
+            }
+        );
+    }
+
+    var updatedVal = changed.value,
+        count = attributeByName('max');
+
+    if (updatedVal == 'month') {
+        count.$el.hide();
+    } else if (updatedVal != 'month')  {
+        count.$el.show();
+    }
+}
+wp.shortcake.hooks.addAction('livewhale.view', updateNewsOptionsListener);
 function updateTaxonomyListener(changed, collection, shortcode) {
 
     function attributeByName(name) {

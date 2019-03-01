@@ -31,12 +31,12 @@ class LiveWhale extends Shortcode
         'only_starred' => null,
         'hide_repeats' => true,
         'max' => 5,
+        'width' => 200,
+        'height' => 200,
         'customclass' => null
     );
 
-     //private static $buildingcode = array('127','116','117','118','119','120','121','122','123','124','125','128','129','126','131','130','132','133','134','135','136','137','138','139','141','142','143','144','145','146','147','148','149','150','151','152','153','154','155','2','3','4','7','6');
-
-    const URL = '//uams-dev.lwcal.com';
+    const URL = 'https://uams-dev.lwcal.com';
 
     /**
      * gets the arguments needed for shortcake
@@ -155,6 +155,30 @@ class LiveWhale extends Shortcode
                     'step'			=> '1',
                 ),
             ),
+            // array(
+            //     'label' => esc_html__('Thumbnail width', 'uams_shortcodes'),
+            //     'attr' => 'width',
+            //     'type' => 'number',
+            //     'description' => '',
+            //     'encode' => false,
+            //     'meta'   => array(
+            //         'placeholder' 	=> esc_html__( '200' ),
+            //         'min'			=> '50',
+            //         'step'			=> '1',
+            //     ),
+            // ),
+            // array(
+            //     'label' => esc_html__('Thumbnail height', 'uams_shortcodes'),
+            //     'attr' => 'height',
+            //     'type' => 'number',
+            //     'description' => '',
+            //     'encode' => false,
+            //     'meta'   => array(
+            //         'placeholder' 	=> esc_html__( '200' ),
+            //         'min'			=> '50',
+            //         'step'			=> '1',
+            //     ),
+            // ),
             array(
                 'label' => esc_html__('Custom CSS classes', 'uams_shortcodes'),
                 'attr' => 'customclass',
@@ -172,7 +196,7 @@ class LiveWhale extends Shortcode
      * LiveWhale CORS script
      */
     function lw_wp_footer() {
-        global $customclasses, $defaultview, $group, $type, $audience, $tags, $excludetags, $starred, $repeats, $max;
+        global $defaultview, $group, $type, $audience, $tags, $excludetags, $starred, $repeats, $max, $width, $height, $customclasses;
         ?>
         <script>
             lwCalendar({
@@ -183,12 +207,12 @@ class LiveWhale extends Shortcode
                     hide_repeats: <?php echo $repeats; ?>,
                     only_starred: <?php echo $starred; ?>,
                     mini_cal_heat_map: true,
-                    thumb_width: 200,
-                    thumb_height: 200,
+                    thumb_width: <?php echo $width; ?>,
+                    thumb_height: <?php echo $height; ?>,
                     <?php echo $max; ?>
                     development: true,
-                    <?php echo $tags ? 'tag: ['. $tags . '],' : ''; ?>
-                    <?php echo $excludetags ? 'tag: ['. $excludetags . '],' : ''; ?>
+                    <?php echo $tags; ?>
+                    <?php echo $excludetags; ?>
                 }
             });
         </script>
@@ -208,7 +232,7 @@ class LiveWhale extends Shortcode
             ? array_merge(self::$defaults, $attrs)
             : self::$defaults;
         
-        global $defaultview, $group, $type, $audience, $tags, $excludetags, $starred, $repeats, $max, $customclasses;
+        global $defaultview, $group, $type, $audience, $tags, $excludetags, $starred, $repeats, $max, $width, $height, $customclasses;
 
         $customclasses = array();
 
@@ -228,14 +252,18 @@ class LiveWhale extends Shortcode
             $audience = $attrs['audience'];
         }
 
+        $tags = null;
         if (!empty($attrs['tags'])) {
             $tags = explode( ",", $attrs['tags'] );
             $tags = "'".implode("','",$tags)."'";
+            $tags = 'tag: ['. $tags . '],';
         }
 
+        $excludetags = null;
         if (!empty($attrs['exclude_tags'])) {
             $excludetags = explode( ",", $attrs['exclude_tags'] );
             $excludetags = "'".implode("','",$excludetags)."'";
+            $excludetags = 'exclude_tag: ['. $excludetags . '],';
         }
 
         $starred = 'false';
@@ -244,15 +272,23 @@ class LiveWhale extends Shortcode
         }
 
         $repeats = 'true';
-        if ($attrs['hide_repeats'] == true) {
-            $repeats = 'false';
+        if ($attrs['include_repeats'] == true) {
+            $repeats = 'false'; // include_repeat(false) = hide_repeat
         }
 
-        //$max = 5;
         if (isset($attrs['max'])){
             if ($defaultview != 'month'){
                 $max = 'max: ' . intval($attrs['max']) .',';
             }
+        }
+        $width = '200';
+        if ($attrs['width']) {
+            $width = intval($attrs['width']);
+        }
+
+        $height = '200';
+        if ($attrs['height']) {
+            $width = intval($attrs['height']);
         }
 
         if (!empty($attrs['customclass'])) {

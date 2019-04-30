@@ -42,6 +42,7 @@ class UAMS_Shortcakes
         // 'UAMS_Shortcakes\Shortcodes\Scribd',
         // 'UAMS_Shortcakes\Shortcodes\Script',
         'UAMS_Shortcakes\Shortcodes\LiveWhale',
+        'UAMS_Shortcakes\Shortcodes\LiveWhale_Widget',
     );
 
     private $registered_shortcode_classes = array();

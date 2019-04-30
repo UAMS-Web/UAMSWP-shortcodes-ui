@@ -30,7 +30,7 @@ class Map extends Shortcode
 
      private static $buildingcode = array('127','116','117','118','119','120','121','122','123','124','125','128','129','126','131','130','132','133','134','135','136','137','138','139','141','142','143','144','145','146','147','148','149','150','151','152','153','154','155','2','3','4','7','6');
 
-    const URL = '//maps.uams.edu/full-screen/?markerid=';
+    const URL = '//maps.uams.edu/full-screen/?marker=';
 
     /**
      * gets the arguments needed for shortcake

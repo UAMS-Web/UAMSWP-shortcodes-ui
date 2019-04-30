@@ -26,7 +26,7 @@ class LiveWhale_Widget extends Shortcode
         'customclass' => null
     );
 
-    const URL = 'https://uams-dev.lwcal.com';
+    const URL = '//uams-dev.lwcal.com';
 
     /**
      * gets the arguments needed for shortcake
@@ -107,13 +107,14 @@ class LiveWhale_Widget extends Shortcode
 
         $return .= '
         <!-- Livewhale Calendar Widget -->
-        <div class="lwcw" data-options="id='. $id .'&format=html"></div>';
+        <div class="lwcw" data-options="id='. $id .'&format=html"></div><div class="lwcw" data-options="id=2&format=html"></div> 
+        <script type="text/javascript" id="lw_lwcw" src="'. self::URL .'/livewhale/theme/core/scripts/lwcw.js"></script>';
         if ($customclasses){
             $return .= '</div>';
         }
 
         /* Enqueue two required scripts */
-        wp_enqueue_script( 'lw_lwcw', self::URL .'/livewhale/theme/core/scripts/lwcw.js', array(), false, false );        
+        // wp_enqueue_script( 'lw_lwcw', self::URL .'/livewhale/theme/core/scripts/lwcw.js', array(), false, false );        
 
         return $return;
 

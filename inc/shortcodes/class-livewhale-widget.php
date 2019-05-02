@@ -26,7 +26,7 @@ class LiveWhale_Widget extends Shortcode
         'customclass' => null
     );
 
-    const URL = 'https://uams-dev.lwcal.com';
+    const URL = 'https://calendar.uams.edu';
 
     /**
      * gets the arguments needed for shortcake

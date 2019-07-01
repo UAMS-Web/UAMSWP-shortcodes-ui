@@ -1,595 +1,263 @@
+@mixin brand-colors($background-color, $color, $other-color) {
+    background-color: $background-color;
+    color: $color;
+
+    [class^="ic-"]:before,
+    [class*=" ic-"],
+    [class^="i-"]:before,
+    [class*=" i-"],
+    .callout-heading {
+        color: $other-color;
+    }
+}
+
+@mixin brand-colors-links($color, $border-color, $hover-color, $hover-border-color, $visited-color, $visited-border-color) {
+    color: $color;
+    border-bottom-color: $border-bottom-color;
+
+    &:hover,
+    &:active,
+    &:focus {
+        color: $hover-color;
+        border-bottom-color: $hover-border-color;
+    }
+    &:visited {
+        color: $visited-color;
+        border-bottom-color: $visited-border-color;
+    }
+}
+
+@mixin brand-colors-classed-link($background-color, $color, $border-color) {
+    &:hover,
+    &:active,
+    &:focus {
+        background-color: $background-color;
+        color: $color;
+        border-bottom-color: $border-color;
+    }
+}
 
 .darken {
-  background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .lighten {
-  background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .transparentwhite {
-  background-color: none;
-  color: #fff;
-
-  [class^="ic-"]:before, [class*=" ic-"], 
-[class^="i-"]:before, [class*=" i-"],,
-  .callout-heading {
-    color: #fff;
-  }
+    @include brand-colors(none, #fff, #fff);
 }
 
 .transparentblack {
-  background-color: none;
-  color: #212121;
-
-  [class^="ic-"]:before, [class*=" ic-"], 
-[class^="i-"]:before, [class*=" i-"],,
-  .callout-heading {
-    color: #212121;
-  }
+    @include brand-colors(none, #212121, #212121);
 }
 
 .transparentred {
-  background-color: none;
-  color: #9d2235;
-
-  [class^="ic-"]:before, [class*=" ic-"], 
-[class^="i-"]:before, [class*=" i-"],,
-  .callout-heading {
-    color: #9d2235;
-  }
+    @include brand-colors(none, #9d2235, #9d2235);
 }
 
 .semidark {
-  background-color: rgba(0,0,0,0.5);
-  color: #fff;
-
-  [class^="ic-"]:before, [class*=" ic-"], 
-[class^="i-"]:before, [class*=" i-"],,
-  .callout-heading {
-    color: #fff;
-  }
+    @include brand-colors(rgba(0, 0, 0, 0.5), #fff, #fff);
 }
 
 .semilight {
-  background-color: rgba(255,255,255,0.5);
-  color: #212121;
-
-  [class^="ic-"]:before, [class*=" ic-"], 
-[class^="i-"]:before, [class*=" i-"],,
-  .callout-heading {
-    color: #212121;
-  }
+    @include brand-colors(rgba(255, 255, 255, 0.5), #212121, #212121);
 }
 
 .black {
-  background-color: #000;
-  color: #fff;
-
-  [class^="ic-"]:before, [class*=" ic-"], 
-[class^="i-"]:before, [class*=" i-"],,
-  .callout-heading {
-    color: #fff;
-  }
+    @include brand-colors(#000, #fff, #fff);
 }
 
 .white {
-  background-color: #fff;
-  color: #212121;
-
-  [class^="ic-"]:before, [class*=" ic-"], 
-[class^="i-"]:before, [class*=" i-"],,
-  .callout-heading {
-    color: #212121;
-  }
+    @include brand-colors(#fff, #212121, #212121);
 }
 
 .gray5 {
-  background-color: #FAF8F9;
-  color: #212121;
-
-  [class^="ic-"]:before, [class*=" ic-"], 
-[class^="i-"]:before, [class*=" i-"],,
-  .callout-heading {
-    color: #212121;
-  }
+    @include brand-colors(#faf8f9, #212121, #212121);
 }
 
 .gray10 {
-  background-color: #F5F3F4;
-  color: #212121;
-
-  [class^="ic-"]:before, [class*=" ic-"], 
-[class^="i-"]:before, [class*=" i-"],,
-  .callout-heading {
-    color: #212121;
-  }
+    @include brand-colors(#f5f3f4, #212121, #212121);
 }
 
 .gray25 {
-  background-color: #DCDADB;
-  color: #212121;
-
-  [class^="ic-"]:before, [class*=" ic-"], 
-[class^="i-"]:before, [class*=" i-"],,
-  .callout-heading {
-    color: #212121;
-  }
+    @include brand-colors(#dcdadb, #212121, #212121);
 }
 
 .gray60 {
-  background-color: #767475;
-  color: #fff;
-
-  [class^="ic-"]:before, [class*=" ic-"], 
-[class^="i-"]:before, [class*=" i-"],,
-  .callout-heading {
-    color: #fff;
-  }
+    @include brand-colors(#767475, #fff, #fff);
 }
 
 .gray90 {
-  background-color: #212121;
-  color: #fff;
-
-  [class^="ic-"]:before, [class*=" ic-"], 
-[class^="i-"]:before, [class*=" i-"], {
-    color: #fff;
-  }
+    @include brand-colors(#212121, #fff, #fff);
 }
 
 .uamsred {
-  background-color: #9d2235;
-  color: #fff;
-
-  [class^="ic-"]:before, [class*=" ic-"], 
-[class^="i-"]:before, [class*=" i-"],,
-  .callout-heading {
-    color: #fff;
-  }
+    @include brand-colors(#9d2235, #fff, #fff);
 }
 
 .accentgray {
-  background-color: #767475;
-  color: #fff;
-
-  [class^="ic-"]:before, [class*=" ic-"], 
-[class^="i-"]:before, [class*=" i-"],,
-  .callout-heading {
-    color: #fff;
-  }
+    @include brand-colors(#767475, #fff, #fff);
 }
 
 .eggplant {
-  background-color: #701D45;
-  color: #fff;
-
-  [class^="ic-"]:before, [class*=" ic-"], 
-[class^="i-"]:before, [class*=" i-"],,
-  .callout-heading {
-    color: #fff;
-  }
+    @include brand-colors(#701d45, #fff, #fff);
 }
 
 .bluegray {
-  background-color: #396079;
-  color: #fff;
-
-  [class^="ic-"]:before, [class*=" ic-"], 
-[class^="i-"]:before, [class*=" i-"],,
-  .callout-heading {
-    color: #fff;
-  }
+    @include brand-colors(#396079, #fff, #fff);
 }
 
 .darkblue {
-  background-color: #1A365C;
-  color: #fff;
-
-  [class^="ic-"]:before, [class*=" ic-"], 
-[class^="i-"]:before, [class*=" i-"],,
-  .callout-heading {
-    color: #fff;
-  }
+    @include brand-colors(#1a365c, #fff, #fff);
 }
 
 .maroon {
-  background-color: #6C0020;
-  color: #fff;
-
-  [class^="ic-"]:before, [class*=" ic-"], 
-[class^="i-"]:before, [class*=" i-"],,
-  .callout-heading {
-    color: #fff;
-  }
+    @include brand-colors(#6c0020, #fff, #fff);
 }
 
 .orange {
-  background-color: #CA4C1D;
-  color: #fff;
-
-  [class^="ic-"]:before, [class*=" ic-"], 
-[class^="i-"]:before, [class*=" i-"],,
-  .callout-heading {
-    color: #fff;
-  }
+    @include brand-colors(#ca4c1d, #fff, #fff);
 }
 
 .lightblue {
-  background-color: #01809F;
-  color: #fff;
-  
-  [class^="ic-"]:before, [class*=" ic-"], 
-[class^="i-"]:before, [class*=" i-"],,
-  .callout-heading {
-    color: #fff;
-  }
+    @include brand-colors(#01809f, #fff, #fff);
 }
 
 .tealblue {
-  background-color: #427F81;
-  color: #fff;
-  
-  [class^="ic-"]:before, [class*=" ic-"], 
-[class^="i-"]:before, [class*=" i-"],,
-  .callout-heading {
-    color: #fff;
-  }
+    @include brand-colors(#427f81, #fff, #fff);
 }
 
 /* ===== 1.2 - Brand Colors - Links ===== */
 
 .transparentwhite a {
-  color: #fff;
-  border-bottom-color: #fff;
-
-  &:hover, &:active, &:focus {
-    color: #F5F3F4;
-    border-bottom-color: #F5F3F4;
-  }
-  &:visited {
-    color: #DCDADB;
-    border-bottom-color: #DCDADB;
-  }
+    @include brand-colors-links(#fff, #fff, #f5f3f4, #f5f3f4, #dcdadb, #dcdadb);
 }
 
 .transparentblack a {
-  color: #212121;
-  border-bottom-color: #212121;
-
-  &:hover, &:active, &:focus {
-    color: #2A2829;
-    border-bottom-color: #2A2829;
-  }
-  &:visited {
-    color: #434142;
-    border-bottom-color: #434142;
-  }
+    @include brand-colors-links(#212121, #212121, #2a2829, #2a2829, #434142, #434142);
 }
 
 .transparentred a {
-  color: #cc0000;
-  border-bottom-color: #cc0000;
-
-  &:hover, &:active, &:focus {
-    color: #990000;
-    border-bottom-color: #990000;
-  }
-  &:visited {
-    color: #aa0000;
-    border-bottom-color: #aa0000;
-  }
+    @include brand-colors-links(#cc0000, #cc0000, #990000, #990000, #aa0000, #aa0000);
 }
 
 .black a {
-  color: #fff;
-  border-bottom-color: #fff;
-
-  &:hover, &:active, &:focus {
-    color: #F5F3F4;
-    border-bottom-color: #F5F3F4;
-  }
-  &:visited {
-    color: #DCDADB;
-    border-bottom-color: #DCDADB;
-  }
+    @include brand-colors-links(#fff, #fff, #f5f3f4, #f5f3f4, #dcdadb, #dcdadb);
 }
 
 .white a {
-  color: #212121;
-  border-bottom-color: #212121;
-
-  &:hover, &:active, &:focus {
-    color: #2A2829;
-    border-bottom-color: #2A2829;
-  }
-  &:visited {
-    color: #434142;
-    border-bottom-color: #434142;
-  }
+    @include brand-colors-links(#212121, #212121, #2a2829, #2a2829, #434142, #434142);
 }
 
 .gray10 a {
-  color: #212121;
-  border-bottom-color: #212121;
-
-  &:hover, &:active, &:focus {
-    color: #2A2829;
-    border-bottom-color: #2A2829;
-  }
-  &:visited {
-    color: #434142;
-    border-bottom-color: #434142;
-  }
+    @include brand-colors-links(#212121, #212121, #2a2829, #2a2829, #434142, #434142);
 }
 
 .gray25 a {
-  color: #212121;
-  border-bottom-color: #212121;
-
-  &:hover, &:active, &:focus {
-    color: #2A2829;
-    border-bottom-color: #2A2829;
-  }
-  &:visited {
-    color: #434142;
-    border-bottom-color: #434142;
-  }
+    @include brand-colors-links(#212121, #212121, #2a2829, #2a2829, #434142, #434142);
 }
 
 .gray60 a {
-  color: #fff;
-  border-bottom-color: #fff;
-
-  &:hover, &:active, &:focus {
-    color: #F5F3F4;
-    border-bottom-color: #F5F3F4;
-  }
+    @include brand-colors-links(#fff, #fff, #f5f3f4, #f5f3f4, #f5f3f4, #f5f3f4);
 }
 
 .gray90 a {
-  color: #fff;
-  border-bottom-color: #fff;
-
-  &:hover, &:active, &:focus {
-    color: #F5F3F4;
-    border-bottom-color: #F5F3F4;
-  }
-  &:visited {
-    color: #DCDADB;
-    border-bottom-color: #DCDADB;
-  }
+    @include brand-colors-links(#fff, #fff, #f5f3f4, #f5f3f4, #dcdadb, #dcdadb);
 }
 
 .uamsred a {
-  color: #fff;
-  border-bottom-color: #fff;
-
-  &:hover, &:active, &:focus {
-    color: #F5F3F4;
-    border-bottom-color: #F5F3F4;
-  }
-  &:visited {
-    color: #DCDADB;
-    border-bottom-color: #DCDADB;
-  }
+    @include brand-colors-links(#fff, #fff, #f5f3f4, #f5f3f4, #dcdadb, #dcdadb);
 }
 
 .accentgray a {
-  color: #fff;
-  border-bottom-color: #fff;
-
-  &:hover, &:active, &:focus {
-    color: #F5F3F4;
-    border-bottom-color: #F5F3F4;
-  }
-  &:visited {
-    color: #DCDADB;
-    border-bottom-color: #DCDADB;
-  }
+    @include brand-colors-links(#fff, #fff, #f5f3f4, #f5f3f4, #dcdadb, #dcdadb);
 }
 
 .eggplant a {
-  color: #fff;
-  border-bottom-color: #fff;
-
-  &:hover, &:active, &:focus {
-    color: #F5F3F4;
-    border-bottom-color: #F5F3F4;
-  }
-  &:visited {
-    color: #DCDADB;
-    border-bottom-color: #DCDADB;
-  }
+    @include brand-colors-links(#fff, #fff, #f5f3f4, #f5f3f4, #dcdadb, #dcdadb);
 }
 
 .bluegray a {
-  color: #fff;
-  border-bottom-color: #fff;
-
-  &:hover, &:active, &:focus {
-    color: #F5F3F4;
-    border-bottom-color: #F5F3F4;
-  }
-  &:visited {
-    color: #DCDADB;
-    border-bottom-color: #DCDADB;
-  }
+    @include brand-colors-links(#fff, #fff, #f5f3f4, #f5f3f4, #dcdadb, #dcdadb);
 }
 
 .maroon a {
-  color: #fff;
-  border-bottom-color: #fff;
-
-  &:hover, &:active, &:focus {
-    color: #F5F3F4;
-    border-bottom-color: #F5F3F4;
-  }
-  &:visited {
-    color: #DCDADB;
-    border-bottom-color: #DCDADB;
-  }
+    @include brand-colors-links(#fff, #fff, #f5f3f4, #f5f3f4, #dcdadb, #dcdadb);
 }
 
 .orange a {
-  color: #fff;
-  border-bottom-color: #fff;
-
-  &:hover, &:active, &:focus {
-    color: #F5F3F4;
-    border-bottom-color: #F5F3F4;
-  }
-  &:visited {
-    color: #DCDADB;
-    border-bottom-color: #DCDADB;
-  }
+    @include brand-colors-links(#fff, #fff, #f5f3f4, #f5f3f4, #dcdadb, #dcdadb);
 }
 
 .lightblue a {
-  color: #fff;
-  border-bottom-color: #fff;
-
-  &:hover, &:active, &:focus {
-    color: #F5F3F4;
-    border-bottom-color: #F5F3F4;
-  }
-  &:visited {
-    color: #DCDADB;
-    border-bottom-color: #DCDADB;
-  }
+    @include brand-colors-links(#fff, #fff, #f5f3f4, #f5f3f4, #dcdadb, #dcdadb);
 }
 
 .tealblue a {
-  color: #fff;
-  border-bottom-color: #fff;
-
-  &:hover, &:active, &:focus {
-    color: #F5F3F4;
-    border-bottom-color: #F5F3F4;
-  }
-  &:visited {
-    color: #DCDADB;
-    border-bottom-color: #DCDADB;
-  }
+    @include brand-colors-links(#fff, #fff, #f5f3f4, #f5f3f4, #dcdadb, #dcdadb);
 }
 
+
 a {
-  &.black {
-    &:hover, &:active, &:focus {
-      color: #fff;
-      border-bottom-color: #fff;
+    &.black {
+        @include brand-colors-classed-link(#000, #fff, #fff);
     }
-  }
 
-  &.white {
-    &:hover, &:active, &:focus {
-      background-color: #F0EEEF;
-      color: #212121;
-      border-bottom-color: #212121;
+    &.white {
+        @include brand-colors-classed-link(#f0eeef, #212121, #212121);
     }
-  }
 
-  &.gray10 {
-    &:hover, &:active, &:focus {
-      background-color: #DCDADB;
-      color: #212121;
-      border-bottom-color: #212121;
+    &.gray10 {
+        @include brand-colors-classed-link(#dcdadb, #212121, #212121);
     }
-  }
 
-  &.gray25 {
-    &:hover, &:active, &:focus {
-      background-color: #A9A7A8;
-      color: #212121;
-      border-bottom-color: #212121;
+    &.gray25 {
+        @include brand-colors-classed-link(#a9a7a8, #212121, #212121);
     }
-  }
 
-  &.gray60 {
-    &:hover, &:active, &:focus {
-      background-color: #434142;
-      color: #fff;
-      border-bottom-color: #fff;
+    &.gray60 {
+        @include brand-colors-classed-link(#434142, #fff, #fff);
     }
-  }
 
-  &.gray90 {
-    &:hover, &:active, &:focus {
-      background-color: #1a1a1a;
-      color: #fff;
-      border-bottom-color: #fff;
+    &.gray90 {
+        @include brand-colors-classed-link(#1a1a1a, #fff, #fff);
     }
-  }
 
-  &.uamsred {
-    &:hover, &:active, &:focus {
-      background-color: #9d2235;
-      color: #fff;
-      border-bottom-color: #fff;
+    &.uamsred {
+        @include brand-colors-classed-link(#9d2235, #fff, #fff);
     }
-  }
 
-  &.accentgray {
-    &:hover, &:active, &:focus {
-      background-color: #767475;
-      color: #fff;
-      border-bottom-color: #fff;
+    &.accentgray {
+        @include brand-colors-classed-link(#767475, #fff, #fff);
     }
-  }
 
-  &.eggplant {
-    &:hover, &:active, &:focus {
-      background-color: #701D45;
-      color: #fff;
-      border-bottom-color: #fff;
+    &.eggplant {
+        @include brand-colors-classed-link(#701d45, #fff, #fff);
     }
-  }
 
-  &.bluegray {
-    &:hover, &:active, &:focus {
-      background-color: #396079;
-      color: #fff;
-      border-bottom-color: #fff;
+    &.bluegray {
+        @include brand-colors-classed-link(#396079, #fff, #fff);
     }
-  }
 
-  &.darkblue {
-    &:hover, &:active, &:focus {
-      background-color: #1A365C;
-      color: #fff;
-      border-bottom-color: #fff;
+    &.darkblue {
+        @include brand-colors-classed-link(#1a365c, #fff, #fff);
     }
-  }
 
-  &.maroon {
-    &:hover, &:active, &:focus {
-      background-color: #6C0020;
-      color: #fff;
-      border-bottom-color: #fff;
+    &.maroon {
+        @include brand-colors-classed-link(#6c0020, #fff, #fff);
     }
-  }
 
-  &.orange {
-    &:hover, &:active, &:focus {
-      background-color: #CA4C1D;
-      color: #fff;
-      border-bottom-color: #fff;
+    &.orange {
+        @include brand-colors-classed-link(#ca4c1d, #fff, #fff);
     }
-  }
 
-  &.lightblue {
-    &:hover, &:active, &:focus {
-      background-color: #01809F;
-      color: #fff;
-      border-bottom-color: #fff;
+    &.lightblue {
+        @include brand-colors-classed-link(#01809f, #fff, #fff);
     }
-  }
 
-  &.tealblue {
-    &:hover, &:active, &:focus {
-      background-color: #427F81;
-      color: #fff;
-      border-bottom-color: #fff;
+    &.tealblue {
+        @include brand-colors-classed-link(#427f81, #fff, #fff);
     }
-  }
 }

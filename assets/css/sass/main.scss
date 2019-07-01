@@ -1,2 +1,21 @@
-@import "partials/*.scss";
-@import "shortcodes/*.scss";
+// Partials
+@import "partials/brand-colors";
+@import "partials/bugfixes";
+@import "partials/fonts";
+@import "partials/icons";
+@import "partials/misc";
+@import "partials/tinymce";
+@import "partials/variables";
+
+// Shortcodes
+
+@import "shortcodes/class-alert";
+// @import "shortcodes/class-basebutton";
+@import "shortcodes/class-button";
+@import "shortcodes/class-callout";
+// @import "shortcodes/class-col";
+@import "shortcodes/class-iconbox";
+// @import "shortcodes/class-lead";
+@import "shortcodes/class-panel";
+@import "shortcodes/class-pullquote";
+@import "shortcodes/class-textbox";

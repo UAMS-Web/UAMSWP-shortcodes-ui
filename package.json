@@ -15,16 +15,19 @@
   "author": "OIT Design",
   "license": "MIT",
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-coffee": "^2.3.1",
+    "clean-css": "^4.2.1",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-coffee": "^2.3.5",
     "gulp-concat": "^2.6.0",
-    "gulp-jshint": "^2.0.0",
-    "gulp-minify-css": "^1.2.2",
-    "gulp-plumber": "^1.0.1",
-    "gulp-rename": "^1.2.2",
+    "gulp-jshint": "^2.1.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-rename": "^1.4.0",
     "gulp-sass": "^2.1.0",
     "gulp-sass-glob": "0.0.8",
     "gulp-strip-css-comments": "^1.2.0",
-    "jshint": "^2.8.0"
-  }
+    "jshint": "^2.10.2",
+    "node-sass": "^4.12.0"
+  },
+  "dependencies": {}
 }

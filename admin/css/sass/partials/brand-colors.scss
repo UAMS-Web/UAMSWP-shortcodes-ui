@@ -13,7 +13,7 @@
 
 @mixin brand-colors-links($color, $border-color, $hover-color, $hover-border-color, $visited-color, $visited-border-color) {
     color: $color;
-    border-bottom-color: $border-bottom-color;
+    border-bottom-color: $border-color;
 
     &:hover,
     &:active,

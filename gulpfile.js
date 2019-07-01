@@ -5,14 +5,13 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     sass = require('gulp-sass'),
     sassGlob = require('gulp-sass-glob');
-minifyCss = require('gulp-minify-css'),
+minifyCss = require('gulp-clean-css'),
     stripCssComments = require('gulp-strip-css-comments'),
     jshint = require('gulp-jshint');
 
 // handle styles
-gulp.task('styles', function () {
-    gulp.src(['assets/css/sass/main.scss',
-        ])
+function style() {
+    return gulp.src('assets/css/sass/main.scss')
         .pipe(plumber({
             errorHandler: function (error) {
                 console.log(error.message);
@@ -24,8 +23,9 @@ gulp.task('styles', function () {
         .pipe(stripCssComments())
         .pipe(minifyCss())
         .pipe(gulp.dest('assets/css'))
-    gulp.src(['admin/css/sass/admin.scss',
-        ])
+};
+function admin() {   
+    return gulp.src('admin/css/sass/admin.scss')
         .pipe(plumber({
             errorHandler: function (error) {
                 console.log(error.message);
@@ -37,9 +37,9 @@ gulp.task('styles', function () {
         .pipe(stripCssComments())
         .pipe(minifyCss())
         .pipe(gulp.dest('admin/css'))
-});
+};
 
-gulp.task('front-end-scripts', function () {
+function frontEndScripts() {
     return gulp.src('assets/js/src/**/*.js')
         .pipe(plumber({
             errorHandler: function (error) {
@@ -49,9 +49,9 @@ gulp.task('front-end-scripts', function () {
         }))
         .pipe(concat('main.js'))
         .pipe(gulp.dest('assets/js/build/'))
-});
+};
 
-gulp.task('admin-scripts', function () {
+function adminScripts() {
     return gulp.src('admin/js/src/**/*.js')
         .pipe(plumber({
             errorHandler: function (error) {
@@ -61,10 +61,8 @@ gulp.task('admin-scripts', function () {
         }))
         .pipe(concat('main.js'))
         .pipe(gulp.dest('admin/js/build/'))
-});
+};
 
-gulp.task('default', [
-    'styles',
-    'front-end-scripts',
-    'admin-scripts'
-]);
+gulp.task('default', gulp.parallel(
+    style, admin, frontEndScripts, adminScripts
+));

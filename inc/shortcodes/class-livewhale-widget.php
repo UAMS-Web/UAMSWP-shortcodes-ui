@@ -107,7 +107,7 @@ class LiveWhale_Widget extends Shortcode
 
         $return .= '
         <!-- Livewhale Calendar Widget -->
-        <div class="lwcw" data-options="id='. $id .'&format=html"></div><div class="lwcw" data-options="id=2&format=html"></div> 
+        <div class="lwcw" data-options="id='. $id .'&format=html"></div> 
         <script type="text/javascript" id="lw_lwcw" src="'. self::URL .'/livewhale/theme/core/scripts/lwcw.js"></script>';
         if ($customclasses){
             $return .= '</div>';

@@ -31,10 +31,10 @@ class LiveWhale extends Shortcode
         'only_starred' => null,
         'hide_repeats' => true,
         'max' => 5,
-        'width' => 200,
-        'height' => 200,
         'customclass' => null
     );
+
+     //private static $buildingcode = array('127','116','117','118','119','120','121','122','123','124','125','128','129','126','131','130','132','133','134','135','136','137','138','139','141','142','143','144','145','146','147','148','149','150','151','152','153','154','155','2','3','4','7','6');
 
     const URL = 'https://uams-dev.lwcal.com';
 
@@ -155,30 +155,6 @@ class LiveWhale extends Shortcode
                     'step'			=> '1',
                 ),
             ),
-            // array(
-            //     'label' => esc_html__('Thumbnail width', 'uams_shortcodes'),
-            //     'attr' => 'width',
-            //     'type' => 'number',
-            //     'description' => '',
-            //     'encode' => false,
-            //     'meta'   => array(
-            //         'placeholder' 	=> esc_html__( '200' ),
-            //         'min'			=> '50',
-            //         'step'			=> '1',
-            //     ),
-            // ),
-            // array(
-            //     'label' => esc_html__('Thumbnail height', 'uams_shortcodes'),
-            //     'attr' => 'height',
-            //     'type' => 'number',
-            //     'description' => '',
-            //     'encode' => false,
-            //     'meta'   => array(
-            //         'placeholder' 	=> esc_html__( '200' ),
-            //         'min'			=> '50',
-            //         'step'			=> '1',
-            //     ),
-            // ),
             array(
                 'label' => esc_html__('Custom CSS classes', 'uams_shortcodes'),
                 'attr' => 'customclass',
@@ -196,23 +172,24 @@ class LiveWhale extends Shortcode
      * LiveWhale CORS script
      */
     function lw_wp_footer() {
-        global $defaultview, $group, $type, $audience, $tags, $excludetags, $starred, $repeats, $max, $width, $height, $customclasses;
+        global $customclasses, $defaultview, $group, $type, $audience, $tags, $excludetags, $starred, $repeats, $max;
         ?>
         <script>
             lwCalendar({
                 host: '<?php echo self::URL; ?>',
                 theme: 'global',
+                use_modular_templates: true,
                 default_view: '<?php echo $defaultview; ?>',
                 widget_args: {
                     hide_repeats: <?php echo $repeats; ?>,
                     only_starred: <?php echo $starred; ?>,
                     mini_cal_heat_map: true,
-                    thumb_width: <?php echo $width; ?>,
-                    thumb_height: <?php echo $height; ?>,
+                    thumb_width: 200,
+                    thumb_height: 200,
                     <?php echo $max; ?>
                     development: true,
-                    <?php echo $tags; ?>
-                    <?php echo $excludetags; ?>
+                    <?php echo $tags ? 'tag: ['. $tags . '],' : ''; ?>
+                    <?php echo $excludetags ? 'tag: ['. $excludetags . '],' : ''; ?>
                 }
             });
         </script>
@@ -231,15 +208,15 @@ class LiveWhale extends Shortcode
         $attrs = (is_array($attrs))
             ? array_merge(self::$defaults, $attrs)
             : self::$defaults;
-        
-        global $defaultview, $group, $type, $audience, $tags, $excludetags, $starred, $repeats, $max, $width, $height, $customclasses;
+
+        global $defaultview, $group, $type, $audience, $tags, $excludetags, $starred, $repeats, $max, $customclasses;
 
         $customclasses = array();
 
         if (isset($attrs['view'])){
             $defaultview = esc_attr($attrs['view']);
         }
-        
+
         if (isset($attrs['group'])){
             $group = esc_attr($attrs['group']);
         }
@@ -252,18 +229,14 @@ class LiveWhale extends Shortcode
             $audience = $attrs['audience'];
         }
 
-        $tags = null;
         if (!empty($attrs['tags'])) {
             $tags = explode( ",", $attrs['tags'] );
             $tags = "'".implode("','",$tags)."'";
-            $tags = 'tag: ['. $tags . '],';
         }
 
-        $excludetags = null;
         if (!empty($attrs['exclude_tags'])) {
             $excludetags = explode( ",", $attrs['exclude_tags'] );
             $excludetags = "'".implode("','",$excludetags)."'";
-            $excludetags = 'exclude_tag: ['. $excludetags . '],';
         }
 
         $starred = 'false';
@@ -273,22 +246,14 @@ class LiveWhale extends Shortcode
 
         $repeats = 'true';
         if ($attrs['include_repeats'] == true) {
-            $repeats = 'false'; // include_repeat(false) = hide_repeat
+            $repeats = 'false';
         }
 
+        //$max = 5;
         if (isset($attrs['max'])){
             if ($defaultview != 'month'){
                 $max = 'max: ' . intval($attrs['max']) .',';
             }
-        }
-        $width = '200';
-        if ($attrs['width']) {
-            $width = intval($attrs['width']);
-        }
-
-        $height = '200';
-        if ($attrs['height']) {
-            $width = intval($attrs['height']);
         }
 
         if (!empty($attrs['customclass'])) {
@@ -296,11 +261,11 @@ class LiveWhale extends Shortcode
         }
 
         $return = '';
-        
+
         if ($customclasses){
             $return .= '<div class="' . $customclasses . '">';
         }
-        
+
         if ($defaultview != 'all') {
             $return .= '<!-- The Day, Week, Month, All Upcoming Events tabs -->
                         <div id="lw_cal_view_selector"></div>';
@@ -325,11 +290,11 @@ class LiveWhale extends Shortcode
         wp_enqueue_script( 'googlemaps-api', 'https://maps.googleapis.com/maps/api/js?sensor=false', array(), false, false );
         wp_enqueue_script( 'livewhale-js', 'https://uams-dev.lwcal.com/livewhale/scripts/cors-calendar.js', array(), false, false );
 
-        
+
 
         return $return;
 
-        
+
 
         // <!-- The Day, Week, Month, All Upcoming Events tabs -->
         // <div id="lw_cal_view_selector"></div>

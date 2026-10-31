@@ -1,0 +1,6 @@
+/* export-ignore
+/.* export-ignore
+/inc -export-ignore
+/admin -export-ignore
+/assets -export-ignore
+/uamswp-shortcodes.php -export-ignore

@@ -11,11 +11,9 @@ namespace UAMS_Shortcakes\Shortcodes;
 
 /**
  * Class Map
- * @package UAMS_Shortcakes\Shortcodes
  */
 class Map extends Shortcode
 {
-
     /**
      * declare default attributes
      */
@@ -23,10 +21,10 @@ class Map extends Shortcode
         'building' => null,
         'width' => '100%',
         'height' => '480px',
-        'customclass' => null
+        'customclass' => null,
     ];
 
-     private static array $buildingcode = ['127','116','117','118','119','120','121','122','123','124','125','128','129','126','131','130','132','133','134','135','136','137','138','139','141','142','143','144','145','146','147','148','149','150','151','152','153','154','155','2','3','4','7','6'];
+    private static array $buildingcode = ['127', '116', '117', '118', '119', '120', '121', '122', '123', '124', '125', '128', '129', '126', '131', '130', '132', '133', '134', '135', '136', '137', '138', '139', '141', '142', '143', '144', '145', '146', '147', '148', '149', '150', '151', '152', '153', '154', '155', '2', '3', '4', '7', '6'];
 
     const URL = '//maps.uams.edu/full-screen/?marker=';
 
@@ -38,7 +36,7 @@ class Map extends Shortcode
         return [
             'label' => esc_html__('UAMS Map', 'uams_shortcodes'),
             'listItemImage' => 'dashicons-location-alt',
-            'attrs' => self::get_attributes()
+            'attrs' => self::get_attributes(),
         ];
     }
 
@@ -99,7 +97,7 @@ class Map extends Shortcode
                     '3' => 'Parking Deck 2 Entrance',
                     '4' => 'Parking Deck 3 Entrance',
                     '6' => 'Stephens Institute Valet Parking',
-                ]
+                ],
             ],
             [
                 'label' => esc_html__('Width', 'uams_shortcodes'),
@@ -108,8 +106,8 @@ class Map extends Shortcode
                 'description' => 'Width in % or px (Default 100%)',
                 'encode' => false,
                 'meta' => [
-                    'placeholder' => '100%'
-                ]
+                    'placeholder' => '100%',
+                ],
             ],
             [
                 'label' => esc_html__('Height', 'uams_shortcodes'),
@@ -117,8 +115,8 @@ class Map extends Shortcode
                 'type' => 'text',
                 'description' => 'Height in px (Defualt 480px)',
                 'meta' => [
-                    'placeholder' => '480px'
-                ]
+                    'placeholder' => '480px',
+                ],
             ],
             [
                 'label' => esc_html__('Custom CSS classes', 'uams_shortcodes'),
@@ -127,56 +125,53 @@ class Map extends Shortcode
                 'description' => '',
                 'encode' => false,
                 'meta' => [
-                    'placeholder' => 'Comma-separated list'
-                ]
-            ]
+                    'placeholder' => 'Comma-separated list',
+                ],
+            ],
         ];
     }
 
     /**
      * return (not echo) our button element
      *
-     * @param array $attrs
-     * @param string $content
+     * @param  array  $attrs
+     * @param  string  $content
      */
     public static function callback($attrs, $content = ''): string
     {
         $attrs = (is_array($attrs))
             ? array_merge(self::$defaults, $attrs)
             : self::$defaults;
-        
+
         $customclasses = [];
 
-        if (isset($attrs['building'])){
+        if (isset($attrs['building'])) {
             $building = esc_attr($attrs['building']);
-            if (!in_array($building, self::$buildingcode)){
+            if (! in_array($building, self::$buildingcode)) {
                 return sprintf('Building "%s" is not supported', $building);
             }
-        }
-        else {
+        } else {
             return 'required attribute "building" missing';
         }
 
         $width = '100%';
-        if (isset($attrs['width'])){
+        if (isset($attrs['width'])) {
             $width = $attrs['width'];
         }
 
         $height = '480px';
-        if (isset($attrs['height'])){
+        if (isset($attrs['height'])) {
             $height = $attrs['height'];
         }
 
-        if (!empty($attrs['customclass'])) {
-            $customclasses = explode( ",", $attrs['customclass'] );
+        if (! empty($attrs['customclass'])) {
+            $customclasses = explode(',', $attrs['customclass']);
         }
 
-        return '<div class="uams-campus-map '. implode(' ', $customclasses) .'">
-                  <iframe width="'. $width .'" height="'. $height .'" src="'.self::URL.$building.'" frameborder="0"></iframe>
+        return '<div class="uams-campus-map '.implode(' ', $customclasses).'">
+                  <iframe width="'.$width.'" height="'.$height.'" src="'.self::URL.$building.'" frameborder="0"></iframe>
                   <a href="https://maps.uams.edu/map-mashup/?markerid='.$building.'" target="_blank">View full map</a>
                 </div>';
-
-        
 
         // return sprintf(
         //     "<a class=\"uams-btn %s %s\" href=\"%s\" target=\"%s\">%s</a>%s",
@@ -188,6 +183,6 @@ class Map extends Shortcode
         //     $newline
         // );
 
-        //return  $shortcode;//'<div class="uams-button '. esc_attr( $customclass ) .'">' . do_shortcode($shortcode) . '</div>';
+        // return  $shortcode;//'<div class="uams-button '. esc_attr( $customclass ) .'">' . do_shortcode($shortcode) . '</div>';
     }
 }

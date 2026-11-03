@@ -11,18 +11,16 @@ namespace UAMS_Shortcakes\Shortcodes;
 
 /**
  * Class Alert
- * @package UAMS_Shortcakes\Shortcodes
  */
 class Alert extends Shortcode
 {
-
     /**
      * declare default attributes
      */
     private static array $defaults = [
         'type' => 'info',
         'dismiss' => false,
-        'customclass' => null
+        'customclass' => null,
     ];
 
     /**
@@ -34,11 +32,11 @@ class Alert extends Shortcode
             'label' => esc_html__('Alert', 'uams_shortcodes'),
             'listItemImage' => 'dashicons-info',
             'inner_content' => [
-                'label'        => esc_html__( 'Alert Body', 'uams_shortcodes' ),
-                'description'  => esc_html__( 'Main content of your alert. Text and basic HTML tags can be added here.', 'uams_shortcodes' ),
+                'label' => esc_html__('Alert Body', 'uams_shortcodes'),
+                'description' => esc_html__('Main content of your alert. Text and basic HTML tags can be added here.', 'uams_shortcodes'),
                 'encode' => true,
             ],
-            'attrs' => self::get_attributes()
+            'attrs' => self::get_attributes(),
         ];
     }
 
@@ -76,22 +74,21 @@ class Alert extends Shortcode
                 'encode' => false,
                 'meta' => [
                     'placeholder' => 'Comma-separated list',
-                ]
-            ]
+                ],
+            ],
         ];
     }
-    
+
     /**
      * return (not echo) our Alert element
      */
     public static function callback($attrs, $content = ''): string
     {
         $attrs = array_merge(self::$defaults, $attrs);
-        
 
         // Valid types only
-        if (!empty($attrs['type'])) {
-            $type = ( in_array($attrs['type'], ['success', 'info', 'help', 'warning', 'danger']) ) ? sanitize_html_class( $attrs['type'] ) : 'info';
+        if (! empty($attrs['type'])) {
+            $type = (in_array($attrs['type'], ['success', 'info', 'help', 'warning', 'danger'])) ? sanitize_html_class($attrs['type']) : 'info';
         } else {
             $type = 'info';
         }
@@ -105,31 +102,33 @@ class Alert extends Shortcode
             default => 'dashicons-info',
         };
 
-        if ( $attrs['dismiss'] == true ) {
+        if ($attrs['dismiss'] == true) {
             $dismiss = '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-        } else { $dismiss = null; }
+        } else {
+            $dismiss = null;
+        }
 
-        if (!empty( $icon )) {
+        if (! empty($icon)) {
             $icon_type = explode('-', $icon, 2)[0];
             $icon_name = explode('-', $icon, 2)[1];
 
-            $icon_display = '<span aria-hidden="true">'. self::uams_shortcodes_get_contents( esc_url(UAMS_SHORTCAKES_PATH . 'assets/images/'. $icon_type .'/'  . $icon_name . '.svg' ) ) .'</span>';
+            $icon_display = '<span aria-hidden="true">'.self::uams_shortcodes_get_contents(esc_url(UAMS_SHORTCAKES_PATH.'assets/images/'.$icon_type.'/'.$icon_name.'.svg')).'</span>';
 
         } else {
             $icon_display = null;
         }
 
-        $alertcontent = wp_kses_post( $content );
+        $alertcontent = wp_kses_post($content);
 
-        $customclass = implode(" ", array_map( sanitize_html_class(...), explode( ",", $attrs['customclass'] ) ) );
+        $customclass = implode(' ', array_map(sanitize_html_class(...), explode(',', $attrs['customclass'])));
 
         return sprintf(
             '<div class="uams-alert alert alert-%s %s" role="alert"><div class="alert-icon">%s</div><div class="alert-body">%s</div>%s</div>',
             $type,
-            esc_attr( $customclass ),
+            esc_attr($customclass),
             $icon_display,
-            wpautop( urldecode( $alertcontent ) ),
+            wpautop(urldecode($alertcontent)),
             $dismiss
-        ); 
+        );
     }
 }

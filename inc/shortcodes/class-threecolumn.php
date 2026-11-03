@@ -10,11 +10,9 @@ namespace UAMS_Shortcakes\Shortcodes;
 
 /**
  * Class ThreeColumn
- * @package UAMS_Shortcakes\Shortcodes
  */
 class ThreeColumn extends Shortcode
 {
-
     /**
      * declare default attributes
      */
@@ -23,7 +21,7 @@ class ThreeColumn extends Shortcode
         'col2' => null,
         'col3' => null,
         'ratio' => 'third-third-third',
-        'customclass' => null
+        'customclass' => null,
     ];
 
     /**
@@ -33,8 +31,8 @@ class ThreeColumn extends Shortcode
     {
         return [
             'label' => esc_html__('Row, 3 Columns', 'uams_shortcodes'),
-            'listItemImage' => '<img src="' . esc_url( UAMS_SHORTCAKES_URL_ROOT . 'admin/images/icon-threecolumn.png' ) . '" />',
-            'attrs' => self::get_attributes()
+            'listItemImage' => '<img src="'.esc_url(UAMS_SHORTCAKES_URL_ROOT.'admin/images/icon-threecolumn.png').'" />',
+            'attrs' => self::get_attributes(),
         ];
     }
 
@@ -86,11 +84,11 @@ class ThreeColumn extends Shortcode
                 'encode' => false,
                 'meta' => [
                     'placeholder' => 'Comma-separated list',
-                ]
-            ]
+                ],
+            ],
         ];
     }
-    
+
     /**
      * return (not echo) our Three Column element
      */
@@ -122,18 +120,18 @@ class ThreeColumn extends Shortcode
                 $col2 = 'col-lg-3 col-md-3 col-sm-3 col-xs-12';
                 $col3 = 'col-lg-3 col-md-3 col-sm-3 col-xs-12';
                 break;
-            
+
             default:
                 $col1 = 'col-lg-4 col-md-4 col-sm-4 col-xs-12';
                 $col2 = 'col-lg-4 col-md-4 col-sm-4 col-xs-12';
                 $col3 = 'col-lg-4 col-md-4 col-sm-4 col-xs-12';
         }
 
-        $contentcol1 = wp_kses_post( $attrs['col1'] );
-        $contentcol2 = wp_kses_post( $attrs['col2'] );
-        $contentcol3 = wp_kses_post( $attrs['col3'] );
+        $contentcol1 = wp_kses_post($attrs['col1']);
+        $contentcol2 = wp_kses_post($attrs['col2']);
+        $contentcol3 = wp_kses_post($attrs['col3']);
 
-        $customclass = implode(" ", array_map( sanitize_html_class(...), explode( ",", $attrs['customclass'] ) ) );
+        $customclass = implode(' ', array_map(sanitize_html_class(...), explode(',', $attrs['customclass'])));
 
         return sprintf(
             '<div class="row %s">
@@ -149,13 +147,13 @@ class ThreeColumn extends Shortcode
                     </div>
                 </div>
             </div>',
-            esc_attr( $customclass ),
+            esc_attr($customclass),
             $col1,
-            wpautop( do_shortcode( urldecode( $contentcol1 ) ) ),
+            wpautop(do_shortcode(urldecode($contentcol1))),
             $col2,
-            wpautop( do_shortcode( urldecode( $contentcol2 ) ) ),
+            wpautop(do_shortcode(urldecode($contentcol2))),
             $col3,
-            wpautop( do_shortcode( urldecode( $contentcol3 ) ) )
-        ); 
+            wpautop(do_shortcode(urldecode($contentcol3)))
+        );
     }
 }

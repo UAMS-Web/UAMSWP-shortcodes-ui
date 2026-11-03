@@ -11,11 +11,9 @@ namespace UAMS_Shortcakes\Shortcodes;
 
 /**
  * Class Button
- * @package UAMS_Shortcakes\Shortcodes
  */
 class Button extends Shortcode
 {
-
     /**
      * declare default attributes
      */
@@ -26,7 +24,7 @@ class Button extends Shortcode
         'target' => null,
         'size' => null,
         'icon' => null,
-        'customclass' => null
+        'customclass' => null,
     ];
 
     /**
@@ -37,7 +35,7 @@ class Button extends Shortcode
         return [
             'label' => esc_html__('UAMS Button', 'uams_shortcodes'),
             'listItemImage' => 'dashicons-plus-alt',
-            'attrs' => self::get_attributes()
+            'attrs' => self::get_attributes(),
         ];
     }
 
@@ -54,8 +52,8 @@ class Button extends Shortcode
                 'description' => '',
                 'encode' => false,
                 'meta' => [
-                    'placeholder' => 'Click Me!'
-                ]
+                    'placeholder' => 'Click Me!',
+                ],
             ],
             [
                 'label' => esc_html__('Destination URL', 'uams_shortcodes'),
@@ -64,8 +62,8 @@ class Button extends Shortcode
                 'description' => '',
                 'encode' => false,
                 'meta' => [
-                    'placeholder' => 'http://www.uams.edu/'
-                ]
+                    'placeholder' => 'http://www.uams.edu/',
+                ],
             ],
             [
                 'label' => esc_html__('Target', 'uams_shortcodes'),
@@ -73,7 +71,7 @@ class Button extends Shortcode
                 'type' => 'radio',
                 'options' => [
                     '_top' => 'Same Tab/Window',
-                    '_blank' => 'New Tab/Window', 
+                    '_blank' => 'New Tab/Window',
                 ],
             ],
             [
@@ -83,13 +81,13 @@ class Button extends Shortcode
                 'description' => 'For more information, see the <a href="#" target="_blank">Coming Soon</a>.',
                 'encode' => false,
                 'options' => [
-                    ''          => 'Default',
-                    'btn-red'       => 'Red',
-                    'btn-gray'      => 'Gray',
-                    'btn-green'     => 'Green',
-                    'btn-blue'      => 'Blue',
-                    'btn-yellow'    => 'Yellow',
-                ]
+                    '' => 'Default',
+                    'btn-red' => 'Red',
+                    'btn-gray' => 'Gray',
+                    'btn-green' => 'Green',
+                    'btn-blue' => 'Blue',
+                    'btn-yellow' => 'Yellow',
+                ],
             ],
             [
                 'label' => esc_html__('Size', 'uams_shortcodes'),
@@ -98,10 +96,10 @@ class Button extends Shortcode
                 'description' => '',
                 'encode' => false,
                 'options' => [
-                    ''          => 'Default',
-                    'btn-lg'    => 'Large',
-                    'btn-sm'    => 'Small',
-                ]
+                    '' => 'Default',
+                    'btn-lg' => 'Large',
+                    'btn-sm' => 'Small',
+                ],
             ],
             [
                 'label' => esc_html__('Icon', 'uams_shortcodes'),
@@ -109,12 +107,12 @@ class Button extends Shortcode
                 'type' => 'select',
                 'encode' => false,
                 'options' => [
-                    'btn-go'        => 'Default',
-                    'btn-plus'      => 'Plus',
-                    'btn-external'  => 'External',
-                    'btn-play'      => 'Play',
-                    'btn-pdf'       => 'PDF',
-                ]
+                    'btn-go' => 'Default',
+                    'btn-plus' => 'Plus',
+                    'btn-external' => 'External',
+                    'btn-play' => 'Play',
+                    'btn-pdf' => 'PDF',
+                ],
             ],
             [
                 'label' => esc_html__('New line?', 'uams_shortcodes'),
@@ -129,36 +127,36 @@ class Button extends Shortcode
                 'description' => '',
                 'encode' => false,
                 'meta' => [
-                    'placeholder' => 'Comma-separated list'
-                ]
-            ]
+                    'placeholder' => 'Comma-separated list',
+                ],
+            ],
         ];
     }
 
     /**
      * return (not echo) our button element
      *
-     * @param array $attrs
-     * @param string $content
+     * @param  array  $attrs
+     * @param  string  $content
      */
     public static function callback($attrs, $content = ''): string
     {
         $attrs = (is_array($attrs))
             ? array_merge(self::$defaults, $attrs)
             : self::$defaults;
-        
+
         $customclasses = [];
 
-         $button_classes = [ 'btn', $attrs['color'], $attrs['size'], $attrs['type'] ];
+        $button_classes = ['btn', $attrs['color'], $attrs['size'], $attrs['type']];
 
-         if ( $attrs['newline'] == true ) {
-            $newline = "<br/>";
+        if ($attrs['newline'] == true) {
+            $newline = '<br/>';
         } else {
             $newline = null;
         }
 
-        if (!empty($attrs['customclass'])) {
-            $customclasses = explode( ",", $attrs['customclass'] );
+        if (! empty($attrs['customclass'])) {
+            $customclasses = explode(',', $attrs['customclass']);
         }
 
         return sprintf(
@@ -171,6 +169,6 @@ class Button extends Shortcode
             $newline
         );
 
-        //return  $shortcode;//'<div class="uams-button '. esc_attr( $customclass ) .'">' . do_shortcode($shortcode) . '</div>';
+        // return  $shortcode;//'<div class="uams-button '. esc_attr( $customclass ) .'">' . do_shortcode($shortcode) . '</div>';
     }
 }

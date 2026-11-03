@@ -10,11 +10,9 @@ namespace UAMS_Shortcakes\Shortcodes;
 
 /**
  * Class TwoColumn
- * @package UAMS_Shortcakes\Shortcodes
  */
 class TwoColumn extends Shortcode
 {
-
     /**
      * declare default attributes
      */
@@ -22,7 +20,7 @@ class TwoColumn extends Shortcode
         'col1' => null,
         'col2' => null,
         'ratio' => 'half-half',
-        'customclass' => null
+        'customclass' => null,
     ];
 
     /**
@@ -32,8 +30,8 @@ class TwoColumn extends Shortcode
     {
         return [
             'label' => esc_html__('Row, 2 Columns', 'uams_shortcodes'),
-            'listItemImage' => '<img src="' . esc_url( UAMS_SHORTCAKES_URL_ROOT . 'admin/images/icon-twocolumn.png' ) . '" />',
-            'attrs' => self::get_attributes()
+            'listItemImage' => '<img src="'.esc_url(UAMS_SHORTCAKES_URL_ROOT.'admin/images/icon-twocolumn.png').'" />',
+            'attrs' => self::get_attributes(),
         ];
     }
 
@@ -79,11 +77,11 @@ class TwoColumn extends Shortcode
                 'encode' => false,
                 'meta' => [
                     'placeholder' => 'Comma-separated list',
-                ]
-            ]
+                ],
+            ],
         ];
     }
-    
+
     /**
      * return (not echo) our Two Column element
      */
@@ -116,16 +114,16 @@ class TwoColumn extends Shortcode
                 $col1 = 'col-lg-9 col-md-9 col-sm-9 col-xs-12';
                 $col2 = 'col-lg-3 col-md-3 col-sm-3 col-xs-12';
                 break;
-            
+
             default:
                 $col1 = 'col-lg-6 col-md-6 col-sm-6 col-xs-12';
                 $col2 = 'col-lg-6 col-md-6 col-sm-6 col-xs-12';
         }
 
-        $contentcol1 = $attrs['col1'];//wp_kses_post( $attrs['col1'] );
-        $contentcol2 = $attrs['col2'];//wp_kses_post( $attrs['col2'] );
+        $contentcol1 = $attrs['col1']; // wp_kses_post( $attrs['col1'] );
+        $contentcol2 = $attrs['col2']; // wp_kses_post( $attrs['col2'] );
 
-        $customclass = implode(" ", array_map( sanitize_html_class(...), explode( ",", $attrs['customclass'] ) ) );
+        $customclass = implode(' ', array_map(sanitize_html_class(...), explode(',', $attrs['customclass'])));
 
         return sprintf(
             '<div class="row %s">
@@ -138,11 +136,11 @@ class TwoColumn extends Shortcode
                     </div>
                 </div>
             </div>',
-            esc_attr( $customclass ),
+            esc_attr($customclass),
             $col1,
-            wpautop( do_shortcode( urldecode( $contentcol1 ) ) ),
+            wpautop(do_shortcode(urldecode($contentcol1))),
             $col2,
-            wpautop( do_shortcode( urldecode( $contentcol2 ) ) )
-        ); 
+            wpautop(do_shortcode(urldecode($contentcol2)))
+        );
     }
 }

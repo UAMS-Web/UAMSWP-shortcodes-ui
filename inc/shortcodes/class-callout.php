@@ -23,12 +23,12 @@ class Callout extends Shortcode
         'bgcolor' => 'uamsred',
         'img' => null,
         'imgcaption' => false,
-        //'vidtype' => null,
-        //'youtube' => null,
-        //'vimeo' => null,
-        //'vidsource' => null,
-        //'autoplay' => null,
-        //'fallbackimg' => null,
+        // 'vidtype' => null,
+        // 'youtube' => null,
+        // 'vimeo' => null,
+        // 'vidsource' => null,
+        // 'autoplay' => null,
+        // 'fallbackimg' => null,
         'imgoverlay' => null,
         'textbgcolor' => null,
         'imgback' => 'front',
@@ -44,12 +44,12 @@ class Callout extends Shortcode
     {
         return [
             'label' => esc_html__('Callout', 'uams_shortcodes'),
-            'listItemImage' => '<img width="100px" height="100px" src="' . esc_url( UAMS_SHORTCAKES_URL_ROOT . 'admin/images/icon-callout.png' ) . '" />',
+            'listItemImage' => '<img width="100px" height="100px" src="'.esc_url(UAMS_SHORTCAKES_URL_ROOT.'admin/images/icon-callout.png').'" />',
             'inner_content' => [
                 'label' => esc_html__('Callout Body', 'uams_shortcodes'),
                 'description' => esc_html__('Main content of your callout. Text and basic HTML tags can be added here.', 'uams_shortcodes'),
             ],
-            'attrs' => self::get_attributes()
+            'attrs' => self::get_attributes(),
         ];
     }
 
@@ -110,8 +110,8 @@ class Callout extends Shortcode
                 'description' => 'Optional. Enter a URL to make your callout a clickable hyperlink.',
                 'encode' => false,
                 'meta' => [
-                    'placeholder' => 'http://www.uams.edu/'
-                ]
+                    'placeholder' => 'http://www.uams.edu/',
+                ],
             ],
 
             [
@@ -130,9 +130,9 @@ class Callout extends Shortcode
                 'options' => [
                     'basic' => 'Basic Callout',
                     'img' => 'Callout with Image',
-                    //'vid' => 'Callout with Video',
+                    // 'vid' => 'Callout with Video',
                     'bgimg' => 'Callout with Background Image',
-                    //'bgvid' => 'Callout with Background Video',
+                    // 'bgvid' => 'Callout with Background Video',
                 ],
             ],
 
@@ -339,9 +339,9 @@ class Callout extends Shortcode
                 'description' => '',
                 'encode' => false,
                 'meta' => [
-                    'placeholder' => 'Comma-separated list'
-                ]
-            ]
+                    'placeholder' => 'Comma-separated list',
+                ],
+            ],
         ];
     }
 
@@ -360,51 +360,51 @@ class Callout extends Shortcode
 
         $ignored_icons = self::get_ignored_icon_names();
 
-        if (!empty($attrs['headingicon']) && !in_array($attrs['headingicon'], $ignored_icons)) {
+        if (! empty($attrs['headingicon']) && ! in_array($attrs['headingicon'], $ignored_icons)) {
             $icon_name = $attrs['headingicon'];
 
-            $icon = '<span class="'. $icon_name .'" aria-hidden="true"></span>';            
+            $icon = '<span class="'.$icon_name.'" aria-hidden="true"></span>';
         } else {
             $icon = null;
         }
 
-        if (!empty($attrs['heading'])) {
-            $heading = '<' . $attrs['headingtype'] . ' class="callout-heading">' . $icon . $attrs['heading'] . '</' . $attrs['headingtype'] . '>';
+        if (! empty($attrs['heading'])) {
+            $heading = '<'.$attrs['headingtype'].' class="callout-heading">'.$icon.$attrs['heading'].'</'.$attrs['headingtype'].'>';
         } else {
             $heading = null;
         }
 
-        if (!empty($attrs['url'])) {
+        if (! empty($attrs['url'])) {
             if ($attrs['target'] === true) {
                 $target = 'target="_blank"';
             } else {
                 $target = null;
             }
 
-            $urlopen = '<a href="' . esc_url( $attrs['url'] ) . '" ' . $target . '>';
+            $urlopen = '<a href="'.esc_url($attrs['url']).'" '.$target.'>';
             $urlclose = '</a>';
-            $arrow = '<span class="right-arrow" aria-hidden="true">'. self::uams_shortcodes_get_contents( esc_url(UAMS_SHORTCAKES_PATH . 'assets/images/glyphicon/bold-arrow-right.svg' ) ) .'</span>';
+            $arrow = '<span class="right-arrow" aria-hidden="true">'.self::uams_shortcodes_get_contents(esc_url(UAMS_SHORTCAKES_PATH.'assets/images/glyphicon/bold-arrow-right.svg')).'</span>';
         } else {
             $urlopen = '<div>';
             $urlclose = '</div>';
             $arrow = null;
         }
 
-        if (!empty($attrs['customclass'])) {
-            $customclasses = explode(",", $attrs['customclass']);
+        if (! empty($attrs['customclass'])) {
+            $customclasses = explode(',', $attrs['customclass']);
             $basic_classes = array_merge($basic_classes, $customclasses);
-            $customclass = implode(" ", array_map( sanitize_html_class(...), explode( ",", $attrs['customclass'] ) ) );
+            $customclass = implode(' ', array_map(sanitize_html_class(...), explode(',', $attrs['customclass'])));
         }
 
-        if ( $attrs['fullscreen'] == true ) {
-            $fullscreen = "uams-full-width";
-            //$basic_classes = array_push($basic_classes, $fullscreen);
-            $customclass = $customclass . " " . $fullscreen;
+        if ($attrs['fullscreen'] == true) {
+            $fullscreen = 'uams-full-width';
+            // $basic_classes = array_push($basic_classes, $fullscreen);
+            $customclass = $customclass.' '.$fullscreen;
         } else {
             $fullscreen = null;
         }
 
-        if (!empty($attrs['img'])) {
+        if (! empty($attrs['img'])) {
             $img = wp_get_attachment_image_src($attrs['img'], 'large')[0];
             $imgset = wp_get_attachment_image_srcset($attrs['img'], 'large');
             $alt = get_post_meta($attrs['img'], '_wp_attachment_image_alt', true);
@@ -426,7 +426,7 @@ class Callout extends Shortcode
 
         if ($attrs['imgcaption'] == true) {
             $caption = get_post_field('post_excerpt', $attrs['img']);
-            $imgcap = '<div class="callout-img-caption">' . $caption . '</div>';
+            $imgcap = '<div class="callout-img-caption">'.$caption.'</div>';
         } else {
             $imgcap = null;
         }
@@ -437,7 +437,7 @@ class Callout extends Shortcode
             $imgback = null;
         }
 
-        if (!empty($attrs['fallbackimg'])) {
+        if (! empty($attrs['fallbackimg'])) {
             $fallbackimg = wp_get_attachment_image_src($attrs['fallbackimg'])[0];
             $fallbackimgset = wp_get_attachment_image_srcset($attrs['fallbackimg']);
             $fallbackalt = get_post_meta($attrs['fallbackimg'], '_wp_attachment_image_alt', true);
@@ -449,14 +449,13 @@ class Callout extends Shortcode
             $fallbackalt = null;
         }
 
-        if (!empty($attrs['imgoverlay'])) {
+        if (! empty($attrs['imgoverlay'])) {
             $overlay = esc_attr($attrs['imgoverlay']);
         } else {
             $overlay = null;
         }
 
-
-        if(!empty($attrs['padding'])) {
+        if (! empty($attrs['padding'])) {
             $padding = esc_attr($attrs['padding']);
         } else {
             $padding = 'padding-one';
@@ -467,37 +466,37 @@ class Callout extends Shortcode
 
         if ($attrs['type'] === 'vid') {
 
-            if (!empty($attrs['youtube']) && ($attrs['vidtype'] == 'youtube')) {
+            if (! empty($attrs['youtube']) && ($attrs['vidtype'] == 'youtube')) {
 
                 if (preg_match("/youtu.be\/[a-z1-9.-_]+/", $attrs['youtube'])) {
                     preg_match("/youtu.be\/([a-z1-9.-_]+)/", $attrs['youtube'], $matches);
                     if (isset($matches[1])) {
-                        $vidsrc = 'http://www.youtube.com/embed/' . $matches[1] . '?modestbranding=0&autohide=1&showinfo=0';
-                        $vidembed = '<iframe class="embed-responsive-item ' . $mediaposition . '" src="' . esc_url( $vidsrc ) . '"></iframe>';
+                        $vidsrc = 'http://www.youtube.com/embed/'.$matches[1].'?modestbranding=0&autohide=1&showinfo=0';
+                        $vidembed = '<iframe class="embed-responsive-item '.$mediaposition.'" src="'.esc_url($vidsrc).'"></iframe>';
                     }
-                } else if (preg_match("/youtube.com(.+)v=([^&]+)/", $attrs['youtube'])) {
-                    preg_match("/v=([^&]+)/", $attrs['youtube'], $matches);
+                } elseif (preg_match('/youtube.com(.+)v=([^&]+)/', $attrs['youtube'])) {
+                    preg_match('/v=([^&]+)/', $attrs['youtube'], $matches);
                     if (isset($matches[1])) {
-                        $vidsrc = 'http://www.youtube.com/embed/' . $matches[1] . '?modestbranding=0&autohide=1&showinfo=0';
-                        $vidembed = '<iframe class="embed-responsive-item ' . $mediaposition . '" src="' . esc_url( $vidsrc ) . '"></iframe>';
+                        $vidsrc = 'http://www.youtube.com/embed/'.$matches[1].'?modestbranding=0&autohide=1&showinfo=0';
+                        $vidembed = '<iframe class="embed-responsive-item '.$mediaposition.'" src="'.esc_url($vidsrc).'"></iframe>';
                     }
                 }
-            } else if (!empty($attrs['vimeo']) && ($attrs['vidtype'] == 'vimeo')) {
+            } elseif (! empty($attrs['vimeo']) && ($attrs['vidtype'] == 'vimeo')) {
                 if (preg_match("/vimeo.com\/[1-9.-_]+/", $attrs['vimeo'])) {
                     preg_match("/vimeo.com\/([1-9.-_]+)/", $attrs['vimeo'], $matches);
                     if (isset($matches[1])) {
-                        $vidsrc = 'http://player.vimeo.com/video/' . $matches[1] . '?badge=0&byline=0&portrait=0&title=0';
-                        $vidembed = '<iframe class="embed-responsive-item ' . $mediaposition . '" src="' . esc_url( $vidsrc ) . '"></iframe>';
+                        $vidsrc = 'http://player.vimeo.com/video/'.$matches[1].'?badge=0&byline=0&portrait=0&title=0';
+                        $vidembed = '<iframe class="embed-responsive-item '.$mediaposition.'" src="'.esc_url($vidsrc).'"></iframe>';
                     }
                 }
-            } else if (!empty($attrs['vidsource']) && ($attrs['vidtype'] == 'other' && !empty($attrs['fallbackimg']))) {
+            } elseif (! empty($attrs['vidsource']) && ($attrs['vidtype'] == 'other' && ! empty($attrs['fallbackimg']))) {
                 if ($attrs['autoplay'] == true) {
                     $autoplay = 'autoplay loop muted';
                 }
 
-                $vidembed = '<video class="callout-media-element" poster="' . esc_url( $poster ) . '" controls ' . $autoplay . '>
-                        <source src="' . esc_url( $attrs['vidsource'] ) . '" type="video/mp4">
-                        <img src="' . $fallbackimg . '" srcset="' . $fallbackimgset . '" alt="' . $fallbackalt . '" />
+                $vidembed = '<video class="callout-media-element" poster="'.esc_url($poster).'" controls '.$autoplay.'>
+                        <source src="'.esc_url($attrs['vidsource']).'" type="video/mp4">
+                        <img src="'.$fallbackimg.'" srcset="'.$fallbackimgset.'" alt="'.$fallbackalt.'" />
                         Your browser does not support the <pre>video</pre> tag.
                         </video>';
             }
@@ -507,21 +506,20 @@ class Callout extends Shortcode
 
         if ($attrs['type'] === 'bgimg') {
             $bgimg = wp_get_attachment_image_src($attrs['img'], 'full')[0];
-            $calloutbgimg = '<div class="bgimg" style="background: url(' . esc_url( $bgimg ) . ');"></div> <!-- .bgimg -->';
+            $calloutbgimg = '<div class="bgimg" style="background: url('.esc_url($bgimg).');"></div> <!-- .bgimg -->';
         } else {
             $bgimg = null;
         }
 
-
         if ($attrs['type'] === 'bgvid') {
 
             $bgimg = wp_get_attachment_image_src($attrs['img'], 'full')[0];
-            $calloutbgimg = '<div class="bgimg" style="background: url(' . esc_url( $poster ) . ');"></div> <!-- .bgimg -->';
+            $calloutbgimg = '<div class="bgimg" style="background: url('.esc_url($poster).');"></div> <!-- .bgimg -->';
 
-            if (!empty($attrs['vidsource']) && !empty($attrs['fallbackimg'])) {
+            if (! empty($attrs['vidsource']) && ! empty($attrs['fallbackimg'])) {
 
-                $vidembed = $calloutbgimg . '<video poster="' . $poster . '" controls autoplay loop muted>
-                            <source src="' . esc_url( $attrs['vidsource'] ) . '" type="video/mp4">
+                $vidembed = $calloutbgimg.'<video poster="'.$poster.'" controls autoplay loop muted>
+                            <source src="'.esc_url($attrs['vidsource']).'" type="video/mp4">
                             
                             Your browser does not support the <pre>video</pre> tag.
                             </video>';
@@ -538,19 +536,19 @@ class Callout extends Shortcode
             'basic' => sprintf(
                 '<div class="%s %s"><div class="inner-container">%s%s%s<p class="%s">%s</p></div></div><!-- .uams-callout -->',
                 implode(' ', $basic_classes),
-                esc_attr( $customclass ),
+                esc_attr($customclass),
                 $urlopen,
                 $heading,
-                //$arrow,
+                // $arrow,
                 $urlclose,
                 implode(' ', $body_classes),
-                wpautop( do_shortcode($content) )
+                wpautop(do_shortcode($content))
             ),
             'img' => sprintf(
                 '<div class="%s callout-media callout-media-img %s %s"><div class="callout-img %s%s"><img class="img-responsive" src="%s" srcset="%s" sizes="(min-width: 36em) 33.3vw, 100vw" alt="%s" />%s</div><div class="callout-content %s %s">%s%s%s<p class="%s">%s</p></div></div><!-- .uams-callout -->',
                 implode(' ', $basic_classes),
                 $mediaposition,
-                esc_attr( $customclass ),
+                esc_attr($customclass),
                 $mediaposition,
                 $imgback,
                 $img,
@@ -561,77 +559,73 @@ class Callout extends Shortcode
                 $padding,
                 $urlopen,
                 $heading,
-                //$arrow,
+                // $arrow,
                 $urlclose,
                 implode(' ', $body_classes),
-                wpautop( do_shortcode($content) )
+                wpautop(do_shortcode($content))
             ),
             'vid' => sprintf(
                 '<div class="%s callout-media callout-video %s">%s<div class="callout-content %s">%s%s%s<p class="%s">%s</p></div></div><!-- .uams-callout -->',
                 implode(' ', $basic_classes),
-                esc_attr( $customclass ),
+                esc_attr($customclass),
                 $video,
                 $mediaposition,
                 $urlopen,
                 $heading,
-                //$arrow,
+                // $arrow,
                 $urlclose,
                 implode(' ', $body_classes),
-                wpautop( do_shortcode($content) )
+                wpautop(do_shortcode($content))
             ),
             'bgimg' => sprintf(
-                "<div class=\"uams-callout-bgimg %s %s\">
-                        <div class=\"callout-media-wrapper callout-img\">%s%s</div>
-                        <div class=\"callout-content-container container %s\">
-                            <div class=\"callout-content %s\">%s%s%s<p class=\"%s\">%s</p></div>
+                '<div class="uams-callout-bgimg %s %s">
+                        <div class="callout-media-wrapper callout-img">%s%s</div>
+                        <div class="callout-content-container container %s">
+                            <div class="callout-content %s">%s%s%s<p class="%s">%s</p></div>
                         </div><!-- .callout-img -->
-                    </div><!-- .uams-callout-bgimg -->",
+                    </div><!-- .uams-callout-bgimg -->',
                 $attrs['margin'],
-                esc_attr( $customclass ),
+                esc_attr($customclass),
                 $calloutbgimg,
                 $imgcap,
                 $overlay,
                 implode(' ', $textbox_classes),
                 $urlopen,
                 $heading,
-                //$arrow,
+                // $arrow,
                 $urlclose,
                 implode(' ', $body_classes),
-                wpautop( do_shortcode($content) )
+                wpautop(do_shortcode($content))
             ),
             'bgvid' => sprintf(
-                "<div class=\"uams-callout-bgvid %s\">
-                        <div class=\"callout-media-wrapper callout-video\">%s</div>
-                        <div class=\"callout-content-container container %s\">
-                            <div class=\"callout-content %s\">%s%s%s<p class=\"%s\">%s</p></div>
+                '<div class="uams-callout-bgvid %s">
+                        <div class="callout-media-wrapper callout-video">%s</div>
+                        <div class="callout-content-container container %s">
+                            <div class="callout-content %s">%s%s%s<p class="%s">%s</p></div>
                         </div><!-- .callout-video -->
-                    </div><!-- .uams-callout-bgvig -->",
-                esc_attr( $customclass ),
+                    </div><!-- .uams-callout-bgvig -->',
+                esc_attr($customclass),
                 $video,
                 $overlay,
                 implode(' ', $textbox_classes),
                 $urlopen,
                 $heading,
-                //$arrow,
+                // $arrow,
                 $urlclose,
                 implode(' ', $body_classes),
-                wpautop( do_shortcode($content) )
+                wpautop(do_shortcode($content))
             ),
             default => sprintf(
                 '<div class="%s %s"><div class="inner-container">%s%s%s<p class="%s">%s</p></div></div>',
                 implode(' ', $basic_classes),
-                esc_attr( $customclass ),
+                esc_attr($customclass),
                 $urlopen,
                 $heading,
-                //$arrow,
+                // $arrow,
                 $urlclose,
                 implode(' ', $body_classes),
-                wpautop( do_shortcode($content) )
+                wpautop(do_shortcode($content))
             ),
         };
     }
 }
-
-
-
-

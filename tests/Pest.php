@@ -12,6 +12,7 @@ declare(strict_types=1);
 use function Brain\Monkey\Functions\stubEscapeFunctions;
 use function Brain\Monkey\Functions\stubs;
 use function Brain\Monkey\Functions\stubTranslationFunctions;
+use function Brain\Monkey\Functions\when;
 use function Brain\Monkey\setUp;
 use function Brain\Monkey\tearDown;
 
@@ -50,7 +51,7 @@ function stubWordPress(): void
     stubTranslationFunctions();
     // Brain Monkey's esc_url prepends http:// to a value with no scheme, which turns a Linux file path
     // into a URL; the shortcode classes pass file paths through it.
-    \Brain\Monkey\Functions\when('esc_url')->alias(fn ($url) => $url);
+    when('esc_url')->alias(fn ($url) => $url);
     stubs([
         'esc_url_raw' => fn ($url) => $url,
         'sanitize_html_class' => fn ($class): ?string => preg_replace('/[^A-Za-z0-9_-]/', '', (string) $class),

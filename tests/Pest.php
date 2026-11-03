@@ -9,6 +9,10 @@
 
 declare(strict_types=1);
 
+use function Brain\Monkey\Functions\stubEscapeFunctions;
+use function Brain\Monkey\Functions\stubs;
+use function Brain\Monkey\Functions\stubTranslationFunctions;
+use function Brain\Monkey\Functions\when;
 use function Brain\Monkey\setUp;
 use function Brain\Monkey\tearDown;
 
@@ -33,3 +37,30 @@ uses()
         tearDown();
     })
     ->in('Unit');
+
+/**
+ * Stand-ins for the WordPress functions the shortcode classes call.
+ *
+ * Escaping and translation functions return their input; the sanitizers and
+ * helpers below do the minimum their real versions do for the inputs the
+ * tests use. Call this from a test or a beforeEach() inside Unit.
+ */
+function stubWordPress(): void
+{
+    stubEscapeFunctions();
+    stubTranslationFunctions();
+    // Brain Monkey's esc_url prepends http:// to a value with no scheme, which turns a Linux file path
+    // into a URL; the shortcode classes pass file paths through it.
+    when('esc_url')->alias(fn ($url) => $url);
+    stubs([
+        'esc_url_raw' => fn ($url) => $url,
+        'sanitize_html_class' => fn ($class): ?string => preg_replace('/[^A-Za-z0-9_-]/', '', (string) $class),
+        'sanitize_text_field' => fn ($text): string => trim(strip_tags((string) $text)),
+        'wp_kses_post' => fn ($content) => $content,
+        'wpautop' => fn ($text): string => '<p>'.$text.'</p>',
+        'absint' => fn ($value): int => abs((int) $value),
+        'wp_unslash' => fn ($value) => $value,
+        'do_shortcode' => fn ($content) => $content,
+        'apply_filters' => fn ($tag, $value) => $value,
+    ]);
+}

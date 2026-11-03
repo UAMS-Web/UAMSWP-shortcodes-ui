@@ -23,3 +23,17 @@ require_once __DIR__.'/../vendor/antecedent/patchwork/Patchwork.php';
  * inside a test.
  */
 require_once __DIR__.'/../inc/class-uams-shortcodes.php';
+
+/*
+ * The plugin constants the main file defines, pointed at the repository root
+ * so asset paths resolve to real files.
+ */
+define('UAMS_SHORTCAKES_PATH', __DIR__.'/../');
+define('UAMS_SHORTCAKES_URL_ROOT', 'https://example.test/wp-content/plugins/uamswp-shortcodes/');
+
+/*
+ * Load shortcode classes the way the plugin does, through its own autoloader.
+ */
+spl_autoload_register(
+    (new ReflectionClass(UAMS_Shortcakes::class))->newInstanceWithoutConstructor()->autoload_shortcode_classes(...)
+);

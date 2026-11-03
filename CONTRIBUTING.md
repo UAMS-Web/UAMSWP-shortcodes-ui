@@ -42,7 +42,7 @@ Coding agents follow the same path. Their instructions are in [`AGENTS.md`](AGEN
 
 ## Running the tests
 
-The PHP tests use PHPUnit with Brain Monkey, which mocks WordPress functions, so no WordPress install or database is needed.
+The PHP tests use Pest 5 with Brain Monkey, which mocks WordPress functions, so no WordPress install or database is needed. The supported PHP floor is 8.2; development and tests run on the latest 8.4 patch.
 
 ```sh
 composer install

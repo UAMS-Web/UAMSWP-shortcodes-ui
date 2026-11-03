@@ -9,22 +9,23 @@ namespace UAMS_Shortcakes;
  */
 class Asset_Proxy {
 
-	private static $instance;
+	private static ?Asset_Proxy $instance = null;
 
-	public static function get_instance() {
+	public static function get_instance(): Asset_Proxy {
 		if ( ! isset( self::$instance ) ) {
 			self::$instance = new Asset_Proxy;
 			self::$instance->setup_actions();
 		}
+        
 		return self::$instance;
 	}
 
-	private function setup_actions() {
-		add_action( 'wp_ajax_uams_shortcodes_asset_proxy', array( $this, 'handle_asset_proxy' ) );
-		add_action( 'wp_ajax_nopriv_uams_shortcodes_asset_proxy', array( $this, 'handle_asset_proxy' ) );
+	private function setup_actions(): void {
+		add_action( 'wp_ajax_uams_shortcodes_asset_proxy', $this->handle_asset_proxy(...) );
+		add_action( 'wp_ajax_nopriv_uams_shortcodes_asset_proxy', $this->handle_asset_proxy(...) );
 	}
 
-	public function handle_asset_proxy() {
+	public function handle_asset_proxy(): void {
 		$asset_url = stripslashes( $_REQUEST['url'] );
 		$security_check = $_REQUEST['_nonce'];
 
@@ -41,12 +42,12 @@ class Asset_Proxy {
 		 * @param array HTTP options for asset stream
 		 */
 		$stream_options = apply_filters( 'uams_shortcodes_asset_proxy_stream_options',
-			array(
-				'http' => array(
+			[
+				'http' => [
 					'method'  => 'GET',
 					'timeout' => 5,     // Hang up if PDF takes more than 5 seconds to transfer
-				),
-			)
+				],
+			]
 		);
 		$stream_context = stream_context_create( $stream_options );
 
@@ -59,7 +60,7 @@ class Asset_Proxy {
 		$output_handle = fopen( 'php://output', 'w+', null, $stream_context );
 
 		foreach ( get_headers( $asset_url ) as $header_str ) {
-			if ( 0 === strpos( $header_str, 'Content-' ) ) {
+			if ( str_starts_with($header_str, 'Content-') ) {
 				header( $header_str );
 			}
 		}

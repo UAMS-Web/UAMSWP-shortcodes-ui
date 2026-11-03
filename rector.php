@@ -3,8 +3,11 @@
 declare(strict_types=1);
 
 use Rector\CodeQuality\Rector\ClassMethod\LocallyCalledStaticMethodToNonStaticRector;
+use Rector\CodingStyle\Rector\FuncCall\VersionCompareFuncCallToConstantRector;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\ClassMethod\RemoveDuplicatedReturnSelfDocblockRector;
+use Rector\DeadCode\Rector\ConstFetch\RemovePhpVersionIdCheckRector;
+use Rector\DeadCode\Rector\If_\UnwrapFutureCompatibleIfPhpVersionRector;
 use Rector\DeadCode\Rector\Property\RemoveUselessVarTagRector;
 use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
 use Rector\Php82\Rector\Class_\ReadOnlyClassRector;
@@ -91,22 +94,17 @@ $sweepOnlyRules = [
 // from the supported PHP version and would delete a runtime guard that exists
 // for the case that reasoning cannot cover.
 //
-// Example from a WordPress plugin whose header file checks the PHP version and
-// shows an admin notice instead of fataling on a site downgraded underneath an
-// already-active plugin. Three rules converge on that branch, so all three are
-// pinned to the one file and still apply everywhere else:
+// The plugin header file checks the PHP version and shows an admin notice instead of
+// fataling on a site downgraded underneath an already-active plugin. Three rules
+// converge on that branch, so all three are pinned to the one file and still apply
+// everywhere else:
 //
-// use Rector\CodingStyle\Rector\FuncCall\VersionCompareFuncCallToConstantRector;
-// use Rector\DeadCode\Rector\ConstFetch\RemovePhpVersionIdCheckRector;
-// use Rector\DeadCode\Rector\If_\UnwrapFutureCompatibleIfPhpVersionRector;
-//
-// $guardFile = [__DIR__.'/my-plugin.php'];
-// $neverRules = [
-//     UnwrapFutureCompatibleIfPhpVersionRector::class => $guardFile,
-//     RemovePhpVersionIdCheckRector::class => $guardFile,
-//     VersionCompareFuncCallToConstantRector::class => $guardFile,
-// ];
-$neverRules = [];
+$guardFile = [__DIR__.'/uamswp-shortcodes.php'];
+$neverRules = [
+    UnwrapFutureCompatibleIfPhpVersionRector::class => $guardFile,
+    RemovePhpVersionIdCheckRector::class => $guardFile,
+    VersionCompareFuncCallToConstantRector::class => $guardFile,
+];
 
 return RectorConfig::configure()
     // First-party PHP only: the plugin code under inc/, the tests, and the plugin

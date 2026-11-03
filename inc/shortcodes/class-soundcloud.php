@@ -4,47 +4,48 @@ namespace UAMS_Shortcakes\Shortcodes;
 
 class SoundCloud extends Shortcode {
 
-	public static function get_shortcode_ui_args() {
-		return array(
+	public static function get_shortcode_ui_args(): array {
+		return [
 			'label'          => esc_html__( 'SoundCloud', 'uams_shortcodes' ),
 			'listItemImage'  => '<img src="' . esc_url( UAMS_SHORTCAKES_URL_ROOT . 'assets/images/svg/icon-soundcloud.svg' ) . '" />',
-			'attrs'          => array(
-				array(
+			'attrs'          => [
+				[
 					'label'        => esc_html__( 'URL', 'uams_shortcodes' ),
 					'attr'         => 'url',
 					'type'         => 'text',
 					'description'  => esc_html__( 'Full URL to the SoundCloud track.', 'uams_shortcodes' ),
-				),
-				array(
+				],
+				[
 					'label'        => esc_html__( 'Type', 'uams_shortcodes' ),
 					'attr'         => 'type',
 					'type'         => 'select',
-					'options'      => array(
+					'options'      => [
 						'simple'   => esc_html__( 'Simple', 'uams_shortcodes' ),
 						'visual'   => esc_html__( 'Visual', 'uams_shortcodes' ),
-						),
-					),
-				array(
+						],
+					],
+				[
 					'label'        => esc_html__( 'Autoplay', 'uams_shortcodes' ),
 					'attr'         => 'autoplay',
 					'type'         => 'select',
-					'options'      => array(
+					'options'      => [
 						'0'        => esc_html__( 'No', 'uams_shortcodes' ),
 						'1'        => esc_html__( 'Yes', 'uams_shortcodes' ),
-						),
-					),
-			),
-		);
+						],
+					],
+			],
+		];
 	}
 
 	public static function reversal( $content ) {
 		$iframes = self::parse_iframes( $content );
 		if ( $iframes ) {
-			$replacements = array();
+			$replacements = [];
 			foreach ( $iframes as $iframe ) {
 				if ( 'w.soundcloud.com' !== self::parse_url( $iframe->attrs['src'], PHP_URL_HOST ) ) {
 					continue;
 				}
+                
 				// Track ID is exposed in the `url` parameter
 				$query = self::parse_url( $iframe->attrs['src'], PHP_URL_QUERY );
 				$query = str_replace( '&amp;', '&', $query );
@@ -52,20 +53,22 @@ class SoundCloud extends Shortcode {
 				if ( empty( $args['url'] ) ) {
 					continue;
 				}
+                
 				$type = ! empty( $args['visual'] ) && 'true' === $args['visual'] ? 'visual' : 'simple';
 				$autoplay = ! empty( $args['auto_play'] ) && 'true' === $args['auto_play'] ? '1' : '0';
 				$replacements[ $iframe->original ] = '[' . self::get_shortcode_tag() . ' url="' . esc_url_raw( $args['url'] ) . '" type="' . $type . '" autoplay="' . $autoplay . '"]';
 			}
+            
 			$content = self::make_replacements_to_content( $content, $replacements );
 		}
 
 		return $content;
 	}
 
-	public static function callback( $attrs, $content = '' ) {
+	public static function callback( $attrs, $content = '' ): string {
 
 		$host = self::parse_url( $attrs['url'], PHP_URL_HOST );
-		if ( empty( $attrs['url'] ) || ! in_array( $host, array( 'soundcloud.com', 'api.soundcloud.com' ), true ) ) {
+		if ( empty( $attrs['url'] ) || ! in_array( $host, [ 'soundcloud.com', 'api.soundcloud.com' ], true ) ) {
 			return '';
 		}
 
@@ -76,9 +79,11 @@ class SoundCloud extends Shortcode {
 			$embed_url = add_query_arg( 'visual', 'true', $embed_url );
 			$height = 450;
 		}
+        
 		if ( ! empty( $attrs['autoplay'] ) ) {
 			$embed_url = add_query_arg( 'auto_play', 'true', $embed_url );
 		}
+        
 		return sprintf( '<iframe width="%s" height="%d" scrolling="no" frameborder="no" src="%s"></iframe>', esc_attr( '100%' ), esc_attr( $height ), esc_url( $embed_url ) );
 	}
 

@@ -18,114 +18,106 @@ class IconBox extends Shortcode
 
     /**
      * declare default attributes
-     *
-     * @var array
      */
-    private static $defaults = array(
+    private static array $defaults = [
         'type' => 'info',
         'bgcolor' => 'none',
         'heading' => null,
         'headingicon' => null,
         'url' => null,
         'customclass' => null
-    );
+    ];
 
     /**
      * gets the arguments needed for shortcake
-     *
-     * @return array
      */
-    public static function get_shortcode_ui_args()
+    public static function get_shortcode_ui_args(): array
     {
-        return array(
+        return [
             'label' => esc_html__('Icon Box', 'uams_shortcodes'),
             'listItemImage' => 'dashicons-info',
-            'inner_content' => array(
+            'inner_content' => [
                 'label'        => esc_html__( 'Icon Box Body', 'uams_shortcodes' ),
                 'description'  => esc_html__( 'Main content of your icon box. Text and basic HTML tags can be added here.', 'uams_shortcodes' ),
                 'encode' => true,
-            ),
+            ],
             'attrs' => self::get_attributes()
-        );
+        ];
     }
 
     /**
      * provide UI items for shortcake
-     *
-     * @return array
      */
-    public static function get_attributes()
+    public static function get_attributes(): array
     {
-        return array(
-            array(
+        return [
+            [
                 'label' => esc_html__('Icon Box Type', 'uams_shortcodes'),
                 'attr' => 'type',
                 'type' => 'radio',
                 'description' => 'See examples of <a href="https://design.oit.ncsu.edu/docs/ncsu-shortcodes/alerts/" target="_blank">each type of alert</a> on the <a href="https://design.oit.ncsu.edu/docs/" target="_blank">OIT Design documentation site</a>.',
                 'encode' => false,
-                'options' => array(
+                'options' => [
                     'default'   => 'Default',
                     'boxed'     => 'Boxed',
                     'framed'    => 'Framed',
-                ),
-            ),
-            array(
+                ],
+            ],
+            [
                 'label' => esc_html__('Background Color Option', 'uams_shortcodes'),
                 'attr' => 'bgcolor',
                 'type' => 'radio',
                 'description' => 'See examples of <a href="https://design.oit.ncsu.edu/docs/ncsu-shortcodes/alerts/" target="_blank">each type of alert</a> on the <a href="https://design.oit.ncsu.edu/docs/" target="_blank">OIT Design documentation site</a>.',
                 'encode' => false,
-                'options' => array(
+                'options' => [
                     'none'      => 'Default',
                     'red'       => 'Red',
                     'gray'      => 'Gray',
                     'blue'      => 'Blue'
-                ),
-            ),
-            array(
+                ],
+            ],
+            [
                 'label' => esc_html__('Icon Box Heading', 'uams_shortcodes'),
                 'attr' => 'heading',
                 'type' => 'text',
                 'description' => 'Title or heading for the box',
                 'encode' => false,
-            ),
-            array(
+            ],
+            [
                 'label' => esc_html__('Heading Icon', 'uams_shortcodes'),
                 'attr' => 'headingicon',
                 'type' => 'select',
                 'description' => 'Select any <a href="https://brand.ncsu.edu/bootstrap/components/" target="_blank">Bootstrap Glyphicon</a> or <a href="https://developer.wordpress.org/resource/dashicons/" target="_blank">WordPress Dashicon</a>.',
                 'encode' => false,
                 'options' => self::get_icon_collection(),
-            ),
-            array(
+            ],
+            [
                 'label' => esc_html__('URL', 'uams_shortcodes'),
                 'attr' => 'url',
                 'type' => 'url',
                 'description' => 'Optional. Enter a URL to make your icon and title a clickable hyperlink.',
                 'encode' => false,
-                'meta' => array(
+                'meta' => [
                     'placeholder' => 'http://www.uams.edu/'
-                )
-            ),
-            array(
+                ]
+            ],
+            [
                 'label' => esc_html__('Custom CSS classes', 'uams_shortcodes'),
                 'attr' => 'customclass',
                 'type' => 'text',
                 'description' => '',
                 'encode' => false,
-                'meta' => array(
+                'meta' => [
                     'placeholder' => 'Comma-separated list',
-                )
-            )
-        );
+                ]
+            ]
+        ];
     }
     
     /**
      * return (not echo) our Alert element
-     *
-     * @return string
      */
-    public static function callback($attrs, $content = '')
+    public static function callback($attrs, $content = ''): string
     {
         $attrs = (is_array($attrs))
             ? array_merge(self::$defaults, $attrs)
@@ -133,14 +125,14 @@ class IconBox extends Shortcode
 
         // Valid types only
         if (!empty($attrs['type'])) {
-            $type = ( $attrs['type'] == 'default' || $attrs['type'] == 'boxed' || $attrs['type'] == 'framed' ) ? sanitize_html_class( $attrs['type'] ) : 'defualt';
+            $type = ( in_array($attrs['type'], ['default', 'boxed', 'framed']) ) ? sanitize_html_class( $attrs['type'] ) : 'defualt';
         } else {
             $type = 'default';
         }
 
         // Valid types only
         if (!empty($attrs['bgcolor'])) {
-            $bg = ( $attrs['bgcolor'] == 'none' || $attrs['bgcolor'] == 'red' || $attrs['bgcolor'] == 'gray' || $attrs['bgcolor'] == 'blue' ) ? sanitize_html_class( $attrs['bgcolor'] ) : 'none';
+            $bg = ( in_array($attrs['bgcolor'], ['none', 'red', 'gray', 'blue']) ) ? sanitize_html_class( $attrs['bgcolor'] ) : 'none';
         } else {
             $bg = 'none';
         }
@@ -179,10 +171,10 @@ class IconBox extends Shortcode
 
         $txtcontent = wp_kses_post( $content );
 
-        $customclass = implode(" ", array_map( 'sanitize_html_class', explode( ",", $attrs['customclass'] ) ) );
+        $customclass = implode(" ", array_map( sanitize_html_class(...), explode( ",", $attrs['customclass'] ) ) );
 
         return sprintf(
-            "<div class=\"icon-box-wrapper %s %s %s\"><div class=\"icon-box-icon\">%s%s%s</div><div class=\"icon-box-content\">%s%s%s<div class=\"icon-box-description\">%s</div></div></div>",
+            '<div class="icon-box-wrapper %s %s %s"><div class="icon-box-icon">%s%s%s</div><div class="icon-box-content">%s%s%s<div class="icon-box-description">%s</div></div></div>',
             $type,
             $bg,
             esc_attr( $customclass ),

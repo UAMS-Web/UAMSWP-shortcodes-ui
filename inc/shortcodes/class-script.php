@@ -4,19 +4,19 @@ namespace UAMS_Shortcakes\Shortcodes;
 
 class Script extends Shortcode {
 
-	public static function get_shortcode_ui_args() {
-		return array(
+	public static function get_shortcode_ui_args(): array {
+		return [
 			'label'          => esc_html__( 'Script', 'uams_shortcodes' ),
 			'listItemImage'  => 'dashicons-media-code',
-			'attrs'          => array(
-				array(
+			'attrs'          => [
+				[
 					'label'        => esc_html__( 'URL', 'uams_shortcodes' ),
 					'attr'         => 'src',
 					'type'         => 'text',
 					'description'  => esc_html__( 'Full URL to the script file. Host must be whitelisted.', 'uams_shortcodes' ),
-				),
-			),
-		);
+				],
+			],
+		];
 	}
 
 
@@ -28,13 +28,13 @@ class Script extends Shortcode {
 	* @return array of whitelisted domains, e.g. 'ajax.googleapis.com'
 	*/
 	public static function get_whitelisted_script_domains() {
-		return apply_filters( 'uams_shortcodes_whitelisted_script_domains', array() );
+		return apply_filters( 'uams_shortcodes_whitelisted_script_domains', [] );
 	}
 
 	public static function reversal( $content ) {
 		$scripts = self::parse_scripts( $content );
 		if ( $scripts ) {
-			$replacements = array();
+			$replacements = [];
 			$whitelisted_script_domains = static::get_whitelisted_script_domains();
 			$shortcode_tag = static::get_shortcode_tag();
 			foreach ( $scripts as $script ) {
@@ -42,14 +42,17 @@ class Script extends Shortcode {
 				if ( ! in_array( $host, $whitelisted_script_domains, true ) ) {
 					continue;
 				}
+                
 				$replacements[ $script->original ] = '[' . $shortcode_tag . ' src="' . esc_url_raw( $script->attrs['src'] ) . '"]';
 			}
+            
 			$content = self::make_replacements_to_content( $content, $replacements );
 		}
+        
 		return $content;
 	}
 
-	public static function callback( $attrs, $content = '' ) {
+	public static function callback( $attrs, $content = '' ): string {
 
 		if ( empty( $attrs['src'] ) ) {
 			return '';
@@ -63,9 +66,9 @@ class Script extends Shortcode {
 			if ( current_user_can( 'edit_posts' ) ) {
 				/* Translators: invalid hostname warning. */
 				return '<div class="uams-shortcodes-error"><p>' . sprintf( esc_html__( 'Invalid hostname in URL: %s', 'uams_shortcodes' ), esc_url( $attrs['src'] ) ) . '</p></div>';
-			} else {
-				return '';
 			}
+
+            return '';
 		}
 
 		return '<script src="' . esc_url( $attrs['src'] ) . '"></script>';

@@ -4,19 +4,19 @@ namespace UAMS_Shortcakes\Shortcodes;
 
 class Instagram extends Shortcode {
 
-	public static function get_shortcode_ui_args() {
-		return array(
+	public static function get_shortcode_ui_args(): array {
+		return [
 			'label'          => esc_html__( 'Instagram', 'uams_shortcodes' ),
 			'listItemImage'  => '<img src="' . esc_url( UAMS_SHORTCAKES_URL_ROOT . 'assets/images/svg/icon-instagram.svg' ) . '" />',
-			'attrs'          => array(
-				array(
+			'attrs'          => [
+				[
 					'label'        => esc_html__( 'URL', 'uams_shortcodes' ),
 					'attr'         => 'url',
 					'type'         => 'text',
 					'description'  => esc_html__( 'URL to an Instagram', 'uams_shortcodes' ),
-				),
-			),
-		);
+				],
+			],
+		];
 	}
 
 	public static function reversal( $content ) {
@@ -27,34 +27,39 @@ class Instagram extends Shortcode {
 
 		$needle = '#<blockquote class="instagram-media.+<a href="(https://(www\.)?instagram\.com/p/[^/]+/)"[^>]+>.+(?=</blockquote>)</blockquote>\n?(<script[^>]+src="//platform\.instagram\.com/[^>]+></script>)?#';
 		if ( preg_match_all( $needle, $content, $matches ) ) {
-			$replacements = array();
+			$replacements = [];
 			$shortcode_tag = self::get_shortcode_tag();
 			foreach ( $matches[0] as $key => $value ) {
 				$replacements[ $value ] = '[' . $shortcode_tag . ' url="' . esc_url_raw( $matches[1][ $key ] ) . '"]';
 			}
+            
 			$content = self::make_replacements_to_content( $content, $replacements );
 		}
+        
 		$iframes = self::parse_iframes( $content );
 		if ( $iframes ) {
-			$replacements = array();
+			$replacements = [];
 			foreach ( $iframes as $iframe ) {
 				if ( 'instagram.com' !== self::parse_url( $iframe->attrs['src'], PHP_URL_HOST ) ) {
 					continue;
 				}
+                
 				if ( preg_match( '#//instagram\.com/p/([^/]+)/embed/?#', $iframe->attrs['src'], $matches ) ) {
 					$embed_id = $matches[1];
 				} else {
 					continue;
 				}
+                
 				$replacements[ $iframe->original ] = '[' . self::get_shortcode_tag() . ' url="' . esc_url_raw( 'https://instagram.com/p/' . $embed_id . '/' ) . '"]';
 			}
+            
 			$content = self::make_replacements_to_content( $content, $replacements );
 		}
 
 		return $content;
 	}
 
-	public static function callback( $attrs, $content = '' ) {
+	public static function callback( $attrs, $content = '' ): string {
 
 		if ( empty( $attrs['url'] ) ) {
 			return '';

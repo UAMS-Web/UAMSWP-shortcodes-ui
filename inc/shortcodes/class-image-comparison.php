@@ -4,44 +4,44 @@ namespace UAMS_Shortcakes\Shortcodes;
 
 class Image_Comparison extends Shortcode {
 
-	public static function get_shortcode_ui_args() {
-		return array(
+	public static function get_shortcode_ui_args(): array {
+		return [
 			'label'          => esc_html__( 'Image Comparison', 'uams_shortcodes' ),
 			'listItemImage'  => 'dashicons-format-gallery',
-			'attrs'          => array(
-				array(
+			'attrs'          => [
+				[
 					'label'  => esc_html__( 'Left Image', 'uams_shortcodes' ),
 					'attr'   => 'left',
 					'type'   => 'attachment',
-					'libraryType' => array( 'image' ),
+					'libraryType' => [ 'image' ],
 					'addButton'   => esc_html__( 'Select Image', 'uams_shortcodes' ),
 					'frameTitle'  => esc_html__( 'Select Image', 'uams_shortcodes' ),
-					),
-				array(
+					],
+				[
 					'label'  => esc_html__( 'Right Image', 'uams_shortcodes' ),
 					'attr'   => 'right',
 					'type'   => 'attachment',
-					'libraryType' => array( 'image' ),
+					'libraryType' => [ 'image' ],
 					'addButton'   => esc_html__( 'Select Image', 'uams_shortcodes' ),
 					'frameTitle'  => esc_html__( 'Select Image', 'uams_shortcodes' ),
-					),
-				array(
+					],
+				[
 					'label'  => esc_html__( 'Slider Start Position', 'uams_shortcodes' ),
 					'attr'   => 'position',
 					'type'   => 'select',
-					'options' => array(
+					'options' => [
 						'center' => esc_html__( 'Center', 'uams_shortcodes' ),
 						'mostlyleft' => esc_html__( 'Mostly Left', 'uams_shortcodes' ),
 						'mostlyright' => esc_html__( 'Mostly Right', 'uams_shortcodes' ),
-					),
-				),
-			),
-		);
+					],
+				],
+			],
+		];
 	}
 
-	public static function setup_actions() {
-		add_action( 'wp_enqueue_scripts', 'UAMS_Shortcakes\Shortcodes\Image_Comparison::action_init_register_scripts' );
-		add_action( 'shortcode_ui_after_do_shortcode', function( $shortcode ) {
+	public static function setup_actions(): void {
+		add_action( 'wp_enqueue_scripts', Image_Comparison::class . '::action_init_register_scripts' );
+		add_action( 'shortcode_ui_after_do_shortcode', function( $shortcode ): void {
 			if ( false !== stripos( $shortcode, '[' . self::get_shortcode_tag() ) ) {
 				echo '<link rel="stylesheet" href="' . esc_url( UAMS_SHORTCAKES_URL_ROOT . 'assets/css/juxtapose.css' ) . '">';
 				echo '<script type="text/javascript" src="' . esc_url( UAMS_SHORTCAKES_URL_ROOT . 'assets/js/juxtapose.js' ) . '"></script>';
@@ -49,18 +49,18 @@ class Image_Comparison extends Shortcode {
 		});
 	}
 
-	public static function action_init_register_scripts() {
-		wp_register_script( 'juxtapose-js', UAMS_SHORTCAKES_URL_ROOT . 'assets/js/juxtapose.js', array( 'jquery' ) );
+	public static function action_init_register_scripts(): void {
+		wp_register_script( 'juxtapose-js', UAMS_SHORTCAKES_URL_ROOT . 'assets/js/juxtapose.js', [ 'jquery' ] );
 		wp_register_style( 'juxtapose-css', UAMS_SHORTCAKES_URL_ROOT . 'assets/css/juxtapose.css' );
 	}
 
-	public static function callback( $attrs, $content = '' ) {
+	public static function callback( $attrs, $content = '' ): ?string {
 		if ( empty( $attrs['left'] ) || empty( $attrs['right'] ) ) {
 			if ( current_user_can( 'edit_posts' ) ) {
 				return '<div class="uams-shortcodes-error"><p>' . esc_html__( 'Two images required for image comparison.', 'uams_shortcodes' ) . '</p></div>';
-			} else {
-				return '';
 			}
+
+            return '';
 		}
 
 		if ( empty( $attrs['position'] ) ) {
@@ -95,7 +95,7 @@ class Image_Comparison extends Shortcode {
 		$right_credit = $right_meta['image_meta']['credit'];
 
 		if ( ! $left_image || ! $right_image ) {
-			return;
+			return null;
 		}
 
 		wp_enqueue_script( 'juxtapose-js' );

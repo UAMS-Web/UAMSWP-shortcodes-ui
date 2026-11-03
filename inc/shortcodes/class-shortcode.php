@@ -15,10 +15,10 @@ abstract class Shortcode
      */
     public static function get_shortcode_tag()
     {
-        $parts = explode('\\', get_called_class());
+        $parts = explode('\\', static::class);
         $shortcode_tag = array_pop($parts);
         $shortcode_tag = strtolower($shortcode_tag); // Original strtolower(str_replace('_', '-', $shortcode_tag));
-        return apply_filters('uams_shortcodes_shortcode_tag', $shortcode_tag, get_called_class());
+        return apply_filters('uams_shortcodes_shortcode_tag', $shortcode_tag, static::class);
     }
 
     /**
@@ -48,9 +48,9 @@ abstract class Shortcode
     {
         if ( file_get_contents( $url, FILE_USE_INCLUDE_PATH ) ) {
             return file_get_contents( $url, FILE_USE_INCLUDE_PATH );
-        } else {
-            return null;
         }
+
+        return null;
     }   
 
     /**
@@ -76,7 +76,7 @@ abstract class Shortcode
     */
     public static function get_icon_collectiOn()
     {
-        return array(
+        return [
             'noicon'                   => 'No Icon',
             'ic-address-book'          => 'Address-book',
             'ic-administration'        => 'Administration',
@@ -354,7 +354,7 @@ abstract class Shortcode
             'i-wordpress'              => 'Wordpress',
             'i-youtube-1'              => 'Youtube-1',
             'i-youtube-2'              => 'Youtube-2',
-        );
+        ];
     }
 
     /**
@@ -364,7 +364,7 @@ abstract class Shortcode
     */
     public static function get_ignored_icon_names()
     {
-        return array(
+        return [
             'noicon',
             'commonicons',
             'uamsicons',
@@ -373,7 +373,7 @@ abstract class Shortcode
             'uamsglyph',
             'wpdash',
             'numbers',
-        );
+        ];
     }
 
     /**
@@ -383,7 +383,7 @@ abstract class Shortcode
      */
     public static function get_uams_brand_colors()
     {
-        return array(
+        return [
             'white' => 'White',
             'gray10' => '10% Gray',
             'gray25' => '25% Gray',
@@ -399,12 +399,12 @@ abstract class Shortcode
             'orange' => 'Orange',
             'lightblue' => 'Light Blue',
             'tealblue' => 'Teal Blue'
-        );
+        ];
     }
 
     public static function get_uams_brand_colors_plus()
     {
-        return array(
+        return [
             'transparentwhite' => 'Transparent (White Text)',
             'transparentblack' => 'Transparent (Black Text)',
             'transparentred' => 'Transparent (Red Text)',
@@ -425,12 +425,12 @@ abstract class Shortcode
             'orange' => 'Orange',
             'lightblue' => 'Light Blue',
             'tealblue' => 'Teal Blue'
-        );
+        ];
     }
 
     public static function get_accessible_text_brand_colors()
     {
-        return array(
+        return [
             'wolfpackred' => 'Cardinal Red',
             'gray90' => '90% Gray',
             'black' => 'Black',
@@ -439,14 +439,12 @@ abstract class Shortcode
             // 'genomicgreen' => 'Genomic Green',
             // 'innovationblue' => 'Innovation Blue',
             // 'bioindigo' => 'Bio-Indigo',
-        );
+        ];
     }
 
     /**
      * Allow subclasses to register their own action
      * Fires after the shortcode has been registered on init
-     *
-     * @return null
      */
     public static function setup_actions()
     {
@@ -459,7 +457,7 @@ abstract class Shortcode
      */
     public static function get_attributes()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -467,7 +465,7 @@ abstract class Shortcode
      */
     public static function get_shortcode_ui_args()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -505,10 +503,11 @@ abstract class Shortcode
      */
     protected static function parse_url( $url, $component = -1 ) {
         $added_protocol = false;
-        if ( 0 === strpos( $url, '//' ) ) {
+        if ( str_starts_with($url, '//') ) {
             $url = 'http:' . $url;
             $added_protocol = true;
         }
+        
         // @codingStandardsIgnoreStart
         $ret = parse_url( $url, $component );
         // @codingStandardsIgnoreEnd
@@ -519,6 +518,7 @@ abstract class Shortcode
                 $ret = '';
             }
         }
+        
         return $ret;
     }
 
@@ -526,33 +526,33 @@ abstract class Shortcode
      * Parse a string of content for a given tag name.
      *
      * @param string $content
-     * @param string $tag_name
      * @return array|false
      */
-    private static function parse_closed_tags( $content, $tag_name ) {
+    private static function parse_closed_tags( $content, string $tag_name ): false|array {
 
         if ( false === stripos( $content, '<' . $tag_name ) ) {
             return false;
         }
 
         if ( preg_match_all( '#(.+\r?\n?)?(<' . $tag_name . '([^>]+)>([^<]+)?</' . $tag_name . '>)(\r?\n?.+)?#', $content, $matches ) ) {
-            $tags = array();
+            $tags = [];
             foreach ( $matches[0] as $key => $value ) {
                 $tag = new \stdClass;
                 $tag->original = $matches[2][ $key ];
                 $tag->before = $matches[1][ $key ];
-                $tag->attrs = array(
+                $tag->attrs = [
                     'src' => '',
-                );
+                ];
                 $tag->inner = $matches[4][ $key ];
                 $tag->after = $matches[5][ $key ];
                 $tag->attrs = self::parse_tag_attributes( $matches[3][ $key ] );
                 $tags[] = $tag;
             }
+            
             return $tags;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -586,7 +586,7 @@ abstract class Shortcode
     protected static function parse_tag_attributes( $text ) {
         $pattern = '/([\w-]+)\s*=\s*"([^"]*)"(?:\s|$)|([\w-]+)\s*=\s*\'([^\']*)\'(?:\s|$)|([\w-]+)\s*=\s*([^\s\'"]+)(?:\s|$)|"([^"]*)"(?:\s|$)|(\S+)(?:\s|$)/';
         $text = preg_replace( "/[\x{00a0}\x{200b}]+/u", ' ', $text );
-        $atts = array();
+        $atts = [];
 
         if ( preg_match_all( $pattern, $text, $match, PREG_SET_ORDER ) ) {
             foreach ( $match as $m ) {
@@ -618,6 +618,7 @@ abstract class Shortcode
         if ( empty( $replacements ) ) {
             return $content;
         }
+        
         return str_replace( array_keys( $replacements ), array_values( $replacements ), $content );
     }
 

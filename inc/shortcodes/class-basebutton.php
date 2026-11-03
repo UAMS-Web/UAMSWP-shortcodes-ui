@@ -18,10 +18,8 @@ class BaseButton extends Shortcode
 
     /**
      * declare default attributes
-     *
-     * @var array
      */
-    private static $defaults = array(
+    private static array $defaults = [
         'color' => null,
         'btn_content' => null,
         'url' => null,
@@ -29,76 +27,72 @@ class BaseButton extends Shortcode
         'size' => null,
         'displayblock' => null,
         'customclass' => null
-    );
+    ];
 
     /**
      * gets the arguments needed for shortcake
-     *
-     * @return array
      */
-    public static function get_shortcode_ui_args()
+    public static function get_shortcode_ui_args(): array
     {
-        return array(
+        return [
             'label' => esc_html__('Basic Button', 'uams_shortcodes'),
             'listItemImage' => 'dashicons-editor-removeformatting',
             'attrs' => self::get_attributes()
-        );
+        ];
     }
 
     /**
      * provide UI items for shortcake
-     *
-     * @return array
      */
-    public static function get_attributes()
+    public static function get_attributes(): array
     {
-        return array(
-            array(
+        return [
+            [
                 'label' => esc_html__('Button Text', 'uams_shortcodes'),
                 'attr' => 'btncontent',
                 'type' => 'text',
                 'description' => '',
                 'encode' => false,
-                'meta' => array(
+                'meta' => [
                     'placeholder' => 'Click Me!'
-                )
-            ),
+                ]
+            ],
 
-            array(
+            [
                 'label'        => esc_html__('Link Title', 'uams_shortcodes'),
                 'attr'         => 'title',
                 'type'         => 'text',
                 'description'  => 'This text will appear as a title for the link.'
-            ),
+            ],
 
-            array(
+            [
                 'label' => esc_html__('Destination URL', 'uams_shortcodes'),
                 'attr' => 'url',
                 'type' => 'url',
                 'description' => '',
                 'encode' => false,
-                'meta' => array(
+                'meta' => [
                     'placeholder' => 'http://www.uams.edu/'
-                )
-            ),
+                ]
+            ],
 
-            array(
+            [
                 'label' => esc_html__('Target', 'uams_shortcodes'),
                 'attr' => 'target',
                 'type' => 'radio',
-                'options' => array(
+                'options' => [
                     '_top' => 'Same Tab/Window',
                     '_blank' => 'New Tab/Window', 
-                ),
-            ),
+                ],
+            ],
 
-            array(
+            [
                 'label' => esc_html__('Style and Color', 'uams_shortcodes'),
                 'attr' => 'color',
                 'type' => 'radio',
                 'description' => 'For more information, see the <a href="https://brand.ncsu.edu/color/" target="_blank">NC State color palette</a>.',
                 'encode' => false,
-                'options' => array(
+                'options' => [
                     ''              => 'Basic / Gray',
                     'btn-default'   => 'Default / Ghost',
                     'btn-primary'   => 'Primary / UAMS Red',
@@ -107,38 +101,38 @@ class BaseButton extends Shortcode
                     'btn-warning'   => 'Warning / Yellow',
                     'btn-danger'    => 'Danger / Orange',
                     'btn-link'      => 'Link / None',
-                )
-            ),
-            array(
+                ]
+            ],
+            [
                 'label' => esc_html__('Size', 'uams_shortcodes'),
                 'attr' => 'size',
                 'type' => 'radio',
                 'description' => '',
                 'encode' => false,
-                'options' => array(
+                'options' => [
                     ''          => 'Default',
                     'btn-lg'    => 'Large',
                     'btn-sm'    => 'Small',
-                )
-            ),
-            array(
+                ]
+            ],
+            [
                 'label' => esc_html__('Display full-width?', 'uams_shortcodes'),
                 'attr' => 'displayblock',
                 'type' => 'checkbox',
                 'description' => '',
                 'encode' => false,
-            ),
-            array(
+            ],
+            [
                 'label' => esc_html__('Custom CSS classes', 'uams_shortcodes'),
                 'attr' => 'customclass',
                 'type' => 'text',
                 'description' => '',
                 'encode' => false,
-                'meta' => array(
+                'meta' => [
                     'placeholder' => 'Comma-separated list'
-                )
-            )
-        );
+                ]
+            ]
+        ];
     }
 
     /**
@@ -146,20 +140,19 @@ class BaseButton extends Shortcode
      *
      * @param array $attrs
      * @param string $content
-     * @return string
      */
-    public static function callback($attrs, $content = '')
+    public static function callback($attrs, $content = ''): string
     {
         $attrs = (is_array($attrs))
             ? array_merge(self::$defaults, $attrs)
             : self::$defaults;
         
-        $customclasses = array();
+        $customclasses = [];
 
-        $button_classes = array( 'btn', $attrs['color'], $attrs['size'] );
+        $button_classes = [ 'btn', $attrs['color'], $attrs['size'] ];
 
         if (!empty($attrs['displayblock'])) {
-            $button_classes = array_merge( $button_classes, array('btn-block') );
+            $button_classes = array_merge( $button_classes, ['btn-block'] );
         }
 
         if (!empty($attrs['customclass'])) {
@@ -167,7 +160,7 @@ class BaseButton extends Shortcode
         }
 
         return sprintf(
-            "<a href=\"%s\" title=\"%s\" target=\"%s\"><button type=\"button\" class=\"%s %s\">%s</button></a>",
+            '<a href="%s" title="%s" target="%s"><button type="button" class="%s %s">%s</button></a>',
             esc_url($attrs['url']),
             $attrs['title'],
             $attrs['target'],

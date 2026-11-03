@@ -4,19 +4,19 @@ namespace UAMS_Shortcakes\Shortcodes;
 
 class Twitter extends Shortcode {
 
-	public static function get_shortcode_ui_args() {
-		return array(
+	public static function get_shortcode_ui_args(): array {
+		return [
 			'label'          => esc_html__( 'Twitter', 'uams_shortcodes' ),
 			'listItemImage'  => '<img src="' . esc_url( UAMS_SHORTCAKES_URL_ROOT . 'assets/images/svg/icon-twitter.svg' ) . '" />',
-			'attrs'          => array(
-				array(
+			'attrs'          => [
+				[
 					'label'        => esc_html__( 'URL', 'uams_shortcodes' ),
 					'attr'         => 'url',
 					'type'         => 'text',
 					'description'  => esc_html__( 'URL to a tweet', 'uams_shortcodes' ),
-				),
-			),
-		);
+				],
+			],
+		];
 	}
 
 	public static function reversal( $content ) {
@@ -27,18 +27,19 @@ class Twitter extends Shortcode {
 
 		$needle = '#<blockquote class="twitter-(tweet|video).+<a href="(https://twitter\.com/[^/]+/status/[^/]+)">.+(?=</blockquote>)</blockquote>\n?<script[^>]+src="//platform\.twitter\.com/widgets\.js"[^>]+></script>#';
 		if ( preg_match_all( $needle, $content, $matches ) ) {
-			$replacements = array();
+			$replacements = [];
 			$shortcode_tag = self::get_shortcode_tag();
 			foreach ( $matches[0] as $key => $value ) {
 				$replacements[ $value ] = '[' . $shortcode_tag . ' url="' . esc_url_raw( $matches[2][ $key ] ) . '"]';
 			}
+            
 			$content = str_replace( array_keys( $replacements ), array_values( $replacements ), $content );
 		}
 
 		return $content;
 	}
 
-	public static function callback( $attrs, $content = '' ) {
+	public static function callback( $attrs, $content = '' ): string {
 
 		if ( empty( $attrs['url'] ) ) {
 			return '';

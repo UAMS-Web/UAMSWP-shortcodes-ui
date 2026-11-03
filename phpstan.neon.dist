@@ -150,21 +150,19 @@ parameters:
     # an entry needs. With every entry commented out the key is empty, which
     # PHPStan reads as no entries.
     ignoreErrors:
-        # Found by the first level 0 run. Each is pinned by identifier and path, and each
-        # is removed by the ticket named beside it: fixing them changes behavior, which
-        # this change does not.
+        # Found by the first level 0 run, and pinned by identifier and path. Fixing either
+        # changes behavior, which this change does not, so each is removed by the ticket
+        # named beside it.
         # The callback's return value is discarded by WordPress (UAMS-Web/UAMSWP-shortcodes-ui#45).
         -
             identifier: return.void
             path: inc/class-uams-shortcodes.php
-        # An optional parameter before a required one, deprecated in PHP 8.0 (UAMS-Web/UAMSWP-shortcodes-ui#42).
+        # Hooked by name, so a theme can remove it; wrapping it in a closure would break that
+        # (UAMS-Web/UAMSWP-shortcodes-ui#45).
         -
-            identifier: parameter.requiredAfterOptional
-            path: inc/class-uams-shortcodes.php
-        # A documented array return with no return on two paths (UAMS-Web/UAMSWP-shortcodes-ui#46).
-        -
-            identifier: return.missing
-            path: inc/shortcodes/class-googledocs.php
+            identifier: return.void
+            path: uamswp-shortcodes.php
+
         # The entry most plugins need once the level reaches 4, from
         # uamswp-migration-api: the PHP version guard in the plugin header.
         # PHPStan analyzes at the `min` above, so

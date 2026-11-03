@@ -4,46 +4,49 @@ namespace UAMS_Shortcakes\Shortcodes;
 
 class YouTube extends Shortcode {
 
-	private static $valid_hosts = array( 'www.youtube.com', 'youtube.com', 'youtu.be' );
+	private static array $valid_hosts = [ 'www.youtube.com', 'youtube.com', 'youtu.be' ];
 
-	public static function get_shortcode_ui_args() {
-		return array(
+	public static function get_shortcode_ui_args(): array {
+		return [
 			'label'         => esc_html__( 'YouTube', 'uams_shortcodes' ),
 			'listItemImage' => '<img src="' . esc_url( UAMS_SHORTCAKES_URL_ROOT . 'assets/images/svg/icon-youtube.svg' ) . '" />',
-			'attrs'         => array(
-				array(
+			'attrs'         => [
+				[
 					'label'       => esc_html__( 'URL', 'uams_shortcodes' ),
 					'attr'        => 'url',
 					'type'        => 'text',
 					'description' => esc_html__( 'Full YouTube URL', 'uams_shortcodes' ),
-				),
-			),
-		);
+				],
+			],
+		];
 	}
 
 	public static function reversal( $content ) {
 		$iframes = self::parse_iframes( $content );
 		if ( $iframes ) {
-			$replacements = array();
+			$replacements = [];
 			foreach ( $iframes as $iframe ) {
 				if ( ! in_array( self::parse_url( $iframe->attrs['src'], PHP_URL_HOST ), self::$valid_hosts, true ) ) {
 					continue;
 				}
+                
 				if ( preg_match( '#youtube\.com/embed/([^/?]+)#', $iframe->attrs['src'], $matches ) ) {
 					$embed_id = $matches[1];
 				} else {
 					continue;
 				}
+                
 				$replacement_url                   = 'https://www.youtube.com/watch?v=' . $embed_id;
 				$replacements[ $iframe->original ] = '[' . self::get_shortcode_tag() . ' url="' . esc_url_raw( $replacement_url ) . '"]';
 			}
+            
 			$content = self::make_replacements_to_content( $content, $replacements );
 		}
 
 		return $content;
 	}
 
-	public static function callback( $attrs, $content = '' ) {
+	public static function callback( $attrs, $content = '' ): string {
 
 		$host = self::parse_url( $attrs['url'], PHP_URL_HOST );
 		if ( empty( $attrs['url'] ) || ! in_array( $host, self::$valid_hosts, true ) ) {
@@ -58,11 +61,12 @@ class YouTube extends Shortcode {
 		} elseif ( in_array( $host, self::$valid_hosts, true ) ) { // https://www.youtube.com/watch?v=hDlpVFDmXrc
 			$path = self::parse_url( $attrs['url'], PHP_URL_PATH );
 
-			$query = self::parse_url( str_replace( array( '&amp;', '&#038;' ), '&', $attrs['url'] ), PHP_URL_QUERY );
+			$query = self::parse_url( str_replace( [ '&amp;', '&#038;' ], '&', $attrs['url'] ), PHP_URL_QUERY );
 			parse_str( $query, $args );
 			if ( empty( $args['v'] ) ) {
 				return '';
 			}
+            
 			$embed_id = $args['v'];
 			if ( ! empty( $args['list'] ) ) {
 				$list_id = $args['list'];
@@ -74,6 +78,7 @@ class YouTube extends Shortcode {
 		if ( ! empty( $list_id ) ) {
 			$embed_url = add_query_arg( 'list', $list_id, $embed_url );
 		}
+        
 		$embed_url = apply_filters( 'uams_shortcodes_youtube_embed_url', $embed_url, $attrs );
 		return sprintf( '<iframe class="shortcake-bakery-responsive" width="640" height="360" src="%s" frameborder="0"></iframe>', esc_url( $embed_url ) );
 	}

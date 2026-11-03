@@ -4,24 +4,24 @@ namespace UAMS_Shortcakes\Shortcodes;
 
 class PDF extends Shortcode {
 
-	public static function get_shortcode_ui_args() {
-		$shortcode_attrs = array(
+	public static function get_shortcode_ui_args(): array {
+		$shortcode_attrs = [
 			'label'          => esc_html__( 'PDF', 'uams_shortcodes' ),
 			'listItemImage'  => 'dashicons-media-document',
-			'attrs'          => array(
-				array(
+			'attrs'          => [
+				[
 					'label'       => esc_html__( 'Select or upload PDF', 'uams_shortcodes' ),
 					'attr'        => 'attachment',
 					'type'        => 'attachment',
 					'libraryType' => 'application/pdf',
-				),
-				array(
+				],
+				[
 					'label'       => esc_html__( '...or embed from URL', 'uams_shortcodes' ),
 					'attr'        => 'url',
 					'type'        => 'text',
-				),
-			),
-		);
+				],
+			],
+		];
 
 		/*
 		 * Filter whether to enable the CORS proxy option on the [pdf]
@@ -31,7 +31,7 @@ class PDF extends Shortcode {
 		 */
 		if ( apply_filters( 'uams_shortcodes_pdf_enable_cors_proxy', false ) ) {
 
-			$shortcode_attrs['attrs'][] = array(
+			$shortcode_attrs['attrs'][] = [
 				'label'  => esc_html__( 'Proxy through local domain?', 'uams_shortcodes' ),
 				'attr'   => 'proxy',
 				'type'   => 'checkbox',
@@ -39,7 +39,7 @@ class PDF extends Shortcode {
 					"External PDFs require proper Access-Control headers in order to embed. \nIf you are seeing 'An error occurred while loading the PDF' errors, try this.",
 					'uams_shortcodes'
 				),
-			);
+			];
 		}
 
 		return $shortcode_attrs;
@@ -49,9 +49,9 @@ class PDF extends Shortcode {
 	 * Attach filters and actions for this shortcode
 	 *
 	 */
-	public static function setup_actions() {
-		add_filter( 'media_send_to_editor', array( get_called_class(), 'filter_media_send_to_editor' ), 10, 2 );
-		add_filter( 'post_mime_types', array( get_called_class(), 'filter_post_mime_types' ) );
+	public static function setup_actions(): void {
+		add_filter( 'media_send_to_editor', static::filter_media_send_to_editor(...), 10, 2 );
+		add_filter( 'post_mime_types', static::filter_post_mime_types(...) );
 	}
 
 	/**
@@ -76,19 +76,17 @@ class PDF extends Shortcode {
 	 */
 	public static function filter_post_mime_types( $post_mime_types ) {
 
-		if ( ! isset( $post_mime_types['application/pdf'] ) ) {
-			$post_mime_types['application/pdf'] = array(
+		$post_mime_types['application/pdf'] ??= [
 				__( 'PDF documents', 'uams_shortcodes' ),
 				__( 'Manage PDFs', 'uams_shortcodes' ),
 				/* translators: PDF count. */
 				_n_noop( 'PDF <span class="count">(%s)</span>', 'PDF <span class="count">(%s)</span>', 'uams_shortcodes' ),
-			);
-		}
+			];
 
 		return $post_mime_types;
 	}
 
-	public static function callback( $attrs, $content = '' ) {
+	public static function callback( $attrs, $content = '' ): string {
 
 		if ( ! empty( $attrs['attachment'] ) && 'application/pdf' === get_post_mime_type( absint( $attrs['attachment'] ) ) ) {
 			$url = wp_get_attachment_url( absint( $attrs['attachment'] ) );
@@ -98,8 +96,8 @@ class PDF extends Shortcode {
 			return '';
 		}
 
-		$url_for_parse = ( 0 === strpos( $url, '//' ) ) ? 'http:' . $url :  $url;
-		$scheme = self::parse_url( $url_for_parse, PHP_URL_SCHEME );
+		$url_for_parse = ( str_starts_with($url, '//') ) ? 'http:' . $url :  $url;
+		self::parse_url( $url_for_parse, PHP_URL_SCHEME );
 
 		$ext = pathinfo( $url, PATHINFO_EXTENSION );
 		if ( 'pdf' !== strtolower( $ext ) ) {
@@ -124,11 +122,11 @@ class PDF extends Shortcode {
 	 */
 	private static function asset_proxy_url( $url ) {
 		$asset_proxy_url = add_query_arg(
-			array(
+			[
 				'action' => 'uams_shortcodes_asset_proxy',
 				'_nonce' => wp_create_nonce( 'asset-proxy-' . $url ),
 				'url'    => $url,
-			),
+			],
 			admin_url( 'admin-ajax.php' )
 		);
 

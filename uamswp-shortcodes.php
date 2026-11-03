@@ -7,6 +7,7 @@
  * Author: Todd McKee, MEd, Original: OIT Design, Brian DeConinck, Chris Deaton
  * Author URI: https://www.uams.edu/
  * Requires at least: 4.6
+ * Requires PHP: 8.2
  * Tested up to: 4.9.9
  *
  * @package WordPress
@@ -20,14 +21,16 @@ if ( ! defined( 'WPINC' ) ) {
 
 if ( ! function_exists( 'is_plugin_active' ) )
      require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
-// This plugin uses namespaces and requires PHP 5.3 or greater.
-if ( version_compare( PHP_VERSION, '5.4', '<' ) ) {
-	add_action( 'admin_notices', create_function( '',
-	"echo '<div class=\"error\"><p>" . __( 'UAMSWP Shortcode UI requires PHP 5.4 to function properly. Please upgrade PHP or deactivate the plugin.', 'uamswp-shortcode-ui' ) . "</p></div>';" ) );
+// This plugin requires PHP 8.2 or greater.
+if ( version_compare( PHP_VERSION, '8.2', '<' ) ) {
+	add_action( 'admin_notices', function () {
+		echo '<div class="error"><p>' . __( 'UAMSWP Shortcode UI requires PHP 8.2 to function properly. Please upgrade PHP or deactivate the plugin.', 'uamswp-shortcode-ui' ) . '</p></div>';
+	} );
 	return;
 } elseif ( ! is_plugin_active( 'shortcode-ui/shortcode-ui.php') ) {
-	add_action( 'admin_notices', create_function( '',
-	"echo '<div class=\"error\"><p>" . __( 'UAMSWP Shortcode UI requires <a href="https://wordpress.org/plugins/shortcode-ui/">Shortcake (Shortcode UI)</a> plugin to be active!', 'uamswp-shortcode-ui' ) . "</p></div>';" ) );
+	add_action( 'admin_notices', function () {
+		echo '<div class="error"><p>' . __( 'UAMSWP Shortcode UI requires <a href="https://wordpress.org/plugins/shortcode-ui/">Shortcake (Shortcode UI)</a> plugin to be active!', 'uamswp-shortcode-ui' ) . '</p></div>';
+	} );
 	return;
 } else {
 	require_once dirname(__FILE__) . '/inc/class-uams-shortcodes.php';

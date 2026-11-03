@@ -1083,6 +1083,7 @@ var pdfjsWebLibs;
    PDFJS.disableTextLayer = PDFJS.disableTextLayer === undefined ? false : PDFJS.disableTextLayer;
    PDFJS.ignoreCurrentPositionOnZoom = PDFJS.ignoreCurrentPositionOnZoom === undefined ? false : PDFJS.ignoreCurrentPositionOnZoom;
    PDFJS.locale = PDFJS.locale === undefined ? navigator.language : PDFJS.locale;
+   PDFJS.isEvalSupported = false;
    function getOutputScale(ctx) {
     var devicePixelRatio = window.devicePixelRatio || 1;
     var backingStoreRatio = ctx.webkitBackingStorePixelRatio || ctx.mozBackingStorePixelRatio || ctx.msBackingStorePixelRatio || ctx.oBackingStorePixelRatio || ctx.backingStorePixelRatio || 1;

@@ -7,7 +7,12 @@
     },
     "require-dev": {
         "brain/monkey": "^2.7",
-        "pestphp/pest": "^5.3"
+        "laravel/pint": "^1.32",
+        "pestphp/pest": "^5.3",
+        "php-stubs/wordpress-stubs": "^6.8",
+        "phpstan/phpstan": "^2.3",
+        "rector/rector": "^2.8",
+        "szepeviktor/phpstan-wordpress": "^2.0"
     },
     "config": {
         "platform": {
@@ -19,9 +24,19 @@
         }
     },
     "scripts": {
-        "test": "pest"
+        "test": "pest",
+        "stan": "phpstan analyse --no-progress --memory-limit=2G",
+        "refactor": "rector",
+        "test:refactor": "rector --dry-run",
+        "pint": "pint",
+        "test:pint": "pint --test"
     },
     "scripts-descriptions": {
-        "test": "Run the Pest suite. WordPress functions are mocked with Brain Monkey, so no WordPress install or database is needed."
+        "test": "Run the Pest suite. WordPress functions are mocked with Brain Monkey, so no WordPress install or database is needed.",
+        "stan": "Run PHPStan at the level phpstan.neon.dist sets.",
+        "refactor": "Apply Rector.",
+        "test:refactor": "Preview Rector without changing files.",
+        "pint": "Format with Pint.",
+        "test:pint": "Check formatting with Pint without changing files."
     }
 }

@@ -247,9 +247,9 @@ class UAMS_Shortcakes
         /**
          * Hook to transform the embed reversal response before returning it to the editor.
          *
-         * @param array Return value of `reverse_embed()`
-         * @param string Original string provided
-         * @param int Post ID
+         * @param array $result Return value of `reverse_embed()`
+         * @param string $provided_embed_code Original string provided
+         * @param int $post_id Post ID
          */
         $result = apply_filters( 'shortcake_bakery_embed_reversal', $result, $provided_embed_code, $post_id );
 

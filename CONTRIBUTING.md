@@ -47,7 +47,7 @@ composer test
 
 ### JavaScript and build tests
 
-The JavaScript tests use Node's built-in test runner (Node 22 or later), so they add no dependency beyond the `npm ci` that installs Gulp.
+The JavaScript tests use Node's built-in test runner (Node 22.12 or later, which can `require()` the ES module that `gulp-strip-css-comments` 3 ships), so they add no dependency beyond the `npm ci` that installs Gulp.
 
 ```sh
 npm ci

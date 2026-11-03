@@ -51,6 +51,17 @@ composer test
 
 `composer.json` lists development dependencies only.
 
+### PHP coverage
+
+Coverage needs a driver: PCOV (`pecl install pcov`, then enable `pcov.enabled=1`) or Xdebug in coverage mode.
+
+```sh
+vendor/bin/pest --coverage          # line coverage per file under inc/
+vendor/bin/pest --coverage --min=95 # fail below a floor
+```
+
+`phpunit.xml` sets `inc/` as the measured source. Every shortcode class under `inc/shortcodes/` is at 100%, except `class-alert.php`. The uncovered remainder is recorded on UAMS-Web/UAMSWP-shortcodes-ui#30.
+
 ## Checks
 
 ```sh

@@ -294,7 +294,6 @@ abstract class Shortcode
             'i-recycle'                => 'Recycle',
             'i-reddie-alt'             => 'Reddie-alt',
             'i-reddie'                 => 'Reddie',
-            'i-reddie'                 => 'Reddie',
             'i-rewind'                 => 'Rewind',
             'i-rss'                    => 'Rss',
             'i-sale'                   => 'Sale',

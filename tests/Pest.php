@@ -9,6 +9,9 @@
 
 declare(strict_types=1);
 
+use function Brain\Monkey\Functions\stubEscapeFunctions;
+use function Brain\Monkey\Functions\stubs;
+use function Brain\Monkey\Functions\stubTranslationFunctions;
 use function Brain\Monkey\setUp;
 use function Brain\Monkey\tearDown;
 
@@ -43,15 +46,15 @@ uses()
  */
 function stubWordPress(): void
 {
-    Brain\Monkey\Functions\stubEscapeFunctions();
-    Brain\Monkey\Functions\stubTranslationFunctions();
-    Brain\Monkey\Functions\stubs([
+    stubEscapeFunctions();
+    stubTranslationFunctions();
+    stubs([
         'esc_url_raw' => fn ($url) => $url,
-        'sanitize_html_class' => fn ($class) => preg_replace('/[^A-Za-z0-9_-]/', '', (string) $class),
-        'sanitize_text_field' => fn ($text) => trim(strip_tags((string) $text)),
+        'sanitize_html_class' => fn ($class): ?string => preg_replace('/[^A-Za-z0-9_-]/', '', (string) $class),
+        'sanitize_text_field' => fn ($text): string => trim(strip_tags((string) $text)),
         'wp_kses_post' => fn ($content) => $content,
-        'wpautop' => fn ($text) => '<p>'.$text.'</p>',
-        'absint' => fn ($value) => abs((int) $value),
+        'wpautop' => fn ($text): string => '<p>'.$text.'</p>',
+        'absint' => fn ($value): int => abs((int) $value),
         'wp_unslash' => fn ($value) => $value,
         'do_shortcode' => fn ($content) => $content,
         'apply_filters' => fn ($tag, $value) => $value,

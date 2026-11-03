@@ -32,6 +32,10 @@ it('falls back to info for a type that is not allowed', function (): void {
     expect(Alert::callback(['type' => 'bogus', 'customclass' => ''], 'x'))->toContain('alert-info');
 });
 
+it('falls back to info for an empty type', function (): void {
+    expect(Alert::callback(['type' => '', 'customclass' => ''], 'x'))->toContain('alert-info');
+});
+
 it('keeps each allowed type', function (string $type): void {
     expect(Alert::callback(['type' => $type, 'customclass' => ''], 'x'))->toContain('alert-'.$type);
 })->with(['success', 'info', 'help', 'warning', 'danger']);

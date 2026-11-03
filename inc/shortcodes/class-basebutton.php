@@ -11,11 +11,9 @@ namespace UAMS_Shortcakes\Shortcodes;
 
 /**
  * Class Button
- * @package UAMS_Shortcakes\Shortcodes
  */
 class BaseButton extends Shortcode
 {
-
     /**
      * declare default attributes
      */
@@ -26,7 +24,7 @@ class BaseButton extends Shortcode
         'target' => null,
         'size' => null,
         'displayblock' => null,
-        'customclass' => null
+        'customclass' => null,
     ];
 
     /**
@@ -37,7 +35,7 @@ class BaseButton extends Shortcode
         return [
             'label' => esc_html__('Basic Button', 'uams_shortcodes'),
             'listItemImage' => 'dashicons-editor-removeformatting',
-            'attrs' => self::get_attributes()
+            'attrs' => self::get_attributes(),
         ];
     }
 
@@ -54,15 +52,15 @@ class BaseButton extends Shortcode
                 'description' => '',
                 'encode' => false,
                 'meta' => [
-                    'placeholder' => 'Click Me!'
-                ]
+                    'placeholder' => 'Click Me!',
+                ],
             ],
 
             [
-                'label'        => esc_html__('Link Title', 'uams_shortcodes'),
-                'attr'         => 'title',
-                'type'         => 'text',
-                'description'  => 'This text will appear as a title for the link.'
+                'label' => esc_html__('Link Title', 'uams_shortcodes'),
+                'attr' => 'title',
+                'type' => 'text',
+                'description' => 'This text will appear as a title for the link.',
             ],
 
             [
@@ -72,8 +70,8 @@ class BaseButton extends Shortcode
                 'description' => '',
                 'encode' => false,
                 'meta' => [
-                    'placeholder' => 'http://www.uams.edu/'
-                ]
+                    'placeholder' => 'http://www.uams.edu/',
+                ],
             ],
 
             [
@@ -82,7 +80,7 @@ class BaseButton extends Shortcode
                 'type' => 'radio',
                 'options' => [
                     '_top' => 'Same Tab/Window',
-                    '_blank' => 'New Tab/Window', 
+                    '_blank' => 'New Tab/Window',
                 ],
             ],
 
@@ -93,15 +91,15 @@ class BaseButton extends Shortcode
                 'description' => 'For more information, see the <a href="https://brand.ncsu.edu/color/" target="_blank">NC State color palette</a>.',
                 'encode' => false,
                 'options' => [
-                    ''              => 'Basic / Gray',
-                    'btn-default'   => 'Default / Ghost',
-                    'btn-primary'   => 'Primary / UAMS Red',
-                    'btn-success'   => 'Success / Green',
-                    'btn-info'      => 'Info / Blue',
-                    'btn-warning'   => 'Warning / Yellow',
-                    'btn-danger'    => 'Danger / Orange',
-                    'btn-link'      => 'Link / None',
-                ]
+                    '' => 'Basic / Gray',
+                    'btn-default' => 'Default / Ghost',
+                    'btn-primary' => 'Primary / UAMS Red',
+                    'btn-success' => 'Success / Green',
+                    'btn-info' => 'Info / Blue',
+                    'btn-warning' => 'Warning / Yellow',
+                    'btn-danger' => 'Danger / Orange',
+                    'btn-link' => 'Link / None',
+                ],
             ],
             [
                 'label' => esc_html__('Size', 'uams_shortcodes'),
@@ -110,10 +108,10 @@ class BaseButton extends Shortcode
                 'description' => '',
                 'encode' => false,
                 'options' => [
-                    ''          => 'Default',
-                    'btn-lg'    => 'Large',
-                    'btn-sm'    => 'Small',
-                ]
+                    '' => 'Default',
+                    'btn-lg' => 'Large',
+                    'btn-sm' => 'Small',
+                ],
             ],
             [
                 'label' => esc_html__('Display full-width?', 'uams_shortcodes'),
@@ -129,34 +127,34 @@ class BaseButton extends Shortcode
                 'description' => '',
                 'encode' => false,
                 'meta' => [
-                    'placeholder' => 'Comma-separated list'
-                ]
-            ]
+                    'placeholder' => 'Comma-separated list',
+                ],
+            ],
         ];
     }
 
     /**
      * return (not echo) our button element
      *
-     * @param array $attrs
-     * @param string $content
+     * @param  array  $attrs
+     * @param  string  $content
      */
     public static function callback($attrs, $content = ''): string
     {
         $attrs = (is_array($attrs))
             ? array_merge(self::$defaults, $attrs)
             : self::$defaults;
-        
+
         $customclasses = [];
 
-        $button_classes = [ 'btn', $attrs['color'], $attrs['size'] ];
+        $button_classes = ['btn', $attrs['color'], $attrs['size']];
 
-        if (!empty($attrs['displayblock'])) {
-            $button_classes = array_merge( $button_classes, ['btn-block'] );
+        if (! empty($attrs['displayblock'])) {
+            $button_classes = array_merge($button_classes, ['btn-block']);
         }
 
-        if (!empty($attrs['customclass'])) {
-            $customclasses = explode( ",", $attrs['customclass'] );
+        if (! empty($attrs['customclass'])) {
+            $customclasses = explode(',', $attrs['customclass']);
         }
 
         return sprintf(

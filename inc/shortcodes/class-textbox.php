@@ -11,11 +11,9 @@ namespace UAMS_Shortcakes\Shortcodes;
 
 /**
  * Class Alert
- * @package UAMS_Shortcakes\Shortcodes
  */
 class TextBox extends Shortcode
 {
-
     /**
      * declare default attributes
      */
@@ -25,7 +23,7 @@ class TextBox extends Shortcode
         'txtcolor' => 'dark',
         'titletxt' => null,
         'fullscreen' => false,
-        'customclass' => null
+        'customclass' => null,
     ];
 
     /**
@@ -37,11 +35,11 @@ class TextBox extends Shortcode
             'label' => esc_html__('Text Box', 'uams_shortcodes'),
             'listItemImage' => 'dashicons-info',
             'inner_content' => [
-                'label'        => esc_html__( 'Text Box Body', 'uams_shortcodes' ),
-                'description'  => esc_html__( 'Main content of your text box. Text and basic HTML tags can be added here.', 'uams_shortcodes' ),
+                'label' => esc_html__('Text Box Body', 'uams_shortcodes'),
+                'description' => esc_html__('Main content of your text box. Text and basic HTML tags can be added here.', 'uams_shortcodes'),
                 'encode' => true,
             ],
-            'attrs' => self::get_attributes()
+            'attrs' => self::get_attributes(),
         ];
     }
 
@@ -66,29 +64,29 @@ class TextBox extends Shortcode
                 ],
             ],
             [
-                'label'       => esc_html__('Image Background', 'uams_shortcodes'),
-                'attr'        => 'imagebg',
-                'type'        => 'attachment',
+                'label' => esc_html__('Image Background', 'uams_shortcodes'),
+                'attr' => 'imagebg',
+                'type' => 'attachment',
                 'description' => 'Used for image background only.',
-                'libraryType' => [ 'image' ],
-                'addButton'   => 'Select Image',
-                'frameTitle'  => 'Select Image',
+                'libraryType' => ['image'],
+                'addButton' => 'Select Image',
+                'frameTitle' => 'Select Image',
             ],
             [
-                'label'         => esc_html__('Text Color', 'uams_shortcodes'),
-                'attr'          => 'txtcolor',
-                'type'          => 'radio',
-                    'options'   => [
-                       'dark'      => 'Dark',
-                       'light'     => 'Light',
-            ],
-            'description'   => 'Choose the color of the text (Dark text over light colored images or light over darker images).',
+                'label' => esc_html__('Text Color', 'uams_shortcodes'),
+                'attr' => 'txtcolor',
+                'type' => 'radio',
+                'options' => [
+                    'dark' => 'Dark',
+                    'light' => 'Light',
+                ],
+                'description' => 'Choose the color of the text (Dark text over light colored images or light over darker images).',
             ],
             [
-                'label'        => esc_html__('Title', 'uams_shortcodes'),
-                'attr'         => 'titletxt',
-                'type'         => 'text',
-                'description'  => 'The title heading of the box',
+                'label' => esc_html__('Title', 'uams_shortcodes'),
+                'attr' => 'titletxt',
+                'type' => 'text',
+                'description' => 'The title heading of the box',
             ],
             [
                 'label' => esc_html__('Fullsreen?', 'uams_shortcodes'),
@@ -104,57 +102,58 @@ class TextBox extends Shortcode
                 'encode' => false,
                 'meta' => [
                     'placeholder' => 'Comma-separated list',
-                ]
-            ]
+                ],
+            ],
         ];
     }
-    
+
     /**
      * return (not echo) our Alert element
      */
     public static function callback($attrs, $content = ''): string
     {
         $attrs = array_merge(self::$defaults, $attrs);
-        
 
         // Valid types only
-        if (!empty($attrs['background'])) {
-            $background = ( in_array($attrs['background'], ['none', 'red', 'gray', 'blue', 'image']) ) ? sanitize_html_class( $attrs['background'] ) : 'none';
+        if (! empty($attrs['background'])) {
+            $background = (in_array($attrs['background'], ['none', 'red', 'gray', 'blue', 'image'])) ? sanitize_html_class($attrs['background']) : 'none';
         } else {
             $background = 'none';
         }
 
-        if ( $attrs['background'] == 'image' && $attrs['imagebg'] ) {
-            $imagebg = 'style="background-image:url('. wp_kses_post( wp_get_attachment_image_url($attrs['imagebg'], 'Full') ) .');"';
-        } else { $imagebg = null; }
+        if ($attrs['background'] == 'image' && $attrs['imagebg']) {
+            $imagebg = 'style="background-image:url('.wp_kses_post(wp_get_attachment_image_url($attrs['imagebg'], 'Full')).');"';
+        } else {
+            $imagebg = null;
+        }
 
-        if ( !empty($attrs['txtcolor'])) {
-            $txtcolor = ( $attrs['txtcolor'] == 'dark' || $attrs['txtcolor'] == 'light' ) ? sanitize_html_class( $attrs['txtcolor'] ) : 'dark';
+        if (! empty($attrs['txtcolor'])) {
+            $txtcolor = ($attrs['txtcolor'] == 'dark' || $attrs['txtcolor'] == 'light') ? sanitize_html_class($attrs['txtcolor']) : 'dark';
         } else {
             $txtcolor = 'dark';
         }
 
         $titletxt = $attrs['titletxt'];
 
-        if ( $attrs['fullscreen'] == true ) {
-            $fullscreen = "uams-full-width";
+        if ($attrs['fullscreen'] == true) {
+            $fullscreen = 'uams-full-width';
         } else {
             $fullscreen = null;
         }
 
-        $textcontent = wp_kses_post( $content );
+        $textcontent = wp_kses_post($content);
 
-        $customclass = implode(" ", array_map( sanitize_html_class(...), explode( ",", $attrs['customclass'] ) ) );
+        $customclass = implode(' ', array_map(sanitize_html_class(...), explode(',', $attrs['customclass'])));
 
         return sprintf(
             '<div class="text-box-wrapper %s %s %s %s" %s><h2 class="text-box-title">%s</h2><div class="text-box-content">%s</div></div>',
             $background,
             $txtcolor,
             $fullscreen,
-            esc_attr( $customclass ),
+            esc_attr($customclass),
             $imagebg,
             $titletxt,
-            wpautop( urldecode( $textcontent ) )
-        ); 
+            wpautop(urldecode($textcontent))
+        );
     }
 }

@@ -10,11 +10,9 @@ namespace UAMS_Shortcakes\Shortcodes;
 
 /**
  * Class ProgressBar
- * @package UAMS_Shortcakes\Shortcodes
  */
 class ProgressBar extends Shortcode
 {
-
     /**
      * declare default attributes
      */
@@ -22,7 +20,7 @@ class ProgressBar extends Shortcode
         'complete' => null,
         'type' => 'progress-bar-default',
         'style' => 'default',
-        'customclass' => null
+        'customclass' => null,
     ];
 
     /**
@@ -32,8 +30,8 @@ class ProgressBar extends Shortcode
     {
         return [
             'label' => esc_html__('Progress Bar', 'uams_shortcodes'),
-            'listItemImage' => '<img src="' . esc_url( UAMS_SHORTCAKES_URL_ROOT . 'admin/images/icon-progressbar.png' ) . '" />',
-            'attrs' => self::get_attributes()
+            'listItemImage' => '<img src="'.esc_url(UAMS_SHORTCAKES_URL_ROOT.'admin/images/icon-progressbar.png').'" />',
+            'attrs' => self::get_attributes(),
         ];
     }
 
@@ -57,11 +55,11 @@ class ProgressBar extends Shortcode
                 'description' => '',
                 'encode' => false,
                 'options' => [
-                    'progress-bar-primary'  => 'Primary / UAMS Red',
-                    'progress-bar-success'  => 'Success / Green',
-                    'progress-bar-info'     => 'Info / Blue',
-                    'progress-bar-warning'  => 'Warning / Yellow',
-                    'progress-bar-danger'   => 'Danger / Orange',
+                    'progress-bar-primary' => 'Primary / UAMS Red',
+                    'progress-bar-success' => 'Success / Green',
+                    'progress-bar-info' => 'Info / Blue',
+                    'progress-bar-warning' => 'Warning / Yellow',
+                    'progress-bar-danger' => 'Danger / Orange',
                 ],
             ],
             [
@@ -85,11 +83,11 @@ class ProgressBar extends Shortcode
                 'encode' => false,
                 'meta' => [
                     'placeholder' => 'Comma-separated list',
-                ]
-            ]
+                ],
+            ],
         ];
     }
-    
+
     /**
      * return (not echo) our Progress Bar element
      */
@@ -114,23 +112,23 @@ class ProgressBar extends Shortcode
                 $style = $attrs['style'];
                 $sr = 'sr-only';
                 break;
-            
+
             default:
                 $style = null;
                 $sr = 'sr-only';
         }
 
         // Only integers. Otherwise, default to 50.
-        $complete = ( ctype_digit( $attrs['complete'] ) ) ? sanitize_text_field( $attrs['complete'] ) : '50';
+        $complete = (ctype_digit($attrs['complete'])) ? sanitize_text_field($attrs['complete']) : '50';
 
         // Valid types only.
-        if (!empty($attrs['type'])) {
-            $type = ( in_array($attrs['type'], ['progress-bar-primary', 'progress-bar-success', 'progress-bar-info', 'progress-bar-warning', 'progress-bar-danger']) ) ? sanitize_html_class( $attrs['type'] ) : 'progress-bar-primary';
+        if (! empty($attrs['type'])) {
+            $type = (in_array($attrs['type'], ['progress-bar-primary', 'progress-bar-success', 'progress-bar-info', 'progress-bar-warning', 'progress-bar-danger'])) ? sanitize_html_class($attrs['type']) : 'progress-bar-primary';
         } else {
             $type = 'progress-bar-primary';
         }
 
-        $customclass = implode(" ", array_map( sanitize_html_class(...), explode( ",", $attrs['customclass'] ) ) );
+        $customclass = implode(' ', array_map(sanitize_html_class(...), explode(',', $attrs['customclass'])));
 
         return sprintf(
             '<div class="progress %s %s">
@@ -139,12 +137,12 @@ class ProgressBar extends Shortcode
                 </div>
             </div>',
             $style,
-            esc_attr( $customclass ),
+            esc_attr($customclass),
             $attrs['type'],
             $complete,
             $complete,
             $sr,
             $complete
-        ); 
+        );
     }
 }

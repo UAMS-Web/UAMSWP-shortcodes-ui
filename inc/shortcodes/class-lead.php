@@ -3,23 +3,21 @@
 /**
  * Lead Shortcode
  *
- * Inserts a Bootstrap class='lead' paragraph 
+ * Inserts a Bootstrap class='lead' paragraph
  */
 
 namespace UAMS_Shortcakes\Shortcodes;
 
 /**
  * Class Lead
- * @package UAMS_Shortcakes\Shortcodes
  */
 class Lead extends Shortcode
 {
-
     /**
      * declare default attributes
      */
     private static array $defaults = [
-        'customclass' => null
+        'customclass' => null,
     ];
 
     /**
@@ -29,13 +27,13 @@ class Lead extends Shortcode
     {
         return [
             'label' => esc_html__('Lead Paragraph', 'uams_shortcodes'),
-            'listItemImage' => '<img src="' . esc_url( UAMS_SHORTCAKES_URL_ROOT . 'admin/images/icon-lead.png' ) . '" />',
+            'listItemImage' => '<img src="'.esc_url(UAMS_SHORTCAKES_URL_ROOT.'admin/images/icon-lead.png').'" />',
             'inner_content' => [
-                'label'        => esc_html__( 'Lead Paragraph Text', 'uams_shortcodes' ),
-                'description'  => esc_html__('', 'uams_shortcodes' ),
+                'label' => esc_html__('Lead Paragraph Text', 'uams_shortcodes'),
+                'description' => esc_html__('', 'uams_shortcodes'),
                 'encode' => true,
             ],
-            'attrs' => self::get_attributes()
+            'attrs' => self::get_attributes(),
         ];
     }
 
@@ -53,11 +51,11 @@ class Lead extends Shortcode
                 'encode' => false,
                 'meta' => [
                     'placeholder' => 'Comma-separated list',
-                ]
-            ]
+                ],
+            ],
         ];
     }
-    
+
     /**
      * return (not echo) our Lead element
      */
@@ -67,12 +65,12 @@ class Lead extends Shortcode
             ? array_merge(self::$defaults, $attrs)
             : self::$defaults;
 
-        $customclass = implode(" ", array_map( sanitize_html_class(...), explode( ",", $attrs['customclass'] ) ) );
+        $customclass = implode(' ', array_map(sanitize_html_class(...), explode(',', $attrs['customclass'])));
 
         return sprintf(
             '<p class="lead %s">%s</p>',
-            esc_attr( $customclass ),
+            esc_attr($customclass),
             $content
-        ); 
+        );
     }
 }

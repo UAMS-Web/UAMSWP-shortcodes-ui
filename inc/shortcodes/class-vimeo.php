@@ -2,62 +2,65 @@
 
 namespace UAMS_Shortcakes\Shortcodes;
 
-class Vimeo extends Shortcode {
+class Vimeo extends Shortcode
+{
+    public static function get_shortcode_ui_args(): array
+    {
+        return [
+            'label' => esc_html__('Vimeo', 'uams_shortcodes'),
+            'listItemImage' => '<img src="'.esc_url(UAMS_SHORTCAKES_URL_ROOT.'assets/images/svg/icon-vimeo.svg').'" />',
+            'attrs' => [
+                [
+                    'label' => esc_html__('URL', 'uams_shortcodes'),
+                    'attr' => 'url',
+                    'type' => 'text',
+                    'description' => esc_html__('Full Vimeo URL', 'uams_shortcodes'),
+                ],
+            ],
+        ];
+    }
 
-	public static function get_shortcode_ui_args(): array {
-		return [
-			'label'          => esc_html__( 'Vimeo', 'uams_shortcodes' ),
-			'listItemImage'  => '<img src="' . esc_url( UAMS_SHORTCAKES_URL_ROOT . 'assets/images/svg/icon-vimeo.svg' ) . '" />',
-			'attrs'          => [
-				[
-					'label'        => esc_html__( 'URL', 'uams_shortcodes' ),
-					'attr'         => 'url',
-					'type'         => 'text',
-					'description'  => esc_html__( 'Full Vimeo URL', 'uams_shortcodes' ),
-				],
-			],
-		];
-	}
+    public static function reversal($content)
+    {
+        $iframes = self::parse_iframes($content);
+        if ($iframes) {
+            $replacements = [];
+            foreach ($iframes as $iframe) {
+                if (self::parse_url($iframe->attrs['src'], PHP_URL_HOST) !== 'player.vimeo.com') {
+                    continue;
+                }
 
-	public static function reversal( $content ) {
-		$iframes = self::parse_iframes( $content );
-		if ( $iframes ) {
-			$replacements = [];
-			foreach ( $iframes as $iframe ) {
-				if ( 'player.vimeo.com' !== self::parse_url( $iframe->attrs['src'], PHP_URL_HOST ) ) {
-					continue;
-				}
-                
-				// Embed ID is the second part of the URL
-				$parts = explode( '/', trim( self::parse_url( $iframe->attrs['src'], PHP_URL_PATH ), '/' ) );
-				if ( empty( $parts[1] ) ) {
-					continue;
-				}
-                
-				$embed_id = $parts[1];
-				$replacements[ $iframe->original ] = '[' . self::get_shortcode_tag() . ' url="' . esc_url_raw( 'https://vimeo.com/' . $embed_id ) . '"]';
-			}
-            
-			$content = self::make_replacements_to_content( $content, $replacements );
-		}
+                // Embed ID is the second part of the URL
+                $parts = explode('/', trim(self::parse_url($iframe->attrs['src'], PHP_URL_PATH), '/'));
+                if (empty($parts[1])) {
+                    continue;
+                }
 
-		return $content;
-	}
+                $embed_id = $parts[1];
+                $replacements[$iframe->original] = '['.self::get_shortcode_tag().' url="'.esc_url_raw('https://vimeo.com/'.$embed_id).'"]';
+            }
 
-	public static function callback( $attrs, $content = '' ): string {
+            $content = self::make_replacements_to_content($content, $replacements);
+        }
 
-		$valid_hosts = [ 'www.vimeo.com', 'vimeo.com' ];
-		$host = self::parse_url( $attrs['url'], PHP_URL_HOST );
-		if ( empty( $attrs['url'] ) || ! in_array( $host, $valid_hosts, true ) ) {
-			return '';
-		}
+        return $content;
+    }
 
-		// Video ID is always the first part of the path
-		$path = self::parse_url( $attrs['url'], PHP_URL_PATH );
-		$parts = explode( '/', trim( $path, '/' ) );
-		$video_id = $parts[0];
-		$embed_url = 'https://player.vimeo.com/video/' . $video_id;
-		return sprintf( '<div class="nc-video-player" role="region" aria-label="video" tabindex=-1><div class="tube-wrapper"><iframe class="uams-shortcodes-responsive" width="500" height="281" src="%s" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div></div>', esc_url( $embed_url ) );
-	}
+    public static function callback($attrs, $content = ''): string
+    {
 
+        $valid_hosts = ['www.vimeo.com', 'vimeo.com'];
+        $host = self::parse_url($attrs['url'], PHP_URL_HOST);
+        if (empty($attrs['url']) || ! in_array($host, $valid_hosts, true)) {
+            return '';
+        }
+
+        // Video ID is always the first part of the path
+        $path = self::parse_url($attrs['url'], PHP_URL_PATH);
+        $parts = explode('/', trim($path, '/'));
+        $video_id = $parts[0];
+        $embed_url = 'https://player.vimeo.com/video/'.$video_id;
+
+        return sprintf('<div class="nc-video-player" role="region" aria-label="video" tabindex=-1><div class="tube-wrapper"><iframe class="uams-shortcodes-responsive" width="500" height="281" src="%s" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div></div>', esc_url($embed_url));
+    }
 }

@@ -11,11 +11,9 @@ namespace UAMS_Shortcakes\Shortcodes;
 
 /**
  * Class Alert
- * @package UAMS_Shortcakes\Shortcodes
  */
 class IconBox extends Shortcode
 {
-
     /**
      * declare default attributes
      */
@@ -25,7 +23,7 @@ class IconBox extends Shortcode
         'heading' => null,
         'headingicon' => null,
         'url' => null,
-        'customclass' => null
+        'customclass' => null,
     ];
 
     /**
@@ -37,11 +35,11 @@ class IconBox extends Shortcode
             'label' => esc_html__('Icon Box', 'uams_shortcodes'),
             'listItemImage' => 'dashicons-info',
             'inner_content' => [
-                'label'        => esc_html__( 'Icon Box Body', 'uams_shortcodes' ),
-                'description'  => esc_html__( 'Main content of your icon box. Text and basic HTML tags can be added here.', 'uams_shortcodes' ),
+                'label' => esc_html__('Icon Box Body', 'uams_shortcodes'),
+                'description' => esc_html__('Main content of your icon box. Text and basic HTML tags can be added here.', 'uams_shortcodes'),
                 'encode' => true,
             ],
-            'attrs' => self::get_attributes()
+            'attrs' => self::get_attributes(),
         ];
     }
 
@@ -58,9 +56,9 @@ class IconBox extends Shortcode
                 'description' => 'See examples of <a href="https://design.oit.ncsu.edu/docs/ncsu-shortcodes/alerts/" target="_blank">each type of alert</a> on the <a href="https://design.oit.ncsu.edu/docs/" target="_blank">OIT Design documentation site</a>.',
                 'encode' => false,
                 'options' => [
-                    'default'   => 'Default',
-                    'boxed'     => 'Boxed',
-                    'framed'    => 'Framed',
+                    'default' => 'Default',
+                    'boxed' => 'Boxed',
+                    'framed' => 'Framed',
                 ],
             ],
             [
@@ -70,10 +68,10 @@ class IconBox extends Shortcode
                 'description' => 'See examples of <a href="https://design.oit.ncsu.edu/docs/ncsu-shortcodes/alerts/" target="_blank">each type of alert</a> on the <a href="https://design.oit.ncsu.edu/docs/" target="_blank">OIT Design documentation site</a>.',
                 'encode' => false,
                 'options' => [
-                    'none'      => 'Default',
-                    'red'       => 'Red',
-                    'gray'      => 'Gray',
-                    'blue'      => 'Blue'
+                    'none' => 'Default',
+                    'red' => 'Red',
+                    'gray' => 'Gray',
+                    'blue' => 'Blue',
                 ],
             ],
             [
@@ -98,8 +96,8 @@ class IconBox extends Shortcode
                 'description' => 'Optional. Enter a URL to make your icon and title a clickable hyperlink.',
                 'encode' => false,
                 'meta' => [
-                    'placeholder' => 'http://www.uams.edu/'
-                ]
+                    'placeholder' => 'http://www.uams.edu/',
+                ],
             ],
             [
                 'label' => esc_html__('Custom CSS classes', 'uams_shortcodes'),
@@ -109,11 +107,11 @@ class IconBox extends Shortcode
                 'encode' => false,
                 'meta' => [
                     'placeholder' => 'Comma-separated list',
-                ]
-            ]
+                ],
+            ],
         ];
     }
-    
+
     /**
      * return (not echo) our Alert element
      */
@@ -124,67 +122,66 @@ class IconBox extends Shortcode
             : self::$defaults;
 
         // Valid types only
-        if (!empty($attrs['type'])) {
-            $type = ( in_array($attrs['type'], ['default', 'boxed', 'framed']) ) ? sanitize_html_class( $attrs['type'] ) : 'defualt';
+        if (! empty($attrs['type'])) {
+            $type = (in_array($attrs['type'], ['default', 'boxed', 'framed'])) ? sanitize_html_class($attrs['type']) : 'defualt';
         } else {
             $type = 'default';
         }
 
         // Valid types only
-        if (!empty($attrs['bgcolor'])) {
-            $bg = ( in_array($attrs['bgcolor'], ['none', 'red', 'gray', 'blue']) ) ? sanitize_html_class( $attrs['bgcolor'] ) : 'none';
+        if (! empty($attrs['bgcolor'])) {
+            $bg = (in_array($attrs['bgcolor'], ['none', 'red', 'gray', 'blue'])) ? sanitize_html_class($attrs['bgcolor']) : 'none';
         } else {
             $bg = 'none';
         }
 
         $ignored_icons = self::get_ignored_icon_names();
 
-        if (!empty($attrs['headingicon']) && !in_array($attrs['headingicon'], $ignored_icons)) {
-            //$icon_type = explode('-', $attrs['headingicon'], 2)[0];
-            //$icon_type = explode(' ', $icon_type, 2)[0]; // Changed a naming convention at one point. This extra step means old usages don't break.
+        if (! empty($attrs['headingicon']) && ! in_array($attrs['headingicon'], $ignored_icons)) {
+            // $icon_type = explode('-', $attrs['headingicon'], 2)[0];
+            // $icon_type = explode(' ', $icon_type, 2)[0]; // Changed a naming convention at one point. This extra step means old usages don't break.
 
             $icon_name = $attrs['headingicon'];
-            //$icon_name = explode('-', $attrs['headingicon'], 2)[1]; //Original for SVG
+            // $icon_name = explode('-', $attrs['headingicon'], 2)[1]; //Original for SVG
 
-            //$icon = '<span class="heading-icon" aria-hidden="true">'. self::uams_shortcodes_get_contents( esc_url(UAMS_SHORTCAKES_PATH . 'assets/images/'. $icon_type .'/'  . $icon_name . '.svg' ) ) .'</span>'; // Original SVG
+            // $icon = '<span class="heading-icon" aria-hidden="true">'. self::uams_shortcodes_get_contents( esc_url(UAMS_SHORTCAKES_PATH . 'assets/images/'. $icon_type .'/'  . $icon_name . '.svg' ) ) .'</span>'; // Original SVG
 
-            $icon = '<span class="'. $icon_name .'" aria-hidden="true"></span>';
+            $icon = '<span class="'.$icon_name.'" aria-hidden="true"></span>';
 
         } else {
             $icon = null;
         }
 
-        if (!empty($attrs['heading'])) {
-            $heading = '<h3 class="icon-box-title">' . $attrs['heading'] . '</h3>';
+        if (! empty($attrs['heading'])) {
+            $heading = '<h3 class="icon-box-title">'.$attrs['heading'].'</h3>';
         } else {
             $heading = null;
         }
 
-        if (!empty($attrs['url'])) {
-            $urlopen = '<a href="' . esc_url( $attrs['url'] ) . '">';
+        if (! empty($attrs['url'])) {
+            $urlopen = '<a href="'.esc_url($attrs['url']).'">';
             $urlclose = '</a>';
         } else {
             $urlopen = '<span class="icon-wrap">';
             $urlclose = '</span>';
         }
 
+        $txtcontent = wp_kses_post($content);
 
-        $txtcontent = wp_kses_post( $content );
-
-        $customclass = implode(" ", array_map( sanitize_html_class(...), explode( ",", $attrs['customclass'] ) ) );
+        $customclass = implode(' ', array_map(sanitize_html_class(...), explode(',', $attrs['customclass'])));
 
         return sprintf(
             '<div class="icon-box-wrapper %s %s %s"><div class="icon-box-icon">%s%s%s</div><div class="icon-box-content">%s%s%s<div class="icon-box-description">%s</div></div></div>',
             $type,
             $bg,
-            esc_attr( $customclass ),
+            esc_attr($customclass),
             $urlopen,
             $icon,
             $urlclose,
             $urlopen,
             $heading,
             $urlclose,
-            wpautop( urldecode( $txtcontent ) )
-        ); 
+            wpautop(urldecode($txtcontent))
+        );
     }
 }

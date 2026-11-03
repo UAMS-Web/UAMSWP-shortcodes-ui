@@ -3,18 +3,16 @@
 /**
  * Panel Shortcode
  *
- * Inserts a Bootstrap panel, either collapsible or not 
+ * Inserts a Bootstrap panel, either collapsible or not
  */
 
 namespace UAMS_Shortcakes\Shortcodes;
 
 /**
  * Class Panel
- * @package UAMS_Shortcakes\Shortcodes
  */
 class Panel extends Shortcode
 {
-
     /**
      * declare default attributes
      */
@@ -24,7 +22,7 @@ class Panel extends Shortcode
         'type' => 'panel-default',
         'state' => 'static',
         'style' => 'bootstrap',
-        'customclass' => null
+        'customclass' => null,
     ];
 
     /**
@@ -34,13 +32,13 @@ class Panel extends Shortcode
     {
         return [
             'label' => esc_html__('Collapsible Panel', 'uams_shortcodes'),
-            'listItemImage' => '<img src="' . esc_url( UAMS_SHORTCAKES_URL_ROOT . 'admin/images/icon-panel.png' ) . '" />',
+            'listItemImage' => '<img src="'.esc_url(UAMS_SHORTCAKES_URL_ROOT.'admin/images/icon-panel.png').'" />',
             'inner_content' => [
-                'label'        => esc_html__( 'Panel Body', 'uams_shortcodes' ),
-                'description'  => esc_html__('', 'uams_shortcodes' ),
+                'label' => esc_html__('Panel Body', 'uams_shortcodes'),
+                'description' => esc_html__('', 'uams_shortcodes'),
                 'encode' => true,
             ],
-            'attrs' => self::get_attributes()
+            'attrs' => self::get_attributes(),
         ];
     }
 
@@ -93,7 +91,7 @@ class Panel extends Shortcode
                 'options' => [
                     'static' => 'Static',
                     'open' => 'Collapsible and open when page loads',
-                    'closed' => 'Collapsible and closed when page loads'
+                    'closed' => 'Collapsible and closed when page loads',
                 ],
             ],
             [
@@ -104,7 +102,7 @@ class Panel extends Shortcode
                 'options' => [
                     'boostrap' => 'Classic Bootstrap',
                     'noborder' => 'Classic Bootstrap, no border',
-                    'simple' => 'Simple'
+                    'simple' => 'Simple',
                 ],
             ],
             [
@@ -115,11 +113,11 @@ class Panel extends Shortcode
                 'encode' => false,
                 'meta' => [
                     'placeholder' => 'Comma-separated list',
-                ]
-            ]
+                ],
+            ],
         ];
     }
-    
+
     /**
      * return (not echo) our Panel element
      */
@@ -128,36 +126,36 @@ class Panel extends Shortcode
         $attrs = array_merge(self::$defaults, $attrs);
 
         // Only headings or p. Otherwise, default to p.
-        if (!empty($attrs['headingtype'])) {
-            $headingtype = ( in_array($attrs['headingtype'], ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p']) ) ? sanitize_html_class( $attrs['headingtype'] ) : 'p';
+        if (! empty($attrs['headingtype'])) {
+            $headingtype = (in_array($attrs['headingtype'], ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'])) ? sanitize_html_class($attrs['headingtype']) : 'p';
         } else {
             $headingtype = 'p';
         }
 
-        if (!empty($attrs['type'])) {
-            $type = ( in_array($attrs['type'], ['panel-default', 'panel-primary', 'panel-success', 'panel-info', 'panel-warning', 'panel-danger']) ) ? sanitize_html_class( $attrs['type'] ) : 'panel-default';
+        if (! empty($attrs['type'])) {
+            $type = (in_array($attrs['type'], ['panel-default', 'panel-primary', 'panel-success', 'panel-info', 'panel-warning', 'panel-danger'])) ? sanitize_html_class($attrs['type']) : 'panel-default';
         } else {
             $type = 'panel-default';
         }
 
-        if ( $attrs['style'] == 'noborder' ) {
+        if ($attrs['style'] == 'noborder') {
             $style = 'noborder';
-        } elseif ( $attrs['style'] == 'simple' ) {
+        } elseif ($attrs['style'] == 'simple') {
             $style = 'simple';
         } else {
             $style = null;
         }
 
-        if ( !empty($attrs['heading']) ) {
-            $id = self::text_to_css_friendly( $attrs['heading'] );
-            $id = $id .'-'. random_int(0, mt_getrandmax()); // Add a random integer to the ID, in case users have multiple panels with the same heading. They shouldn't, but if they do collapsible behavior gets weird.
+        if (! empty($attrs['heading'])) {
+            $id = self::text_to_css_friendly($attrs['heading']);
+            $id = $id.'-'.random_int(0, mt_getrandmax()); // Add a random integer to the ID, in case users have multiple panels with the same heading. They shouldn't, but if they do collapsible behavior gets weird.
         } else {
             $id = null;
         }
 
-        if ( $attrs['state'] != 'static' ) {
+        if ($attrs['state'] != 'static') {
 
-            if ( $attrs['state'] == 'closed' ) {
+            if ($attrs['state'] == 'closed') {
                 $collapsed = 'collapsed';
             } else {
                 $collapsed = null;
@@ -168,26 +166,26 @@ class Panel extends Shortcode
                 $id,
                 $collapsed,
                 $attrs['heading'],
-                self::uams_shortcodes_get_contents( esc_url(UAMS_SHORTCAKES_PATH . 'assets/images/glyphicon/minus.svg' ) ),
-                self::uams_shortcodes_get_contents( esc_url(UAMS_SHORTCAKES_PATH . 'assets/images/glyphicon/plus-no-bkgrnd.svg' ) )
-                );
+                self::uams_shortcodes_get_contents(esc_url(UAMS_SHORTCAKES_PATH.'assets/images/glyphicon/minus.svg')),
+                self::uams_shortcodes_get_contents(esc_url(UAMS_SHORTCAKES_PATH.'assets/images/glyphicon/plus-no-bkgrnd.svg'))
+            );
         } else {
             $id = null;
             $heading = sprintf(
                 '<span>%s</span>',
-                sanitize_text_field( $attrs['heading'] )
-                );
+                sanitize_text_field($attrs['heading'])
+            );
         }
 
-        if ( $attrs['state'] != 'closed' ) {
+        if ($attrs['state'] != 'closed') {
             $in = 'in';
         } else {
             $in = null;
         }
 
-        $panelcontent = wp_kses_post( $content );
+        $panelcontent = wp_kses_post($content);
 
-        $customclass = implode(" ", array_map( sanitize_html_class(...), explode( ",", $attrs['customclass'] ) ) );
+        $customclass = implode(' ', array_map(sanitize_html_class(...), explode(',', $attrs['customclass'])));
 
         return sprintf(
             '<div class="panel %s %s %s">
@@ -200,15 +198,15 @@ class Panel extends Shortcode
                     </div>
                 </div>
             </div>',
-            esc_attr( $type ),
-            esc_attr( $style ),
-            esc_attr( $customclass ),
-            esc_html( $headingtype ),
+            esc_attr($type),
+            esc_attr($style),
+            esc_attr($customclass),
+            esc_html($headingtype),
             $heading,
-            esc_html( $headingtype ),
+            esc_html($headingtype),
             $id,
             $in,
-            wpautop( urldecode( $panelcontent ) )
-        ); 
+            wpautop(urldecode($panelcontent))
+        );
     }
 }

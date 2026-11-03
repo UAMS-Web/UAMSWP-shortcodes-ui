@@ -9,8 +9,7 @@ name: CI
 #   every shipped file on 8.2.
 # - Dropped from the template: `mutate-ignore` and `mutate` (no mutation testing here) and the
 #   pest job's skip-baseline checks (no baseline file).
-# - Not yet here: `npm test`. The script is a placeholder that exits 1 until the coverage
-#   ticket (UAMS-Web/UAMSWP-shortcodes-ui#30) makes it run real tests.
+# - The `js` job runs `npm test` (Node's built-in test runner) from a clean `npm ci`.
 # - The download-archive check is its own workflow (download-archive.yml, added by
 #   UAMS-Web/UAMSWP-shortcodes-ui#25), so it is not a job in this file and not in `CI`'s
 #   `needs:`. The aggregate-needs check reads jobs within this file only.
@@ -117,6 +116,23 @@ jobs:
           test -n "$files"
           printf '%s\n' "$files" | xargs -n1 php -l
 
+  js:
+    name: JavaScript and build tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      # Runs the listener and embed tests and builds the Sass and scripts in a scratch copy.
+      - run: npm test
+
   pint:
     name: Pint
     needs: [composer-validate, synced-files]
@@ -161,7 +177,7 @@ jobs:
   # in the file; the aggregate-needs job fails the pull request when one is missing.
   ci:
     name: CI
-    needs: [composer-validate, synced-files, no-emoji, aggregate-needs, lint-floor, pint, rector, phpstan, pest]
+    needs: [composer-validate, synced-files, no-emoji, aggregate-needs, lint-floor, js, pint, rector, phpstan, pest]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5

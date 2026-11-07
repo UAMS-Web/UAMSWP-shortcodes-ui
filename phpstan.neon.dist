@@ -153,10 +153,6 @@ parameters:
         # Found by the first level 0 run, and pinned by identifier and path. Fixing either
         # changes behavior, which this change does not, so each is removed by the ticket
         # named beside it.
-        # The callback's return value is discarded by WordPress (UAMS-Web/UAMSWP-shortcodes-ui#45).
-        -
-            identifier: return.void
-            path: inc/class-uams-shortcodes.php
         # Hooked by name, so a theme can remove it; wrapping it in a closure would break that
         # (UAMS-Web/UAMSWP-shortcodes-ui#45).
         -

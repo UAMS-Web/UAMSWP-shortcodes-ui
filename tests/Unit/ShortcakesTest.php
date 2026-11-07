@@ -124,6 +124,29 @@ it('prints the admin dependencies only in the admin', function (): void {
             .'<script type="text/javascript" src="'.UAMS_SHORTCAKES_URL_ROOT.'assets/js/shortcake-bakery.js"></script>');
 });
 
+it('echoes the admin dependencies after a Shortcake preview renders', function (): void {
+    stubWordPress();
+    when('includes_url')->alias(fn ($path): string => 'https://example.test/wp-includes/'.$path);
+    when('is_admin')->justReturn(true);
+
+    $callbacks = [];
+    when('add_action')->alias(function (string $hook, callable $callback) use (&$callbacks): void {
+        $callbacks[$hook][] = $callback;
+    });
+
+    // get_instance() is a singleton another test creates first, so register this instance's actions directly.
+    (new ReflectionMethod(UAMS_Shortcakes::class, 'setup_actions'))->invoke($this->shortcakes);
+    expect($callbacks['shortcode_ui_after_do_shortcode'] ?? [])->toHaveCount(1);
+
+    // Shortcake keeps what a callback echoes and drops what it returns.
+    ob_start();
+    $returned = $callbacks['shortcode_ui_after_do_shortcode'][0]('[button]');
+    $printed = ob_get_clean();
+
+    expect($returned)->toBeNull()
+        ->and($printed)->toBe(UAMS_Shortcakes::get_shortcake_admin_dependencies());
+});
+
 it('enqueues the front-end style and script', function (): void {
     Functions\expect('wp_enqueue_script')->once()->with('shortcodes_scripts');
     Functions\expect('wp_enqueue_style')->once()->with('shortcodes_styles');

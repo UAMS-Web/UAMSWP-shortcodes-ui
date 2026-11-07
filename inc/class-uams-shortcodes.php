@@ -112,7 +112,7 @@ class UAMS_Shortcakes
     {
         spl_autoload_register($this->autoload_shortcode_classes(...));
         add_action('init', $this->action_init_register_shortcodes(...));
-        add_action('shortcode_ui_after_do_shortcode', fn ($shortcode): ?string => $this::get_shortcake_admin_dependencies());
+        add_action('shortcode_ui_after_do_shortcode', $this->action_print_admin_dependencies(...));
 
         add_action('shortcode_ui_loaded_editor', $this->action_admin_enqueue_scripts(...));
         // add_action( 'media_buttons', array( $this, 'action_media_buttons' ) ); // Button for Embed Media
@@ -206,6 +206,15 @@ class UAMS_Shortcakes
         $r .= '<script type="text/javascript" src="'.esc_url(UAMS_SHORTCAKES_URL_ROOT.'assets/js/shortcake-bakery.js').'"></script>';
 
         return $r;
+    }
+
+    /**
+     * Print the admin dependencies after a shortcode renders in a Shortcake preview.
+     * Shortcake captures what this action echoes and discards what a callback returns.
+     */
+    public function action_print_admin_dependencies(): void
+    {
+        echo self::get_shortcake_admin_dependencies(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- both tags are built with esc_url().
     }
 
     public function action_enqueue_scripts(): void

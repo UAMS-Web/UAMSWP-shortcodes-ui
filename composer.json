@@ -24,19 +24,23 @@
         }
     },
     "scripts": {
-        "test": "pest",
+        "test": "@test:unit",
+        "test:unit": "pest",
         "stan": "phpstan analyse --no-progress --memory-limit=2G",
         "refactor": "rector",
         "test:refactor": "rector --dry-run",
         "pint": "pint",
-        "test:pint": "pint --test"
+        "test:pint": "pint --test",
+        "lint:floor": "@php scripts/lint-floor.php"
     },
     "scripts-descriptions": {
-        "test": "Run the Pest suite. WordPress functions are mocked with Brain Monkey, so no WordPress install or database is needed.",
+        "test": "Run the unit suite (the same as test:unit).",
+        "test:unit": "Run the Pest suite. WordPress functions are mocked with Brain Monkey, so no WordPress install or database is needed.",
         "stan": "Run PHPStan at the level phpstan.neon.dist sets.",
         "refactor": "Apply Rector.",
         "test:refactor": "Preview Rector without changing files.",
         "pint": "Format with Pint.",
-        "test:pint": "Check formatting with Pint without changing files."
+        "test:pint": "Check formatting with Pint without changing files.",
+        "lint:floor": "Parse every file the download ships with the PHP that runs the script; run it under PHP 8.2 with LINT_PHP set to that binary."
     }
 }

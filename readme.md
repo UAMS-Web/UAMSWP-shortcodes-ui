@@ -41,3 +41,16 @@ It may be fruitful at some point to also minify/uglify.
 # lastly, execute the task runner
 gulp
 ```
+
+## Continuous integration
+
+Pull requests and pushes to `master` run `.github/workflows/ci.yml`, which calls the shared chain in [UAMS-Web/uams-ci-workflows](https://github.com/UAMS-Web/uams-ci-workflows) (Pint, Rector, PHPStan, Pest, a PHP 8.2 syntax check of the files the download ships, and the download archive check). The one check a ruleset needs from it is `CI`. To run the same checks locally:
+
+```
+composer test:pint
+composer test:refactor
+composer stan
+composer test:unit
+LINT_PHP=/path/to/php8.2 composer lint:floor
+node .claude/skills/download-archive-check/check-download-archive.mjs
+```

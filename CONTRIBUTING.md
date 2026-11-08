@@ -39,3 +39,14 @@ The [`tests` skill](.claude/skills/tests/SKILL.md#pinning-legacy-behavior-before
 
 Coding agents follow the same path. Their instructions are in [`AGENTS.md`](AGENTS.md) and the shared skills and rules under `.claude/`, which are synced from `UAMS-Web/uams-claude-skills`.
 <!-- uams-claude-skills:end -->
+
+## Running the tests
+
+The PHP tests use PHPUnit with Brain Monkey, which mocks WordPress functions, so no WordPress install or database is needed.
+
+```sh
+composer install
+composer test
+```
+
+`composer.json` lists development dependencies only.

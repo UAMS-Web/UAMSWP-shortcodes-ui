@@ -1,0 +1,21 @@
+{
+    "name": "uams-web/uamswp-shortcodes-ui",
+    "description": "Useful shortcodes for UAMS websites, which can be added using the Shortcake shortcode UI.",
+    "type": "wordpress-plugin",
+    "require-dev": {
+        "brain/monkey": "^2.7",
+        "phpunit/phpunit": "^13.0"
+    },
+    "config": {
+        "platform": {
+            "php": "8.4.1"
+        },
+        "sort-packages": true
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "scripts-descriptions": {
+        "test": "Run the PHPUnit suite. WordPress functions are mocked with Brain Monkey, so no WordPress install or database is needed."
+    }
+}

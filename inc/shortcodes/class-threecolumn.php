@@ -127,9 +127,10 @@ class ThreeColumn extends Shortcode
                 $col3 = 'col-lg-4 col-md-4 col-sm-4 col-xs-12';
         }
 
-        $contentcol1 = wp_kses_post($attrs['col1']);
-        $contentcol2 = wp_kses_post($attrs['col2']);
-        $contentcol3 = wp_kses_post($attrs['col3']);
+        // Decode before filtering, so an encoded tag cannot slip past wp_kses_post().
+        $contentcol1 = wp_kses_post(urldecode($attrs['col1']));
+        $contentcol2 = wp_kses_post(urldecode($attrs['col2']));
+        $contentcol3 = wp_kses_post(urldecode($attrs['col3']));
 
         $customclass = implode(' ', array_map(sanitize_html_class(...), explode(',', $attrs['customclass'])));
 
@@ -149,11 +150,11 @@ class ThreeColumn extends Shortcode
             </div>',
             esc_attr($customclass),
             $col1,
-            wpautop(do_shortcode(urldecode($contentcol1))),
+            wpautop(do_shortcode($contentcol1)),
             $col2,
-            wpautop(do_shortcode(urldecode($contentcol2))),
+            wpautop(do_shortcode($contentcol2)),
             $col3,
-            wpautop(do_shortcode(urldecode($contentcol3)))
+            wpautop(do_shortcode($contentcol3))
         );
     }
 }

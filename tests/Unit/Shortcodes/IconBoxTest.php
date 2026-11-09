@@ -11,6 +11,7 @@ declare(strict_types=1);
 use UAMS_Shortcakes\Shortcodes\IconBox;
 
 use function Brain\Monkey\Functions\stubs;
+use function Brain\Monkey\Functions\when;
 
 beforeEach(function (): void {
     stubWordPress();
@@ -46,10 +47,17 @@ it('keeps each allowed background and falls back to none', function (): void {
         ->and(IconBox::callback(['type' => 'default', 'bgcolor' => '', 'customclass' => ''], 'x'))->toContain('default none ');
 });
 
-it('renders the heading icon span unescaped', function (): void {
+it('renders the heading icon span', function (): void {
     $html = IconBox::callback(['type' => 'default', 'headingicon' => 'dashicons-star', 'customclass' => ''], 'x');
 
     expect($html)->toContain('<div class="icon-box-icon"><span class="icon-wrap"><span class="dashicons-star" aria-hidden="true"></span></span></div>');
+});
+
+it('escapes the heading icon class', function (): void {
+    $html = IconBox::callback(['type' => 'default', 'headingicon' => 'dashicons-star" onclick="x', 'customclass' => ''], 'x');
+
+    expect($html)->toContain('<span class="dashicons-star&quot; onclick=&quot;x" aria-hidden="true">')
+        ->not->toContain('dashicons-star" onclick');
 });
 
 it('skips a heading icon whose name is on the ignored list', function (string $ignored): void {
@@ -57,9 +65,17 @@ it('skips a heading icon whose name is on the ignored list', function (string $i
         ->not->toContain('aria-hidden');
 })->with(['noicon', 'commonicons', 'uamsicons', 'misc', 'allicons', 'uamsglyph', 'wpdash', 'numbers']);
 
-it('renders the heading unescaped inside an h3', function (): void {
+it('renders the heading inside an h3', function (): void {
     expect(IconBox::callback(['type' => 'default', 'heading' => 'A <em>Head</em>', 'customclass' => ''], 'x'))
         ->toContain('<span class="icon-wrap"><h3 class="icon-box-title">A <em>Head</em></h3></span>');
+});
+
+it('passes the heading through wp_kses_post', function (): void {
+    when('wp_kses_post')->alias(fn ($content): string => strip_tags((string) $content));
+
+    expect(IconBox::callback(['type' => 'default', 'heading' => 'A <em>Head</em><script>x</script>', 'customclass' => ''], 'x'))
+        ->toContain('<h3 class="icon-box-title">A Headx</h3>')
+        ->not->toContain('<script>');
 });
 
 it('wraps the icon and the heading in links when a url is set', function (): void {

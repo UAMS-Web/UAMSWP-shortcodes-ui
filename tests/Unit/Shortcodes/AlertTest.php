@@ -40,6 +40,33 @@ it('keeps each allowed type', function (string $type): void {
     expect(Alert::callback(['type' => $type, 'customclass' => ''], 'x'))->toContain('alert-'.$type);
 })->with(['success', 'info', 'help', 'warning', 'danger']);
 
+it('inlines the shipped SVG for each type', function (string $type, string $file): void {
+    $svg = file_get_contents(UAMS_SHORTCAKES_PATH.'assets/images/'.$file);
+
+    expect($svg)->toStartWith('<')
+        ->and(Alert::callback(['type' => $type, 'customclass' => ''], 'x'))
+        ->toContain('<div class="alert-icon"><span aria-hidden="true">'.$svg.'</span></div>');
+})->with([
+    ['success', 'glyphicon/checkbox.svg'],
+    ['info', 'dashicons/info.svg'],
+    ['help', 'glyphicon/question.svg'],
+    ['warning', 'dashicons/warning.svg'],
+    ['danger', 'glyphicon/x.svg'],
+]);
+
+it('ignores an icon attribute, so the SVG path comes from the type alone', function (string $icon): void {
+    $svg = file_get_contents(UAMS_SHORTCAKES_PATH.'assets/images/dashicons/info.svg');
+    $html = Alert::callback(['icon' => $icon, 'customclass' => ''], 'x');
+
+    expect($html)->toContain('<span aria-hidden="true">'.$svg.'</span>')
+        ->not->toContain('<?php');
+})->with([
+    'glyphicon-../../../../composer.json',
+    'dashicons-../../../uamswp-shortcodes.php',
+    "glyphicon-x\0",
+    'svg-..%2F..%2Fcomposer.json',
+]);
+
 it('adds a dismiss button when dismiss is set', function (): void {
     expect(Alert::callback(['dismiss' => true, 'customclass' => ''], 'x'))
         ->toContain('<button type="button" class="close" data-dismiss="alert"');

@@ -154,17 +154,20 @@ class BaseButton extends Shortcode
         }
 
         if (! empty($attrs['customclass'])) {
-            $customclasses = explode(',', $attrs['customclass']);
+            $customclasses = array_map(sanitize_html_class(...), explode(',', $attrs['customclass']));
         }
+
+        // Only a browsing-context name. Otherwise, leave the target empty.
+        $target = in_array($attrs['target'], ['_blank', '_self', '_top', '_parent'], true) ? $attrs['target'] : '';
 
         return sprintf(
             '<a href="%s" title="%s" target="%s"><button type="button" class="%s %s">%s</button></a>',
             esc_url($attrs['url']),
-            $attrs['title'],
-            $attrs['target'],
-            implode(' ', $customclasses),
-            implode(' ', $button_classes),
-            $attrs['btncontent']
+            esc_attr($attrs['title']),
+            $target,
+            esc_attr(implode(' ', $customclasses)),
+            esc_attr(implode(' ', $button_classes)),
+            wp_kses_post($attrs['btncontent'])
         );
     }
 }

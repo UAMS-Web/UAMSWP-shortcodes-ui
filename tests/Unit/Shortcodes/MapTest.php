@@ -52,12 +52,19 @@ it('falls back to the default size when width or height is explicitly null', fun
         ->toContain('<iframe width="100%" height="480px" ');
 });
 
-it('prints width and height without escaping them', function (): void {
-    expect(Map::callback(['building' => '135', 'width' => '1" onload="x']))->toContain('<iframe width="1" onload="x" ');
-});
+it('accepts a number with or without a CSS unit as the width and height', function (string $length): void {
+    expect(Map::callback(['building' => '135', 'width' => $length, 'height' => $length]))
+        ->toContain('<iframe width="'.$length.'" height="'.$length.'" ');
+})->with(['320', '50%', '300px', '20em', '1.5rem', '100vw', '80vh']);
 
-it('adds each comma-separated custom class without sanitizing it', function (): void {
-    expect(Map::callback(['building' => '135', 'customclass' => 'one,t wo!']))->toContain('<div class="uams-campus-map one t wo!">');
+it('falls back to the default size for a width or height that is not a CSS length', function (string $length): void {
+    expect(Map::callback(['building' => '135', 'width' => $length, 'height' => $length]))
+        ->toContain('<iframe width="100%" height="480px" ')
+        ->not->toContain('onload');
+})->with(['1" onload="x', 'auto', '10 px', '-5px', '', 'calc(100% - 1px)']);
+
+it('sanitizes each comma-separated custom class', function (): void {
+    expect(Map::callback(['building' => '135', 'customclass' => 'one,t wo!']))->toContain('<div class="uams-campus-map one two">');
 });
 
 it('lists the same building codes in the UI as the callback accepts', function (): void {

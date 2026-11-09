@@ -116,6 +116,15 @@ it('builds the tag filter literal from comma-separated tags', function (): void 
         ->and($GLOBALS['excludetags'])->toBe("exclude_tag: ['x'],");
 });
 
+it('escapes each tag for the single-quoted script string it lands in', function (): void {
+    when('esc_js')->alias(fn ($text): string => 'JS['.$text.']');
+
+    LiveWhale::callback(['tags' => "o'ne,two", 'exclude_tags' => 'x', 'include_repeats' => false]);
+
+    expect($GLOBALS['tags'])->toBe("tag: ['JS[o'ne]','JS[two]'],")
+        ->and($GLOBALS['excludetags'])->toBe("exclude_tag: ['JS[x]'],");
+});
+
 it('leaves the tag filters null when none are given', function (): void {
     LiveWhale::callback(['include_repeats' => false]);
 

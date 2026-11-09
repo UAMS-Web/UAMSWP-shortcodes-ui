@@ -44,8 +44,8 @@ it('puts custom classes before the button classes', function (): void {
         ->toContain('class="one two btn btn-primary btn-lg"');
 });
 
-it('does not sanitize custom classes', function (): void {
-    expect(BaseButton::callback(baseButtonAttrs(['customclass' => 't wo!'])))->toContain('class="t wo! btn  "');
+it('sanitizes each comma-separated custom class', function (): void {
+    expect(BaseButton::callback(baseButtonAttrs(['customclass' => 'one,t wo!'])))->toContain('class="one two btn  "');
 });
 
 it('adds btn-block when displayblock is truthy', function (): void {
@@ -54,10 +54,27 @@ it('adds btn-block when displayblock is truthy', function (): void {
         ->and(BaseButton::callback(baseButtonAttrs(['displayblock' => ''])))->not->toContain('btn-block');
 });
 
-it('prints the title, target and content without escaping them', function (): void {
-    expect(BaseButton::callback(baseButtonAttrs(['title' => 'a"b', 'target' => '_x', 'btncontent' => '<i>Go</i>'])))
-        ->toContain('title="a"b" target="_x"')
-        ->toContain('>'.'<i>Go</i></button>');
+it('escapes the title and drops a target that is not a browsing-context name', function (): void {
+    expect(BaseButton::callback(baseButtonAttrs(['title' => 'a"b', 'target' => '_x'])))
+        ->toContain('title="a&quot;b" target=""');
+});
+
+it('keeps each browsing-context target', function (string $target): void {
+    expect(BaseButton::callback(baseButtonAttrs(['target' => $target])))->toContain('target="'.$target.'">');
+})->with(['_blank', '_self', '_top', '_parent']);
+
+it('passes the content through wp_kses_post', function (): void {
+    when('wp_kses_post')->alias(fn ($content): string => strip_tags((string) $content));
+
+    expect(BaseButton::callback(baseButtonAttrs(['btncontent' => '<i>Go</i><script>x</script>'])))
+        ->toContain('>Gox</button>')
+        ->not->toContain('<script>');
+});
+
+it('escapes the button classes', function (): void {
+    expect(BaseButton::callback(baseButtonAttrs(['color' => 'red" onclick="x'])))
+        ->toContain('class=" btn red&quot; onclick=&quot;x "')
+        ->not->toContain('red" onclick');
 });
 
 it('runs the url through esc_url', function (): void {
@@ -85,7 +102,8 @@ it('raises warnings for the title and btncontent keys the defaults omit', functi
     }
 
     expect($html)->toBe('<a href="" title="" target=""><button type="button" class=" btn  "></button></a>')
-        ->and($messages)->toBe(['Undefined array key "title"', 'Undefined array key "btncontent"']);
+        ->and($messages)->toContain('Undefined array key "title"')
+        ->and($messages)->toContain('Undefined array key "btncontent"');
 });
 
 it('uses the defaults when the attributes are not an array', function (): void {

@@ -29,6 +29,11 @@ class Map extends Shortcode
     const URL = '//maps.uams.edu/full-screen/?marker=';
 
     /**
+     * A width or height the iframe accepts: a number with an optional CSS unit.
+     */
+    const LENGTH_PATTERN = '/^\d+(\.\d+)?(px|%|em|rem|vw|vh)?$/';
+
+    /**
      * gets the arguments needed for shortcake
      */
     public static function get_shortcode_ui_args(): array
@@ -154,22 +159,23 @@ class Map extends Shortcode
             return 'required attribute "building" missing';
         }
 
+        // Only a CSS length (a number with an optional unit). Otherwise, the default.
         $width = '100%';
-        if (isset($attrs['width'])) {
+        if (isset($attrs['width']) && preg_match(self::LENGTH_PATTERN, (string) $attrs['width'])) {
             $width = $attrs['width'];
         }
 
         $height = '480px';
-        if (isset($attrs['height'])) {
+        if (isset($attrs['height']) && preg_match(self::LENGTH_PATTERN, (string) $attrs['height'])) {
             $height = $attrs['height'];
         }
 
         if (! empty($attrs['customclass'])) {
-            $customclasses = explode(',', $attrs['customclass']);
+            $customclasses = array_map(sanitize_html_class(...), explode(',', $attrs['customclass']));
         }
 
-        return '<div class="uams-campus-map '.implode(' ', $customclasses).'">
-                  <iframe width="'.$width.'" height="'.$height.'" src="'.self::URL.$building.'" frameborder="0"></iframe>
+        return '<div class="uams-campus-map '.esc_attr(implode(' ', $customclasses)).'">
+                  <iframe width="'.esc_attr($width).'" height="'.esc_attr($height).'" src="'.self::URL.$building.'" frameborder="0"></iframe>
                   <a href="https://maps.uams.edu/map-mashup/?markerid='.$building.'" target="_blank">View full map</a>
                 </div>';
 

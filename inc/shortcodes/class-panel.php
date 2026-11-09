@@ -165,7 +165,7 @@ class Panel extends Shortcode
                 '<button data-toggle="collapse" data-target="#%s" class="%s">%s<span class="showless"><span aria-hidden="true">%s</span> Show Less</span><span class="showmore"><span aria-hidden="true">%s</span> Show More</span></button>',
                 $id,
                 $collapsed,
-                $attrs['heading'],
+                wp_kses_post($attrs['heading']),
                 self::uams_shortcodes_get_contents(esc_url(UAMS_SHORTCAKES_PATH.'assets/images/glyphicon/minus.svg')),
                 self::uams_shortcodes_get_contents(esc_url(UAMS_SHORTCAKES_PATH.'assets/images/glyphicon/plus-no-bkgrnd.svg'))
             );

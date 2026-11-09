@@ -76,7 +76,7 @@ class UAMS_Shortcakes
         $last = array_pop($parts);
         $last = 'class-' . $last . '.php';
         $parts[] = $last;
-        $file = dirname(__FILE__) . '/shortcodes/' . str_replace('_', '-', strtolower(implode($parts, '/')));
+        $file = dirname(__FILE__) . '/shortcodes/' . str_replace('_', '-', strtolower(implode('/', $parts)));
         if (file_exists($file)) {
             require $file;
         }

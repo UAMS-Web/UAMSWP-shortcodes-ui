@@ -43,7 +43,8 @@ if (! is_plugin_active('shortcode-ui/shortcode-ui.php')) {
 }
 
 require_once __DIR__.'/inc/class-uams-shortcodes.php';
-define('UAMS_SHORTCAKES_VERSION', '0.5.0');
+// The header's Version is the only place the release number is written.
+define('UAMS_SHORTCAKES_VERSION', get_file_data(__FILE__, ['Version' => 'Version'])['Version']);
 define('UAMS_SHORTCAKES_URL_ROOT', plugin_dir_url(__FILE__));
 define('UAMS_SHORTCAKES_PATH', plugin_dir_path(__FILE__));
 function UAMS_Shortcakes(): UAMS_Shortcakes

@@ -89,6 +89,16 @@ it('enqueues the bakery script and hands a registered tag to its class', functio
     expect($this->shortcakes->do_shortcode_callback(['a' => 1], 'inner', 'fake'))->toBe('fake:{"a":1}:inner:fake');
 });
 
+it('declares all three shortcode callback parameters as required', function (): void {
+    // An optional parameter ahead of a required one raises E_DEPRECATED on PHP 8 when the file compiles.
+    $parameters = (new ReflectionMethod(UAMS_Shortcakes::class, 'do_shortcode_callback'))->getParameters();
+
+    expect(array_map(fn (ReflectionParameter $parameter): string => $parameter->getName(), $parameters))
+        ->toBe(['attrs', 'content', 'shortcode_tag'])
+        ->and(array_filter($parameters, fn (ReflectionParameter $parameter): bool => $parameter->isOptional()))
+        ->toBeEmpty();
+});
+
 it('registers each class under its tag, runs its setup and its Shortcake UI', function (): void {
     stubWordPress();
     Functions\expect('add_shortcode')->once()->with('fakeloadershortcode', Mockery::type(Closure::class));

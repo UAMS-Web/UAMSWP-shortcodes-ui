@@ -3,9 +3,10 @@
 /**
  * What a GitHub download of this repository holds.
  *
- * The repository has no `.gitattributes`, so `git archive` on HEAD holds every tracked file.
- * The top-level entries are recorded as they are; a new top-level file or folder fails the
- * test until it is added to the list.
+ * `.gitattributes` marks every top-level entry `export-ignore` except the plugin entry file and
+ * the `inc`, `admin` and `assets` folders, so `git archive` on HEAD holds only what the plugin
+ * ships. The top-level entries are recorded as they are; a new top-level file or folder in the
+ * download fails the test until it is added to the list.
  */
 
 declare(strict_types=1);
@@ -45,39 +46,17 @@ it('holds these top-level entries', function (): void {
     sort($top);
 
     expect($top)->toBe([
-        '.agents',
-        '.claude',
-        '.cursor',
-        '.git-blame-ignore-revs',
-        '.github',
-        '.gitignore',
-        'AGENTS.md',
-        'CONTRIBUTING.md',
         'admin',
         'assets',
-        'banner.png',
-        'composer.json',
-        'composer.lock',
-        'gulpfile.js',
-        'icon.png',
         'inc',
-        'old',
-        'package-lock.json',
-        'package.json',
-        'phpstan.neon.dist',
-        'phpunit.xml',
-        'pint.json',
-        'readme.md',
-        'rector.php',
-        'tests',
         'uamswp-shortcodes.php',
     ]);
 });
 
-it('holds the plugin entry file and the synced agent folders', function (): void {
+it('holds the plugin entry file and leaves the development files out', function (): void {
     $names = downloadArchiveEntries();
 
     expect($names)->toContain('uamswp-shortcodes.php')
-        ->and($names)->toContain('AGENTS.md')
-        ->and(array_filter($names, fn (string $name): bool => str_starts_with($name, '.claude/')))->not->toBeEmpty();
+        ->and($names)->not->toContain('AGENTS.md')
+        ->and(array_filter($names, fn (string $name): bool => str_starts_with($name, '.claude/')))->toBeEmpty();
 });

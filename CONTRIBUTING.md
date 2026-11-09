@@ -51,6 +51,18 @@ composer test
 
 `composer.json` lists development dependencies only.
 
+### JavaScript and build tests
+
+The JavaScript tests use Node's built-in test runner (Node 22 or later), so they add no dependency beyond the `npm ci` that installs Gulp.
+
+```sh
+npm ci
+npm test                 # listener, embed and Gulp build tests
+npm run test:coverage    # the same, with a line and branch coverage table
+```
+
+`tests/js/build.test.js` copies the Sass and script sources to a scratch folder, runs the default Gulp task there and compares the output with the committed `assets/css/main.css`, `admin/css/admin.css` and `admin/js/build/main.js`. After a change to a source under `assets/css/sass/`, `admin/css/sass/` or `admin/js/src/`, run `npx gulp` and commit the rebuilt files, or that test fails. The vendored `assets/js/juxtapose.js` and `assets/lib/` are not covered.
+
 ### PHP coverage
 
 Coverage needs a driver: PCOV (`pecl install pcov`, then enable `pcov.enabled=1`) or Xdebug in coverage mode.

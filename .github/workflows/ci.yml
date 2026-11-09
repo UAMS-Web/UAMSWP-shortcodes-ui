@@ -53,10 +53,29 @@ jobs:
       download-archive-command: node .claude/skills/download-archive-check/check-download-archive.mjs
       pest-command: composer test:unit
 
+  # A plain job beside the shared call: the chain has no JavaScript job. It is listed in the
+  # `needs:` of `CI` below, as the header requires of every plain job.
+  js:
+    name: JavaScript and build tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      # Runs the listener and embed tests and builds the Sass and scripts in a scratch copy.
+      - run: npm test
+
   # The one check a ruleset requires from this workflow. Keep `needs:` naming the call.
   ci:
     name: CI
-    needs: [checks]
+    needs: [checks, js]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5

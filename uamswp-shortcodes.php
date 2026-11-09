@@ -2,8 +2,8 @@
 
 /*
  * Plugin Name: UAMSWP Shortcodes UI
- * Version: 0.5
- * Plugin URI:
+ * Version: 0.5.0
+ * Plugin URI: https://github.com/UAMS-Web/UAMSWP-shortcodes-ui
  * Description: Useful shortcodes for UAMS websites, which can be added using the Shortcake shortcode UI.
  * Author: Todd McKee, MEd, Original: OIT Design, Brian DeConinck, Chris Deaton
  * Author URI: https://www.uams.edu/
@@ -43,7 +43,7 @@ if (! is_plugin_active('shortcode-ui/shortcode-ui.php')) {
 }
 
 require_once __DIR__.'/inc/class-uams-shortcodes.php';
-define('UAMS_SHORTCAKES_VERSION', '0.4');
+define('UAMS_SHORTCAKES_VERSION', '0.5.0');
 define('UAMS_SHORTCAKES_URL_ROOT', plugin_dir_url(__FILE__));
 define('UAMS_SHORTCAKES_PATH', plugin_dir_path(__FILE__));
 function UAMS_Shortcakes(): UAMS_Shortcakes

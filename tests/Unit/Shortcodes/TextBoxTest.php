@@ -11,6 +11,8 @@ declare(strict_types=1);
 use Brain\Monkey\Functions;
 use UAMS_Shortcakes\Shortcodes\TextBox;
 
+use function Brain\Monkey\Functions\when;
+
 beforeEach(function (): void {
     stubWordPress();
 });
@@ -61,9 +63,17 @@ it('adds the full width class when fullscreen is truthy', function (): void {
         ->and(TextBox::callback(['fullscreen' => '', 'customclass' => ''], 'x'))->not->toContain('uams-full-width');
 });
 
-it('prints the title unescaped', function (): void {
+it('prints the title inside an h2', function (): void {
     expect(TextBox::callback(['titletxt' => 'A <b>Title</b>', 'customclass' => ''], 'x'))
         ->toContain('<h2 class="text-box-title">A <b>Title</b></h2>');
+});
+
+it('passes the title through wp_kses_post', function (): void {
+    when('wp_kses_post')->alias(fn ($content): string => strip_tags((string) $content));
+
+    expect(TextBox::callback(['titletxt' => 'A <b>Title</b><script>x</script>', 'customclass' => ''], 'x'))
+        ->toContain('<h2 class="text-box-title">A Titlex</h2>')
+        ->not->toContain('<script>');
 });
 
 it('url-decodes the body before wpautop', function (): void {

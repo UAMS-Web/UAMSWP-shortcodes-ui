@@ -133,7 +133,7 @@ class TextBox extends Shortcode
             $txtcolor = 'dark';
         }
 
-        $titletxt = $attrs['titletxt'];
+        $titletxt = wp_kses_post($attrs['titletxt']);
 
         if ($attrs['fullscreen'] == true) {
             $fullscreen = 'uams-full-width';

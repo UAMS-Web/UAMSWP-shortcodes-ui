@@ -363,13 +363,16 @@ class Callout extends Shortcode
         if (! empty($attrs['headingicon']) && ! in_array($attrs['headingicon'], $ignored_icons)) {
             $icon_name = $attrs['headingicon'];
 
-            $icon = '<span class="'.$icon_name.'" aria-hidden="true"></span>';
+            $icon = '<span class="'.esc_attr($icon_name).'" aria-hidden="true"></span>';
         } else {
             $icon = null;
         }
 
+        // Only headings or p. Otherwise, default to p.
+        $headingtype = in_array($attrs['headingtype'], ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'], true) ? $attrs['headingtype'] : 'p';
+
         if (! empty($attrs['heading'])) {
-            $heading = '<'.$attrs['headingtype'].' class="callout-heading">'.$icon.$attrs['heading'].'</'.$attrs['headingtype'].'>';
+            $heading = '<'.$headingtype.' class="callout-heading">'.$icon.wp_kses_post($attrs['heading']).'</'.$headingtype.'>';
         } else {
             $heading = null;
         }
@@ -535,7 +538,7 @@ class Callout extends Shortcode
         return match ($type) {
             'basic' => sprintf(
                 '<div class="%s %s"><div class="inner-container">%s%s%s<p class="%s">%s</p></div></div><!-- .uams-callout -->',
-                implode(' ', $basic_classes),
+                esc_attr(implode(' ', $basic_classes)),
                 esc_attr($customclass),
                 $urlopen,
                 $heading,
@@ -546,7 +549,7 @@ class Callout extends Shortcode
             ),
             'img' => sprintf(
                 '<div class="%s callout-media callout-media-img %s %s"><div class="callout-img %s%s"><img class="img-responsive" src="%s" srcset="%s" sizes="(min-width: 36em) 33.3vw, 100vw" alt="%s" />%s</div><div class="callout-content %s %s">%s%s%s<p class="%s">%s</p></div></div><!-- .uams-callout -->',
-                implode(' ', $basic_classes),
+                esc_attr(implode(' ', $basic_classes)),
                 $mediaposition,
                 esc_attr($customclass),
                 $mediaposition,
@@ -566,7 +569,7 @@ class Callout extends Shortcode
             ),
             'vid' => sprintf(
                 '<div class="%s callout-media callout-video %s">%s<div class="callout-content %s">%s%s%s<p class="%s">%s</p></div></div><!-- .uams-callout -->',
-                implode(' ', $basic_classes),
+                esc_attr(implode(' ', $basic_classes)),
                 esc_attr($customclass),
                 $video,
                 $mediaposition,
@@ -584,12 +587,12 @@ class Callout extends Shortcode
                             <div class="callout-content %s">%s%s%s<p class="%s">%s</p></div>
                         </div><!-- .callout-img -->
                     </div><!-- .uams-callout-bgimg -->',
-                $attrs['margin'],
+                esc_attr($attrs['margin']),
                 esc_attr($customclass),
                 $calloutbgimg,
                 $imgcap,
                 $overlay,
-                implode(' ', $textbox_classes),
+                esc_attr(implode(' ', $textbox_classes)),
                 $urlopen,
                 $heading,
                 // $arrow,
@@ -607,7 +610,7 @@ class Callout extends Shortcode
                 esc_attr($customclass),
                 $video,
                 $overlay,
-                implode(' ', $textbox_classes),
+                esc_attr(implode(' ', $textbox_classes)),
                 $urlopen,
                 $heading,
                 // $arrow,
@@ -617,7 +620,7 @@ class Callout extends Shortcode
             ),
             default => sprintf(
                 '<div class="%s %s"><div class="inner-container">%s%s%s<p class="%s">%s</p></div></div>',
-                implode(' ', $basic_classes),
+                esc_attr(implode(' ', $basic_classes)),
                 esc_attr($customclass),
                 $urlopen,
                 $heading,

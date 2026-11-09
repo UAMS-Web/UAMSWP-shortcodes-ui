@@ -44,9 +44,9 @@ it('adds color, size and icon type classes in that order', function (): void {
         ->toContain('class="uams-btn btn btn-red btn-lg btn-pdf ');
 });
 
-it('adds each comma-separated custom class unsanitized after the button classes', function (): void {
+it('adds each comma-separated custom class, sanitized, after the button classes', function (): void {
     expect(Button::callback(buttonAttrs(['customclass' => 'one,t wo!'])))
-        ->toContain('class="uams-btn btn   btn-go one t wo!"');
+        ->toContain('class="uams-btn btn   btn-go one two"');
 });
 
 it('appends a line break when newline is truthy', function (): void {
@@ -56,9 +56,30 @@ it('appends a line break when newline is truthy', function (): void {
         ->and(Button::callback(buttonAttrs(['newline' => '0'])))->toEndWith('</a>');
 });
 
-it('prints the button text and target without escaping them', function (): void {
-    expect(Button::callback(buttonAttrs(['text' => '<b>Go</b>', 'target' => '_blank" x="y'])))
-        ->toContain('target="_blank" x="y"><b>Go</b></a>');
+it('keeps a browsing-context target and drops any other', function (string $target, string $expected): void {
+    expect(Button::callback(buttonAttrs(['target' => $target])))->toContain('target="'.$expected.'">');
+})->with([
+    ['_blank', '_blank'],
+    ['_self', '_self'],
+    ['_top', '_top'],
+    ['_parent', '_parent'],
+    ['_blank" x="y', ''],
+    ['frame', ''],
+    ['', ''],
+]);
+
+it('passes the button text through wp_kses_post', function (): void {
+    when('wp_kses_post')->alias(fn ($content): string => strip_tags((string) $content));
+
+    expect(Button::callback(buttonAttrs(['text' => '<b>Go</b><script>x</script>'])))
+        ->toContain('>Gox</a>')
+        ->not->toContain('<script>');
+});
+
+it('escapes the button classes', function (): void {
+    expect(Button::callback(buttonAttrs(['color' => 'red" onclick="x'])))
+        ->toContain('class="uams-btn btn red&quot; onclick=&quot;x ')
+        ->not->toContain('red" onclick');
 });
 
 it('runs the url through esc_url', function (): void {

@@ -123,7 +123,7 @@ class ProgressBar extends Shortcode
 
         // Valid types only.
         if (! empty($attrs['type'])) {
-            $type = (in_array($attrs['type'], ['progress-bar-primary', 'progress-bar-success', 'progress-bar-info', 'progress-bar-warning', 'progress-bar-danger'])) ? sanitize_html_class($attrs['type']) : 'progress-bar-primary';
+            $type = (in_array($attrs['type'], ['progress-bar-default', 'progress-bar-primary', 'progress-bar-success', 'progress-bar-info', 'progress-bar-warning', 'progress-bar-danger'])) ? sanitize_html_class($attrs['type']) : 'progress-bar-primary';
         } else {
             $type = 'progress-bar-primary';
         }
@@ -138,7 +138,7 @@ class ProgressBar extends Shortcode
             </div>',
             $style,
             esc_attr($customclass),
-            $attrs['type'],
+            $type,
             $complete,
             $complete,
             $sr,

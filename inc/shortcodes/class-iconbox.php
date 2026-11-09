@@ -146,14 +146,14 @@ class IconBox extends Shortcode
 
             // $icon = '<span class="heading-icon" aria-hidden="true">'. self::uams_shortcodes_get_contents( esc_url(UAMS_SHORTCAKES_PATH . 'assets/images/'. $icon_type .'/'  . $icon_name . '.svg' ) ) .'</span>'; // Original SVG
 
-            $icon = '<span class="'.$icon_name.'" aria-hidden="true"></span>';
+            $icon = '<span class="'.esc_attr($icon_name).'" aria-hidden="true"></span>';
 
         } else {
             $icon = null;
         }
 
         if (! empty($attrs['heading'])) {
-            $heading = '<h3 class="icon-box-title">'.$attrs['heading'].'</h3>';
+            $heading = '<h3 class="icon-box-title">'.wp_kses_post($attrs['heading']).'</h3>';
         } else {
             $heading = null;
         }

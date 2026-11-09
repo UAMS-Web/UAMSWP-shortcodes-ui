@@ -29,6 +29,8 @@ beforeEach(function (): void {
     }
 
     when('is_wp_error')->alias(fn ($thing): bool => $thing instanceof WP_Error_Stub);
+    // The real function rejects anything but an http(s) URL to a public host; these tests pass it short names.
+    when('wp_http_validate_url')->alias(fn ($url) => $url);
 });
 
 /**
@@ -228,15 +230,32 @@ it('sanitizes each comma-separated custom class', function (): void {
         ->toStartWith('<div class="recent-posts row grid one two">');
 });
 
-it('passes a null feed to fetch_feed when none is given', function (): void {
-    Functions\expect('fetch_feed')->once()->with(null)->andReturn(new WP_Error_Stub);
+it('does not fetch when no feed is given', function (): void {
+    Functions\expect('fetch_feed')->never();
     set_error_handler(fn (): bool => true);
 
     try {
-        RSS_Posts::callback([]);
+        $html = RSS_Posts::callback([]);
     } finally {
         restore_error_handler();
     }
+
+    expect($html)->toContain('>No items</div>');
+});
+
+it('does not fetch a feed that wp_http_validate_url rejects', function (): void {
+    when('wp_http_validate_url')->justReturn(false);
+    Functions\expect('fetch_feed')->never();
+
+    expect(RSS_Posts::callback(['feed' => 'http://127.0.0.1/feed', 'author' => '', 'customclass' => '']))
+        ->toBe('<div class="recent-posts row grid ">No items</div>');
+});
+
+it('fetches the url wp_http_validate_url returns', function (): void {
+    when('wp_http_validate_url')->justReturn('https://validated.test/feed');
+    Functions\expect('fetch_feed')->once()->with('https://validated.test/feed')->andReturn(rssFeed([]));
+
+    RSS_Posts::callback(['feed' => 'https://example.test/feed', 'author' => '', 'customclass' => '']);
 });
 
 it('raises a warning when author is not given with items present', function (): void {

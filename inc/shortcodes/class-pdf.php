@@ -108,7 +108,8 @@ class PDF extends Shortcode
             return '';
         }
 
-        if (! empty($attrs['proxy']) && $attrs['proxy']) {
+        // The proxy option only exists while the filter enables it; a proxy attribute typed into the shortcode is ignored otherwise.
+        if (! empty($attrs['proxy']) && apply_filters('uams_shortcodes_pdf_enable_cors_proxy', false)) {
             $url = self::asset_proxy_url($url);
         }
 

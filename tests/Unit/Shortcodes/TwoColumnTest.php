@@ -64,10 +64,20 @@ it('passes column content through do_shortcode', function (): void {
     expect(TwoColumn::callback(['col1' => 'a', 'col2' => 'b', 'customclass' => '']))->toContain('<p>A</p>')->toContain('<p>B</p>');
 });
 
-it('does not run wp_kses_post on column content (current behavior)', function (): void {
-    when('wp_kses_post')->alias(fn ($content): string => 'KSES');
+it('runs each column through wp_kses_post', function (): void {
+    when('wp_kses_post')->alias(fn ($content): string => strip_tags((string) $content));
 
-    expect(TwoColumn::callback(['col1' => '<script>x</script>', 'col2' => '', 'customclass' => '']))->toContain('<p><script>x</script></p>');
+    expect(TwoColumn::callback(['col1' => '<script>x</script>', 'col2' => '', 'customclass' => '']))
+        ->toContain('<p>x</p>')
+        ->not->toContain('<script>');
+});
+
+it('url-decodes a column before wp_kses_post sees it', function (): void {
+    when('wp_kses_post')->alias(fn ($content): string => strip_tags((string) $content));
+
+    expect(TwoColumn::callback(['col1' => '%3Cscript%3Ex%3C/script%3E', 'col2' => '', 'customclass' => '']))
+        ->toContain('<p>x</p>')
+        ->not->toContain('<script>');
 });
 
 it('sanitizes each comma-separated custom class', function (): void {

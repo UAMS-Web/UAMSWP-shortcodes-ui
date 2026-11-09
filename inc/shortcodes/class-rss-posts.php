@@ -101,12 +101,15 @@ class RSS_Posts extends Shortcode
 
         include_once ABSPATH.WPINC.'/feed.php';
 
+        // Only an http(s) URL that passes WordPress' own checks (no local or private hosts) is fetched.
+        $feed = empty($attrs['feed']) || ! is_string($attrs['feed']) ? false : wp_http_validate_url($attrs['feed']);
+
         // Get a SimplePie feed object from the specified feed source.
-        $rss = fetch_feed($attrs['feed']);
+        $rss = ($feed === false) ? false : fetch_feed($feed);
 
         $maxitems = 0;
 
-        if (! is_wp_error($rss)) {
+        if ($rss !== false && ! is_wp_error($rss)) {
             // Checks that the object is created correctly
             // Figure out how many total items there are, but limit it to 5.
             $maxitems = $rss->get_item_quantity($posts_per_page);

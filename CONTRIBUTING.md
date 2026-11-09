@@ -50,3 +50,16 @@ composer test
 ```
 
 `composer.json` lists development dependencies only.
+
+## Checks
+
+```sh
+composer test:pint       # formatting (Pint, `laravel` preset)
+composer test:refactor   # Rector, dry run
+composer stan            # PHPStan with the WordPress extension
+composer test            # Pest
+```
+
+`composer pint` and `composer refactor` apply their fixes.
+
+The remote gate is [`.github/workflows/ci.yml`](.github/workflows/ci.yml). It runs those four, the PHP 8.2 floor lint, `composer validate`, the synced-files check and the emoji sweep on every pull request to `master`. Its final `CI` job fails unless every other job in the file succeeded, so a ruleset requires `CI` alone, with the two pull-request body checks, `Attribution footer` and `Closing keywords`.

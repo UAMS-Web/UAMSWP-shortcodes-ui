@@ -158,16 +158,45 @@ it('defaults the heading tag to p', function (): void {
     expect($html)->toContain('<p class="callout-heading">Hello</p>');
 });
 
-it('does not escape the heading', function (): void {
-    [$html] = calloutRender(['heading' => '<em>Hi</em> & bye', 'fullscreen' => false]);
+it('passes the heading through wp_kses_post', function (): void {
+    when('wp_kses_post')->alias(fn ($content): string => strip_tags((string) $content));
 
-    expect($html)->toContain('<em>Hi</em> & bye');
+    [$html] = calloutRender(['heading' => '<em>Hi</em> & bye<script>x</script>', 'fullscreen' => false]);
+
+    expect($html)->toContain('<p class="callout-heading">Hi & byex</p>')
+        ->and($html)->not->toContain('<script>');
 });
+
+it('falls back to p for a heading tag that is not h1 to h6', function (string $tag): void {
+    [$html] = calloutRender(['heading' => 'Hello', 'headingtype' => $tag, 'fullscreen' => false]);
+
+    expect($html)->toContain('<p class="callout-heading">Hello</p>');
+})->with(['div', 'script', 'h7', 'h2 onclick="x"', '']);
+
+it('keeps each allowed heading tag', function (string $tag): void {
+    [$html] = calloutRender(['heading' => 'Hello', 'headingtype' => $tag, 'fullscreen' => false]);
+
+    expect($html)->toContain('<'.$tag.' class="callout-heading">Hello</'.$tag.'>');
+})->with(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p']);
 
 it('prefixes the heading with a heading icon span', function (): void {
     [$html] = calloutRender(['heading' => 'Hello', 'headingicon' => 'ic-book', 'fullscreen' => false]);
 
     expect($html)->toContain('<p class="callout-heading"><span class="ic-book" aria-hidden="true"></span>Hello</p>');
+});
+
+it('escapes the heading icon class', function (): void {
+    [$html] = calloutRender(['heading' => 'Hello', 'headingicon' => 'ic-book" onclick="x', 'fullscreen' => false]);
+
+    expect($html)->toContain('<span class="ic-book&quot; onclick=&quot;x" aria-hidden="true">')
+        ->and($html)->not->toContain('ic-book" onclick');
+});
+
+it('escapes the class list built from the color, alignment and margin attributes', function (): void {
+    [$html] = calloutRender(['bgcolor' => 'maroon" onclick="x', 'fullscreen' => false]);
+
+    expect($html)->toContain('<div class="uams-callout maroon&quot; onclick=&quot;x text-center normal ')
+        ->and($html)->not->toContain('maroon" onclick');
 });
 
 it('skips the icon for an ignored icon name', function (string $icon): void {

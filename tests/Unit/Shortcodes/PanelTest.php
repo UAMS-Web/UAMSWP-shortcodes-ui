@@ -11,6 +11,7 @@ declare(strict_types=1);
 use UAMS_Shortcakes\Shortcodes\Panel;
 
 use function Brain\Monkey\Functions\stubs;
+use function Brain\Monkey\Functions\when;
 
 beforeEach(function (): void {
     stubWordPress();
@@ -41,6 +42,14 @@ it('renders a static default panel', function (): void {
 it('strips tags from a static heading with sanitize_text_field', function (): void {
     expect(Panel::callback(['heading' => 'A <b>Bold</b>', 'customclass' => ''], 'x'))
         ->toContain('<span>A Bold</span>');
+});
+
+it('passes a collapsible heading through wp_kses_post', function (): void {
+    when('wp_kses_post')->alias(fn ($content): string => strip_tags((string) $content));
+
+    expect(Panel::callback(['heading' => 'A <b>Bold</b><script>x</script>', 'state' => 'open', 'customclass' => ''], 'x'))
+        ->toMatch('/class="">A Boldx<span class="showless">/')
+        ->not->toContain('<script>');
 });
 
 it('falls back to panel-default for an unknown type and keeps each allowed one', function (string $type): void {

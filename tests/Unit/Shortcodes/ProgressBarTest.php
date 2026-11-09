@@ -71,13 +71,14 @@ it('does not clamp a completion value above 100 (current behavior)', function ()
     expect(renderProgressBar(['complete' => '250']))->toContain('aria-valuenow="250"');
 });
 
-it('prints the raw type attribute rather than the validated one (current behavior)', function (): void {
+it('prints an allowed type and falls back to progress-bar-primary for any other', function (): void {
     expect(renderProgressBar(['type' => 'progress-bar-success']))->toContain('class="progress-bar progress-bar-success"')
-        ->and(renderProgressBar(['type' => 'bogus" onclick="x']))->toContain('class="progress-bar bogus" onclick="x"');
+        ->and(renderProgressBar(['type' => 'bogus" onclick="x']))->toContain('class="progress-bar progress-bar-primary"')
+        ->and(renderProgressBar(['type' => 'bogus" onclick="x']))->not->toContain('onclick');
 });
 
-it('prints an empty type as empty (current behavior)', function (): void {
-    expect(renderProgressBar(['type' => '']))->toContain('class="progress-bar "');
+it('falls back to progress-bar-primary for an empty type', function (): void {
+    expect(renderProgressBar(['type' => '']))->toContain('class="progress-bar progress-bar-primary"');
 });
 
 it('prints the default progress-bar-default type when none is given', function (): void {

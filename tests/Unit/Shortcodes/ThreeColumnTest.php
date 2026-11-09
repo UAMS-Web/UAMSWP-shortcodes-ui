@@ -67,6 +67,14 @@ it('runs each column through wp_kses_post', function (): void {
         ->not->toContain('<script>');
 });
 
+it('url-decodes a column before wp_kses_post sees it', function (): void {
+    when('wp_kses_post')->alias(fn ($content): string => strip_tags((string) $content));
+
+    expect(ThreeColumn::callback(['col1' => '%3Cscript%3Ex%3C/script%3E', 'col2' => '', 'col3' => '', 'customclass' => '']))
+        ->toContain('<p>x</p>')
+        ->not->toContain('<script>');
+});
+
 it('passes column content through do_shortcode', function (): void {
     when('do_shortcode')->alias(fn ($content): string => strtoupper($content));
 

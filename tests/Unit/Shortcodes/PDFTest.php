@@ -28,6 +28,16 @@ beforeEach(function (): void {
 
 const PDF_VIEWER = 'https://example.test/wp-content/plugins/uamswp-shortcodes/assets/lib/pdfjs/web/viewer.html';
 
+/**
+ * Answer the given filters with fixed values and every other one with its input.
+ *
+ * @param  array<string, mixed>  $values  Filter tag to the value it returns
+ */
+function pdfFilters(array $values): void
+{
+    when('apply_filters')->alias(fn ($tag, $value) => array_key_exists($tag, $values) ? $values[$tag] : $value);
+}
+
 it('uses the lowercase class name as its shortcode tag', function (): void {
     expect(PDF::get_shortcode_tag())->toBe('pdf');
 });
@@ -73,10 +83,27 @@ it('accepts a protocol-relative url', function (): void {
 });
 
 it('does not proxy the url unless asked', function (): void {
+    pdfFilters(['uams_shortcodes_pdf_enable_cors_proxy' => true]);
+
     expect(PDF::callback(['url' => 'https://other.test/a.pdf', 'proxy' => '']))->not->toContain(rawurlencode('admin-ajax.php'));
 });
 
-it('routes the url through the admin-ajax proxy when proxy is set', function (): void {
+it('ignores the proxy attribute while the CORS proxy filter is off', function (): void {
+    $nonces = 0;
+    when('wp_create_nonce')->alias(function () use (&$nonces): string {
+        $nonces++;
+
+        return 'nonce';
+    });
+
+    expect(PDF::callback(['url' => 'https://other.test/a.pdf', 'proxy' => '1']))
+        ->toContain('file='.rawurlencode('https://other.test/a.pdf'))
+        ->not->toContain(rawurlencode('admin-ajax.php'))
+        ->and($nonces)->toBe(0);
+});
+
+it('routes the url through the admin-ajax proxy when proxy is set and the filter is on', function (): void {
+    pdfFilters(['uams_shortcodes_pdf_enable_cors_proxy' => true]);
     $proxied = 'https://site.test/wp-admin/admin-ajax.php?action=uams_shortcodes_asset_proxy&_nonce=nonce&url='.rawurlencode('https://other.test/a.pdf');
 
     expect(PDF::callback(['url' => 'https://other.test/a.pdf', 'proxy' => 'true']))
@@ -84,6 +111,7 @@ it('routes the url through the admin-ajax proxy when proxy is set', function ():
 });
 
 it('creates the proxy nonce for the original url', function (): void {
+    pdfFilters(['uams_shortcodes_pdf_enable_cors_proxy' => true]);
     $actions = [];
     when('wp_create_nonce')->alias(function (string $action) use (&$actions): string {
         $actions[] = $action;
@@ -97,9 +125,10 @@ it('creates the proxy nonce for the original url', function (): void {
 });
 
 it('lets the proxy url filter replace the proxy address', function (): void {
-    when('apply_filters')->alias(
-        fn ($tag, $value) => $tag === 'uams_shortcodes_pdf_asset_proxy_url' ? 'https://proxy.test/a.pdf' : $value
-    );
+    pdfFilters([
+        'uams_shortcodes_pdf_enable_cors_proxy' => true,
+        'uams_shortcodes_pdf_asset_proxy_url' => 'https://proxy.test/a.pdf',
+    ]);
 
     expect(PDF::callback(['url' => 'https://other.test/a.pdf', 'proxy' => '1']))->toContain('file='.rawurlencode('https://proxy.test/a.pdf'));
 });

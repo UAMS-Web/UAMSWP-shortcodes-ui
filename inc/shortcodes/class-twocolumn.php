@@ -120,8 +120,9 @@ class TwoColumn extends Shortcode
                 $col2 = 'col-lg-6 col-md-6 col-sm-6 col-xs-12';
         }
 
-        $contentcol1 = $attrs['col1']; // wp_kses_post( $attrs['col1'] );
-        $contentcol2 = $attrs['col2']; // wp_kses_post( $attrs['col2'] );
+        // Decode before filtering, so an encoded tag cannot slip past wp_kses_post().
+        $contentcol1 = wp_kses_post(urldecode($attrs['col1']));
+        $contentcol2 = wp_kses_post(urldecode($attrs['col2']));
 
         $customclass = implode(' ', array_map(sanitize_html_class(...), explode(',', $attrs['customclass'])));
 
@@ -138,9 +139,9 @@ class TwoColumn extends Shortcode
             </div>',
             esc_attr($customclass),
             $col1,
-            wpautop(do_shortcode(urldecode($contentcol1))),
+            wpautop(do_shortcode($contentcol1)),
             $col2,
-            wpautop(do_shortcode(urldecode($contentcol2)))
+            wpautop(do_shortcode($contentcol2))
         );
     }
 }

@@ -156,16 +156,19 @@ class Button extends Shortcode
         }
 
         if (! empty($attrs['customclass'])) {
-            $customclasses = explode(',', $attrs['customclass']);
+            $customclasses = array_map(sanitize_html_class(...), explode(',', $attrs['customclass']));
         }
+
+        // Only a browsing-context name. Otherwise, leave the target empty.
+        $target = in_array($attrs['target'], ['_blank', '_self', '_top', '_parent'], true) ? $attrs['target'] : '';
 
         return sprintf(
             '<a class="uams-btn %s %s" href="%s" target="%s">%s</a>%s',
-            implode(' ', $button_classes),
-            implode(' ', $customclasses),
+            esc_attr(implode(' ', $button_classes)),
+            esc_attr(implode(' ', $customclasses)),
             esc_url($attrs['url']),
-            $attrs['target'],
-            $attrs['text'],
+            $target,
+            wp_kses_post($attrs['text']),
             $newline
         );
 

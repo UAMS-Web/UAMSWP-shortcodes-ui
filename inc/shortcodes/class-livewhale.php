@@ -244,16 +244,17 @@ class LiveWhale extends Shortcode
             $audience = $attrs['audience'];
         }
 
+        // Each tag lands in a single-quoted string in the footer script, so escape it for that context.
         $tags = null;
         if (! empty($attrs['tags'])) {
-            $tags = explode(',', $attrs['tags']);
+            $tags = array_map(esc_js(...), explode(',', $attrs['tags']));
             $tags = "'".implode("','", $tags)."'";
             $tags = 'tag: ['.$tags.'],';
         }
 
         $excludetags = null;
         if (! empty($attrs['exclude_tags'])) {
-            $excludetags = explode(',', $attrs['exclude_tags']);
+            $excludetags = array_map(esc_js(...), explode(',', $attrs['exclude_tags']));
             $excludetags = "'".implode("','", $excludetags)."'";
             $excludetags = 'exclude_tag: ['.$excludetags.'],';
         }

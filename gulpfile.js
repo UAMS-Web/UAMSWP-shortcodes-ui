@@ -6,7 +6,7 @@ var gulp = require('gulp'),
     sass = require('gulp-sass')(require('sass')),
     sassGlob = require('gulp-sass-glob');
 minifyCss = require('gulp-clean-css'),
-    stripCssComments = require('gulp-strip-css-comments'),
+    stripCssComments = require('gulp-strip-css-comments').default,
     jshint = require('gulp-jshint');
 
 // handle styles

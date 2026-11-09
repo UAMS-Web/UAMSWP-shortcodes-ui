@@ -174,7 +174,7 @@ class UAMS_Shortcakes
     /**
      * Do the shortcode callback
      */
-    public function do_shortcode_callback($attrs, $content = '', $shortcode_tag = null)
+    public function do_shortcode_callback($attrs, $content, $shortcode_tag)
     {
         if (empty($this->registered_shortcodes[$shortcode_tag])) {
             return '';

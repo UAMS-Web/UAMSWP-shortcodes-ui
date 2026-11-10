@@ -47,21 +47,24 @@ it('reads the video from a url with the numeric form of the encoded ampersand', 
         ->toContain('data-uams-youtube="abc"');
 });
 
-it('currently produces a src with two question marks for a playlist url', function (): void {
+it('joins the list and rel arguments of a playlist url with an ampersand', function (): void {
     expect(YouTubeUI::callback(['url' => 'https://www.youtube.com/watch?v=abc&list=PL123']))
-        ->toContain('src="https://youtube.com/embed/abc?list=PL123?rel=0"');
+        ->toContain('src="https://youtube.com/embed/abc?list=PL123&rel=0"');
 });
 
-it('currently prints the embed id into the data attribute without escaping it', function (): void {
+it('escapes the embed id in the data attribute', function (): void {
+    when('esc_attr')->alias(fn ($text): string => htmlspecialchars((string) $text, ENT_QUOTES));
+
     expect(YouTubeUI::callback(['url' => 'https://www.youtube.com/watch?v=a%22b']))
-        ->toContain('data-uams-youtube="a"b"');
+        ->toContain('data-uams-youtube="a&quot;b"')
+        ->not->toContain('data-uams-youtube="a"b"');
 });
 
 it('renders nothing for a watch url without a v argument', function (): void {
     expect(YouTubeUI::callback(['url' => 'https://www.youtube.com/watch?list=PL123']))->toBe('');
 });
 
-it('currently triggers a null parse_str deprecation for a url with no query string', function (): void {
+it('renders nothing for a url with no query string without a deprecation', function (): void {
     $errors = [];
     set_error_handler(function (int $no, string $message) use (&$errors): bool {
         $errors[] = $message;
@@ -76,7 +79,7 @@ it('currently triggers a null parse_str deprecation for a url with no query stri
     }
 
     expect($html)->toBe('')
-        ->and($errors)->toBe(['parse_str(): Passing null to parameter #1 ($string) of type string is deprecated']);
+        ->and($errors)->toBe([]);
 });
 
 it('renders nothing for an empty url or a host that is not YouTube', function (): void {
@@ -85,7 +88,7 @@ it('renders nothing for an empty url or a host that is not YouTube', function ()
         ->and(YouTubeUI::callback(['url' => 'https://m.youtube.com/watch?v=abc']))->toBe('');
 });
 
-it('currently warns about an undefined url key when the attribute is missing', function (): void {
+it('renders nothing without a warning when the url attribute is missing', function (): void {
     $errors = [];
     set_error_handler(function (int $no, string $message) use (&$errors): bool {
         $errors[] = $message;
@@ -100,7 +103,7 @@ it('currently warns about an undefined url key when the attribute is missing', f
     }
 
     expect($html)->toBe('')
-        ->and($errors[0])->toBe('Undefined array key "url"');
+        ->and($errors)->toBe([]);
 });
 
 it('lets a filter change the embed url', function (): void {

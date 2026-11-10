@@ -261,7 +261,8 @@ class GoogleDocs extends Shortcode
             .'(?:\?(?P<query_string>[^/?]+))?$#';                  // Some have additional options stored in a query string
 
         if (preg_match($url_parts_regex, $url, $matches)) {
-            return $matches;
+            // A trailing group that did not match is left out of $matches, so a URL with no query string has no key.
+            return $matches + ['query_string' => ''];
         }
 
         return null;

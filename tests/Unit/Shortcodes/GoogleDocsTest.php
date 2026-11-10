@@ -30,7 +30,8 @@ beforeEach(function (): void {
             $params = [$key => $value];
         }
 
-        return $url.(str_contains($url, '?') ? '&' : '?').http_build_query($params);
+        // WordPress trims the trailing "?" left when there are no arguments.
+        return rtrim($url.(str_contains($url, '?') ? '&' : '?').http_build_query($params), '?');
     });
     when('sanitize_key')->alias(fn ($key): string => strtolower((string) $key));
 });
@@ -65,6 +66,15 @@ it('splits the view name and query string from an embed url', function (): void 
         'embed_id' => 'ABC',
         'view_name' => 'pubhtml',
         'query_string' => 'widget=true&headers=false',
+    ]);
+});
+
+it('returns an empty query string for a url that has none', function (): void {
+    expect(googleDocsParse('https://docs.google.com/presentation/d/ABC/embed'))->toMatchArray([
+        'doc_type' => 'presentation',
+        'embed_id' => 'ABC',
+        'view_name' => 'embed',
+        'query_string' => '',
     ]);
 });
 
@@ -249,6 +259,31 @@ it('turns a fusion table iframe into a shortcode keeping its query', function ()
 
     expect(GoogleDocs::reversal($content))->toBe('[googledocs url="https://www.google.com/fusiontables/embedviz?q=1&viz=GVIZ"]');
 });
+
+it('reverses an iframe with no query string without a warning or deprecation', function (string $src, ?string $expected): void {
+    $errors = [];
+    set_error_handler(function (int $no, string $message) use (&$errors): bool {
+        $errors[] = $message;
+
+        return true;
+    });
+
+    try {
+        $result = GoogleDocs::reversal('<iframe src="'.$src.'"></iframe>');
+    } finally {
+        restore_error_handler();
+    }
+
+    expect($errors)->toBe([])
+        ->and($result)->toBe($expected);
+})->with([
+    'spreadsheet' => ['https://docs.google.com/spreadsheet/d/ABC/pubhtml', '[googledocs url="https://docs.google.com/spreadsheets/d/ABC"]'],
+    'spreadsheets' => ['https://docs.google.com/spreadsheets/d/ABC/pubhtml', '[googledocs url="https://docs.google.com/spreadsheets/d/ABC"]'],
+    'presentation' => ['https://docs.google.com/presentation/d/ABC/embed', '[googledocs url="https://docs.google.com/presentation/d/ABC"]'],
+    'map' => ['https://www.google.com/map/d/embed', null],
+    'maps' => ['https://www.google.com/maps/d/embed', null],
+    'fusion table' => ['https://www.google.com/fusiontables/embedviz', '[googledocs url="https://www.google.com/fusiontables/embedviz"]'],
+]);
 
 it('leaves iframes from other hosts alone', function (): void {
     $content = '<iframe src="https://example.com/document/d/ABC"></iframe>';

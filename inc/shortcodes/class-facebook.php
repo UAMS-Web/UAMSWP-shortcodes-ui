@@ -58,6 +58,7 @@ class Facebook extends Shortcode
     {
 
         /* Pattern for script-based Facebook embeds */
+        // @pest-mutate-ignore: FalseToTrue
         if (stripos($content, '<script') !== false) {
 
             if (preg_match_all('#<div id="fb-root"></div><script>[^<]+</script><div class="fb-post" [^>]+href=[\'\"]([^\'\"]+)[\'\"].+</div>(</div>)?#', $content, $matches)) {

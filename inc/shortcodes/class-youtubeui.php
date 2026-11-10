@@ -51,8 +51,12 @@ class YouTubeUI extends Shortcode
     public static function callback($attrs, $content = ''): string
     {
 
+        if (empty($attrs['url'])) {
+            return '';
+        }
+
         $host = self::parse_url($attrs['url'], PHP_URL_HOST);
-        if (empty($attrs['url']) || ! in_array($host, self::$valid_hosts, true)) {
+        if (! in_array($host, self::$valid_hosts, true)) {
             return '';
         }
 
@@ -65,7 +69,7 @@ class YouTubeUI extends Shortcode
             $path = self::parse_url($attrs['url'], PHP_URL_PATH);
 
             $query = self::parse_url(str_replace(['&amp;', '&#038;'], '&', $attrs['url']), PHP_URL_QUERY);
-            parse_str($query, $args);
+            parse_str((string) $query, $args);
             if (empty($args['v'])) {
                 return '';
             }
@@ -84,6 +88,6 @@ class YouTubeUI extends Shortcode
 
         $embed_url = apply_filters('uams_shortcodes_youtube_embed_url', $embed_url, $attrs);
 
-        return sprintf('<div class="nc-video-player" role="region" aria-label="video" tabindex=-1><div class="tube-wrapper"><iframe class="shortcake-bakery-responsive" data-uams-youtube-type="single" data-uams-youtube="%s" width="640" height="360" frameborder="0" allowfullscreen="1" src="%s?rel=0"></iframe></div></div>', $embed_id, esc_url($embed_url));
+        return sprintf('<div class="nc-video-player" role="region" aria-label="video" tabindex=-1><div class="tube-wrapper"><iframe class="shortcake-bakery-responsive" data-uams-youtube-type="single" data-uams-youtube="%s" width="640" height="360" frameborder="0" allowfullscreen="1" src="%s"></iframe></div></div>', esc_attr($embed_id), esc_url(add_query_arg('rel', '0', $embed_url)));
     }
 }

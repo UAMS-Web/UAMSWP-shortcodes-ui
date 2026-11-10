@@ -87,3 +87,23 @@ it('describes its Shortcake attributes', function (): void {
         ->and($args['listItemImage'])->toBe('dashicons-location-alt')
         ->and(Map::URL)->toBe('//maps.uams.edu/full-screen/?marker=');
 });
+
+it('falls back to the default size when the width or height is not a scalar', function (string $attribute, string $expected): void {
+    $notices = [];
+    set_error_handler(function (int $level, string $message) use (&$notices): bool {
+        $notices[] = $message;
+
+        return true;
+    });
+
+    try {
+        $html = Map::callback(['building' => '135', $attribute => ['1']]);
+    } finally {
+        restore_error_handler();
+    }
+
+    expect($html)->toContain($expected);
+})->with([
+    ['width', '<iframe width="100%" height="480px" '],
+    ['height', '<iframe width="100%" height="480px" '],
+]);

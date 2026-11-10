@@ -72,6 +72,25 @@ it('adds a dismiss button when dismiss is set', function (): void {
         ->toContain('<button type="button" class="close" data-dismiss="alert"');
 });
 
+it('adds a dismiss button for the string values a shortcode attribute carries', function (string $dismiss): void {
+    expect(Alert::callback(['dismiss' => $dismiss, 'customclass' => ''], 'x'))
+        ->toContain('data-dismiss="alert"');
+})->with(['1', 'true']);
+
+it('reads the SVG from the plugin path whatever the working directory is', function (): void {
+    $svg = file_get_contents(UAMS_SHORTCAKES_PATH.'assets/images/dashicons/info.svg');
+    $directory = getcwd();
+    chdir(sys_get_temp_dir());
+
+    try {
+        $html = Alert::callback(['customclass' => ''], 'x');
+    } finally {
+        chdir($directory);
+    }
+
+    expect($html)->toContain('<span aria-hidden="true">'.$svg.'</span>');
+});
+
 it('sanitizes each comma-separated custom class', function (): void {
     expect(Alert::callback(['customclass' => 'one,t wo!'], 'x'))->toContain('alert-info one two"');
 });

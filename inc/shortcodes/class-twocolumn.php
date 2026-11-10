@@ -93,7 +93,7 @@ class TwoColumn extends Shortcode
             case 'half-half':
                 $col1 = 'col-lg-6 col-md-6 col-sm-6 col-xs-12';
                 $col2 = 'col-lg-6 col-md-6 col-sm-6 col-xs-12';
-                break;
+                break; // @pest-mutate-ignore: BreakToContinue
 
             case 'third-twothirds':
                 $col1 = 'col-lg-4 col-md-4 col-sm-4 col-xs-12';

@@ -516,7 +516,7 @@ abstract class Shortcode
         $ret = parse_url($url, $component);
         // @codingStandardsIgnoreEnd
         if ($added_protocol && $ret) {
-            if ($component === -1 && isset($ret['scheme'])) {
+            if ($component === -1) {
                 unset($ret['scheme']);
             } elseif ($component === PHP_URL_SCHEME) {
                 $ret = '';
@@ -533,23 +533,20 @@ abstract class Shortcode
      */
     private static function parse_closed_tags($content, string $tag_name): false|array
     {
-
-        if (stripos($content, '<'.$tag_name) === false) {
-            return false;
-        }
-
-        if (preg_match_all('#(.+\r?\n?)?(<'.$tag_name.'([^>]+)>([^<]+)?</'.$tag_name.'>)(\r?\n?.+)?#', $content, $matches)) {
+        // Match the tag alone: a pattern that also consumed the neighboring lines swallowed an adjacent tag.
+        if (preg_match_all('#<'.$tag_name.'([^>]+)>([^<]+)?</'.$tag_name.'>#', $content, $matches, PREG_OFFSET_CAPTURE)) {
             $tags = [];
-            foreach ($matches[0] as $key => $value) {
+            foreach ($matches[0] as $key => [$original, $offset]) {
+                // The line before the tag, and the line after it, as the combined pattern used to report them.
+                $before = preg_match('#.+\r?\n?\z#', substr($content, 0, $offset), $line) ? $line[0] : '';
+                $after = preg_match('#\A\r?\n?.+#', substr($content, $offset + strlen($original)), $line) ? $line[0] : '';
+
                 $tag = new \stdClass;
-                $tag->original = $matches[2][$key];
-                $tag->before = $matches[1][$key];
-                $tag->attrs = [
-                    'src' => '',
-                ];
-                $tag->inner = $matches[4][$key];
-                $tag->after = $matches[5][$key];
-                $tag->attrs = self::parse_tag_attributes($matches[3][$key]);
+                $tag->original = $original;
+                $tag->before = $before;
+                $tag->inner = $matches[2][$key][0];
+                $tag->after = $after;
+                $tag->attrs = self::parse_tag_attributes($matches[1][$key][0]);
                 $tags[] = $tag;
             }
 
@@ -603,7 +600,7 @@ abstract class Shortcode
                     $atts[$m[3]] = stripcslashes($m[4]);
                 } elseif (! empty($m[5])) {
                     $atts[$m[5]] = stripcslashes($m[6]);
-                } elseif (isset($m[7]) && strlen($m[7])) {
+                } elseif (($m[7] ?? '') !== '') {
                     $atts[$m[7]] = null;
                 } elseif (isset($m[8])) {
                     $atts[$m[8]] = null;
@@ -623,10 +620,6 @@ abstract class Shortcode
      */
     protected static function make_replacements_to_content($content, $replacements)
     {
-        if (empty($replacements)) {
-            return $content;
-        }
-
-        return str_replace(array_keys($replacements), array_values($replacements), $content);
+        return str_replace(array_keys($replacements), $replacements, $content);
     }
 }

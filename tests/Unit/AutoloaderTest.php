@@ -45,6 +45,14 @@ it('maps an underscore in the class name to a hyphen in the file name', function
         ->toBe(['loaded' => true, 'files' => ['class-image-comparison.php', 'class-shortcode.php']]);
 });
 
+it('maps a class name with a leading backslash to its file', function (): void {
+    $loader = (new ReflectionClass(UAMS_Shortcakes::class))->newInstanceWithoutConstructor();
+
+    expect($loader->shortcode_class_file('\\'.Image_Comparison::class))
+        ->toEndWith('/shortcodes/class-image-comparison.php')
+        ->and($loader->shortcode_class_file('Other\Thing'))->toBeNull();
+});
+
 it('requires nothing for a class outside the namespace', function (): void {
     expect(autoloadInChild('Other\Thing'))->toBe(['loaded' => false, 'files' => []]);
 });

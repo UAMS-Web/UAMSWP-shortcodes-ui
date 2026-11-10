@@ -113,7 +113,7 @@ it('registers its scripts and styles', function (): void {
 });
 
 it('hooks registration and the editor preview assets', function (): void {
-    expectAdded('wp_enqueue_scripts')->once();
+    expectAdded('wp_enqueue_scripts')->once()->with(Image_Comparison::class.'::action_init_register_scripts');
     expectAdded('shortcode_ui_after_do_shortcode')->once();
 
     Image_Comparison::setup_actions();
@@ -146,4 +146,17 @@ it('describes its Shortcake attributes', function (): void {
     expect($args['label'])->toBe('Image Comparison')
         ->and(array_column($args['attrs'], 'attr'))->toBe(['left', 'right', 'position'])
         ->and(array_keys($args['attrs'][2]['options']))->toBe(['center', 'mostlyleft', 'mostlyright']);
+});
+
+it('asks for the large size of each image, not the icon', function (): void {
+    $calls = [];
+    when('wp_get_attachment_image_src')->alias(function (...$args) use (&$calls): array {
+        $calls[] = $args;
+
+        return ['https://img.test/'.$args[0].'.jpg', 100, 100];
+    });
+
+    Image_Comparison::callback(['left' => '1', 'right' => '2']);
+
+    expect($calls)->toBe([['1', 'large', false], ['2', 'large', false]]);
 });

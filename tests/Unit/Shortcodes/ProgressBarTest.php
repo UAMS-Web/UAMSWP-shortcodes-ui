@@ -77,6 +77,10 @@ it('prints an allowed type and falls back to progress-bar-primary for any other'
         ->and(renderProgressBar(['type' => 'bogus" onclick="x']))->not->toContain('onclick');
 });
 
+it('keeps each allowed type', function (string $type): void {
+    expect(renderProgressBar(['type' => $type]))->toContain('class="progress-bar '.$type.'"');
+})->with(['progress-bar-default', 'progress-bar-success', 'progress-bar-info', 'progress-bar-warning', 'progress-bar-danger']);
+
 it('falls back to progress-bar-primary for an empty type', function (): void {
     expect(renderProgressBar(['type' => '']))->toContain('class="progress-bar progress-bar-primary"');
 });

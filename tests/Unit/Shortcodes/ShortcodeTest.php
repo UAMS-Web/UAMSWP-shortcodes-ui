@@ -225,16 +225,56 @@ it('parses iframes separated by a blank line as separate matches', function (): 
         ->and($iframes[1]->attrs['src'])->toBe('https://a.test/2');
 });
 
-it('currently finds only the last of two iframes on adjacent lines', function (): void {
-    // The leading (.+\r?\n?) group of the pattern swallows the first iframe line as "before" text.
-    $content = "<iframe src=\"https://a.test/1\"></iframe>\n<iframe src=\"https://a.test/2\"></iframe>";
-    $iframes = ShortcodeProbe::expose_parse_iframes($content);
+it('parses every iframe when two or three sit on adjacent lines', function (string $eol): void {
+    $one = '<iframe src="https://a.test/1"></iframe>';
+    $two = '<iframe src="https://a.test/2"></iframe>';
+    $three = '<iframe src="https://a.test/3"></iframe>';
 
-    expect($iframes)->toHaveCount(1)
-        ->and($iframes[0]->attrs['src'])->toBe('https://a.test/2');
+    $pair = ShortcodeProbe::expose_parse_iframes($one.$eol.$two);
+    $trio = ShortcodeProbe::expose_parse_iframes($one.$eol.$two.$eol.$three);
+
+    expect(array_column($pair, 'original'))->toBe([$one, $two])
+        ->and(array_column($trio, 'original'))->toBe([$one, $two, $three])
+        ->and(array_map(fn ($tag) => $tag->attrs['src'], $trio))->toBe(['https://a.test/1', 'https://a.test/2', 'https://a.test/3']);
+})->with(["\n", "\r\n"]);
+
+it('reports the neighboring line as the before and after text of adjacent iframes', function (): void {
+    $one = '<iframe src="https://a.test/1"></iframe>';
+    $two = '<iframe src="https://a.test/2"></iframe>';
+    $iframes = ShortcodeProbe::expose_parse_iframes("intro\n".$one."\n".$two."\noutro");
+
+    expect($iframes[0]->before)->toBe("intro\n")
+        ->and($iframes[0]->after)->toBe("\n".$two)
+        ->and($iframes[1]->before)->toBe($one."\n")
+        ->and($iframes[1]->after)->toBe("\noutro");
 });
 
-it('does not match an uppercase tag even though the pre-check is case-insensitive', function (): void {
+it('reports empty before and after text for an iframe alone or set apart by blank lines', function (): void {
+    $one = '<iframe src="https://a.test/1"></iframe>';
+    $two = '<iframe src="https://a.test/2"></iframe>';
+
+    $alone = ShortcodeProbe::expose_parse_iframes($one);
+    $apart = ShortcodeProbe::expose_parse_iframes($one.'
+
+'.$two);
+
+    expect($alone[0]->before)->toBe('')
+        ->and($alone[0]->after)->toBe('')
+        ->and($apart[0]->before)->toBe('')
+        ->and($apart[0]->after)->toBe('')
+        ->and($apart[1]->before)->toBe('')
+        ->and($apart[1]->after)->toBe('');
+});
+
+it('parses every script when two sit on adjacent lines', function (): void {
+    $scripts = ShortcodeProbe::expose_parse_scripts("<script src=\"a.js\">var a;</script>\n<script src=\"b.js\">var b;</script>");
+
+    expect($scripts)->toHaveCount(2)
+        ->and($scripts[0]->inner)->toBe('var a;')
+        ->and($scripts[1]->inner)->toBe('var b;');
+});
+
+it('does not match an uppercase tag because the pattern is case-sensitive', function (): void {
     expect(ShortcodeProbe::expose_parse_iframes('<IFRAME src="x"></IFRAME>'))->toBeFalse();
 });
 
@@ -266,6 +306,14 @@ it('unescapes backslash sequences in attribute values', function (): void {
 
 it('treats non-breaking spaces between attributes as separators', function (): void {
     expect(ShortcodeProbe::expose_parse_tag_attributes("a=\"1\"\u{00a0}b=\"2\""))->toBe(['a' => '1', 'b' => '2']);
+});
+
+it('skips an empty quoted token and keeps a quoted word', function (): void {
+    expect(ShortcodeProbe::expose_parse_tag_attributes('"" "word"'))->toBe(['word' => null]);
+});
+
+it('currently drops an attribute whose name is the string 0', function (): void {
+    expect(ShortcodeProbe::expose_parse_tag_attributes("0=\"x\" 0='y' 0=z"))->toBe([]);
 });
 
 it('returns an empty array for empty attribute text', function (): void {

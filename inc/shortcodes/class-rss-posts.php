@@ -92,6 +92,7 @@ class RSS_Posts extends Shortcode
         $attrs = array_merge(self::$defaults, $attrs);
 
         // Only grid or list. Otherwise, default to grid.
+        // @pest-mutate-ignore: EqualToIdentical
         $display = ($attrs['display'] == 'grid' || $attrs['display'] == 'list') ? sanitize_text_field($attrs['display']) : 'grid';
 
         // Only integers. Otherwise, default to 3.
@@ -119,12 +120,16 @@ class RSS_Posts extends Shortcode
 
         $output = '';
 
+        // @pest-mutate-ignore: EqualToIdentical
         if ($maxitems == 0) {
+            // @pest-mutate-ignore: ConcatEqualToEqual
             $output .= 'No items';
         } else {
 
+            // @pest-mutate-ignore: EqualToIdentical
             if ($attrs['display'] == 'list') {
                 $col = 'col-md-12';
+                // @pest-mutate-ignore: EqualToIdentical
             } elseif ($attrs['display'] == 'grid') {
                 $col = 'col-lg-4 col-md-4 col-sm-12 col-xs-12';
             }

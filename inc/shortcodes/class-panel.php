@@ -127,19 +127,21 @@ class Panel extends Shortcode
 
         // Only headings or p. Otherwise, default to p.
         if (! empty($attrs['headingtype'])) {
-            $headingtype = (in_array($attrs['headingtype'], ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'])) ? sanitize_html_class($attrs['headingtype']) : 'p';
+            $headingtype = (in_array($attrs['headingtype'], ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'])) ? sanitize_html_class($attrs['headingtype']) : 'p';
         } else {
             $headingtype = 'p';
         }
 
         if (! empty($attrs['type'])) {
-            $type = (in_array($attrs['type'], ['panel-default', 'panel-primary', 'panel-success', 'panel-info', 'panel-warning', 'panel-danger'])) ? sanitize_html_class($attrs['type']) : 'panel-default';
+            $type = (in_array($attrs['type'], ['panel-primary', 'panel-success', 'panel-info', 'panel-warning', 'panel-danger'])) ? sanitize_html_class($attrs['type']) : 'panel-default';
         } else {
             $type = 'panel-default';
         }
 
+        // @pest-mutate-ignore: EqualToIdentical
         if ($attrs['style'] == 'noborder') {
             $style = 'noborder';
+            // @pest-mutate-ignore: EqualToIdentical
         } elseif ($attrs['style'] == 'simple') {
             $style = 'simple';
         } else {
@@ -148,13 +150,16 @@ class Panel extends Shortcode
 
         if (! empty($attrs['heading'])) {
             $id = self::text_to_css_friendly($attrs['heading']);
+            // @pest-mutate-ignore: IncrementInteger, DecrementInteger
             $id = $id.'-'.random_int(0, mt_getrandmax()); // Add a random integer to the ID, in case users have multiple panels with the same heading. They shouldn't, but if they do collapsible behavior gets weird.
         } else {
             $id = null;
         }
 
+        // @pest-mutate-ignore: NotEqualToNotIdentical
         if ($attrs['state'] != 'static') {
 
+            // @pest-mutate-ignore: EqualToIdentical
             if ($attrs['state'] == 'closed') {
                 $collapsed = 'collapsed';
             } else {
@@ -177,6 +182,7 @@ class Panel extends Shortcode
             );
         }
 
+        // @pest-mutate-ignore: NotEqualToNotIdentical
         if ($attrs['state'] != 'closed') {
             $in = 'in';
         } else {

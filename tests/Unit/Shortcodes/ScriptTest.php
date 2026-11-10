@@ -147,7 +147,7 @@ it('returns content without script tags unchanged', function (): void {
     expect(Script::reversal('<p>Plain</p>'))->toBe('<p>Plain</p>');
 });
 
-it('currently considers only the last tag when several are on adjacent lines', function (): void {
+it('considers every tag when several are on adjacent lines', function (): void {
     scriptFilters(['cdn.example.test']);
 
     $first = '<script src="https://cdn.example.test/a.js"></script>
@@ -155,7 +155,8 @@ it('currently considers only the last tag when several are on adjacent lines', f
     $second = '<script src="https://evil.test/b.js"></script>
 <script src="https://cdn.example.test/a.js"></script>';
 
-    expect(Script::reversal($first))->toBe($first)
+    expect(Script::reversal($first))->toBe('[script src="https://cdn.example.test/a.js"]
+<script src="https://evil.test/b.js"></script>')
         ->and(Script::reversal($second))->toBe('<script src="https://evil.test/b.js"></script>
 [script src="https://cdn.example.test/a.js"]');
 });

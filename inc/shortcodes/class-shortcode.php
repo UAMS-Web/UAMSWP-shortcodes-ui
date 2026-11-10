@@ -538,18 +538,20 @@ abstract class Shortcode
             return false;
         }
 
-        if (preg_match_all('#(.+\r?\n?)?(<'.$tag_name.'([^>]+)>([^<]+)?</'.$tag_name.'>)(\r?\n?.+)?#', $content, $matches)) {
+        // Match the tag alone: a pattern that also consumed the neighboring lines swallowed an adjacent tag.
+        if (preg_match_all('#<'.$tag_name.'([^>]+)>([^<]+)?</'.$tag_name.'>#', $content, $matches, PREG_OFFSET_CAPTURE)) {
             $tags = [];
-            foreach ($matches[0] as $key => $value) {
+            foreach ($matches[0] as $key => [$original, $offset]) {
+                // The line before the tag, and the line after it, as the combined pattern used to report them.
+                $before = preg_match('#(.+\r?\n?)\z#', substr($content, 0, $offset), $line) ? $line[1] : '';
+                $after = preg_match('#\A(\r?\n?.+)#', substr($content, $offset + strlen($original)), $line) ? $line[1] : '';
+
                 $tag = new \stdClass;
-                $tag->original = $matches[2][$key];
-                $tag->before = $matches[1][$key];
-                $tag->attrs = [
-                    'src' => '',
-                ];
-                $tag->inner = $matches[4][$key];
-                $tag->after = $matches[5][$key];
-                $tag->attrs = self::parse_tag_attributes($matches[3][$key]);
+                $tag->original = $original;
+                $tag->before = $before;
+                $tag->inner = $matches[2][$key][0];
+                $tag->after = $after;
+                $tag->attrs = self::parse_tag_attributes($matches[1][$key][0]);
                 $tags[] = $tag;
             }
 

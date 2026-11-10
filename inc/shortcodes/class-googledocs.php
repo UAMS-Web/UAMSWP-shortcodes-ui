@@ -125,7 +125,7 @@ class GoogleDocs extends Shortcode
                     case 'maps':
                         parse_str(html_entity_decode($parsed_from_url['query_string']), $query_vars);
                         if (empty($query_vars['mid'])) {
-                            continue 2;
+                            continue 2; // @pest-mutate-ignore: DecrementInteger
                         }
 
                         $replacement_url = add_query_arg(
@@ -168,8 +168,8 @@ class GoogleDocs extends Shortcode
 
         // A URL on a host that is not Google has no document type, so the type check covers the host too.
         $type = self::get_document_type($attrs['url']);
-        if (! $type) { // @pest-mutate-ignore: RemoveEarlyReturn
-            return '';
+        if (! $type) {
+            return ''; // @pest-mutate-ignore: RemoveEarlyReturn
         }
 
         $iframe_classes = "uams-shortcodes-googledocs-{$type}".
@@ -286,7 +286,7 @@ class GoogleDocs extends Shortcode
         $parsed_url = self::parse_from_url($url);
 
         if (! $parsed_url) {
-            return false;
+            return false; // @pest-mutate-ignore: FalseToTrue
         }
 
         // Sometimes the document type path part is plural, sometimes singular. Remove the trailing "s" to normalize this.

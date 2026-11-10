@@ -86,22 +86,22 @@ it('returns an empty string for a host that is not Vimeo', function (string $url
     'empty url' => '',
 ]);
 
-it('uses an empty id when the url has only a slash path', function (): void {
-    expect(Vimeo::callback(['url' => 'https://vimeo.com/']))->toContain('src="https://player.vimeo.com/video/"');
+it('renders nothing when the url has only a slash path', function (): void {
+    expect(Vimeo::callback(['url' => 'https://vimeo.com/']))->toBe('');
 });
 
-it('raises a missing-key warning when the url attribute is absent, then returns an empty string', function (): void {
+it('returns an empty string without a warning when the url attribute is absent', function (): void {
     [$html, $errors] = vimeoCapture(fn (): string => Vimeo::callback([]));
 
     expect($html)->toBe('')
-        ->and($errors)->toContain('Undefined array key "url"');
+        ->and($errors)->toBe([]);
 });
 
-it('raises a null-to-trim deprecation for a url with no path', function (): void {
+it('renders nothing without a deprecation for a url with no path', function (): void {
     [$html, $errors] = vimeoCapture(fn (): string => Vimeo::callback(['url' => 'https://vimeo.com']));
 
-    expect($html)->toContain('src="https://player.vimeo.com/video/"')
-        ->and($errors)->not->toBeEmpty();
+    expect($html)->toBe('')
+        ->and($errors)->toBe([]);
 });
 
 it('passes the embed url through esc_url', function (): void {

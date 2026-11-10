@@ -43,8 +43,25 @@ it('takes the embed id from the path of a short url', function (): void {
 });
 
 it('renders nothing for a short url with no path', function (): void {
-    expect(YouTube::callback(['url' => 'https://youtu.be/']))->toBe('')
-        ->and(YouTube::callback(['url' => 'https://youtu.be']))->toBe('');
+    expect(YouTube::callback(['url' => 'https://youtu.be/']))->toBe('');
+});
+
+it('renders nothing without a deprecation for a short url with no path component', function (): void {
+    $errors = [];
+    set_error_handler(function (int $no, string $message) use (&$errors): bool {
+        $errors[] = $message;
+
+        return true;
+    });
+
+    try {
+        $html = YouTube::callback(['url' => 'https://youtu.be']);
+    } finally {
+        restore_error_handler();
+    }
+
+    expect($html)->toBe('')
+        ->and($errors)->toBe([]);
 });
 
 it('adds the playlist id to the embed url', function (): void {

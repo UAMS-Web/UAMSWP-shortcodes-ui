@@ -82,6 +82,14 @@ it('is disabled until the CORS proxy filter enables it', function (): void {
     expect(Asset_Proxy::is_enabled())->toBeTrue();
 });
 
+it('reports a boolean for a filter that returns a truthy or falsy value that is not one', function (): void {
+    assetProxyFilters(['uams_shortcodes_pdf_enable_cors_proxy' => '1']);
+    expect(Asset_Proxy::is_enabled())->toBeTrue();
+
+    assetProxyFilters(['uams_shortcodes_pdf_enable_cors_proxy' => '']);
+    expect(Asset_Proxy::is_enabled())->toBeFalse();
+});
+
 it('allows the home, site and uploads hosts by default, lowercased and deduplicated', function (): void {
     expect(Asset_Proxy::allowed_hosts())->toBe(['www.example.test', 'example.test', 'files.example.test']);
 });

@@ -93,7 +93,8 @@ class LiveWhale_Widget extends Shortcode
         $return = '';
 
         if ($customclasses !== []) {
-            $return .= '<div class="'.$customclasses.'">'; // @pest-mutate-ignore: ConcatEqualToEqual
+            // @pest-mutate-ignore: ConcatEqualToEqual
+            $return .= '<div class="'.$customclasses.'">';
         }
 
         $return .= '

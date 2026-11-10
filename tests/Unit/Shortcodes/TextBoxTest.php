@@ -63,6 +63,10 @@ it('adds the full width class when fullscreen is truthy', function (): void {
         ->and(TextBox::callback(['fullscreen' => '', 'customclass' => ''], 'x'))->not->toContain('uams-full-width');
 });
 
+it('adds the full width class for the string a shortcode attribute carries', function (): void {
+    expect(TextBox::callback(['fullscreen' => '1', 'customclass' => ''], 'x'))->toContain('uams-full-width');
+});
+
 it('prints the title inside an h2', function (): void {
     expect(TextBox::callback(['titletxt' => 'A <b>Title</b>', 'customclass' => ''], 'x'))
         ->toContain('<h2 class="text-box-title">A <b>Title</b></h2>');

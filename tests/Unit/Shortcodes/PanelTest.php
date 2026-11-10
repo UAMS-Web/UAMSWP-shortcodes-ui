@@ -152,3 +152,19 @@ it('describes its Shortcake attributes', function (): void {
         ->and($args['inner_content']['encode'])->toBeTrue()
         ->and(array_keys($style['options']))->toBe(['boostrap', 'noborder', 'simple']);
 });
+
+it('reads the toggle icons from the plugin path whatever the working directory is', function (): void {
+    $minus = file_get_contents(UAMS_SHORTCAKES_PATH.'assets/images/glyphicon/minus.svg');
+    $plus = file_get_contents(UAMS_SHORTCAKES_PATH.'assets/images/glyphicon/plus-no-bkgrnd.svg');
+    $directory = getcwd();
+    chdir(sys_get_temp_dir());
+
+    try {
+        $html = Panel::callback(['heading' => 'Heading', 'state' => 'open', 'customclass' => ''], 'x');
+    } finally {
+        chdir($directory);
+    }
+
+    expect($html)->toContain('<span aria-hidden="true">'.$minus.'</span> Show Less')
+        ->toContain('<span aria-hidden="true">'.$plus.'</span> Show More');
+});

@@ -45,6 +45,20 @@ it('maps an underscore in the class name to a hyphen in the file name', function
         ->toBe(['loaded' => true, 'files' => ['class-image-comparison.php', 'class-shortcode.php']]);
 });
 
+it('strips a leading backslash from the class name before it matches the namespace', function (): void {
+    $root = dirname(__DIR__, 2);
+    $code = 'require '.var_export($root.'/tests/bootstrap.php', true).';'
+        .'$before = get_included_files();'
+        .'(new ReflectionClass(UAMS_Shortcakes::class))->newInstanceWithoutConstructor()->autoload_shortcode_classes("\UAMS_Shortcakes\Shortcodes\Lead");'
+        .'echo json_encode(array_values(array_map("basename", array_diff(get_included_files(), $before))));';
+    $script = tempnam(sys_get_temp_dir(), 'autoload');
+    file_put_contents($script, '<?php '.$code);
+    $output = shell_exec(escapeshellarg(PHP_BINARY).' '.escapeshellarg($script).' 2>&1');
+    unlink($script);
+
+    expect(json_decode((string) $output, true, 512, JSON_THROW_ON_ERROR))->toContain('class-lead.php');
+});
+
 it('requires nothing for a class outside the namespace', function (): void {
     expect(autoloadInChild('Other\Thing'))->toBe(['loaded' => false, 'files' => []]);
 });

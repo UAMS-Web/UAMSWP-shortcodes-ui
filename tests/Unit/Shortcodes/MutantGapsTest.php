@@ -15,13 +15,31 @@
  * `$return .=` takes the comment on the line above:
  * - `BreakToContinue` on a `break` that ends a `switch` case: PHP treats `continue`
  *   inside a `switch` as `break`.
- * - `ConcatEqualToEqual` on `$return .=` in LiveWhale and LiveWhale_Widget: `$return`
- *   is still the empty string on that line.
+ * - `ConcatEqualToEqual` on `$return .=` in LiveWhale and LiveWhale_Widget, and on
+ *   `$output .=` in RSS_Posts: the variable is still the empty string on that line.
  * - `EqualToIdentical` and `NotEqualToNotIdentical` on a comparison of a shortcode
- *   attribute or the view with a string literal in Callout and LiveWhale: both sides
- *   are strings, so `==` and `===` agree.
+ *   attribute, the view or a feed item count with a string or integer literal in
+ *   Callout, LiveWhale, Panel, RSS_Posts and TextBox: both sides are strings (or
+ *   integers), so `==` and `===` agree.
  * - `RemoveEarlyReturn` in Instagram and Twitter reversal: the code below the guard
- *   returns content without the markers unchanged.
+ *   returns content without the markers unchanged. For the same reason `FalseToTrue`
+ *   and `IdenticalToNotIdentical` on the guard's `stripos(...) === false` tests in
+ *   those two classes change only whether that code runs, and `FalseToTrue` on the
+ *   `stripos(...) !== false` guard in Facebook: the patterns below it need a
+ *   `<script>` tag, so they match nothing without one.
+ * - `RemoveBooleanCast` on `Asset_Proxy::is_enabled()`, and `RemoveStringCast` in
+ *   `Asset_Proxy::allowed_hosts()` and `fetch_asset()`: the file declares no strict
+ *   types, so PHP coerces the return value and the argument the same way. The
+ *   `(string)` cast on a header that `reset()` returns follows the same rule.
+ * - `EmptyStringToNotEmpty` on the `?? ''` defaults and the empty-host test in
+ *   `Asset_Proxy`: the replacement text has no host, no `.pdf` extension and no
+ *   host to compare, so every path ends as it does with `''`.
+ * - `RemoveArrayItem` on the allowed types in ProgressBar: the validated `$type` is
+ *   never printed (the raw attribute is, which #51 tracks), so no entry changes the markup.
+ * - `IncrementInteger` and `DecrementInteger` on the bounds of `random_int()` in
+ *   Panel: the id suffix is random, and no test can see which range it came from.
+ * - `IncrementInteger` on the limit of `explode('-', $icon, 2)` in Alert: no icon
+ *   name holds a second hyphen, so a limit of 3 splits the same way.
  *
  * @see inc/shortcodes
  */

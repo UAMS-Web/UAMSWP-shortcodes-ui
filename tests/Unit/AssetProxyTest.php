@@ -208,3 +208,63 @@ it('returns null for a body over the size cap and the body at the cap', function
 
     expect(Asset_Proxy::get_instance()->fetch_asset('https://www.example.test/a.pdf'))->toBe('%PDF-1.7');
 });
+
+it('hands the allowed hosts filter a lowercased, deduplicated, reindexed list', function (): void {
+    $received = null;
+    stubs([
+        'home_url' => 'https://A.test/',
+        'site_url' => 'https://a.test/wp',
+        'wp_get_upload_dir' => ['baseurl' => 'https://B.test/uploads'],
+    ]);
+    when('apply_filters')->alias(function ($tag, $value) use (&$received) {
+        if ($tag === 'uams_shortcodes_asset_proxy_allowed_hosts') {
+            $received = $value;
+        }
+
+        return $value;
+    });
+
+    Asset_Proxy::allowed_hosts();
+
+    expect($received)->toBe(['a.test', 'b.test']);
+});
+
+it('leaves a URL without a host out of the allowed hosts', function (): void {
+    stubs(['site_url' => '/wp', 'wp_get_upload_dir' => []]);
+
+    expect(Asset_Proxy::allowed_hosts())->toBe(['www.example.test']);
+});
+
+it('returns the filtered allowed hosts lowercased and reindexed', function (): void {
+    assetProxyFilters(['uams_shortcodes_asset_proxy_allowed_hosts' => [3 => 'A.test', 7 => 'B.test']]);
+
+    expect(Asset_Proxy::allowed_hosts())->toBe(['a.test', 'b.test']);
+});
+
+it('casts the size cap to an integer before using it', function (): void {
+    $args = null;
+    when('apply_filters')->alias(function ($tag, $value) use (&$args) {
+        if ($tag === 'uams_shortcodes_asset_proxy_max_bytes') {
+            return 8.9;
+        }
+
+        if ($tag === 'uams_shortcodes_asset_proxy_request_args') {
+            $args = $value;
+        }
+
+        return $value;
+    });
+    when('wp_safe_remote_get')->justReturn(assetProxyResponse());
+
+    Asset_Proxy::get_instance()->fetch_asset('https://www.example.test/a.pdf');
+
+    expect($args['limit_response_size'])->toBe(9);
+});
+
+it('accepts a response code that arrives as a string', function (): void {
+    $response = assetProxyResponse();
+    $response['code'] = '200';
+    when('wp_safe_remote_get')->justReturn($response);
+
+    expect(Asset_Proxy::get_instance()->fetch_asset('https://www.example.test/a.pdf'))->toBe('%PDF-1.7');
+});

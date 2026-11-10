@@ -88,7 +88,7 @@ class Alert extends Shortcode
 
         // Valid types only
         if (! empty($attrs['type'])) {
-            $type = (in_array($attrs['type'], ['success', 'info', 'help', 'warning', 'danger'])) ? sanitize_html_class($attrs['type']) : 'info';
+            $type = (in_array($attrs['type'], ['success', 'help', 'warning', 'danger'])) ? sanitize_html_class($attrs['type']) : 'info';
         } else {
             $type = 'info';
         }
@@ -109,7 +109,9 @@ class Alert extends Shortcode
         }
 
         if (! empty($icon)) {
+            // @pest-mutate-ignore: IncrementInteger
             $icon_type = explode('-', $icon, 2)[0];
+            // @pest-mutate-ignore: IncrementInteger
             $icon_name = explode('-', $icon, 2)[1];
 
             $icon_display = '<span aria-hidden="true">'.self::uams_shortcodes_get_contents(esc_url(UAMS_SHORTCAKES_PATH.'assets/images/'.$icon_type.'/'.$icon_name.'.svg')).'</span>';

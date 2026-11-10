@@ -75,7 +75,7 @@ class Image_Comparison extends Shortcode
 
             case 'center':
                 $attrs['position'] = 50;
-                break;
+                break; // @pest-mutate-ignore: BreakToContinue
 
             case 'mostlyleft':
                 $attrs['position'] = 10;

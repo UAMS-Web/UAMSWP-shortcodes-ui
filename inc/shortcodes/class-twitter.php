@@ -23,6 +23,7 @@ class Twitter extends Shortcode
     public static function reversal($content)
     {
 
+        // @pest-mutate-ignore: FalseToTrue
         if (stripos($content, '<script') === false) {
             return $content; // @pest-mutate-ignore: RemoveEarlyReturn
         }
@@ -35,7 +36,7 @@ class Twitter extends Shortcode
                 $replacements[$value] = '['.$shortcode_tag.' url="'.esc_url_raw($matches[2][$key]).'"]';
             }
 
-            $content = str_replace(array_keys($replacements), array_values($replacements), $content);
+            $content = self::make_replacements_to_content($content, $replacements);
         }
 
         return $content;

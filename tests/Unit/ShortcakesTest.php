@@ -287,3 +287,31 @@ it('registers its hooks and assets when the instance is first created', function
     expect(UAMS_Shortcakes::get_instance())->toBe($first)
         ->and($hooks)->toContain('init', 'pre_kses', 'widget_text', 'wp_ajax_shortcake_bakery_embed_reverse');
 });
+
+it('registers every action the loader listens to, and its class autoloader', function (): void {
+    $hooks = [];
+    when('add_action')->alias(function (string $hook) use (&$hooks): void {
+        $hooks[] = $hook;
+    });
+    $before = spl_autoload_functions();
+
+    (new ReflectionMethod(UAMS_Shortcakes::class, 'setup_actions'))->invoke($this->shortcakes);
+    $registered = array_values(array_filter(
+        spl_autoload_functions(),
+        fn (callable $loader): bool => $loader instanceof Closure && (new ReflectionFunction($loader))->getClosureThis() === $this->shortcakes
+    ));
+    foreach ($registered as $loader) {
+        spl_autoload_unregister($loader);
+    }
+
+    expect($hooks)->toBe([
+        'init',
+        'shortcode_ui_after_do_shortcode',
+        'shortcode_ui_loaded_editor',
+        'wp_ajax_shortcake_bakery_embed_reverse',
+        'enqueue_shortcode_ui',
+        'wp_enqueue_scripts',
+    ])
+        ->and($registered)->toHaveCount(1)
+        ->and(spl_autoload_functions())->toBe($before);
+});

@@ -101,7 +101,7 @@ class ThreeColumn extends Shortcode
                 $col1 = 'col-lg-4 col-md-4 col-sm-4 col-xs-12';
                 $col2 = 'col-lg-4 col-md-4 col-sm-4 col-xs-12';
                 $col3 = 'col-lg-4 col-md-4 col-sm-4 col-xs-12';
-                break;
+                break; // @pest-mutate-ignore: BreakToContinue
 
             case 'quarter-quarter-half':
                 $col1 = 'col-lg-3 col-md-3 col-sm-3 col-xs-12';

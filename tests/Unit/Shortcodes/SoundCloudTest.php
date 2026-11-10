@@ -72,7 +72,7 @@ it('renders nothing for an empty url or a host that is not SoundCloud', function
     'look-alike' => 'https://soundcloud.com.evil.test/artist/track',
 ]);
 
-it('currently warns about an undefined url key when the attribute is missing', function (): void {
+it('renders nothing without a warning when the url attribute is missing', function (): void {
     $errors = [];
     set_error_handler(function (int $no, string $message) use (&$errors): bool {
         $errors[] = $message;
@@ -87,7 +87,7 @@ it('currently warns about an undefined url key when the attribute is missing', f
     }
 
     expect($html)->toBe('')
-        ->and($errors[0])->toBe('Undefined array key "url"');
+        ->and($errors)->toBe([]);
 });
 
 it('describes its Shortcake attributes', function (): void {

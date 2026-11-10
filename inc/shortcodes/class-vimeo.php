@@ -50,15 +50,23 @@ class Vimeo extends Shortcode
     {
 
         $valid_hosts = ['www.vimeo.com', 'vimeo.com'];
+        if (empty($attrs['url'])) {
+            return '';
+        }
+
         $host = self::parse_url($attrs['url'], PHP_URL_HOST);
-        if (empty($attrs['url']) || ! in_array($host, $valid_hosts, true)) {
+        if (! in_array($host, $valid_hosts, true)) {
             return '';
         }
 
         // Video ID is always the first part of the path
         $path = self::parse_url($attrs['url'], PHP_URL_PATH);
-        $parts = explode('/', trim($path, '/'));
+        $parts = explode('/', trim((string) $path, '/'));
         $video_id = $parts[0];
+        if ($video_id === '') {
+            return '';
+        }
+
         $embed_url = 'https://player.vimeo.com/video/'.$video_id;
 
         return sprintf('<div class="nc-video-player" role="region" aria-label="video" tabindex=-1><div class="tube-wrapper"><iframe class="uams-shortcodes-responsive" width="500" height="281" src="%s" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div></div>', esc_url($embed_url));

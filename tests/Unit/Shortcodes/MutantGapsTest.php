@@ -27,6 +27,8 @@
  *   those two classes change only whether that code runs, and `FalseToTrue` on the
  *   `stripos(...) !== false` guard in Facebook: the patterns below it need a
  *   `<script>` tag, so they match nothing without one.
+ * - `RemoveEarlyReturn` on the `! $type` guard in `GoogleDocs::callback()`: without it the
+ *   type is `false`, no `switch` case matches, and the default case returns `''`.
  * - `RemoveBooleanCast` on `Asset_Proxy::is_enabled()`, and `RemoveStringCast` in
  *   `Asset_Proxy::allowed_hosts()` and `fetch_asset()`: the file declares no strict
  *   types, so PHP coerces the return value and the argument the same way. The

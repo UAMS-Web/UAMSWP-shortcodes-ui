@@ -108,32 +108,42 @@ it('renders nothing for a document type it does not embed', function (): void {
     expect(GoogleDocs::callback(['url' => 'https://docs.google.com/drawings/d/ABC']))->toBe('');
 });
 
-it('currently throws a TypeError for every embeddable type because the attribute reducer starts from null', function (string $url): void {
-    expect(fn (): string => GoogleDocs::callback(['url' => $url]))->toThrow(TypeError::class);
+it('renders the iframe for each embeddable type, responsive and without a size by default', function (string $url, string $expected): void {
+    expect(GoogleDocs::callback(['url' => $url]))->toBe($expected);
 })->with([
-    'document' => 'https://docs.google.com/document/d/ABC',
-    'spreadsheet' => 'https://docs.google.com/spreadsheets/d/ABC',
-    'presentation' => 'https://docs.google.com/presentation/d/ABC',
-    'form' => 'https://docs.google.com/forms/d/ABC',
-    'map' => 'https://www.google.com/maps/d/embed?mid=XYZ',
-    'fusiontable' => 'https://www.google.com/fusiontables/embedviz?q=1',
+    'document' => ['https://docs.google.com/document/d/ABC', '<iframe class="uams-shortcodes-googledocs-document uams-shortcodes-responsive" src="https://docs.google.com/document/d/ABC/pub?embedded=true" frameborder="0" marginheight="0" marginwidth="0" ></iframe>'],
+    'spreadsheet' => ['https://docs.google.com/spreadsheets/d/ABC', '<iframe class="uams-shortcodes-googledocs-spreadsheet uams-shortcodes-responsive" src="https://docs.google.com/spreadsheets/d/ABC/pubhtml?widget=true&headers=false" frameborder="0" marginheight="0" marginwidth="0" ></iframe>'],
+    'presentation' => ['https://docs.google.com/presentation/d/ABC', '<iframe class="uams-shortcodes-googledocs-presentation uams-shortcodes-responsive" src="https://docs.google.com/presentation/d/ABC/embed?start=false&loop=false&delayms=3000" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" ></iframe>'],
+    'form' => ['https://docs.google.com/forms/d/ABC', '<iframe class="uams-shortcodes-googledocs-form uams-shortcodes-responsive" src="https://docs.google.com/forms/d/ABC/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0" >Loading...</iframe>'],
+    'map' => ['https://www.google.com/maps/d/embed?mid=XYZ', '<iframe class="uams-shortcodes-googledocs-map uams-shortcodes-responsive" src="https://www.google.com/maps/d/embed?mid=XYZ" frameborder="0" marginheight="0" marginwidth="0" ></iframe>'],
+    'fusiontable' => ['https://www.google.com/fusiontables/embedviz?q=1', '<iframe class="uams-shortcodes-googledocs-fusiontable uams-shortcodes-responsive" src="https://www.google.com/fusiontables/embedviz?q=1" frameborder="0" marginheight="0" marginwidth="0" ></iframe>'],
 ]);
 
-it('builds the document embed url before failing', function (): void {
-    try {
-        GoogleDocs::callback(['url' => 'https://docs.google.com/document/d/ABC']);
-    } catch (TypeError) {
-    }
+it('renders the width and height and drops the responsive class when asked', function (string $url, string $expected): void {
+    expect(GoogleDocs::callback(['url' => $url, 'width' => '640', 'height' => '480', 'disableresponsiveness' => '1']))->toBe($expected);
+})->with([
+    'document' => ['https://docs.google.com/document/d/ABC', '<iframe class="uams-shortcodes-googledocs-document" src="https://docs.google.com/document/d/ABC/pub?embedded=true" width="640" height="480" frameborder="0" marginheight="0" marginwidth="0" ></iframe>'],
+    'spreadsheet' => ['https://docs.google.com/spreadsheets/d/ABC', '<iframe class="uams-shortcodes-googledocs-spreadsheet" src="https://docs.google.com/spreadsheets/d/ABC/pubhtml?widget=true&headers=false" width="640" height="480" frameborder="0" marginheight="0" marginwidth="0" ></iframe>'],
+    'presentation' => ['https://docs.google.com/presentation/d/ABC', '<iframe class="uams-shortcodes-googledocs-presentation" src="https://docs.google.com/presentation/d/ABC/embed?start=false&loop=false&delayms=3000" width="640" height="480" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" ></iframe>'],
+    'form' => ['https://docs.google.com/forms/d/ABC', '<iframe class="uams-shortcodes-googledocs-form" src="https://docs.google.com/forms/d/ABC/viewform?embedded=true" width="640" height="480" frameborder="0" marginheight="0" marginwidth="0" >Loading...</iframe>'],
+    'map' => ['https://www.google.com/maps/d/embed?mid=XYZ', '<iframe class="uams-shortcodes-googledocs-map" src="https://www.google.com/maps/d/embed?mid=XYZ" width="640" height="480" frameborder="0" marginheight="0" marginwidth="0" ></iframe>'],
+    'fusiontable' => ['https://www.google.com/fusiontables/embedviz?q=1', '<iframe class="uams-shortcodes-googledocs-fusiontable" src="https://www.google.com/fusiontables/embedviz?q=1" width="640" height="480" frameborder="0" marginheight="0" marginwidth="0" ></iframe>'],
+]);
+
+it('renders nothing for a url on another host that holds a Google path', function (): void {
+    expect(GoogleDocs::callback(['url' => 'https://evil.test/docs.google.com/document/d/ABC']))->toBe('')
+        ->and(googleDocsParse('https://evil.test/docs.google.com/document/d/ABC'))->toBeNull();
+});
+
+it('builds the document embed url', function (): void {
+    GoogleDocs::callback(['url' => 'https://docs.google.com/document/d/ABC']);
 
     expect($this->addQueryArgCalls)->toBe([[['embedded' => 'true'], 'https://docs.google.com/document/d/ABC/pub']]);
 });
 
 it('builds the spreadsheet embed url with headers off by default and on when asked', function (): void {
     foreach ([[], ['headers' => '1']] as $extra) {
-        try {
-            GoogleDocs::callback(['url' => 'https://docs.google.com/spreadsheets/d/ABC'] + $extra);
-        } catch (TypeError) {
-        }
+        GoogleDocs::callback(['url' => 'https://docs.google.com/spreadsheets/d/ABC'] + $extra);
     }
 
     expect($this->addQueryArgCalls)->toBe([
@@ -144,10 +154,7 @@ it('builds the spreadsheet embed url with headers off by default and on when ask
 
 it('builds the presentation embed url with start, loop and a 3000 ms default delay', function (): void {
     foreach ([[], ['start' => '1', 'loop' => '1', 'delayms' => '1500abc']] as $extra) {
-        try {
-            GoogleDocs::callback(['url' => 'https://docs.google.com/presentation/d/ABC'] + $extra);
-        } catch (TypeError) {
-        }
+        GoogleDocs::callback(['url' => 'https://docs.google.com/presentation/d/ABC'] + $extra);
     }
 
     expect($this->addQueryArgCalls)->toBe([
@@ -157,26 +164,20 @@ it('builds the presentation embed url with start, loop and a 3000 ms default del
 });
 
 it('builds the form embed url from the viewform view', function (): void {
-    try {
-        GoogleDocs::callback(['url' => 'https://docs.google.com/forms/d/ABC']);
-    } catch (TypeError) {
-    }
+    GoogleDocs::callback(['url' => 'https://docs.google.com/forms/d/ABC']);
 
     expect($this->addQueryArgCalls)->toBe([[['embedded' => 'true'], 'https://docs.google.com/forms/d/ABC/viewform']]);
 });
 
 it('does not touch the query arguments for maps and fusion tables', function (): void {
     foreach (['https://www.google.com/maps/d/embed?mid=XYZ', 'https://www.google.com/fusiontables/embedviz?q=1'] as $url) {
-        try {
-            GoogleDocs::callback(['url' => $url]);
-        } catch (TypeError) {
-        }
+        GoogleDocs::callback(['url' => $url]);
     }
 
     expect($this->addQueryArgCalls)->toBe([]);
 });
 
-it('currently warns about an undefined url key when the attribute is missing', function (): void {
+it('renders nothing without a warning when the url attribute is missing', function (): void {
     $errors = [];
     set_error_handler(function (int $no, string $message) use (&$errors): bool {
         $errors[] = $message;
@@ -191,7 +192,7 @@ it('currently warns about an undefined url key when the attribute is missing', f
     }
 
     expect($html)->toBe('')
-        ->and($errors[0])->toBe('Undefined array key "url"');
+        ->and($errors)->toBe([]);
 });
 
 it('describes its Shortcake attributes', function (): void {
@@ -248,10 +249,18 @@ it('turns a map iframe into a shortcode with the mid argument', function (): voi
     expect(GoogleDocs::reversal($content))->toBe('[googledocs url="https://www.google.com/maps/d/embed?mid=XYZ" width=500]');
 });
 
-it('currently returns null from reversal when a map iframe has no mid', function (): void {
-    $content = '<iframe src="https://www.google.com/maps/d/embed?foo=bar"></iframe>';
+it('leaves a map iframe without a mid in place and still converts the others', function (): void {
+    $map = '<iframe src="https://www.google.com/maps/d/embed?foo=bar"></iframe>';
+    $form = '<iframe src="https://docs.google.com/forms/d/ABC/viewform?embedded=true"></iframe>';
 
-    expect(GoogleDocs::reversal($content))->toBeNull();
+    expect(GoogleDocs::reversal($map))->toBe($map)
+        ->and(GoogleDocs::reversal($map."\n".$form))->toBe($map."\n".'[googledocs url="https://docs.google.com/forms/d/ABC"]');
+});
+
+it('decodes the encoded ampersands of a map query before it reads the mid', function (): void {
+    $content = '<iframe src="https://www.google.com/maps/d/embed?ll=1&amp;mid=XYZ"></iframe>';
+
+    expect(GoogleDocs::reversal($content))->toBe('[googledocs url="https://www.google.com/maps/d/embed?mid=XYZ"]');
 });
 
 it('turns a fusion table iframe into a shortcode keeping its query', function (): void {
@@ -260,7 +269,7 @@ it('turns a fusion table iframe into a shortcode keeping its query', function ()
     expect(GoogleDocs::reversal($content))->toBe('[googledocs url="https://www.google.com/fusiontables/embedviz?q=1&viz=GVIZ"]');
 });
 
-it('reverses an iframe with no query string without a warning or deprecation', function (string $src, ?string $expected): void {
+it('reverses an iframe with no query string without a warning or deprecation', function (string $src, string $expected): void {
     $errors = [];
     set_error_handler(function (int $no, string $message) use (&$errors): bool {
         $errors[] = $message;
@@ -280,8 +289,8 @@ it('reverses an iframe with no query string without a warning or deprecation', f
     'spreadsheet' => ['https://docs.google.com/spreadsheet/d/ABC/pubhtml', '[googledocs url="https://docs.google.com/spreadsheets/d/ABC"]'],
     'spreadsheets' => ['https://docs.google.com/spreadsheets/d/ABC/pubhtml', '[googledocs url="https://docs.google.com/spreadsheets/d/ABC"]'],
     'presentation' => ['https://docs.google.com/presentation/d/ABC/embed', '[googledocs url="https://docs.google.com/presentation/d/ABC"]'],
-    'map' => ['https://www.google.com/map/d/embed', null],
-    'maps' => ['https://www.google.com/maps/d/embed', null],
+    'map' => ['https://www.google.com/map/d/embed', '<iframe src="https://www.google.com/map/d/embed"></iframe>'],
+    'maps' => ['https://www.google.com/maps/d/embed', '<iframe src="https://www.google.com/maps/d/embed"></iframe>'],
     'fusion table' => ['https://www.google.com/fusiontables/embedviz', '[googledocs url="https://www.google.com/fusiontables/embedviz"]'],
 ]);
 

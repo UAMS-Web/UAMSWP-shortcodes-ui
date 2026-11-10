@@ -270,6 +270,7 @@ class LiveWhale extends Shortcode
         }
 
         if (isset($attrs['max'])) {
+            // @pest-mutate-ignore: NotEqualToNotIdentical
             if ($defaultview != 'month') {
                 $max = 'max: '.intval($attrs['max']).',';
             }
@@ -291,9 +292,11 @@ class LiveWhale extends Shortcode
         $return = '';
 
         if ($customclasses !== []) {
-            $return .= '<div class="'.$customclasses.'">'; // @pest-mutate-ignore: ConcatEqualToEqual
+            // @pest-mutate-ignore: ConcatEqualToEqual
+            $return .= '<div class="'.$customclasses.'">';
         }
 
+        // @pest-mutate-ignore: NotEqualToNotIdentical
         if ($defaultview != 'all') {
             $return .= '<!-- The Day, Week, Month, All Upcoming Events tabs -->
                         <div id="lw_cal_view_selector"></div>';

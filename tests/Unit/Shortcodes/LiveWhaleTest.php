@@ -140,6 +140,37 @@ it('maps only_starred to the string true or false', function (): void {
     expect($GLOBALS['starred'])->toBe('true');
 });
 
+it('treats a truthy string flag like a boolean for only_starred and include_repeats', function (): void {
+    LiveWhale::callback(['only_starred' => '1', 'include_repeats' => '1']);
+
+    expect($GLOBALS['starred'])->toBe('true')
+        ->and($GLOBALS['repeats'])->toBe('false');
+});
+
+it('uses the width attribute when the height is empty and the default width when both are', function (): void {
+    LiveWhale::callback(['width' => 300, 'height' => 0, 'include_repeats' => false]);
+    expect($GLOBALS['width'])->toBe(300);
+
+    LiveWhale::callback(['width' => 0, 'height' => 0, 'include_repeats' => false]);
+    expect($GLOBALS['width'])->toBe('200');
+});
+
+it('registers the footer script at priority 30 under its own callable name', function (): void {
+    expectAdded('wp_footer')->once()->with(LiveWhale::class.'::lw_wp_footer', 30);
+
+    LiveWhale::callback(['include_repeats' => false]);
+});
+
+it('keeps the opening wrapper ahead of the view selector and closes it after the container', function (): void {
+    [$withClass] = liveWhaleCapture(['customclass' => 'one', 'view' => 'week', 'include_repeats' => false]);
+    $without = LiveWhale::callback(['view' => 'week', 'include_repeats' => false]);
+
+    expect($withClass)->toStartWith('<div class="Array"><!-- The Day, Week, Month, All Upcoming Events tabs -->')
+        ->and(substr_count($withClass, '</div>'))->toBe(substr_count($without, '</div>') + 1)
+        ->and($withClass)->toEndWith('</div></div>')
+        ->and($without)->not->toEndWith('</div></div>');
+});
+
 it('inverts include_repeats into the hide_repeats flag', function (): void {
     LiveWhale::callback(['include_repeats' => false]);
     expect($GLOBALS['repeats'])->toBe('true');

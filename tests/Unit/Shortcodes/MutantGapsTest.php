@@ -8,14 +8,18 @@
  * attribute parser, the text of a plain mention in the preview hooks, and the
  * field the PDF proxy filter adds.
  *
- * Mutants no input can kill carry a `@pest-mutate-ignore` comment on their line in
- * `inc/shortcodes`, each with its reason:
+ * Mutants no input can kill carry a `@pest-mutate-ignore` comment in `inc/shortcodes`,
+ * each with its reason. A mutator that rewrites the commented statement itself
+ * (`break`, `return`) is ignored only by a comment on the same line, which the plugin
+ * matches by line number; a comment above such a statement does not stop it.
+ * `$return .=` takes the comment on the line above:
  * - `BreakToContinue` on a `break` that ends a `switch` case: PHP treats `continue`
  *   inside a `switch` as `break`.
- * - `DecrementInteger` on `isset($matches[1])` in the Callout video branches: a
- *   preg_match() that matched always sets group 1.
  * - `ConcatEqualToEqual` on `$return .=` in LiveWhale and LiveWhale_Widget: `$return`
  *   is still the empty string on that line.
+ * - `EqualToIdentical` and `NotEqualToNotIdentical` on a comparison of a shortcode
+ *   attribute or the view with a string literal in Callout and LiveWhale: both sides
+ *   are strings, so `==` and `===` agree.
  * - `RemoveEarlyReturn` in Instagram and Twitter reversal: the code below the guard
  *   returns content without the markers unchanged.
  *

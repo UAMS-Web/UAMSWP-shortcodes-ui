@@ -369,7 +369,7 @@ class Callout extends Shortcode
         }
 
         // Only headings or p. Otherwise, default to p.
-        $headingtype = in_array($attrs['headingtype'], ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'], true) ? $attrs['headingtype'] : 'p';
+        $headingtype = in_array($attrs['headingtype'], ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'], true) ? $attrs['headingtype'] : 'p';
 
         if (! empty($attrs['heading'])) {
             $heading = '<'.$headingtype.' class="callout-heading">'.$icon.wp_kses_post($attrs['heading']).'</'.$headingtype.'>';
@@ -386,11 +386,9 @@ class Callout extends Shortcode
 
             $urlopen = '<a href="'.esc_url($attrs['url']).'" '.$target.'>';
             $urlclose = '</a>';
-            $arrow = '<span class="right-arrow" aria-hidden="true">'.self::uams_shortcodes_get_contents(esc_url(UAMS_SHORTCAKES_PATH.'assets/images/glyphicon/bold-arrow-right.svg')).'</span>';
         } else {
             $urlopen = '<div>';
             $urlclose = '</div>';
-            $arrow = null;
         }
 
         if (! empty($attrs['customclass'])) {
@@ -417,6 +415,7 @@ class Callout extends Shortcode
             $alt = null;
         }
 
+        // @pest-mutate-ignore: EqualToIdentical
         if ($attrs['mediaposition'] == 'left') {
             $mediaposition = 'media-left';
         } elseif ($attrs['mediaposition'] == 'right') {
@@ -434,6 +433,7 @@ class Callout extends Shortcode
             $imgcap = null;
         }
 
+        // @pest-mutate-ignore: EqualToIdentical
         if ($attrs['imgback'] == 'back') {
             $imgback = ' bg-img';
         } else {
@@ -469,28 +469,23 @@ class Callout extends Shortcode
 
         if ($attrs['type'] === 'vid') {
 
+            // @pest-mutate-ignore: EqualToIdentical
             if (! empty($attrs['youtube']) && ($attrs['vidtype'] == 'youtube')) {
 
                 if (preg_match("/youtu.be\/[a-z1-9.-_]+/", $attrs['youtube'])) {
                     preg_match("/youtu.be\/([a-z1-9.-_]+)/", $attrs['youtube'], $matches);
-                    if (isset($matches[1])) { // @pest-mutate-ignore: DecrementInteger
-                        $vidsrc = 'http://www.youtube.com/embed/'.$matches[1].'?modestbranding=0&autohide=1&showinfo=0';
-                        $vidembed = '<iframe class="embed-responsive-item '.$mediaposition.'" src="'.esc_url($vidsrc).'"></iframe>';
-                    }
+                    $vidsrc = 'http://www.youtube.com/embed/'.$matches[1].'?modestbranding=0&autohide=1&showinfo=0';
+                    $vidembed = '<iframe class="embed-responsive-item '.$mediaposition.'" src="'.esc_url($vidsrc).'"></iframe>';
                 } elseif (preg_match('/youtube.com(.+)v=([^&]+)/', $attrs['youtube'])) {
                     preg_match('/v=([^&]+)/', $attrs['youtube'], $matches);
-                    if (isset($matches[1])) { // @pest-mutate-ignore: DecrementInteger
-                        $vidsrc = 'http://www.youtube.com/embed/'.$matches[1].'?modestbranding=0&autohide=1&showinfo=0';
-                        $vidembed = '<iframe class="embed-responsive-item '.$mediaposition.'" src="'.esc_url($vidsrc).'"></iframe>';
-                    }
+                    $vidsrc = 'http://www.youtube.com/embed/'.$matches[1].'?modestbranding=0&autohide=1&showinfo=0';
+                    $vidembed = '<iframe class="embed-responsive-item '.$mediaposition.'" src="'.esc_url($vidsrc).'"></iframe>';
                 }
             } elseif (! empty($attrs['vimeo']) && ($attrs['vidtype'] == 'vimeo')) {
                 if (preg_match("/vimeo.com\/[1-9.-_]+/", $attrs['vimeo'])) {
                     preg_match("/vimeo.com\/([1-9.-_]+)/", $attrs['vimeo'], $matches);
-                    if (isset($matches[1])) { // @pest-mutate-ignore: DecrementInteger
-                        $vidsrc = 'http://player.vimeo.com/video/'.$matches[1].'?badge=0&byline=0&portrait=0&title=0';
-                        $vidembed = '<iframe class="embed-responsive-item '.$mediaposition.'" src="'.esc_url($vidsrc).'"></iframe>';
-                    }
+                    $vidsrc = 'http://player.vimeo.com/video/'.$matches[1].'?badge=0&byline=0&portrait=0&title=0';
+                    $vidembed = '<iframe class="embed-responsive-item '.$mediaposition.'" src="'.esc_url($vidsrc).'"></iframe>';
                 }
             } elseif (! empty($attrs['vidsource']) && ($attrs['vidtype'] == 'other' && ! empty($attrs['fallbackimg']))) {
                 if ($attrs['autoplay'] == true) {
@@ -515,8 +510,6 @@ class Callout extends Shortcode
         }
 
         if ($attrs['type'] === 'bgvid') {
-
-            $bgimg = wp_get_attachment_image_src($attrs['img'], 'full')[0];
             $calloutbgimg = '<div class="bgimg" style="background: url('.esc_url($poster).');"></div> <!-- .bgimg -->';
 
             if (! empty($attrs['vidsource']) && ! empty($attrs['fallbackimg'])) {

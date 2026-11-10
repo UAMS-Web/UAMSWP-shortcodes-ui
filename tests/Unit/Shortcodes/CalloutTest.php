@@ -61,7 +61,7 @@ beforeEach(function (): void {
     stubs([
         'wp_get_attachment_image_src' => fn ($id, $size = 'thumbnail'): array => ['https://img.test/'.$id.'-'.$size.'.jpg', 10, 10],
         'wp_get_attachment_image_srcset' => fn ($id, $size = 'medium'): string => 'set-'.$id.'-'.$size,
-        'get_post_meta' => fn ($id, $key, $single): string => 'Alt for '.$id,
+        'get_post_meta' => fn ($id, $key, $single): string => $single ? 'Alt for '.$id : 'List for '.$id,
         'get_post_field' => fn ($field, $id): string => 'Caption for '.$id,
     ]);
 });
@@ -479,9 +479,51 @@ it('passes the overlay and padding through esc_attr', function (): void {
     expect($html)->toContain('container ATTR[dark]">');
 });
 
-it('reads the arrow svg for a linked callout without rendering it', function (): void {
+it('renders no arrow for a linked callout', function (): void {
     [$html, $errors] = calloutRender(['url' => 'https://example.com', 'fullscreen' => false]);
 
     expect($html)->not->toContain('right-arrow')
         ->and(calloutUnexpected($errors))->toBe([]);
 });
+
+it('treats a truthy string like true for fullscreen, the image caption and autoplay', function (): void {
+    [$full] = calloutRender(['customclass' => 'one', 'fullscreen' => '1']);
+    [$img] = calloutRender(['type' => 'img', 'img' => 7, 'imgcaption' => '1', 'mediaposition' => 'left', 'fullscreen' => false]);
+    [$vid] = calloutRender([
+        'type' => 'vid',
+        'vidtype' => 'other',
+        'vidsource' => 'https://cdn.test/clip.mp4',
+        'fallbackimg' => 9,
+        'autoplay' => '1',
+        'mediaposition' => 'left',
+        'fullscreen' => false,
+    ]);
+
+    expect($full)->toContain('uams-full-width')
+        ->and($img)->toContain('<div class="callout-img-caption">Caption for 7</div>')
+        ->and($vid)->toContain('controls autoplay loop muted>');
+});
+
+it('renders no self-hosted video unless the type is other and a fallback image is set', function (array $extra): void {
+    [$html] = calloutRender([
+        'type' => 'vid',
+        'vidsource' => 'https://cdn.test/clip.mp4',
+        'mediaposition' => 'left',
+        'fullscreen' => false,
+        ...$extra,
+    ]);
+
+    expect($html)->not->toContain('<video');
+})->with([
+    'type other without a fallback image' => [['vidtype' => 'other']],
+    'a fallback image with a type that has no source' => [['vidtype' => 'youtube', 'fallbackimg' => 9]],
+]);
+
+it('renders no background video unless both the source and the fallback image are set', function (array $extra): void {
+    [$html] = calloutRender(['type' => 'bgvid', 'img' => 3, 'fallbackimg' => 4, 'fullscreen' => false, ...$extra]);
+
+    expect($html)->not->toContain('<video');
+})->with([
+    'a fallback image only' => [[]],
+    'a source only' => [['fallbackimg' => '', 'vidsource' => 'https://cdn.test/bg.mp4']],
+]);

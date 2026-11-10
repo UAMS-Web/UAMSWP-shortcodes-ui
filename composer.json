@@ -31,7 +31,11 @@
         "test:refactor": "rector --dry-run",
         "pint": "pint",
         "test:pint": "pint --test",
-        "lint:floor": "@php scripts/lint-floor.php"
+        "lint:floor": "@php scripts/lint-floor.php",
+        "mutate": [
+            "Composer\\Config::disableProcessTimeout",
+            "@php vendor/bin/pest --mutate --covered-only --path=inc"
+        ]
     },
     "scripts-descriptions": {
         "test": "Run the unit suite (the same as test:unit).",
@@ -41,6 +45,7 @@
         "test:refactor": "Preview Rector without changing files.",
         "pint": "Format with Pint.",
         "test:pint": "Check formatting with Pint without changing files.",
-        "lint:floor": "Parse every file the download ships with the PHP that runs the script; run it under PHP 8.2 with LINT_PHP set to that binary."
+        "lint:floor": "Parse every file the download ships with the PHP that runs the script; run it under PHP 8.2 with LINT_PHP set to that binary.",
+        "mutate": "Run Pest mutation testing over inc/ with PCOV loaded; pass --path=<file> to narrow it, and read the counts, not the exit status."
     }
 }

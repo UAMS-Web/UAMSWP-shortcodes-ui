@@ -12,10 +12,12 @@ declare(strict_types=1);
 require_once __DIR__.'/../vendor/autoload.php';
 
 /*
- * Patchwork first: it can only redefine functions declared in files loaded
- * after it.
+ * Patchwork is not required here. Brain Monkey loads it when a test arms it.
+ * Requiring it in this file makes every child of a mutation run that scans
+ * tests/Unit die on readdir() (Patchwork and Pest's mutation stream wrapper
+ * both replace file://), and the run scores each dead child as a kill, so the
+ * score reads 100% over mutants that never ran.
  */
-require_once __DIR__.'/../vendor/antecedent/patchwork/Patchwork.php';
 
 /*
  * Define the class under test only. The main plugin file is not loaded: it

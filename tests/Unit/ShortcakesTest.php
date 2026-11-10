@@ -47,6 +47,17 @@ class FakeLoaderShortcode extends Shortcode
 }
 
 /**
+ * A shortcode class with no Shortcake UI.
+ */
+class FakeNoUiLoaderShortcode extends FakeLoaderShortcode
+{
+    public static function get_shortcode_ui_args(): array
+    {
+        return [];
+    }
+}
+
+/**
  * Set a private property on the loader.
  */
 function setLoaderProperty(UAMS_Shortcakes $loader, string $property, mixed $value): void
@@ -104,6 +115,17 @@ it('registers each class under its tag, runs its setup and its Shortcake UI', fu
     Functions\expect('add_shortcode')->once()->with('fakeloadershortcode', Mockery::type(Closure::class));
     Functions\expect('shortcode_ui_register_for_shortcode')->once()->with('fakeloadershortcode', ['label' => 'Fake']);
     setLoaderProperty($this->shortcakes, 'internal_shortcode_classes', [FakeLoaderShortcode::class]);
+
+    $this->shortcakes->action_init_register_shortcodes();
+
+    expect(FakeLoaderShortcode::$calls)->toBe(['setup_actions']);
+});
+
+it('registers no Shortcake UI for a class that has none', function (): void {
+    stubWordPress();
+    when('add_shortcode')->justReturn();
+    Functions\expect('shortcode_ui_register_for_shortcode')->never();
+    setLoaderProperty($this->shortcakes, 'internal_shortcode_classes', [FakeNoUiLoaderShortcode::class]);
 
     $this->shortcakes->action_init_register_shortcodes();
 
@@ -173,7 +195,12 @@ it('adds the embed media frame and localizes the tag map when embeds are shown',
             && $name === 'ShortcakeBakery'
             && $strings['nonces'] === ['customEmbedReverse' => 'nonce-1']
             && $strings['shortcodes'] === ['FakeLoaderShortcode' => 'fake']
-            && $strings['text']['addEmbed'] === 'Insert Embed Code');
+            && $strings['text'] === [
+                'addEmbed' => 'Insert Embed Code',
+                'insertButton' => 'Insert embed',
+                'customEmbedLabel' => 'Paste any custom embed code here. If it matches a known post element, that post element will be used rather than the embed code.',
+                'noReversalMatches' => "The embed code provided doesn't match any known post elements. This means that it may not display as expected.",
+            ]);
     setLoaderProperty($this->shortcakes, 'registered_shortcodes', ['fake' => 'FakeLoaderShortcode']);
 
     $this->shortcakes->action_admin_enqueue_scripts();
@@ -190,7 +217,7 @@ it('adds nothing when the filter hides the embed button', function (): void {
 it('reverses embed code into shortcodes when a reversal changed the text', function (): void {
     $regex = '\[(\[?)(fakeloadershortcode)(?![\w-])([^\]\/]*(?:\/(?!\])[^\]\/]*)*?)(?:(\/)\]|\](?:([^\[]*+(?:\[(?!\/\2\])[^\[]*+)*+)\[\/\2\])?)(\]?)';
     when('get_shortcode_regex')->justReturn($regex);
-    when('shortcode_parse_atts')->justReturn(['id' => '5']);
+    Functions\expect('shortcode_parse_atts')->once()->with(' id=5')->andReturn(['id' => '5']);
     expectApplied('pre_kses')->once()->andReturn('[fakeloadershortcode id=5]x[/fakeloadershortcode]');
 
     $result = $this->shortcakes->reverse_embed('<fake/>');
@@ -221,6 +248,26 @@ it('autoloads nothing for a class outside the shortcode namespace', function ():
 it('loads nothing for a shortcode class that has no file', function (): void {
     expect($this->shortcakes->autoload_shortcode_classes('\\UAMS_Shortcakes\\Shortcodes\\Missing_One'))->toBeNull()
         ->and(class_exists('UAMS_Shortcakes\\Shortcodes\\Missing_One', false))->toBeFalse();
+});
+
+it('loads a class in a sub-directory from a lower-case folder and a hyphenated file name', function (): void {
+    $folder = dirname(__DIR__, 2).'/inc/shortcodes/nestedprobe';
+    $file = $folder.'/class-probe-thing.php';
+    mkdir($folder);
+
+    try {
+        file_put_contents($file, "<?php\nnamespace UAMS_Shortcakes\\Shortcodes\\NestedProbe;\nclass Probe_Thing {}\n");
+
+        $this->shortcakes->autoload_shortcode_classes('UAMS_Shortcakes\\Shortcodes\\NestedProbe\\Probe_Thing');
+
+        expect(class_exists('UAMS_Shortcakes\\Shortcodes\\NestedProbe\\Probe_Thing', false))->toBeTrue();
+    } finally {
+        if (is_file($file)) {
+            unlink($file);
+        }
+
+        rmdir($folder);
+    }
 });
 
 it('registers its hooks and assets when the instance is first created', function (): void {

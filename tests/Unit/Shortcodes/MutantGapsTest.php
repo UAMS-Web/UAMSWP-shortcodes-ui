@@ -17,6 +17,9 @@
  *   inside a `switch` as `break`.
  * - `ConcatEqualToEqual` on `$return .=` in LiveWhale and LiveWhale_Widget: `$return`
  *   is still the empty string on that line.
+ * - `EqualToIdentical` and `NotEqualToNotIdentical` on a comparison of a shortcode
+ *   attribute or the view with a string literal in Callout and LiveWhale: both sides
+ *   are strings, so `==` and `===` agree.
  * - `RemoveEarlyReturn` in Instagram and Twitter reversal: the code below the guard
  *   returns content without the markers unchanged.
  *

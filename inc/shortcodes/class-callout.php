@@ -369,7 +369,7 @@ class Callout extends Shortcode
         }
 
         // Only headings or p. Otherwise, default to p.
-        $headingtype = in_array($attrs['headingtype'], ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'], true) ? $attrs['headingtype'] : 'p';
+        $headingtype = in_array($attrs['headingtype'], ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'], true) ? $attrs['headingtype'] : 'p';
 
         if (! empty($attrs['heading'])) {
             $heading = '<'.$headingtype.' class="callout-heading">'.$icon.wp_kses_post($attrs['heading']).'</'.$headingtype.'>';
@@ -417,6 +417,7 @@ class Callout extends Shortcode
             $alt = null;
         }
 
+        // @pest-mutate-ignore: EqualToIdentical
         if ($attrs['mediaposition'] == 'left') {
             $mediaposition = 'media-left';
         } elseif ($attrs['mediaposition'] == 'right') {
@@ -434,6 +435,7 @@ class Callout extends Shortcode
             $imgcap = null;
         }
 
+        // @pest-mutate-ignore: EqualToIdentical
         if ($attrs['imgback'] == 'back') {
             $imgback = ' bg-img';
         } else {
@@ -469,6 +471,7 @@ class Callout extends Shortcode
 
         if ($attrs['type'] === 'vid') {
 
+            // @pest-mutate-ignore: EqualToIdentical
             if (! empty($attrs['youtube']) && ($attrs['vidtype'] == 'youtube')) {
 
                 if (preg_match("/youtu.be\/[a-z1-9.-_]+/", $attrs['youtube'])) {
@@ -509,8 +512,6 @@ class Callout extends Shortcode
         }
 
         if ($attrs['type'] === 'bgvid') {
-
-            $bgimg = wp_get_attachment_image_src($attrs['img'], 'full')[0];
             $calloutbgimg = '<div class="bgimg" style="background: url('.esc_url($poster).');"></div> <!-- .bgimg -->';
 
             if (! empty($attrs['vidsource']) && ! empty($attrs['fallbackimg'])) {

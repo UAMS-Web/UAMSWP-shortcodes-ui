@@ -23,6 +23,7 @@ class Instagram extends Shortcode
     public static function reversal($content)
     {
 
+        // @pest-mutate-ignore: IdenticalToNotIdentical, FalseToTrue
         if (stripos($content, '<script') === false && stripos($content, '<iframe') === false && stripos($content, 'class="instagram-media') === false) {
             return $content; // @pest-mutate-ignore: RemoveEarlyReturn
         }

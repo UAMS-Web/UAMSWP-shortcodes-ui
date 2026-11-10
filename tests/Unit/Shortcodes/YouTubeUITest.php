@@ -42,6 +42,11 @@ it('reads the video from a url with encoded ampersands', function (): void {
         ->toContain('data-uams-youtube="abc"');
 });
 
+it('reads the video from a url with the numeric form of the encoded ampersand', function (): void {
+    expect(YouTubeUI::callback(['url' => 'https://www.youtube.com/watch?feature=share&#038;v=abc']))
+        ->toContain('data-uams-youtube="abc"');
+});
+
 it('currently produces a src with two question marks for a playlist url', function (): void {
     expect(YouTubeUI::callback(['url' => 'https://www.youtube.com/watch?v=abc&list=PL123']))
         ->toContain('src="https://youtube.com/embed/abc?list=PL123?rel=0"');

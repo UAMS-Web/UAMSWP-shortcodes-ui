@@ -130,7 +130,7 @@ class IconBox extends Shortcode
 
         // Valid types only
         if (! empty($attrs['bgcolor'])) {
-            $bg = (in_array($attrs['bgcolor'], ['none', 'red', 'gray', 'blue'])) ? sanitize_html_class($attrs['bgcolor']) : 'none';
+            $bg = (in_array($attrs['bgcolor'], ['red', 'gray', 'blue'])) ? sanitize_html_class($attrs['bgcolor']) : 'none';
         } else {
             $bg = 'none';
         }

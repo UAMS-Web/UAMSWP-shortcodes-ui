@@ -100,9 +100,6 @@ class PDF extends Shortcode
             return '';
         }
 
-        $url_for_parse = (str_starts_with($url, '//')) ? 'http:'.$url : $url;
-        self::parse_url($url_for_parse, PHP_URL_SCHEME);
-
         $ext = pathinfo($url, PATHINFO_EXTENSION);
         if (strtolower($ext) !== 'pdf') {
             return '';

@@ -119,3 +119,10 @@ it('passes the reversed url through esc_url_raw', function (): void {
     expect(Flickr::reversal('<iframe src="https://www.flickr.com/photos/u/albums/1/player/"></iframe>'))
         ->toBe('[flickr url="RAW[https://www.flickr.com/photos/u/albums/1/]"]');
 });
+
+it('appends /player/ when the url has /player only before its last eight characters', function (string $url): void {
+    expect(Flickr::callback(['url' => $url]))->toContain('src="'.$url.'/player/"');
+})->with([
+    'https://www.flickr.com/photos/player/albums/1',
+    'https://www.flickr.com/photos/user/albums/player/a',
+]);

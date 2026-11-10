@@ -116,11 +116,12 @@ class TextBox extends Shortcode
 
         // Valid types only
         if (! empty($attrs['background'])) {
-            $background = (in_array($attrs['background'], ['none', 'red', 'gray', 'blue', 'image'])) ? sanitize_html_class($attrs['background']) : 'none';
+            $background = (in_array($attrs['background'], ['red', 'gray', 'blue', 'image'])) ? sanitize_html_class($attrs['background']) : 'none';
         } else {
             $background = 'none';
         }
 
+        // @pest-mutate-ignore: EqualToIdentical
         if ($attrs['background'] == 'image' && $attrs['imagebg']) {
             $imagebg = 'style="background-image:url('.wp_kses_post(wp_get_attachment_image_url($attrs['imagebg'], 'Full')).');"';
         } else {
@@ -128,7 +129,8 @@ class TextBox extends Shortcode
         }
 
         if (! empty($attrs['txtcolor'])) {
-            $txtcolor = ($attrs['txtcolor'] == 'dark' || $attrs['txtcolor'] == 'light') ? sanitize_html_class($attrs['txtcolor']) : 'dark';
+            // @pest-mutate-ignore: EqualToIdentical
+            $txtcolor = ($attrs['txtcolor'] == 'light') ? 'light' : 'dark';
         } else {
             $txtcolor = 'dark';
         }

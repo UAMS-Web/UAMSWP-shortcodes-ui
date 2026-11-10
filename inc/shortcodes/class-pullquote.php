@@ -101,7 +101,7 @@ class Pullquote extends Shortcode
             $cite = null;
         }
 
-        if (in_array($attrs['align'], ['alignleft', 'aligncenter', 'alignright'])) {
+        if (in_array($attrs['align'], ['aligncenter', 'alignright'])) {
             $align = sanitize_html_class($attrs['align']);
         } else {
             $align = 'alignleft';

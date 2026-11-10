@@ -288,3 +288,26 @@ it('describes its Shortcake attributes', function (): void {
         ->and($args['label'])->toBe('RSS Posts')
         ->and($args['listItemImage'])->toBe('dashicons-rss');
 });
+
+it('does not validate or fetch a feed that is empty or not a string', function (mixed $feed): void {
+    Functions\expect('wp_http_validate_url')->never();
+    Functions\expect('fetch_feed')->never();
+
+    expect(RSS_Posts::callback(['feed' => $feed, 'author' => '', 'customclass' => '']))
+        ->toBe('<div class="recent-posts row grid ">No items</div>');
+})->with(['', null, 0, [['https://example.test/feed']]]);
+
+it('reads the arrow SVG from the plugin path whatever the working directory is', function (): void {
+    when('fetch_feed')->justReturn(rssFeed(rssSampleItems()));
+    $arrow = file_get_contents(UAMS_SHORTCAKES_PATH.'assets/images/glyphicon/thin-arrow-right.svg');
+    $directory = getcwd();
+    chdir(sys_get_temp_dir());
+
+    try {
+        $html = RSS_Posts::callback(['feed' => 'f', 'author' => '', 'customclass' => '']);
+    } finally {
+        chdir($directory);
+    }
+
+    expect($html)->toContain('<span class="right-arrow" aria-hidden="true">'.$arrow.'</span>');
+});

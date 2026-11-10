@@ -123,7 +123,6 @@ class ProgressBar extends Shortcode
 
         // Valid types only.
         if (! empty($attrs['type'])) {
-            // @pest-mutate-ignore: RemoveArrayItem
             $type = (in_array($attrs['type'], ['progress-bar-default', 'progress-bar-success', 'progress-bar-info', 'progress-bar-warning', 'progress-bar-danger'])) ? sanitize_html_class($attrs['type']) : 'progress-bar-primary';
         } else {
             $type = 'progress-bar-primary';

@@ -34,8 +34,6 @@
  * - `EmptyStringToNotEmpty` on the `?? ''` defaults and the empty-host test in
  *   `Asset_Proxy`: the replacement text has no host, no `.pdf` extension and no
  *   host to compare, so every path ends as it does with `''`.
- * - `RemoveArrayItem` on the allowed types in ProgressBar: the validated `$type` is
- *   never printed (the raw attribute is, which #51 tracks), so no entry changes the markup.
  * - `IncrementInteger` and `DecrementInteger` on the bounds of `random_int()` in
  *   Panel: the id suffix is random, and no test can see which range it came from.
  * - `IncrementInteger` on the limit of `explode('-', $icon, 2)` in Alert: no icon

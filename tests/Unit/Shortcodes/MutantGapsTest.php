@@ -27,6 +27,12 @@
  *   those two classes change only whether that code runs, and `FalseToTrue` on the
  *   `stripos(...) !== false` guard in Facebook: the patterns below it need a
  *   `<script>` tag, so they match nothing without one.
+ * - `RemoveEarlyReturn` on the `! $type` guard in `GoogleDocs::callback()`: without it the
+ *   type is `false`, no `switch` case matches, and the default case returns `''`.
+ * - `DecrementInteger` on `continue 2` in `GoogleDocs::reversal()`: the `switch` is the last
+ *   statement of the loop body, so `continue 1` ends the iteration the same way.
+ * - `FalseToTrue` on `get_document_type()`'s `return false`: the file declares no strict types,
+ *   so `true` is coerced to `"1"`, which matches no `switch` case.
  * - `RemoveBooleanCast` on `Asset_Proxy::is_enabled()`, and `RemoveStringCast` in
  *   `Asset_Proxy::allowed_hosts()` and `fetch_asset()`: the file declares no strict
  *   types, so PHP coerces the return value and the argument the same way. The

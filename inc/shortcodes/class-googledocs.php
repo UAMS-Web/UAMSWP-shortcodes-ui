@@ -120,12 +120,12 @@ class GoogleDocs extends Shortcode
                             (! empty($iframe->attrs['height']) ? ' height='.intval($iframe->attrs['height']) : '').
                             (! empty($iframe->attrs['width']) ? ' width='.intval($iframe->attrs['width']) : '').
                             ']';
-                        break;
+                        break; // @pest-mutate-ignore: BreakToContinue
                     case 'map':
                     case 'maps':
                         parse_str(html_entity_decode($parsed_from_url['query_string']), $query_vars);
                         if (empty($query_vars['mid'])) {
-                            return;
+                            continue 2; // @pest-mutate-ignore: DecrementInteger
                         }
 
                         $replacement_url = add_query_arg(
@@ -162,15 +162,18 @@ class GoogleDocs extends Shortcode
     public static function callback($attrs, $content = ''): string
     {
 
-        $host = self::parse_url($attrs['url'], PHP_URL_HOST);
-        $type = self::get_document_type($attrs['url']);
-        if (! in_array($host, self::$valid_hosts, true) || ! $type) {
+        if (empty($attrs['url'])) {
             return '';
+        }
+
+        // A URL on a host that is not Google has no document type, so the type check covers the host too.
+        $type = self::get_document_type($attrs['url']);
+        if (! $type) {
+            return ''; // @pest-mutate-ignore: RemoveEarlyReturn
         }
 
         $iframe_classes = "uams-shortcodes-googledocs-{$type}".
             (empty($attrs['disableresponsiveness']) ? ' uams-shortcodes-responsive' : '');
-        $url = '';
         $inner_content = '';
         $width_attr = ! empty($attrs['width']) ? intval($attrs['width']) : '';
         $height_attr = ! empty($attrs['height']) ? intval($attrs['height']) : '';
@@ -188,7 +191,7 @@ class GoogleDocs extends Shortcode
                     ],
                     $attrs['url'].'/pub'
                 );
-                break;
+                break; // @pest-mutate-ignore: BreakToContinue
             case 'spreadsheet':
                 $url = add_query_arg(
                     [
@@ -197,7 +200,7 @@ class GoogleDocs extends Shortcode
                     ],
                     $attrs['url'].'/pubhtml'
                 );
-                break;
+                break; // @pest-mutate-ignore: BreakToContinue
             case 'presentation':
                 $url = add_query_arg(
                     [
@@ -212,7 +215,7 @@ class GoogleDocs extends Shortcode
                     'mozallowfullscreen' => 'true',
                     'webkitallowfullscreen' => 'true',
                 ];
-                break;
+                break; // @pest-mutate-ignore: BreakToContinue
             case 'form':
                 $url = add_query_arg(
                     [
@@ -221,11 +224,11 @@ class GoogleDocs extends Shortcode
                     $attrs['url'].'/viewform'
                 );
                 $inner_content = 'Loading...';
-                break;
+                break; // @pest-mutate-ignore: BreakToContinue
             case 'map':
             case 'fusiontable':
                 $url = $attrs['url'];
-                break;
+                break; // @pest-mutate-ignore: BreakToContinue
             default:
                 return '';
         } // End switch().
@@ -234,10 +237,11 @@ class GoogleDocs extends Shortcode
             'src="'.esc_url($url).'" '.
             ($width_attr ? 'width="'.esc_attr($width_attr).'" ' : '').
             ($height_attr ? 'height="'.esc_attr($height_attr).'" ' : '').
-            ($additional_attributes !== [] ? array_reduce(
+            array_reduce(
                 array_keys($additional_attributes),
-                fn (string $attribute_string, string $attr_key): string => $attribute_string.sanitize_key($attr_key).'="'.esc_attr($additional_attributes[$attr_key]).'" '
-            ) : '').'>'.
+                fn (string $attribute_string, string $attr_key): string => $attribute_string.sanitize_key($attr_key).'="'.esc_attr($additional_attributes[$attr_key]).'" ',
+                ''
+            ).'>'.
             ($inner_content ? esc_html($inner_content) : '').
             '</iframe>';
     }
@@ -261,7 +265,8 @@ class GoogleDocs extends Shortcode
             .'(?:\?(?P<query_string>[^/?]+))?$#';                  // Some have additional options stored in a query string
 
         if (preg_match($url_parts_regex, $url, $matches)) {
-            return $matches;
+            // A trailing group that did not match is left out of $matches, so a URL with no query string has no key.
+            return $matches + ['query_string' => ''];
         }
 
         return null;
@@ -280,8 +285,8 @@ class GoogleDocs extends Shortcode
     {
         $parsed_url = self::parse_from_url($url);
 
-        if (! $parsed_url || empty($parsed_url['doc_type'])) {
-            return false;
+        if (! $parsed_url) {
+            return false; // @pest-mutate-ignore: FalseToTrue
         }
 
         // Sometimes the document type path part is plural, sometimes singular. Remove the trailing "s" to normalize this.

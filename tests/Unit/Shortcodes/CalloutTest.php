@@ -479,24 +479,11 @@ it('passes the overlay and padding through esc_attr', function (): void {
     expect($html)->toContain('container ATTR[dark]">');
 });
 
-it('reads the arrow svg for a linked callout without rendering it', function (): void {
+it('renders no arrow for a linked callout', function (): void {
     [$html, $errors] = calloutRender(['url' => 'https://example.com', 'fullscreen' => false]);
 
     expect($html)->not->toContain('right-arrow')
         ->and(calloutUnexpected($errors))->toBe([]);
-});
-
-it('reads the arrow svg from the plugin assets path', function (): void {
-    $urls = [];
-    when('esc_url')->alias(function (string $url) use (&$urls): string {
-        $urls[] = $url;
-
-        return $url;
-    });
-
-    calloutRender(['url' => 'https://example.com', 'fullscreen' => false]);
-
-    expect($urls)->toContain(UAMS_SHORTCAKES_PATH.'assets/images/glyphicon/bold-arrow-right.svg');
 });
 
 it('treats a truthy string like true for fullscreen, the image caption and autoplay', function (): void {

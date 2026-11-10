@@ -386,11 +386,9 @@ class Callout extends Shortcode
 
             $urlopen = '<a href="'.esc_url($attrs['url']).'" '.$target.'>';
             $urlclose = '</a>';
-            $arrow = '<span class="right-arrow" aria-hidden="true">'.self::uams_shortcodes_get_contents(esc_url(UAMS_SHORTCAKES_PATH.'assets/images/glyphicon/bold-arrow-right.svg')).'</span>';
         } else {
             $urlopen = '<div>';
             $urlclose = '</div>';
-            $arrow = null;
         }
 
         if (! empty($attrs['customclass'])) {

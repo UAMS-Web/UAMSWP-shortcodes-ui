@@ -249,6 +249,23 @@ it('reports the neighboring line as the before and after text of adjacent iframe
         ->and($iframes[1]->after)->toBe("\noutro");
 });
 
+it('reports empty before and after text for an iframe alone or set apart by blank lines', function (): void {
+    $one = '<iframe src="https://a.test/1"></iframe>';
+    $two = '<iframe src="https://a.test/2"></iframe>';
+
+    $alone = ShortcodeProbe::expose_parse_iframes($one);
+    $apart = ShortcodeProbe::expose_parse_iframes($one.'
+
+'.$two);
+
+    expect($alone[0]->before)->toBe('')
+        ->and($alone[0]->after)->toBe('')
+        ->and($apart[0]->before)->toBe('')
+        ->and($apart[0]->after)->toBe('')
+        ->and($apart[1]->before)->toBe('')
+        ->and($apart[1]->after)->toBe('');
+});
+
 it('parses every script when two sit on adjacent lines', function (): void {
     $scripts = ShortcodeProbe::expose_parse_scripts("<script src=\"a.js\">var a;</script>\n<script src=\"b.js\">var b;</script>");
 

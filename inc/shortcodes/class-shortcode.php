@@ -543,8 +543,8 @@ abstract class Shortcode
             $tags = [];
             foreach ($matches[0] as $key => [$original, $offset]) {
                 // The line before the tag, and the line after it, as the combined pattern used to report them.
-                $before = preg_match('#(.+\r?\n?)\z#', substr($content, 0, $offset), $line) ? $line[1] : '';
-                $after = preg_match('#\A(\r?\n?.+)#', substr($content, $offset + strlen($original)), $line) ? $line[1] : '';
+                $before = preg_match('#.+\r?\n?\z#', substr($content, 0, $offset), $line) ? $line[0] : '';
+                $after = preg_match('#\A\r?\n?.+#', substr($content, $offset + strlen($original)), $line) ? $line[0] : '';
 
                 $tag = new \stdClass;
                 $tag->original = $original;

@@ -79,11 +79,11 @@ class Image_Comparison extends Shortcode
 
             case 'mostlyleft':
                 $attrs['position'] = 10;
-                break;
+                break; // @pest-mutate-ignore: BreakToContinue
 
             case 'mostlyright':
                 $attrs['position'] = 90;
-                break;
+                break; // @pest-mutate-ignore: BreakToContinue
 
         }
 

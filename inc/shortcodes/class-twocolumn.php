@@ -98,22 +98,22 @@ class TwoColumn extends Shortcode
             case 'third-twothirds':
                 $col1 = 'col-lg-4 col-md-4 col-sm-4 col-xs-12';
                 $col2 = 'col-lg-8 col-md-8 col-sm-8 col-xs-12';
-                break;
+                break; // @pest-mutate-ignore: BreakToContinue
 
             case 'quarter-threequarters':
                 $col1 = 'col-lg-3 col-md-3 col-sm-3 col-xs-12';
                 $col2 = 'col-lg-9 col-md-9 col-sm-9 col-xs-12';
-                break;
+                break; // @pest-mutate-ignore: BreakToContinue
 
             case 'twothirds-third':
                 $col1 = 'col-lg-8 col-md-8 col-sm-8 col-xs-12';
                 $col2 = 'col-lg-4 col-md-4 col-sm-4 col-xs-12';
-                break;
+                break; // @pest-mutate-ignore: BreakToContinue
 
             case 'threequarters-quarter':
                 $col1 = 'col-lg-9 col-md-9 col-sm-9 col-xs-12';
                 $col2 = 'col-lg-3 col-md-3 col-sm-3 col-xs-12';
-                break;
+                break; // @pest-mutate-ignore: BreakToContinue
 
             default:
                 $col1 = 'col-lg-6 col-md-6 col-sm-6 col-xs-12';

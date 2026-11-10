@@ -107,19 +107,19 @@ class ThreeColumn extends Shortcode
                 $col1 = 'col-lg-3 col-md-3 col-sm-3 col-xs-12';
                 $col2 = 'col-lg-3 col-md-3 col-sm-3 col-xs-12';
                 $col3 = 'col-lg-6 col-md-6 col-sm-6 col-xs-12';
-                break;
+                break; // @pest-mutate-ignore: BreakToContinue
 
             case 'quarter-half-quarter':
                 $col1 = 'col-lg-3 col-md-3 col-sm-3 col-xs-12';
                 $col2 = 'col-lg-6 col-md-6 col-sm-6 col-xs-12';
                 $col3 = 'col-lg-3 col-md-3 col-sm-3 col-xs-12';
-                break;
+                break; // @pest-mutate-ignore: BreakToContinue
 
             case 'half-quarter-quarter':
                 $col1 = 'col-lg-6 col-md-6 col-sm-6 col-xs-12';
                 $col2 = 'col-lg-3 col-md-3 col-sm-3 col-xs-12';
                 $col3 = 'col-lg-3 col-md-3 col-sm-3 col-xs-12';
-                break;
+                break; // @pest-mutate-ignore: BreakToContinue
 
             default:
                 $col1 = 'col-lg-4 col-md-4 col-sm-4 col-xs-12';

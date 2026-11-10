@@ -87,9 +87,20 @@ class UAMS_Shortcakes
      */
     public function autoload_shortcode_classes($class): void
     {
+        $file = $this->shortcode_class_file($class);
+        if ($file !== null && file_exists($file)) {
+            require $file;
+        }
+    }
+
+    /**
+     * The file a shortcode class lives in, or null for a class outside the shortcode namespace.
+     */
+    public function shortcode_class_file($class): ?string
+    {
         $class = ltrim($class, '\\');
         if (stripos($class, 'UAMS_Shortcakes\\Shortcodes') !== 0) {
-            return;
+            return null;
         }
 
         $parts = explode('\\', $class);
@@ -99,10 +110,8 @@ class UAMS_Shortcakes
         $last = array_pop($parts);
         $last = 'class-'.$last.'.php';
         $parts[] = $last;
-        $file = __DIR__.'/shortcodes/'.str_replace('_', '-', strtolower(implode('/', $parts)));
-        if (file_exists($file)) {
-            require $file;
-        }
+
+        return __DIR__.'/shortcodes/'.str_replace('_', '-', strtolower(implode('/', $parts)));
     }
 
     /**

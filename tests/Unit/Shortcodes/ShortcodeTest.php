@@ -274,7 +274,7 @@ it('parses every script when two sit on adjacent lines', function (): void {
         ->and($scripts[1]->inner)->toBe('var b;');
 });
 
-it('does not match an uppercase tag even though the pre-check is case-insensitive', function (): void {
+it('does not match an uppercase tag because the pattern is case-sensitive', function (): void {
     expect(ShortcodeProbe::expose_parse_iframes('<IFRAME src="x"></IFRAME>'))->toBeFalse();
 });
 
@@ -306,6 +306,10 @@ it('unescapes backslash sequences in attribute values', function (): void {
 
 it('treats non-breaking spaces between attributes as separators', function (): void {
     expect(ShortcodeProbe::expose_parse_tag_attributes("a=\"1\"\u{00a0}b=\"2\""))->toBe(['a' => '1', 'b' => '2']);
+});
+
+it('skips an empty quoted token and keeps a quoted word', function (): void {
+    expect(ShortcodeProbe::expose_parse_tag_attributes('"" "word"'))->toBe(['word' => null]);
 });
 
 it('returns an empty array for empty attribute text', function (): void {

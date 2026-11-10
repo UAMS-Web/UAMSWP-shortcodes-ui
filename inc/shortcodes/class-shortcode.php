@@ -516,7 +516,7 @@ abstract class Shortcode
         $ret = parse_url($url, $component);
         // @codingStandardsIgnoreEnd
         if ($added_protocol && $ret) {
-            if ($component === -1 && isset($ret['scheme'])) {
+            if ($component === -1) {
                 unset($ret['scheme']);
             } elseif ($component === PHP_URL_SCHEME) {
                 $ret = '';
@@ -533,11 +533,6 @@ abstract class Shortcode
      */
     private static function parse_closed_tags($content, string $tag_name): false|array
     {
-
-        if (stripos($content, '<'.$tag_name) === false) {
-            return false;
-        }
-
         // Match the tag alone: a pattern that also consumed the neighboring lines swallowed an adjacent tag.
         if (preg_match_all('#<'.$tag_name.'([^>]+)>([^<]+)?</'.$tag_name.'>#', $content, $matches, PREG_OFFSET_CAPTURE)) {
             $tags = [];
@@ -605,7 +600,7 @@ abstract class Shortcode
                     $atts[$m[3]] = stripcslashes($m[4]);
                 } elseif (! empty($m[5])) {
                     $atts[$m[5]] = stripcslashes($m[6]);
-                } elseif (isset($m[7]) && strlen($m[7])) {
+                } elseif (($m[7] ?? '') !== '') {
                     $atts[$m[7]] = null;
                 } elseif (isset($m[8])) {
                     $atts[$m[8]] = null;
@@ -625,10 +620,6 @@ abstract class Shortcode
      */
     protected static function make_replacements_to_content($content, $replacements)
     {
-        if (empty($replacements)) {
-            return $content;
-        }
-
-        return str_replace(array_keys($replacements), array_values($replacements), $content);
+        return str_replace(array_keys($replacements), $replacements, $content);
     }
 }

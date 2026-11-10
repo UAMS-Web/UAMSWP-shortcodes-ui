@@ -312,6 +312,10 @@ it('skips an empty quoted token and keeps a quoted word', function (): void {
     expect(ShortcodeProbe::expose_parse_tag_attributes('"" "word"'))->toBe(['word' => null]);
 });
 
+it('currently drops an attribute whose name is the string 0', function (): void {
+    expect(ShortcodeProbe::expose_parse_tag_attributes("0=\"x\" 0='y' 0=z"))->toBe([]);
+});
+
 it('returns an empty array for empty attribute text', function (): void {
     expect(ShortcodeProbe::expose_parse_tag_attributes(''))->toBe([]);
 });

@@ -298,7 +298,7 @@ it('registers every action the loader listens to, and its class autoloader', fun
     (new ReflectionMethod(UAMS_Shortcakes::class, 'setup_actions'))->invoke($this->shortcakes);
     $registered = array_values(array_filter(
         spl_autoload_functions(),
-        fn ($loader): bool => $loader instanceof Closure && (new ReflectionFunction($loader))->getClosureThis() === $this->shortcakes
+        fn (callable $loader): bool => $loader instanceof Closure && (new ReflectionFunction($loader))->getClosureThis() === $this->shortcakes
     ));
     foreach ($registered as $loader) {
         spl_autoload_unregister($loader);

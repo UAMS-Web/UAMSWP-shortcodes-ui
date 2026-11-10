@@ -247,6 +247,7 @@ it('casts the size cap to an integer before using it', function (): void {
         if ($tag === 'uams_shortcodes_asset_proxy_max_bytes') {
             return 8.9;
         }
+
         if ($tag === 'uams_shortcodes_asset_proxy_request_args') {
             $args = $value;
         }

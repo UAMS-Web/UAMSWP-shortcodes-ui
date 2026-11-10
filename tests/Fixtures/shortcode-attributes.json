@@ -1,0 +1,3718 @@
+{
+    "Alert": {
+        "ui_args": {
+            "label": "Alert",
+            "listItemImage": "dashicons-info",
+            "inner_content": {
+                "label": "Alert Body",
+                "description": "Main content of your alert. Text and basic HTML tags can be added here.",
+                "encode": true
+            },
+            "attrs": [
+                {
+                    "label": "Alert Type",
+                    "attr": "type",
+                    "type": "radio",
+                    "description": "See examples of <a href=\"https://design.oit.ncsu.edu/docs/ncsu-shortcodes/alerts/\" target=\"_blank\">each type of alert</a> on the <a href=\"https://design.oit.ncsu.edu/docs/\" target=\"_blank\">OIT Design documentation site</a>.",
+                    "encode": false,
+                    "options": {
+                        "success": "Success",
+                        "info": "Information",
+                        "help": "Help",
+                        "warning": "Warning",
+                        "danger": "Danger"
+                    }
+                },
+                {
+                    "label": "Dismissable?",
+                    "attr": "dismiss",
+                    "type": "checkbox",
+                    "description": ""
+                },
+                {
+                    "label": "Custom CSS classes",
+                    "attr": "customclass",
+                    "type": "text",
+                    "description": "",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "Comma-separated list"
+                    }
+                }
+            ]
+        },
+        "attributes": [
+            {
+                "label": "Alert Type",
+                "attr": "type",
+                "type": "radio",
+                "description": "See examples of <a href=\"https://design.oit.ncsu.edu/docs/ncsu-shortcodes/alerts/\" target=\"_blank\">each type of alert</a> on the <a href=\"https://design.oit.ncsu.edu/docs/\" target=\"_blank\">OIT Design documentation site</a>.",
+                "encode": false,
+                "options": {
+                    "success": "Success",
+                    "info": "Information",
+                    "help": "Help",
+                    "warning": "Warning",
+                    "danger": "Danger"
+                }
+            },
+            {
+                "label": "Dismissable?",
+                "attr": "dismiss",
+                "type": "checkbox",
+                "description": ""
+            },
+            {
+                "label": "Custom CSS classes",
+                "attr": "customclass",
+                "type": "text",
+                "description": "",
+                "encode": false,
+                "meta": {
+                    "placeholder": "Comma-separated list"
+                }
+            }
+        ]
+    },
+    "BaseButton": {
+        "ui_args": {
+            "label": "Basic Button",
+            "listItemImage": "dashicons-editor-removeformatting",
+            "attrs": [
+                {
+                    "label": "Button Text",
+                    "attr": "btncontent",
+                    "type": "text",
+                    "description": "",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "Click Me!"
+                    }
+                },
+                {
+                    "label": "Link Title",
+                    "attr": "title",
+                    "type": "text",
+                    "description": "This text will appear as a title for the link."
+                },
+                {
+                    "label": "Destination URL",
+                    "attr": "url",
+                    "type": "url",
+                    "description": "",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "http://www.uams.edu/"
+                    }
+                },
+                {
+                    "label": "Target",
+                    "attr": "target",
+                    "type": "radio",
+                    "options": {
+                        "_top": "Same Tab/Window",
+                        "_blank": "New Tab/Window"
+                    }
+                },
+                {
+                    "label": "Style and Color",
+                    "attr": "color",
+                    "type": "radio",
+                    "description": "For more information, see the <a href=\"https://brand.ncsu.edu/color/\" target=\"_blank\">NC State color palette</a>.",
+                    "encode": false,
+                    "options": {
+                        "": "Basic / Gray",
+                        "btn-default": "Default / Ghost",
+                        "btn-primary": "Primary / UAMS Red",
+                        "btn-success": "Success / Green",
+                        "btn-info": "Info / Blue",
+                        "btn-warning": "Warning / Yellow",
+                        "btn-danger": "Danger / Orange",
+                        "btn-link": "Link / None"
+                    }
+                },
+                {
+                    "label": "Size",
+                    "attr": "size",
+                    "type": "radio",
+                    "description": "",
+                    "encode": false,
+                    "options": {
+                        "": "Default",
+                        "btn-lg": "Large",
+                        "btn-sm": "Small"
+                    }
+                },
+                {
+                    "label": "Display full-width?",
+                    "attr": "displayblock",
+                    "type": "checkbox",
+                    "description": "",
+                    "encode": false
+                },
+                {
+                    "label": "Custom CSS classes",
+                    "attr": "customclass",
+                    "type": "text",
+                    "description": "",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "Comma-separated list"
+                    }
+                }
+            ]
+        },
+        "attributes": [
+            {
+                "label": "Button Text",
+                "attr": "btncontent",
+                "type": "text",
+                "description": "",
+                "encode": false,
+                "meta": {
+                    "placeholder": "Click Me!"
+                }
+            },
+            {
+                "label": "Link Title",
+                "attr": "title",
+                "type": "text",
+                "description": "This text will appear as a title for the link."
+            },
+            {
+                "label": "Destination URL",
+                "attr": "url",
+                "type": "url",
+                "description": "",
+                "encode": false,
+                "meta": {
+                    "placeholder": "http://www.uams.edu/"
+                }
+            },
+            {
+                "label": "Target",
+                "attr": "target",
+                "type": "radio",
+                "options": {
+                    "_top": "Same Tab/Window",
+                    "_blank": "New Tab/Window"
+                }
+            },
+            {
+                "label": "Style and Color",
+                "attr": "color",
+                "type": "radio",
+                "description": "For more information, see the <a href=\"https://brand.ncsu.edu/color/\" target=\"_blank\">NC State color palette</a>.",
+                "encode": false,
+                "options": {
+                    "": "Basic / Gray",
+                    "btn-default": "Default / Ghost",
+                    "btn-primary": "Primary / UAMS Red",
+                    "btn-success": "Success / Green",
+                    "btn-info": "Info / Blue",
+                    "btn-warning": "Warning / Yellow",
+                    "btn-danger": "Danger / Orange",
+                    "btn-link": "Link / None"
+                }
+            },
+            {
+                "label": "Size",
+                "attr": "size",
+                "type": "radio",
+                "description": "",
+                "encode": false,
+                "options": {
+                    "": "Default",
+                    "btn-lg": "Large",
+                    "btn-sm": "Small"
+                }
+            },
+            {
+                "label": "Display full-width?",
+                "attr": "displayblock",
+                "type": "checkbox",
+                "description": "",
+                "encode": false
+            },
+            {
+                "label": "Custom CSS classes",
+                "attr": "customclass",
+                "type": "text",
+                "description": "",
+                "encode": false,
+                "meta": {
+                    "placeholder": "Comma-separated list"
+                }
+            }
+        ]
+    },
+    "Button": {
+        "ui_args": {
+            "label": "UAMS Button",
+            "listItemImage": "dashicons-plus-alt",
+            "attrs": [
+                {
+                    "label": "Button Text",
+                    "attr": "text",
+                    "type": "text",
+                    "description": "",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "Click Me!"
+                    }
+                },
+                {
+                    "label": "Destination URL",
+                    "attr": "url",
+                    "type": "url",
+                    "description": "",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "http://www.uams.edu/"
+                    }
+                },
+                {
+                    "label": "Target",
+                    "attr": "target",
+                    "type": "radio",
+                    "options": {
+                        "_top": "Same Tab/Window",
+                        "_blank": "New Tab/Window"
+                    }
+                },
+                {
+                    "label": "Color",
+                    "attr": "color",
+                    "type": "radio",
+                    "description": "For more information, see the <a href=\"#\" target=\"_blank\">Coming Soon</a>.",
+                    "encode": false,
+                    "options": {
+                        "": "Default",
+                        "btn-red": "Red",
+                        "btn-gray": "Gray",
+                        "btn-green": "Green",
+                        "btn-blue": "Blue",
+                        "btn-yellow": "Yellow"
+                    }
+                },
+                {
+                    "label": "Size",
+                    "attr": "size",
+                    "type": "radio",
+                    "description": "",
+                    "encode": false,
+                    "options": {
+                        "": "Default",
+                        "btn-lg": "Large",
+                        "btn-sm": "Small"
+                    }
+                },
+                {
+                    "label": "Icon",
+                    "attr": "type",
+                    "type": "select",
+                    "encode": false,
+                    "options": {
+                        "btn-go": "Default",
+                        "btn-plus": "Plus",
+                        "btn-external": "External",
+                        "btn-play": "Play",
+                        "btn-pdf": "PDF"
+                    }
+                },
+                {
+                    "label": "New line?",
+                    "attr": "newline",
+                    "type": "checkbox",
+                    "description": "This adds a line break after the button to move it to the next line."
+                },
+                {
+                    "label": "Custom CSS classes",
+                    "attr": "customclass",
+                    "type": "text",
+                    "description": "",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "Comma-separated list"
+                    }
+                }
+            ]
+        },
+        "attributes": [
+            {
+                "label": "Button Text",
+                "attr": "text",
+                "type": "text",
+                "description": "",
+                "encode": false,
+                "meta": {
+                    "placeholder": "Click Me!"
+                }
+            },
+            {
+                "label": "Destination URL",
+                "attr": "url",
+                "type": "url",
+                "description": "",
+                "encode": false,
+                "meta": {
+                    "placeholder": "http://www.uams.edu/"
+                }
+            },
+            {
+                "label": "Target",
+                "attr": "target",
+                "type": "radio",
+                "options": {
+                    "_top": "Same Tab/Window",
+                    "_blank": "New Tab/Window"
+                }
+            },
+            {
+                "label": "Color",
+                "attr": "color",
+                "type": "radio",
+                "description": "For more information, see the <a href=\"#\" target=\"_blank\">Coming Soon</a>.",
+                "encode": false,
+                "options": {
+                    "": "Default",
+                    "btn-red": "Red",
+                    "btn-gray": "Gray",
+                    "btn-green": "Green",
+                    "btn-blue": "Blue",
+                    "btn-yellow": "Yellow"
+                }
+            },
+            {
+                "label": "Size",
+                "attr": "size",
+                "type": "radio",
+                "description": "",
+                "encode": false,
+                "options": {
+                    "": "Default",
+                    "btn-lg": "Large",
+                    "btn-sm": "Small"
+                }
+            },
+            {
+                "label": "Icon",
+                "attr": "type",
+                "type": "select",
+                "encode": false,
+                "options": {
+                    "btn-go": "Default",
+                    "btn-plus": "Plus",
+                    "btn-external": "External",
+                    "btn-play": "Play",
+                    "btn-pdf": "PDF"
+                }
+            },
+            {
+                "label": "New line?",
+                "attr": "newline",
+                "type": "checkbox",
+                "description": "This adds a line break after the button to move it to the next line."
+            },
+            {
+                "label": "Custom CSS classes",
+                "attr": "customclass",
+                "type": "text",
+                "description": "",
+                "encode": false,
+                "meta": {
+                    "placeholder": "Comma-separated list"
+                }
+            }
+        ]
+    },
+    "Callout": {
+        "ui_args": {
+            "label": "Callout",
+            "listItemImage": "<img width=\"100px\" height=\"100px\" src=\"https://example.test/wp-content/plugins/uamswp-shortcodes/admin/images/icon-callout.png\" />",
+            "inner_content": {
+                "label": "Callout Body",
+                "description": "Main content of your callout. Text and basic HTML tags can be added here."
+            },
+            "attrs": [
+                {
+                    "label": "Callout Heading",
+                    "attr": "heading",
+                    "type": "text",
+                    "description": "Optional",
+                    "encode": false
+                },
+                {
+                    "label": "Heading Type",
+                    "attr": "headingtype",
+                    "type": "radio",
+                    "description": "Headings <a href=\"https://accessibility.oit.ncsu.edu/training/accessibility-handbook/headings.html\" target=\"_blank\">help determine page structure</a>, and are used by screen reading software as landmarks for navigating page content. If you are using this callout as a page title or heading for a section on the page, choose the appropriate heading. Otherwise, choose \"Paragraph.\"",
+                    "encode": false,
+                    "options": {
+                        "p": "Paragraph",
+                        "h3": "Heading 3",
+                        "h2": "Heading 2",
+                        "h1": "Heading 1"
+                    }
+                },
+                {
+                    "label": "Heading Icon",
+                    "attr": "headingicon",
+                    "type": "select",
+                    "description": "Select any <a href=\"https://brand.ncsu.edu/bootstrap/components/\" target=\"_blank\">Bootstrap Glyphicon</a> or <a href=\"https://developer.wordpress.org/resource/dashicons/\" target=\"_blank\">WordPress Dashicon</a>.",
+                    "encode": false,
+                    "options": {
+                        "noicon": "No Icon",
+                        "ic-address-book": "Address-book",
+                        "ic-administration": "Administration",
+                        "ic-book": "Book",
+                        "ic-bookmark": "Bookmark",
+                        "ic-briefcase": "Briefcase",
+                        "ic-calendar": "Calendar",
+                        "ic-camera": "Camera",
+                        "ic-capitol": "Capitol",
+                        "ic-check": "Check",
+                        "ic-clipboard": "Clipboard",
+                        "ic-close": "Close",
+                        "ic-compass": "Compass",
+                        "ic-computer": "Computer",
+                        "ic-directions": "Directions",
+                        "ic-eating": "Eating",
+                        "ic-flag": "Flag",
+                        "ic-globe": "Globe",
+                        "ic-globe2": "Globe2",
+                        "ic-handshake": "Handshake",
+                        "ic-heart": "Heart",
+                        "ic-home": "Home",
+                        "ic-key": "Key",
+                        "ic-letter": "Letter",
+                        "ic-list": "List",
+                        "ic-mail": "Mail",
+                        "ic-map-marker": "Map-marker",
+                        "ic-map": "Map",
+                        "ic-marker": "Marker",
+                        "ic-minus": "Minus",
+                        "ic-music": "Music",
+                        "ic-page": "Page",
+                        "ic-page2": "Page2",
+                        "ic-passport": "Passport",
+                        "ic-pause": "Pause",
+                        "ic-pencil": "Pencil",
+                        "ic-person": "Person",
+                        "ic-picture": "Picture",
+                        "ic-plane": "Plane",
+                        "ic-play": "Play",
+                        "ic-plus": "Plus",
+                        "ic-podium": "Podium",
+                        "ic-ribbon": "Ribbon",
+                        "ic-right-arrow-full": "Right-arrow-full",
+                        "ic-right-arrow": "Right-arrow",
+                        "ic-search": "Search",
+                        "ic-settings": "Settings",
+                        "ic-social": "Social",
+                        "ic-stop": "Stop",
+                        "ic-suitcase": "Suitcase",
+                        "ic-ticket": "Ticket",
+                        "ic-tools": "Tools",
+                        "ic-trash": "Trash",
+                        "ic-umbrella": "Umbrella",
+                        "ic-view": "View",
+                        "ic-watch": "Watch",
+                        "i-1-hour": "1-hour",
+                        "i-15-min": "15-min",
+                        "i-30-min": "30-min",
+                        "i-45-min": "45-min",
+                        "i-911": "911",
+                        "i-accessibility": "Accessibility",
+                        "i-aid-kit-2": "Aid-kit-2",
+                        "i-aid-kit": "Aid-kit",
+                        "i-airport": "Airport",
+                        "i-ambulance": "Ambulance",
+                        "i-android": "Android",
+                        "i-apple": "Apple",
+                        "i-at-symbol": "At-symbol",
+                        "i-atom": "Atom",
+                        "i-bacteria-1": "Bacteria-1",
+                        "i-bacteria-2": "Bacteria-2",
+                        "i-bag": "Bag",
+                        "i-bank": "Bank",
+                        "i-basket": "Basket",
+                        "i-batman": "Batman",
+                        "i-bed": "Bed",
+                        "i-bike": "Bike",
+                        "i-biohazzard": "Biohazzard",
+                        "i-blood-drop": "Blood-drop",
+                        "i-books-1": "Books-1",
+                        "i-box": "Box",
+                        "i-brain": "Brain",
+                        "i-briefcase": "Briefcase",
+                        "i-building-1": "Building-1",
+                        "i-building-2": "Building-2",
+                        "i-building-3": "Building-3",
+                        "i-building-4": "Building-4",
+                        "i-building-5": "Building-5",
+                        "i-building-6": "Building-6",
+                        "i-building-7": "Building-7",
+                        "i-building-8": "Building-8",
+                        "i-building-9": "Building-9",
+                        "i-building-10": "Building-10",
+                        "i-building-11": "Building-11",
+                        "i-building-12": "Building-12",
+                        "i-bullhorn": "Bullhorn",
+                        "i-bus-station": "Bus-station",
+                        "i-bus": "Bus",
+                        "i-business-man": "Business-man",
+                        "i-business-woman": "Business-woman",
+                        "i-calendar": "Calendar",
+                        "i-camera": "Camera",
+                        "i-capitol": "Capitol",
+                        "i-cart": "Cart",
+                        "i-certificate": "Certificate",
+                        "i-chat-bubbles": "Chat-bubbles",
+                        "i-church": "Church",
+                        "i-clipboard-pencil": "Clipboard-pencil",
+                        "i-close": "Close",
+                        "i-cloudy": "Cloudy",
+                        "i-coffee-cup": "Coffee-cup",
+                        "i-compass": "Compass",
+                        "i-credit-card": "Credit-card",
+                        "i-darth-vader": "Darth-vader",
+                        "i-directions": "Directions",
+                        "i-dispatcher-female": "Dispatcher-female",
+                        "i-dispatcher-male": "Dispatcher-male",
+                        "i-dna": "Dna",
+                        "i-dollar": "Dollar",
+                        "i-donate-blood": "Donate-blood",
+                        "i-excel": "Excel",
+                        "i-favorite": "Favorite",
+                        "i-female": "Female",
+                        "i-first-aid": "First-aid",
+                        "i-flask-holder": "Flask-holder",
+                        "i-flickr": "Flickr",
+                        "i-forward": "Forward",
+                        "i-fountain": "Fountain",
+                        "i-fuel-station": "Fuel-station",
+                        "i-gift": "Gift",
+                        "i-github": "Github",
+                        "i-glasses": "Glasses",
+                        "i-globe": "Globe",
+                        "i-graduation-cap": "Graduation-cap",
+                        "i-gurney": "Gurney",
+                        "i-gus": "Gus",
+                        "i-hand-washing": "Hand-washing",
+                        "i-headset": "Headset",
+                        "i-heart-beat": "Heart-beat",
+                        "i-heart": "Heart",
+                        "i-helicopter": "Helicopter",
+                        "i-hospital-alt": "Hospital-alt",
+                        "i-hospital": "Hospital",
+                        "i-hot-drink": "Hot-drink",
+                        "i-hotspot-mobile": "Hotspot-mobile",
+                        "i-house-1": "House-1",
+                        "i-house-2": "House-2",
+                        "i-house-3": "House-3",
+                        "i-house-4": "House-4",
+                        "i-house-5": "House-5",
+                        "i-house-6": "House-6",
+                        "i-house-7": "House-7",
+                        "i-house-8": "House-8",
+                        "i-hydrant": "Hydrant",
+                        "i-id-employee-female": "Id-employee-female",
+                        "i-id-employee-male": "Id-employee-male",
+                        "i-id-student-female": "Id-student-female",
+                        "i-id-student-male": "Id-student-male",
+                        "i-inbox": "Inbox",
+                        "i-information": "Information",
+                        "i-infusion": "Infusion",
+                        "i-instagram": "Instagram",
+                        "i-intranet": "Intranet",
+                        "i-keyboard": "Keyboard",
+                        "i-kidneys": "Kidneys",
+                        "i-Lamp": "Lamp",
+                        "i-library-1": "Library-1",
+                        "i-library-2": "Library-2",
+                        "i-light-bulb": "Light-bulb",
+                        "i-lightning": "Lightning",
+                        "i-linkedin": "Linkedin",
+                        "i-litter": "Litter",
+                        "i-liver": "Liver",
+                        "i-lock": "Lock",
+                        "i-loudspeaker": "Loudspeaker",
+                        "i-loyalty-card": "Loyalty-card",
+                        "i-lungs": "Lungs",
+                        "i-mail": "Mail",
+                        "i-male": "Male",
+                        "i-man-woman": "Man-woman",
+                        "i-map-alt": "Map-alt",
+                        "i-map-pin": "Map-pin",
+                        "i-map-screen": "Map-screen",
+                        "i-map": "Map",
+                        "i-medic": "Medic",
+                        "i-medical-bag": "Medical-bag",
+                        "i-medical-symbol": "Medical-symbol",
+                        "i-medicine-mixing": "Medicine-mixing",
+                        "i-medicine": "Medicine",
+                        "i-microscope-1": "Microscope-1",
+                        "i-mobile-map": "Mobile-map",
+                        "i-molecule": "Molecule",
+                        "i-no-phone": "No-phone",
+                        "i-no-smoking": "No-smoking",
+                        "i-nuclear-symbol": "Nuclear-symbol",
+                        "i-nurse": "Nurse",
+                        "i-observatory": "Observatory",
+                        "i-open": "Open",
+                        "i-org-tree": "Org-tree",
+                        "i-paper-clip": "Paper-clip",
+                        "i-park": "Park",
+                        "i-pause": "Pause",
+                        "i-pharmaceutical-symbol": "Pharmaceutical-symbol",
+                        "i-pills": "Pills",
+                        "i-pinterest": "Pinterest",
+                        "i-plant": "Plant",
+                        "i-play": "Play",
+                        "i-police": "Police",
+                        "i-policeman": "Policeman",
+                        "i-post-office": "Post-office",
+                        "i-powerpoint": "Powerpoint",
+                        "i-presentation": "Presentation",
+                        "i-raining": "Raining",
+                        "i-recycle": "Recycle",
+                        "i-reddie-alt": "Reddie-alt",
+                        "i-reddie": "Reddie",
+                        "i-rewind": "Rewind",
+                        "i-rss": "Rss",
+                        "i-sale": "Sale",
+                        "i-satellite": "Satellite",
+                        "i-school": "School",
+                        "i-screen-1": "Screen-1",
+                        "i-screen-2": "Screen-2",
+                        "i-server": "Server",
+                        "i-settings": "Settings",
+                        "i-seven-segment-0": "Seven-segment-0",
+                        "i-seven-segment-1": "Seven-segment-1",
+                        "i-seven-segment-2": "Seven-segment-2",
+                        "i-seven-segment-3": "Seven-segment-3",
+                        "i-seven-segment-4": "Seven-segment-4",
+                        "i-seven-segment-5": "Seven-segment-5",
+                        "i-seven-segment-6": "Seven-segment-6",
+                        "i-seven-segment-7": "Seven-segment-7",
+                        "i-seven-segment-8": "Seven-segment-8",
+                        "i-seven-segment-9": "Seven-segment-9",
+                        "i-share": "Share",
+                        "i-skull": "Skull",
+                        "i-skype": "Skype",
+                        "i-snow-flake": "Snow-flake",
+                        "i-snow-rain": "Snow-rain",
+                        "i-snowing": "Snowing",
+                        "i-stairs-down": "Stairs-down",
+                        "i-stairs-up": "Stairs-up",
+                        "i-stethoscope": "Stethoscope",
+                        "i-stomach": "Stomach",
+                        "i-student": "Student",
+                        "i-sun": "Sun",
+                        "i-surveillance": "Surveillance",
+                        "i-syringe": "Syringe",
+                        "i-tasks": "Tasks",
+                        "i-termometer": "Termometer",
+                        "i-test-flask": "Test-flask",
+                        "i-test-tube": "Test-tube",
+                        "i-thumbs-up": "Thumbs-up",
+                        "i-thunderstorm": "Thunderstorm",
+                        "i-ticket": "Ticket",
+                        "i-Tools": "Tools",
+                        "i-tooth": "Tooth",
+                        "i-tornado": "Tornado",
+                        "i-trafic-light": "Trafic-light",
+                        "i-trash-can": "Trash-can",
+                        "i-twitter": "Twitter",
+                        "i-unlock": "Unlock",
+                        "i-video-camera": "Video-camera",
+                        "i-vimeo": "Vimeo",
+                        "i-virus": "Virus",
+                        "i-vote": "Vote",
+                        "i-war-memorial": "War-memorial",
+                        "i-weight-libra": "Weight-libra",
+                        "i-wheelchair": "Wheelchair",
+                        "i-wind": "Wind",
+                        "i-winter-temperature": "Winter-temperature",
+                        "i-word": "Word",
+                        "i-wordpress": "Wordpress",
+                        "i-youtube-1": "Youtube-1",
+                        "i-youtube-2": "Youtube-2"
+                    }
+                },
+                {
+                    "label": "Text Alignment",
+                    "attr": "textalign",
+                    "type": "radio",
+                    "encode": false,
+                    "options": {
+                        "text-left": "Left",
+                        "text-center": "Center",
+                        "text-right": "Right"
+                    }
+                },
+                {
+                    "label": "URL",
+                    "attr": "url",
+                    "type": "url",
+                    "description": "Optional. Enter a URL to make your callout a clickable hyperlink.",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "http://www.uams.edu/"
+                    }
+                },
+                {
+                    "label": "Open the link in a new window",
+                    "attr": "target",
+                    "type": "checkbox",
+                    "encode": false
+                },
+                {
+                    "label": "Callout Type",
+                    "attr": "type",
+                    "type": "radio",
+                    "description": "See examples of <a href=\"https://design.oit.ncsu.edu/docs/ncsu-shortcodes/callouts/\" target=\"_blank\">each type of callout</a> on the <a href=\"https://design.oit.ncsu.edu/docs/\" target=\"_blank\">OIT Design documentation site</a>.",
+                    "encode": false,
+                    "options": {
+                        "basic": "Basic Callout",
+                        "img": "Callout with Image",
+                        "bgimg": "Callout with Background Image"
+                    }
+                },
+                {
+                    "label": "Callout Background Color",
+                    "attr": "bgcolor",
+                    "type": "radio",
+                    "description": "Review the <a href=\"https://brand.ncsu.edu/color/\" target=\"_blank\">NC State Brand color palette</a> for proper usage. Default font is <strong>UAMS Red</strong>.",
+                    "encode": false,
+                    "options": {
+                        "white": "White",
+                        "gray10": "10% Gray",
+                        "gray25": "25% Gray",
+                        "gray60": "60% Gray",
+                        "gray90": "90% Gray",
+                        "black": "Black",
+                        "uamsred": "Cardinal Red (Primary)",
+                        "accentgray": "Accent Gray",
+                        "eggplant": "Eggplant",
+                        "bluegray": "Blue Gray",
+                        "darkblue": "Dark Blue",
+                        "maroon": "Maroon",
+                        "orange": "Orange",
+                        "lightblue": "Light Blue",
+                        "tealblue": "Teal Blue"
+                    }
+                },
+                {
+                    "label": "Image",
+                    "attr": "img",
+                    "type": "attachment",
+                    "description": "See examples and <a href=\"https://design.oit.ncsu.edu/docs/ncsu-shortcodes/callouts#img\" target=\"_blank\">recommended dimensions</a> on the <a href=\"https://design.oit.ncsu.edu/docs/\" target=\"_blank\">OIT Design documentation site</a>."
+                },
+                {
+                    "label": "Display Image Caption?",
+                    "attr": "imgcaption",
+                    "description": "Check to display the caption field from the media file just beneath the callout. (<a href=\"https://design.oit.ncsu.edu/docs/ncsu-shortcodes/callouts#img\" target=\"_blank\">Learn more.</a>)",
+                    "type": "checkbox"
+                },
+                {
+                    "label": "Image Adjustments",
+                    "attr": "imgoverlay",
+                    "type": "radio",
+                    "description": "See examples and <a href=\"\" target=\"_blank\">notes about video hosting</a> on the <a href=\"/docs/\" target=\"_blank\">Webteam documentation site</a>.",
+                    "encode": false,
+                    "options": {
+                        "": "None",
+                        "darken": "Darken (Dark overlay for light text)",
+                        "lighten": "Lighten (Light overlay for dark text)"
+                    }
+                },
+                {
+                    "label": "Text Background Color",
+                    "attr": "textbgcolor",
+                    "type": "radio",
+                    "description": "Review the <a href=\"https://brand.ncsu.edu/color/\" target=\"_blank\">NC State Brand color palette</a> for proper usage.",
+                    "encode": false,
+                    "options": {
+                        "transparentwhite": "Transparent (White Text)",
+                        "transparentblack": "Transparent (Black Text)",
+                        "transparentred": "Transparent (Red Text)",
+                        "semidark": "Semi-transparent dark (White Text)",
+                        "semilight": "Semi-transparent light (Black Text)",
+                        "uamsred": "Cardinal Red (Primary)",
+                        "white": "White",
+                        "gray10": "10% Gray",
+                        "gray25": "25% Gray",
+                        "gray60": "60% Gray",
+                        "gray90": "90% Gray",
+                        "black": "Black",
+                        "accentgray": "Accent Gray",
+                        "eggplant": "Eggplant",
+                        "bluegray": "Blue Gray",
+                        "darkblue": "Dark Blue",
+                        "maroon": "Maroon",
+                        "orange": "Orange",
+                        "lightblue": "Light Blue",
+                        "tealblue": "Teal Blue"
+                    }
+                },
+                {
+                    "label": "Media Position",
+                    "attr": "mediaposition",
+                    "type": "radio",
+                    "description": "",
+                    "encode": false,
+                    "options": {
+                        "left": "Left",
+                        "right": "Right",
+                        "top": "Top",
+                        "bottom": "Bottom"
+                    }
+                },
+                {
+                    "label": "Image layout?",
+                    "attr": "imgback",
+                    "description": "",
+                    "type": "radio",
+                    "options": {
+                        "front": "Full image",
+                        "back": "Cover background"
+                    }
+                },
+                {
+                    "label": "Text Position",
+                    "attr": "textposition",
+                    "type": "radio",
+                    "description": "",
+                    "encode": false,
+                    "options": {
+                        "top left": "Top Left",
+                        "top center": "Top Center",
+                        "top right": "Top Right",
+                        "middle left": "Middle Left",
+                        "middle center": "Middle Center",
+                        "middle right": "Middle Right",
+                        "bottom left": "Bottom Left",
+                        "bottom center": "Bottom Center",
+                        "bottom right": "Bottom Right"
+                    }
+                },
+                {
+                    "label": "Text Box Width",
+                    "attr": "textwidth",
+                    "type": "radio",
+                    "description": "",
+                    "encode": false,
+                    "options": {
+                        "col-lg-3 col-md-3 col-sm-12 col-xs-12": "One-Quarter Width",
+                        "col-lg-4 col-md-4 col-sm-12 col-xs-12": "One-Third Width",
+                        "col-lg-6 col-md-6 col-sm-12 col-xs-12": "One-Half Width",
+                        "col-lg-8 col-md-8 col-sm-12 col-xs-12": "Two-Thirds Width",
+                        "col-lg-9 col-md-9 col-sm-12 col-xs-12": "Three-Quarters Width",
+                        "col-lg-12 col-md-12 col-sm-12 col-xs-12": "Full-Width"
+                    }
+                },
+                {
+                    "label": "Margins",
+                    "attr": "margin",
+                    "type": "radio",
+                    "encode": false,
+                    "description": "Distance before and after the callout box",
+                    "options": {
+                        "normal": "Normal",
+                        "thinmargin": "Thin",
+                        "nomargin": "None"
+                    }
+                },
+                {
+                    "label": "Text Padding",
+                    "attr": "padding",
+                    "type": "radio",
+                    "encode": false,
+                    "description": "Amount of room around the text",
+                    "options": {
+                        "padding-one ": "Normal (1 em)",
+                        "padding-two": "Large (2em)",
+                        "padding-halve": "Thin (0.5 em)",
+                        "padding-none": "None (0 em)"
+                    }
+                },
+                {
+                    "label": "Fullsreen?",
+                    "attr": "fullscreen",
+                    "type": "checkbox",
+                    "description": "<strong>Note:</strong> This option only works on full width page template (No sidebar). You may get unintended results on pages with sidebar."
+                },
+                {
+                    "label": "Custom CSS classes",
+                    "attr": "customclass",
+                    "type": "text",
+                    "description": "",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "Comma-separated list"
+                    }
+                }
+            ]
+        },
+        "attributes": [
+            {
+                "label": "Callout Heading",
+                "attr": "heading",
+                "type": "text",
+                "description": "Optional",
+                "encode": false
+            },
+            {
+                "label": "Heading Type",
+                "attr": "headingtype",
+                "type": "radio",
+                "description": "Headings <a href=\"https://accessibility.oit.ncsu.edu/training/accessibility-handbook/headings.html\" target=\"_blank\">help determine page structure</a>, and are used by screen reading software as landmarks for navigating page content. If you are using this callout as a page title or heading for a section on the page, choose the appropriate heading. Otherwise, choose \"Paragraph.\"",
+                "encode": false,
+                "options": {
+                    "p": "Paragraph",
+                    "h3": "Heading 3",
+                    "h2": "Heading 2",
+                    "h1": "Heading 1"
+                }
+            },
+            {
+                "label": "Heading Icon",
+                "attr": "headingicon",
+                "type": "select",
+                "description": "Select any <a href=\"https://brand.ncsu.edu/bootstrap/components/\" target=\"_blank\">Bootstrap Glyphicon</a> or <a href=\"https://developer.wordpress.org/resource/dashicons/\" target=\"_blank\">WordPress Dashicon</a>.",
+                "encode": false,
+                "options": {
+                    "noicon": "No Icon",
+                    "ic-address-book": "Address-book",
+                    "ic-administration": "Administration",
+                    "ic-book": "Book",
+                    "ic-bookmark": "Bookmark",
+                    "ic-briefcase": "Briefcase",
+                    "ic-calendar": "Calendar",
+                    "ic-camera": "Camera",
+                    "ic-capitol": "Capitol",
+                    "ic-check": "Check",
+                    "ic-clipboard": "Clipboard",
+                    "ic-close": "Close",
+                    "ic-compass": "Compass",
+                    "ic-computer": "Computer",
+                    "ic-directions": "Directions",
+                    "ic-eating": "Eating",
+                    "ic-flag": "Flag",
+                    "ic-globe": "Globe",
+                    "ic-globe2": "Globe2",
+                    "ic-handshake": "Handshake",
+                    "ic-heart": "Heart",
+                    "ic-home": "Home",
+                    "ic-key": "Key",
+                    "ic-letter": "Letter",
+                    "ic-list": "List",
+                    "ic-mail": "Mail",
+                    "ic-map-marker": "Map-marker",
+                    "ic-map": "Map",
+                    "ic-marker": "Marker",
+                    "ic-minus": "Minus",
+                    "ic-music": "Music",
+                    "ic-page": "Page",
+                    "ic-page2": "Page2",
+                    "ic-passport": "Passport",
+                    "ic-pause": "Pause",
+                    "ic-pencil": "Pencil",
+                    "ic-person": "Person",
+                    "ic-picture": "Picture",
+                    "ic-plane": "Plane",
+                    "ic-play": "Play",
+                    "ic-plus": "Plus",
+                    "ic-podium": "Podium",
+                    "ic-ribbon": "Ribbon",
+                    "ic-right-arrow-full": "Right-arrow-full",
+                    "ic-right-arrow": "Right-arrow",
+                    "ic-search": "Search",
+                    "ic-settings": "Settings",
+                    "ic-social": "Social",
+                    "ic-stop": "Stop",
+                    "ic-suitcase": "Suitcase",
+                    "ic-ticket": "Ticket",
+                    "ic-tools": "Tools",
+                    "ic-trash": "Trash",
+                    "ic-umbrella": "Umbrella",
+                    "ic-view": "View",
+                    "ic-watch": "Watch",
+                    "i-1-hour": "1-hour",
+                    "i-15-min": "15-min",
+                    "i-30-min": "30-min",
+                    "i-45-min": "45-min",
+                    "i-911": "911",
+                    "i-accessibility": "Accessibility",
+                    "i-aid-kit-2": "Aid-kit-2",
+                    "i-aid-kit": "Aid-kit",
+                    "i-airport": "Airport",
+                    "i-ambulance": "Ambulance",
+                    "i-android": "Android",
+                    "i-apple": "Apple",
+                    "i-at-symbol": "At-symbol",
+                    "i-atom": "Atom",
+                    "i-bacteria-1": "Bacteria-1",
+                    "i-bacteria-2": "Bacteria-2",
+                    "i-bag": "Bag",
+                    "i-bank": "Bank",
+                    "i-basket": "Basket",
+                    "i-batman": "Batman",
+                    "i-bed": "Bed",
+                    "i-bike": "Bike",
+                    "i-biohazzard": "Biohazzard",
+                    "i-blood-drop": "Blood-drop",
+                    "i-books-1": "Books-1",
+                    "i-box": "Box",
+                    "i-brain": "Brain",
+                    "i-briefcase": "Briefcase",
+                    "i-building-1": "Building-1",
+                    "i-building-2": "Building-2",
+                    "i-building-3": "Building-3",
+                    "i-building-4": "Building-4",
+                    "i-building-5": "Building-5",
+                    "i-building-6": "Building-6",
+                    "i-building-7": "Building-7",
+                    "i-building-8": "Building-8",
+                    "i-building-9": "Building-9",
+                    "i-building-10": "Building-10",
+                    "i-building-11": "Building-11",
+                    "i-building-12": "Building-12",
+                    "i-bullhorn": "Bullhorn",
+                    "i-bus-station": "Bus-station",
+                    "i-bus": "Bus",
+                    "i-business-man": "Business-man",
+                    "i-business-woman": "Business-woman",
+                    "i-calendar": "Calendar",
+                    "i-camera": "Camera",
+                    "i-capitol": "Capitol",
+                    "i-cart": "Cart",
+                    "i-certificate": "Certificate",
+                    "i-chat-bubbles": "Chat-bubbles",
+                    "i-church": "Church",
+                    "i-clipboard-pencil": "Clipboard-pencil",
+                    "i-close": "Close",
+                    "i-cloudy": "Cloudy",
+                    "i-coffee-cup": "Coffee-cup",
+                    "i-compass": "Compass",
+                    "i-credit-card": "Credit-card",
+                    "i-darth-vader": "Darth-vader",
+                    "i-directions": "Directions",
+                    "i-dispatcher-female": "Dispatcher-female",
+                    "i-dispatcher-male": "Dispatcher-male",
+                    "i-dna": "Dna",
+                    "i-dollar": "Dollar",
+                    "i-donate-blood": "Donate-blood",
+                    "i-excel": "Excel",
+                    "i-favorite": "Favorite",
+                    "i-female": "Female",
+                    "i-first-aid": "First-aid",
+                    "i-flask-holder": "Flask-holder",
+                    "i-flickr": "Flickr",
+                    "i-forward": "Forward",
+                    "i-fountain": "Fountain",
+                    "i-fuel-station": "Fuel-station",
+                    "i-gift": "Gift",
+                    "i-github": "Github",
+                    "i-glasses": "Glasses",
+                    "i-globe": "Globe",
+                    "i-graduation-cap": "Graduation-cap",
+                    "i-gurney": "Gurney",
+                    "i-gus": "Gus",
+                    "i-hand-washing": "Hand-washing",
+                    "i-headset": "Headset",
+                    "i-heart-beat": "Heart-beat",
+                    "i-heart": "Heart",
+                    "i-helicopter": "Helicopter",
+                    "i-hospital-alt": "Hospital-alt",
+                    "i-hospital": "Hospital",
+                    "i-hot-drink": "Hot-drink",
+                    "i-hotspot-mobile": "Hotspot-mobile",
+                    "i-house-1": "House-1",
+                    "i-house-2": "House-2",
+                    "i-house-3": "House-3",
+                    "i-house-4": "House-4",
+                    "i-house-5": "House-5",
+                    "i-house-6": "House-6",
+                    "i-house-7": "House-7",
+                    "i-house-8": "House-8",
+                    "i-hydrant": "Hydrant",
+                    "i-id-employee-female": "Id-employee-female",
+                    "i-id-employee-male": "Id-employee-male",
+                    "i-id-student-female": "Id-student-female",
+                    "i-id-student-male": "Id-student-male",
+                    "i-inbox": "Inbox",
+                    "i-information": "Information",
+                    "i-infusion": "Infusion",
+                    "i-instagram": "Instagram",
+                    "i-intranet": "Intranet",
+                    "i-keyboard": "Keyboard",
+                    "i-kidneys": "Kidneys",
+                    "i-Lamp": "Lamp",
+                    "i-library-1": "Library-1",
+                    "i-library-2": "Library-2",
+                    "i-light-bulb": "Light-bulb",
+                    "i-lightning": "Lightning",
+                    "i-linkedin": "Linkedin",
+                    "i-litter": "Litter",
+                    "i-liver": "Liver",
+                    "i-lock": "Lock",
+                    "i-loudspeaker": "Loudspeaker",
+                    "i-loyalty-card": "Loyalty-card",
+                    "i-lungs": "Lungs",
+                    "i-mail": "Mail",
+                    "i-male": "Male",
+                    "i-man-woman": "Man-woman",
+                    "i-map-alt": "Map-alt",
+                    "i-map-pin": "Map-pin",
+                    "i-map-screen": "Map-screen",
+                    "i-map": "Map",
+                    "i-medic": "Medic",
+                    "i-medical-bag": "Medical-bag",
+                    "i-medical-symbol": "Medical-symbol",
+                    "i-medicine-mixing": "Medicine-mixing",
+                    "i-medicine": "Medicine",
+                    "i-microscope-1": "Microscope-1",
+                    "i-mobile-map": "Mobile-map",
+                    "i-molecule": "Molecule",
+                    "i-no-phone": "No-phone",
+                    "i-no-smoking": "No-smoking",
+                    "i-nuclear-symbol": "Nuclear-symbol",
+                    "i-nurse": "Nurse",
+                    "i-observatory": "Observatory",
+                    "i-open": "Open",
+                    "i-org-tree": "Org-tree",
+                    "i-paper-clip": "Paper-clip",
+                    "i-park": "Park",
+                    "i-pause": "Pause",
+                    "i-pharmaceutical-symbol": "Pharmaceutical-symbol",
+                    "i-pills": "Pills",
+                    "i-pinterest": "Pinterest",
+                    "i-plant": "Plant",
+                    "i-play": "Play",
+                    "i-police": "Police",
+                    "i-policeman": "Policeman",
+                    "i-post-office": "Post-office",
+                    "i-powerpoint": "Powerpoint",
+                    "i-presentation": "Presentation",
+                    "i-raining": "Raining",
+                    "i-recycle": "Recycle",
+                    "i-reddie-alt": "Reddie-alt",
+                    "i-reddie": "Reddie",
+                    "i-rewind": "Rewind",
+                    "i-rss": "Rss",
+                    "i-sale": "Sale",
+                    "i-satellite": "Satellite",
+                    "i-school": "School",
+                    "i-screen-1": "Screen-1",
+                    "i-screen-2": "Screen-2",
+                    "i-server": "Server",
+                    "i-settings": "Settings",
+                    "i-seven-segment-0": "Seven-segment-0",
+                    "i-seven-segment-1": "Seven-segment-1",
+                    "i-seven-segment-2": "Seven-segment-2",
+                    "i-seven-segment-3": "Seven-segment-3",
+                    "i-seven-segment-4": "Seven-segment-4",
+                    "i-seven-segment-5": "Seven-segment-5",
+                    "i-seven-segment-6": "Seven-segment-6",
+                    "i-seven-segment-7": "Seven-segment-7",
+                    "i-seven-segment-8": "Seven-segment-8",
+                    "i-seven-segment-9": "Seven-segment-9",
+                    "i-share": "Share",
+                    "i-skull": "Skull",
+                    "i-skype": "Skype",
+                    "i-snow-flake": "Snow-flake",
+                    "i-snow-rain": "Snow-rain",
+                    "i-snowing": "Snowing",
+                    "i-stairs-down": "Stairs-down",
+                    "i-stairs-up": "Stairs-up",
+                    "i-stethoscope": "Stethoscope",
+                    "i-stomach": "Stomach",
+                    "i-student": "Student",
+                    "i-sun": "Sun",
+                    "i-surveillance": "Surveillance",
+                    "i-syringe": "Syringe",
+                    "i-tasks": "Tasks",
+                    "i-termometer": "Termometer",
+                    "i-test-flask": "Test-flask",
+                    "i-test-tube": "Test-tube",
+                    "i-thumbs-up": "Thumbs-up",
+                    "i-thunderstorm": "Thunderstorm",
+                    "i-ticket": "Ticket",
+                    "i-Tools": "Tools",
+                    "i-tooth": "Tooth",
+                    "i-tornado": "Tornado",
+                    "i-trafic-light": "Trafic-light",
+                    "i-trash-can": "Trash-can",
+                    "i-twitter": "Twitter",
+                    "i-unlock": "Unlock",
+                    "i-video-camera": "Video-camera",
+                    "i-vimeo": "Vimeo",
+                    "i-virus": "Virus",
+                    "i-vote": "Vote",
+                    "i-war-memorial": "War-memorial",
+                    "i-weight-libra": "Weight-libra",
+                    "i-wheelchair": "Wheelchair",
+                    "i-wind": "Wind",
+                    "i-winter-temperature": "Winter-temperature",
+                    "i-word": "Word",
+                    "i-wordpress": "Wordpress",
+                    "i-youtube-1": "Youtube-1",
+                    "i-youtube-2": "Youtube-2"
+                }
+            },
+            {
+                "label": "Text Alignment",
+                "attr": "textalign",
+                "type": "radio",
+                "encode": false,
+                "options": {
+                    "text-left": "Left",
+                    "text-center": "Center",
+                    "text-right": "Right"
+                }
+            },
+            {
+                "label": "URL",
+                "attr": "url",
+                "type": "url",
+                "description": "Optional. Enter a URL to make your callout a clickable hyperlink.",
+                "encode": false,
+                "meta": {
+                    "placeholder": "http://www.uams.edu/"
+                }
+            },
+            {
+                "label": "Open the link in a new window",
+                "attr": "target",
+                "type": "checkbox",
+                "encode": false
+            },
+            {
+                "label": "Callout Type",
+                "attr": "type",
+                "type": "radio",
+                "description": "See examples of <a href=\"https://design.oit.ncsu.edu/docs/ncsu-shortcodes/callouts/\" target=\"_blank\">each type of callout</a> on the <a href=\"https://design.oit.ncsu.edu/docs/\" target=\"_blank\">OIT Design documentation site</a>.",
+                "encode": false,
+                "options": {
+                    "basic": "Basic Callout",
+                    "img": "Callout with Image",
+                    "bgimg": "Callout with Background Image"
+                }
+            },
+            {
+                "label": "Callout Background Color",
+                "attr": "bgcolor",
+                "type": "radio",
+                "description": "Review the <a href=\"https://brand.ncsu.edu/color/\" target=\"_blank\">NC State Brand color palette</a> for proper usage. Default font is <strong>UAMS Red</strong>.",
+                "encode": false,
+                "options": {
+                    "white": "White",
+                    "gray10": "10% Gray",
+                    "gray25": "25% Gray",
+                    "gray60": "60% Gray",
+                    "gray90": "90% Gray",
+                    "black": "Black",
+                    "uamsred": "Cardinal Red (Primary)",
+                    "accentgray": "Accent Gray",
+                    "eggplant": "Eggplant",
+                    "bluegray": "Blue Gray",
+                    "darkblue": "Dark Blue",
+                    "maroon": "Maroon",
+                    "orange": "Orange",
+                    "lightblue": "Light Blue",
+                    "tealblue": "Teal Blue"
+                }
+            },
+            {
+                "label": "Image",
+                "attr": "img",
+                "type": "attachment",
+                "description": "See examples and <a href=\"https://design.oit.ncsu.edu/docs/ncsu-shortcodes/callouts#img\" target=\"_blank\">recommended dimensions</a> on the <a href=\"https://design.oit.ncsu.edu/docs/\" target=\"_blank\">OIT Design documentation site</a>."
+            },
+            {
+                "label": "Display Image Caption?",
+                "attr": "imgcaption",
+                "description": "Check to display the caption field from the media file just beneath the callout. (<a href=\"https://design.oit.ncsu.edu/docs/ncsu-shortcodes/callouts#img\" target=\"_blank\">Learn more.</a>)",
+                "type": "checkbox"
+            },
+            {
+                "label": "Image Adjustments",
+                "attr": "imgoverlay",
+                "type": "radio",
+                "description": "See examples and <a href=\"\" target=\"_blank\">notes about video hosting</a> on the <a href=\"/docs/\" target=\"_blank\">Webteam documentation site</a>.",
+                "encode": false,
+                "options": {
+                    "": "None",
+                    "darken": "Darken (Dark overlay for light text)",
+                    "lighten": "Lighten (Light overlay for dark text)"
+                }
+            },
+            {
+                "label": "Text Background Color",
+                "attr": "textbgcolor",
+                "type": "radio",
+                "description": "Review the <a href=\"https://brand.ncsu.edu/color/\" target=\"_blank\">NC State Brand color palette</a> for proper usage.",
+                "encode": false,
+                "options": {
+                    "transparentwhite": "Transparent (White Text)",
+                    "transparentblack": "Transparent (Black Text)",
+                    "transparentred": "Transparent (Red Text)",
+                    "semidark": "Semi-transparent dark (White Text)",
+                    "semilight": "Semi-transparent light (Black Text)",
+                    "uamsred": "Cardinal Red (Primary)",
+                    "white": "White",
+                    "gray10": "10% Gray",
+                    "gray25": "25% Gray",
+                    "gray60": "60% Gray",
+                    "gray90": "90% Gray",
+                    "black": "Black",
+                    "accentgray": "Accent Gray",
+                    "eggplant": "Eggplant",
+                    "bluegray": "Blue Gray",
+                    "darkblue": "Dark Blue",
+                    "maroon": "Maroon",
+                    "orange": "Orange",
+                    "lightblue": "Light Blue",
+                    "tealblue": "Teal Blue"
+                }
+            },
+            {
+                "label": "Media Position",
+                "attr": "mediaposition",
+                "type": "radio",
+                "description": "",
+                "encode": false,
+                "options": {
+                    "left": "Left",
+                    "right": "Right",
+                    "top": "Top",
+                    "bottom": "Bottom"
+                }
+            },
+            {
+                "label": "Image layout?",
+                "attr": "imgback",
+                "description": "",
+                "type": "radio",
+                "options": {
+                    "front": "Full image",
+                    "back": "Cover background"
+                }
+            },
+            {
+                "label": "Text Position",
+                "attr": "textposition",
+                "type": "radio",
+                "description": "",
+                "encode": false,
+                "options": {
+                    "top left": "Top Left",
+                    "top center": "Top Center",
+                    "top right": "Top Right",
+                    "middle left": "Middle Left",
+                    "middle center": "Middle Center",
+                    "middle right": "Middle Right",
+                    "bottom left": "Bottom Left",
+                    "bottom center": "Bottom Center",
+                    "bottom right": "Bottom Right"
+                }
+            },
+            {
+                "label": "Text Box Width",
+                "attr": "textwidth",
+                "type": "radio",
+                "description": "",
+                "encode": false,
+                "options": {
+                    "col-lg-3 col-md-3 col-sm-12 col-xs-12": "One-Quarter Width",
+                    "col-lg-4 col-md-4 col-sm-12 col-xs-12": "One-Third Width",
+                    "col-lg-6 col-md-6 col-sm-12 col-xs-12": "One-Half Width",
+                    "col-lg-8 col-md-8 col-sm-12 col-xs-12": "Two-Thirds Width",
+                    "col-lg-9 col-md-9 col-sm-12 col-xs-12": "Three-Quarters Width",
+                    "col-lg-12 col-md-12 col-sm-12 col-xs-12": "Full-Width"
+                }
+            },
+            {
+                "label": "Margins",
+                "attr": "margin",
+                "type": "radio",
+                "encode": false,
+                "description": "Distance before and after the callout box",
+                "options": {
+                    "normal": "Normal",
+                    "thinmargin": "Thin",
+                    "nomargin": "None"
+                }
+            },
+            {
+                "label": "Text Padding",
+                "attr": "padding",
+                "type": "radio",
+                "encode": false,
+                "description": "Amount of room around the text",
+                "options": {
+                    "padding-one ": "Normal (1 em)",
+                    "padding-two": "Large (2em)",
+                    "padding-halve": "Thin (0.5 em)",
+                    "padding-none": "None (0 em)"
+                }
+            },
+            {
+                "label": "Fullsreen?",
+                "attr": "fullscreen",
+                "type": "checkbox",
+                "description": "<strong>Note:</strong> This option only works on full width page template (No sidebar). You may get unintended results on pages with sidebar."
+            },
+            {
+                "label": "Custom CSS classes",
+                "attr": "customclass",
+                "type": "text",
+                "description": "",
+                "encode": false,
+                "meta": {
+                    "placeholder": "Comma-separated list"
+                }
+            }
+        ]
+    },
+    "Facebook": {
+        "ui_args": {
+            "label": "Facebook",
+            "listItemImage": "dashicons-facebook",
+            "attrs": [
+                {
+                    "label": "URL",
+                    "attr": "url",
+                    "type": "text",
+                    "description": "Full URL to the Facebook Post or Video"
+                }
+            ]
+        },
+        "attributes": []
+    },
+    "Flickr": {
+        "ui_args": {
+            "label": "Flickr",
+            "listItemImage": "<img src=\"https://example.test/wp-content/plugins/uamswp-shortcodes/assets/images/svg/icon-flickr.svg\" />",
+            "attrs": [
+                {
+                    "label": "URL",
+                    "attr": "url",
+                    "type": "text",
+                    "description": "URL to a Flickr gallery"
+                }
+            ]
+        },
+        "attributes": []
+    },
+    "GoogleDocs": {
+        "ui_args": {
+            "label": "Google Docs",
+            "listItemImage": "<img src=\"https://example.test/wp-content/plugins/uamswp-shortcodes/assets/images/svg/icon-googledocs.svg\" />",
+            "attrs": [
+                {
+                    "label": "URL",
+                    "attr": "url",
+                    "type": "text",
+                    "description": "Full document URL"
+                },
+                {
+                    "label": "Height",
+                    "attr": "height",
+                    "type": "number",
+                    "description": "Pixel height of the iframe."
+                },
+                {
+                    "label": "Width",
+                    "attr": "width",
+                    "type": "number",
+                    "description": "Pixel width of the iframe."
+                },
+                {
+                    "label": "Disable Responsiveness",
+                    "attr": "disableresponsiveness",
+                    "type": "checkbox",
+                    "description": "By default, height/width ratio of the embedded document will be maintained regardless of container width. Check this to keep constant height/width."
+                },
+                {
+                    "label": "Display spreadsheet header rows?",
+                    "attr": "headers",
+                    "type": "checkbox"
+                },
+                {
+                    "label": "Autostart?",
+                    "attr": "start",
+                    "type": "checkbox"
+                },
+                {
+                    "label": "Loop?",
+                    "attr": "loop",
+                    "type": "checkbox"
+                },
+                {
+                    "label": "Delay between slides (ms)",
+                    "attr": "delayms",
+                    "type": "number",
+                    "default": 3000
+                }
+            ]
+        },
+        "attributes": []
+    },
+    "IconBox": {
+        "ui_args": {
+            "label": "Icon Box",
+            "listItemImage": "dashicons-info",
+            "inner_content": {
+                "label": "Icon Box Body",
+                "description": "Main content of your icon box. Text and basic HTML tags can be added here.",
+                "encode": true
+            },
+            "attrs": [
+                {
+                    "label": "Icon Box Type",
+                    "attr": "type",
+                    "type": "radio",
+                    "description": "See examples of <a href=\"https://design.oit.ncsu.edu/docs/ncsu-shortcodes/alerts/\" target=\"_blank\">each type of alert</a> on the <a href=\"https://design.oit.ncsu.edu/docs/\" target=\"_blank\">OIT Design documentation site</a>.",
+                    "encode": false,
+                    "options": {
+                        "default": "Default",
+                        "boxed": "Boxed",
+                        "framed": "Framed"
+                    }
+                },
+                {
+                    "label": "Background Color Option",
+                    "attr": "bgcolor",
+                    "type": "radio",
+                    "description": "See examples of <a href=\"https://design.oit.ncsu.edu/docs/ncsu-shortcodes/alerts/\" target=\"_blank\">each type of alert</a> on the <a href=\"https://design.oit.ncsu.edu/docs/\" target=\"_blank\">OIT Design documentation site</a>.",
+                    "encode": false,
+                    "options": {
+                        "none": "Default",
+                        "red": "Red",
+                        "gray": "Gray",
+                        "blue": "Blue"
+                    }
+                },
+                {
+                    "label": "Icon Box Heading",
+                    "attr": "heading",
+                    "type": "text",
+                    "description": "Title or heading for the box",
+                    "encode": false
+                },
+                {
+                    "label": "Heading Icon",
+                    "attr": "headingicon",
+                    "type": "select",
+                    "description": "Select any <a href=\"https://brand.ncsu.edu/bootstrap/components/\" target=\"_blank\">Bootstrap Glyphicon</a> or <a href=\"https://developer.wordpress.org/resource/dashicons/\" target=\"_blank\">WordPress Dashicon</a>.",
+                    "encode": false,
+                    "options": {
+                        "noicon": "No Icon",
+                        "ic-address-book": "Address-book",
+                        "ic-administration": "Administration",
+                        "ic-book": "Book",
+                        "ic-bookmark": "Bookmark",
+                        "ic-briefcase": "Briefcase",
+                        "ic-calendar": "Calendar",
+                        "ic-camera": "Camera",
+                        "ic-capitol": "Capitol",
+                        "ic-check": "Check",
+                        "ic-clipboard": "Clipboard",
+                        "ic-close": "Close",
+                        "ic-compass": "Compass",
+                        "ic-computer": "Computer",
+                        "ic-directions": "Directions",
+                        "ic-eating": "Eating",
+                        "ic-flag": "Flag",
+                        "ic-globe": "Globe",
+                        "ic-globe2": "Globe2",
+                        "ic-handshake": "Handshake",
+                        "ic-heart": "Heart",
+                        "ic-home": "Home",
+                        "ic-key": "Key",
+                        "ic-letter": "Letter",
+                        "ic-list": "List",
+                        "ic-mail": "Mail",
+                        "ic-map-marker": "Map-marker",
+                        "ic-map": "Map",
+                        "ic-marker": "Marker",
+                        "ic-minus": "Minus",
+                        "ic-music": "Music",
+                        "ic-page": "Page",
+                        "ic-page2": "Page2",
+                        "ic-passport": "Passport",
+                        "ic-pause": "Pause",
+                        "ic-pencil": "Pencil",
+                        "ic-person": "Person",
+                        "ic-picture": "Picture",
+                        "ic-plane": "Plane",
+                        "ic-play": "Play",
+                        "ic-plus": "Plus",
+                        "ic-podium": "Podium",
+                        "ic-ribbon": "Ribbon",
+                        "ic-right-arrow-full": "Right-arrow-full",
+                        "ic-right-arrow": "Right-arrow",
+                        "ic-search": "Search",
+                        "ic-settings": "Settings",
+                        "ic-social": "Social",
+                        "ic-stop": "Stop",
+                        "ic-suitcase": "Suitcase",
+                        "ic-ticket": "Ticket",
+                        "ic-tools": "Tools",
+                        "ic-trash": "Trash",
+                        "ic-umbrella": "Umbrella",
+                        "ic-view": "View",
+                        "ic-watch": "Watch",
+                        "i-1-hour": "1-hour",
+                        "i-15-min": "15-min",
+                        "i-30-min": "30-min",
+                        "i-45-min": "45-min",
+                        "i-911": "911",
+                        "i-accessibility": "Accessibility",
+                        "i-aid-kit-2": "Aid-kit-2",
+                        "i-aid-kit": "Aid-kit",
+                        "i-airport": "Airport",
+                        "i-ambulance": "Ambulance",
+                        "i-android": "Android",
+                        "i-apple": "Apple",
+                        "i-at-symbol": "At-symbol",
+                        "i-atom": "Atom",
+                        "i-bacteria-1": "Bacteria-1",
+                        "i-bacteria-2": "Bacteria-2",
+                        "i-bag": "Bag",
+                        "i-bank": "Bank",
+                        "i-basket": "Basket",
+                        "i-batman": "Batman",
+                        "i-bed": "Bed",
+                        "i-bike": "Bike",
+                        "i-biohazzard": "Biohazzard",
+                        "i-blood-drop": "Blood-drop",
+                        "i-books-1": "Books-1",
+                        "i-box": "Box",
+                        "i-brain": "Brain",
+                        "i-briefcase": "Briefcase",
+                        "i-building-1": "Building-1",
+                        "i-building-2": "Building-2",
+                        "i-building-3": "Building-3",
+                        "i-building-4": "Building-4",
+                        "i-building-5": "Building-5",
+                        "i-building-6": "Building-6",
+                        "i-building-7": "Building-7",
+                        "i-building-8": "Building-8",
+                        "i-building-9": "Building-9",
+                        "i-building-10": "Building-10",
+                        "i-building-11": "Building-11",
+                        "i-building-12": "Building-12",
+                        "i-bullhorn": "Bullhorn",
+                        "i-bus-station": "Bus-station",
+                        "i-bus": "Bus",
+                        "i-business-man": "Business-man",
+                        "i-business-woman": "Business-woman",
+                        "i-calendar": "Calendar",
+                        "i-camera": "Camera",
+                        "i-capitol": "Capitol",
+                        "i-cart": "Cart",
+                        "i-certificate": "Certificate",
+                        "i-chat-bubbles": "Chat-bubbles",
+                        "i-church": "Church",
+                        "i-clipboard-pencil": "Clipboard-pencil",
+                        "i-close": "Close",
+                        "i-cloudy": "Cloudy",
+                        "i-coffee-cup": "Coffee-cup",
+                        "i-compass": "Compass",
+                        "i-credit-card": "Credit-card",
+                        "i-darth-vader": "Darth-vader",
+                        "i-directions": "Directions",
+                        "i-dispatcher-female": "Dispatcher-female",
+                        "i-dispatcher-male": "Dispatcher-male",
+                        "i-dna": "Dna",
+                        "i-dollar": "Dollar",
+                        "i-donate-blood": "Donate-blood",
+                        "i-excel": "Excel",
+                        "i-favorite": "Favorite",
+                        "i-female": "Female",
+                        "i-first-aid": "First-aid",
+                        "i-flask-holder": "Flask-holder",
+                        "i-flickr": "Flickr",
+                        "i-forward": "Forward",
+                        "i-fountain": "Fountain",
+                        "i-fuel-station": "Fuel-station",
+                        "i-gift": "Gift",
+                        "i-github": "Github",
+                        "i-glasses": "Glasses",
+                        "i-globe": "Globe",
+                        "i-graduation-cap": "Graduation-cap",
+                        "i-gurney": "Gurney",
+                        "i-gus": "Gus",
+                        "i-hand-washing": "Hand-washing",
+                        "i-headset": "Headset",
+                        "i-heart-beat": "Heart-beat",
+                        "i-heart": "Heart",
+                        "i-helicopter": "Helicopter",
+                        "i-hospital-alt": "Hospital-alt",
+                        "i-hospital": "Hospital",
+                        "i-hot-drink": "Hot-drink",
+                        "i-hotspot-mobile": "Hotspot-mobile",
+                        "i-house-1": "House-1",
+                        "i-house-2": "House-2",
+                        "i-house-3": "House-3",
+                        "i-house-4": "House-4",
+                        "i-house-5": "House-5",
+                        "i-house-6": "House-6",
+                        "i-house-7": "House-7",
+                        "i-house-8": "House-8",
+                        "i-hydrant": "Hydrant",
+                        "i-id-employee-female": "Id-employee-female",
+                        "i-id-employee-male": "Id-employee-male",
+                        "i-id-student-female": "Id-student-female",
+                        "i-id-student-male": "Id-student-male",
+                        "i-inbox": "Inbox",
+                        "i-information": "Information",
+                        "i-infusion": "Infusion",
+                        "i-instagram": "Instagram",
+                        "i-intranet": "Intranet",
+                        "i-keyboard": "Keyboard",
+                        "i-kidneys": "Kidneys",
+                        "i-Lamp": "Lamp",
+                        "i-library-1": "Library-1",
+                        "i-library-2": "Library-2",
+                        "i-light-bulb": "Light-bulb",
+                        "i-lightning": "Lightning",
+                        "i-linkedin": "Linkedin",
+                        "i-litter": "Litter",
+                        "i-liver": "Liver",
+                        "i-lock": "Lock",
+                        "i-loudspeaker": "Loudspeaker",
+                        "i-loyalty-card": "Loyalty-card",
+                        "i-lungs": "Lungs",
+                        "i-mail": "Mail",
+                        "i-male": "Male",
+                        "i-man-woman": "Man-woman",
+                        "i-map-alt": "Map-alt",
+                        "i-map-pin": "Map-pin",
+                        "i-map-screen": "Map-screen",
+                        "i-map": "Map",
+                        "i-medic": "Medic",
+                        "i-medical-bag": "Medical-bag",
+                        "i-medical-symbol": "Medical-symbol",
+                        "i-medicine-mixing": "Medicine-mixing",
+                        "i-medicine": "Medicine",
+                        "i-microscope-1": "Microscope-1",
+                        "i-mobile-map": "Mobile-map",
+                        "i-molecule": "Molecule",
+                        "i-no-phone": "No-phone",
+                        "i-no-smoking": "No-smoking",
+                        "i-nuclear-symbol": "Nuclear-symbol",
+                        "i-nurse": "Nurse",
+                        "i-observatory": "Observatory",
+                        "i-open": "Open",
+                        "i-org-tree": "Org-tree",
+                        "i-paper-clip": "Paper-clip",
+                        "i-park": "Park",
+                        "i-pause": "Pause",
+                        "i-pharmaceutical-symbol": "Pharmaceutical-symbol",
+                        "i-pills": "Pills",
+                        "i-pinterest": "Pinterest",
+                        "i-plant": "Plant",
+                        "i-play": "Play",
+                        "i-police": "Police",
+                        "i-policeman": "Policeman",
+                        "i-post-office": "Post-office",
+                        "i-powerpoint": "Powerpoint",
+                        "i-presentation": "Presentation",
+                        "i-raining": "Raining",
+                        "i-recycle": "Recycle",
+                        "i-reddie-alt": "Reddie-alt",
+                        "i-reddie": "Reddie",
+                        "i-rewind": "Rewind",
+                        "i-rss": "Rss",
+                        "i-sale": "Sale",
+                        "i-satellite": "Satellite",
+                        "i-school": "School",
+                        "i-screen-1": "Screen-1",
+                        "i-screen-2": "Screen-2",
+                        "i-server": "Server",
+                        "i-settings": "Settings",
+                        "i-seven-segment-0": "Seven-segment-0",
+                        "i-seven-segment-1": "Seven-segment-1",
+                        "i-seven-segment-2": "Seven-segment-2",
+                        "i-seven-segment-3": "Seven-segment-3",
+                        "i-seven-segment-4": "Seven-segment-4",
+                        "i-seven-segment-5": "Seven-segment-5",
+                        "i-seven-segment-6": "Seven-segment-6",
+                        "i-seven-segment-7": "Seven-segment-7",
+                        "i-seven-segment-8": "Seven-segment-8",
+                        "i-seven-segment-9": "Seven-segment-9",
+                        "i-share": "Share",
+                        "i-skull": "Skull",
+                        "i-skype": "Skype",
+                        "i-snow-flake": "Snow-flake",
+                        "i-snow-rain": "Snow-rain",
+                        "i-snowing": "Snowing",
+                        "i-stairs-down": "Stairs-down",
+                        "i-stairs-up": "Stairs-up",
+                        "i-stethoscope": "Stethoscope",
+                        "i-stomach": "Stomach",
+                        "i-student": "Student",
+                        "i-sun": "Sun",
+                        "i-surveillance": "Surveillance",
+                        "i-syringe": "Syringe",
+                        "i-tasks": "Tasks",
+                        "i-termometer": "Termometer",
+                        "i-test-flask": "Test-flask",
+                        "i-test-tube": "Test-tube",
+                        "i-thumbs-up": "Thumbs-up",
+                        "i-thunderstorm": "Thunderstorm",
+                        "i-ticket": "Ticket",
+                        "i-Tools": "Tools",
+                        "i-tooth": "Tooth",
+                        "i-tornado": "Tornado",
+                        "i-trafic-light": "Trafic-light",
+                        "i-trash-can": "Trash-can",
+                        "i-twitter": "Twitter",
+                        "i-unlock": "Unlock",
+                        "i-video-camera": "Video-camera",
+                        "i-vimeo": "Vimeo",
+                        "i-virus": "Virus",
+                        "i-vote": "Vote",
+                        "i-war-memorial": "War-memorial",
+                        "i-weight-libra": "Weight-libra",
+                        "i-wheelchair": "Wheelchair",
+                        "i-wind": "Wind",
+                        "i-winter-temperature": "Winter-temperature",
+                        "i-word": "Word",
+                        "i-wordpress": "Wordpress",
+                        "i-youtube-1": "Youtube-1",
+                        "i-youtube-2": "Youtube-2"
+                    }
+                },
+                {
+                    "label": "URL",
+                    "attr": "url",
+                    "type": "url",
+                    "description": "Optional. Enter a URL to make your icon and title a clickable hyperlink.",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "http://www.uams.edu/"
+                    }
+                },
+                {
+                    "label": "Custom CSS classes",
+                    "attr": "customclass",
+                    "type": "text",
+                    "description": "",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "Comma-separated list"
+                    }
+                }
+            ]
+        },
+        "attributes": [
+            {
+                "label": "Icon Box Type",
+                "attr": "type",
+                "type": "radio",
+                "description": "See examples of <a href=\"https://design.oit.ncsu.edu/docs/ncsu-shortcodes/alerts/\" target=\"_blank\">each type of alert</a> on the <a href=\"https://design.oit.ncsu.edu/docs/\" target=\"_blank\">OIT Design documentation site</a>.",
+                "encode": false,
+                "options": {
+                    "default": "Default",
+                    "boxed": "Boxed",
+                    "framed": "Framed"
+                }
+            },
+            {
+                "label": "Background Color Option",
+                "attr": "bgcolor",
+                "type": "radio",
+                "description": "See examples of <a href=\"https://design.oit.ncsu.edu/docs/ncsu-shortcodes/alerts/\" target=\"_blank\">each type of alert</a> on the <a href=\"https://design.oit.ncsu.edu/docs/\" target=\"_blank\">OIT Design documentation site</a>.",
+                "encode": false,
+                "options": {
+                    "none": "Default",
+                    "red": "Red",
+                    "gray": "Gray",
+                    "blue": "Blue"
+                }
+            },
+            {
+                "label": "Icon Box Heading",
+                "attr": "heading",
+                "type": "text",
+                "description": "Title or heading for the box",
+                "encode": false
+            },
+            {
+                "label": "Heading Icon",
+                "attr": "headingicon",
+                "type": "select",
+                "description": "Select any <a href=\"https://brand.ncsu.edu/bootstrap/components/\" target=\"_blank\">Bootstrap Glyphicon</a> or <a href=\"https://developer.wordpress.org/resource/dashicons/\" target=\"_blank\">WordPress Dashicon</a>.",
+                "encode": false,
+                "options": {
+                    "noicon": "No Icon",
+                    "ic-address-book": "Address-book",
+                    "ic-administration": "Administration",
+                    "ic-book": "Book",
+                    "ic-bookmark": "Bookmark",
+                    "ic-briefcase": "Briefcase",
+                    "ic-calendar": "Calendar",
+                    "ic-camera": "Camera",
+                    "ic-capitol": "Capitol",
+                    "ic-check": "Check",
+                    "ic-clipboard": "Clipboard",
+                    "ic-close": "Close",
+                    "ic-compass": "Compass",
+                    "ic-computer": "Computer",
+                    "ic-directions": "Directions",
+                    "ic-eating": "Eating",
+                    "ic-flag": "Flag",
+                    "ic-globe": "Globe",
+                    "ic-globe2": "Globe2",
+                    "ic-handshake": "Handshake",
+                    "ic-heart": "Heart",
+                    "ic-home": "Home",
+                    "ic-key": "Key",
+                    "ic-letter": "Letter",
+                    "ic-list": "List",
+                    "ic-mail": "Mail",
+                    "ic-map-marker": "Map-marker",
+                    "ic-map": "Map",
+                    "ic-marker": "Marker",
+                    "ic-minus": "Minus",
+                    "ic-music": "Music",
+                    "ic-page": "Page",
+                    "ic-page2": "Page2",
+                    "ic-passport": "Passport",
+                    "ic-pause": "Pause",
+                    "ic-pencil": "Pencil",
+                    "ic-person": "Person",
+                    "ic-picture": "Picture",
+                    "ic-plane": "Plane",
+                    "ic-play": "Play",
+                    "ic-plus": "Plus",
+                    "ic-podium": "Podium",
+                    "ic-ribbon": "Ribbon",
+                    "ic-right-arrow-full": "Right-arrow-full",
+                    "ic-right-arrow": "Right-arrow",
+                    "ic-search": "Search",
+                    "ic-settings": "Settings",
+                    "ic-social": "Social",
+                    "ic-stop": "Stop",
+                    "ic-suitcase": "Suitcase",
+                    "ic-ticket": "Ticket",
+                    "ic-tools": "Tools",
+                    "ic-trash": "Trash",
+                    "ic-umbrella": "Umbrella",
+                    "ic-view": "View",
+                    "ic-watch": "Watch",
+                    "i-1-hour": "1-hour",
+                    "i-15-min": "15-min",
+                    "i-30-min": "30-min",
+                    "i-45-min": "45-min",
+                    "i-911": "911",
+                    "i-accessibility": "Accessibility",
+                    "i-aid-kit-2": "Aid-kit-2",
+                    "i-aid-kit": "Aid-kit",
+                    "i-airport": "Airport",
+                    "i-ambulance": "Ambulance",
+                    "i-android": "Android",
+                    "i-apple": "Apple",
+                    "i-at-symbol": "At-symbol",
+                    "i-atom": "Atom",
+                    "i-bacteria-1": "Bacteria-1",
+                    "i-bacteria-2": "Bacteria-2",
+                    "i-bag": "Bag",
+                    "i-bank": "Bank",
+                    "i-basket": "Basket",
+                    "i-batman": "Batman",
+                    "i-bed": "Bed",
+                    "i-bike": "Bike",
+                    "i-biohazzard": "Biohazzard",
+                    "i-blood-drop": "Blood-drop",
+                    "i-books-1": "Books-1",
+                    "i-box": "Box",
+                    "i-brain": "Brain",
+                    "i-briefcase": "Briefcase",
+                    "i-building-1": "Building-1",
+                    "i-building-2": "Building-2",
+                    "i-building-3": "Building-3",
+                    "i-building-4": "Building-4",
+                    "i-building-5": "Building-5",
+                    "i-building-6": "Building-6",
+                    "i-building-7": "Building-7",
+                    "i-building-8": "Building-8",
+                    "i-building-9": "Building-9",
+                    "i-building-10": "Building-10",
+                    "i-building-11": "Building-11",
+                    "i-building-12": "Building-12",
+                    "i-bullhorn": "Bullhorn",
+                    "i-bus-station": "Bus-station",
+                    "i-bus": "Bus",
+                    "i-business-man": "Business-man",
+                    "i-business-woman": "Business-woman",
+                    "i-calendar": "Calendar",
+                    "i-camera": "Camera",
+                    "i-capitol": "Capitol",
+                    "i-cart": "Cart",
+                    "i-certificate": "Certificate",
+                    "i-chat-bubbles": "Chat-bubbles",
+                    "i-church": "Church",
+                    "i-clipboard-pencil": "Clipboard-pencil",
+                    "i-close": "Close",
+                    "i-cloudy": "Cloudy",
+                    "i-coffee-cup": "Coffee-cup",
+                    "i-compass": "Compass",
+                    "i-credit-card": "Credit-card",
+                    "i-darth-vader": "Darth-vader",
+                    "i-directions": "Directions",
+                    "i-dispatcher-female": "Dispatcher-female",
+                    "i-dispatcher-male": "Dispatcher-male",
+                    "i-dna": "Dna",
+                    "i-dollar": "Dollar",
+                    "i-donate-blood": "Donate-blood",
+                    "i-excel": "Excel",
+                    "i-favorite": "Favorite",
+                    "i-female": "Female",
+                    "i-first-aid": "First-aid",
+                    "i-flask-holder": "Flask-holder",
+                    "i-flickr": "Flickr",
+                    "i-forward": "Forward",
+                    "i-fountain": "Fountain",
+                    "i-fuel-station": "Fuel-station",
+                    "i-gift": "Gift",
+                    "i-github": "Github",
+                    "i-glasses": "Glasses",
+                    "i-globe": "Globe",
+                    "i-graduation-cap": "Graduation-cap",
+                    "i-gurney": "Gurney",
+                    "i-gus": "Gus",
+                    "i-hand-washing": "Hand-washing",
+                    "i-headset": "Headset",
+                    "i-heart-beat": "Heart-beat",
+                    "i-heart": "Heart",
+                    "i-helicopter": "Helicopter",
+                    "i-hospital-alt": "Hospital-alt",
+                    "i-hospital": "Hospital",
+                    "i-hot-drink": "Hot-drink",
+                    "i-hotspot-mobile": "Hotspot-mobile",
+                    "i-house-1": "House-1",
+                    "i-house-2": "House-2",
+                    "i-house-3": "House-3",
+                    "i-house-4": "House-4",
+                    "i-house-5": "House-5",
+                    "i-house-6": "House-6",
+                    "i-house-7": "House-7",
+                    "i-house-8": "House-8",
+                    "i-hydrant": "Hydrant",
+                    "i-id-employee-female": "Id-employee-female",
+                    "i-id-employee-male": "Id-employee-male",
+                    "i-id-student-female": "Id-student-female",
+                    "i-id-student-male": "Id-student-male",
+                    "i-inbox": "Inbox",
+                    "i-information": "Information",
+                    "i-infusion": "Infusion",
+                    "i-instagram": "Instagram",
+                    "i-intranet": "Intranet",
+                    "i-keyboard": "Keyboard",
+                    "i-kidneys": "Kidneys",
+                    "i-Lamp": "Lamp",
+                    "i-library-1": "Library-1",
+                    "i-library-2": "Library-2",
+                    "i-light-bulb": "Light-bulb",
+                    "i-lightning": "Lightning",
+                    "i-linkedin": "Linkedin",
+                    "i-litter": "Litter",
+                    "i-liver": "Liver",
+                    "i-lock": "Lock",
+                    "i-loudspeaker": "Loudspeaker",
+                    "i-loyalty-card": "Loyalty-card",
+                    "i-lungs": "Lungs",
+                    "i-mail": "Mail",
+                    "i-male": "Male",
+                    "i-man-woman": "Man-woman",
+                    "i-map-alt": "Map-alt",
+                    "i-map-pin": "Map-pin",
+                    "i-map-screen": "Map-screen",
+                    "i-map": "Map",
+                    "i-medic": "Medic",
+                    "i-medical-bag": "Medical-bag",
+                    "i-medical-symbol": "Medical-symbol",
+                    "i-medicine-mixing": "Medicine-mixing",
+                    "i-medicine": "Medicine",
+                    "i-microscope-1": "Microscope-1",
+                    "i-mobile-map": "Mobile-map",
+                    "i-molecule": "Molecule",
+                    "i-no-phone": "No-phone",
+                    "i-no-smoking": "No-smoking",
+                    "i-nuclear-symbol": "Nuclear-symbol",
+                    "i-nurse": "Nurse",
+                    "i-observatory": "Observatory",
+                    "i-open": "Open",
+                    "i-org-tree": "Org-tree",
+                    "i-paper-clip": "Paper-clip",
+                    "i-park": "Park",
+                    "i-pause": "Pause",
+                    "i-pharmaceutical-symbol": "Pharmaceutical-symbol",
+                    "i-pills": "Pills",
+                    "i-pinterest": "Pinterest",
+                    "i-plant": "Plant",
+                    "i-play": "Play",
+                    "i-police": "Police",
+                    "i-policeman": "Policeman",
+                    "i-post-office": "Post-office",
+                    "i-powerpoint": "Powerpoint",
+                    "i-presentation": "Presentation",
+                    "i-raining": "Raining",
+                    "i-recycle": "Recycle",
+                    "i-reddie-alt": "Reddie-alt",
+                    "i-reddie": "Reddie",
+                    "i-rewind": "Rewind",
+                    "i-rss": "Rss",
+                    "i-sale": "Sale",
+                    "i-satellite": "Satellite",
+                    "i-school": "School",
+                    "i-screen-1": "Screen-1",
+                    "i-screen-2": "Screen-2",
+                    "i-server": "Server",
+                    "i-settings": "Settings",
+                    "i-seven-segment-0": "Seven-segment-0",
+                    "i-seven-segment-1": "Seven-segment-1",
+                    "i-seven-segment-2": "Seven-segment-2",
+                    "i-seven-segment-3": "Seven-segment-3",
+                    "i-seven-segment-4": "Seven-segment-4",
+                    "i-seven-segment-5": "Seven-segment-5",
+                    "i-seven-segment-6": "Seven-segment-6",
+                    "i-seven-segment-7": "Seven-segment-7",
+                    "i-seven-segment-8": "Seven-segment-8",
+                    "i-seven-segment-9": "Seven-segment-9",
+                    "i-share": "Share",
+                    "i-skull": "Skull",
+                    "i-skype": "Skype",
+                    "i-snow-flake": "Snow-flake",
+                    "i-snow-rain": "Snow-rain",
+                    "i-snowing": "Snowing",
+                    "i-stairs-down": "Stairs-down",
+                    "i-stairs-up": "Stairs-up",
+                    "i-stethoscope": "Stethoscope",
+                    "i-stomach": "Stomach",
+                    "i-student": "Student",
+                    "i-sun": "Sun",
+                    "i-surveillance": "Surveillance",
+                    "i-syringe": "Syringe",
+                    "i-tasks": "Tasks",
+                    "i-termometer": "Termometer",
+                    "i-test-flask": "Test-flask",
+                    "i-test-tube": "Test-tube",
+                    "i-thumbs-up": "Thumbs-up",
+                    "i-thunderstorm": "Thunderstorm",
+                    "i-ticket": "Ticket",
+                    "i-Tools": "Tools",
+                    "i-tooth": "Tooth",
+                    "i-tornado": "Tornado",
+                    "i-trafic-light": "Trafic-light",
+                    "i-trash-can": "Trash-can",
+                    "i-twitter": "Twitter",
+                    "i-unlock": "Unlock",
+                    "i-video-camera": "Video-camera",
+                    "i-vimeo": "Vimeo",
+                    "i-virus": "Virus",
+                    "i-vote": "Vote",
+                    "i-war-memorial": "War-memorial",
+                    "i-weight-libra": "Weight-libra",
+                    "i-wheelchair": "Wheelchair",
+                    "i-wind": "Wind",
+                    "i-winter-temperature": "Winter-temperature",
+                    "i-word": "Word",
+                    "i-wordpress": "Wordpress",
+                    "i-youtube-1": "Youtube-1",
+                    "i-youtube-2": "Youtube-2"
+                }
+            },
+            {
+                "label": "URL",
+                "attr": "url",
+                "type": "url",
+                "description": "Optional. Enter a URL to make your icon and title a clickable hyperlink.",
+                "encode": false,
+                "meta": {
+                    "placeholder": "http://www.uams.edu/"
+                }
+            },
+            {
+                "label": "Custom CSS classes",
+                "attr": "customclass",
+                "type": "text",
+                "description": "",
+                "encode": false,
+                "meta": {
+                    "placeholder": "Comma-separated list"
+                }
+            }
+        ]
+    },
+    "Iframe": {
+        "ui_args": {
+            "label": "Iframe",
+            "listItemImage": "dashicons-admin-site",
+            "attrs": [
+                {
+                    "label": "URL",
+                    "attr": "src",
+                    "type": "text",
+                    "description": "Full URL to the iFrame source. Host must be whitelisted."
+                },
+                {
+                    "label": "Height",
+                    "attr": "height",
+                    "type": "number",
+                    "description": "Pixel height of the iframe. Defaults to 600."
+                },
+                {
+                    "label": "Width",
+                    "attr": "width",
+                    "type": "number",
+                    "description": "Pixel width of the iframe. Defaults to 670."
+                },
+                {
+                    "label": "Disable Responsiveness",
+                    "attr": "disableresponsiveness",
+                    "type": "checkbox",
+                    "description": "By default, height/width ratio of iframe will be maintained regardless of container width. Check this to keep constant height/width."
+                }
+            ]
+        },
+        "attributes": []
+    },
+    "Image_Comparison": {
+        "ui_args": {
+            "label": "Image Comparison",
+            "listItemImage": "dashicons-format-gallery",
+            "attrs": [
+                {
+                    "label": "Left Image",
+                    "attr": "left",
+                    "type": "attachment",
+                    "libraryType": [
+                        "image"
+                    ],
+                    "addButton": "Select Image",
+                    "frameTitle": "Select Image"
+                },
+                {
+                    "label": "Right Image",
+                    "attr": "right",
+                    "type": "attachment",
+                    "libraryType": [
+                        "image"
+                    ],
+                    "addButton": "Select Image",
+                    "frameTitle": "Select Image"
+                },
+                {
+                    "label": "Slider Start Position",
+                    "attr": "position",
+                    "type": "select",
+                    "options": {
+                        "center": "Center",
+                        "mostlyleft": "Mostly Left",
+                        "mostlyright": "Mostly Right"
+                    }
+                }
+            ]
+        },
+        "attributes": []
+    },
+    "Instagram": {
+        "ui_args": {
+            "label": "Instagram",
+            "listItemImage": "<img src=\"https://example.test/wp-content/plugins/uamswp-shortcodes/assets/images/svg/icon-instagram.svg\" />",
+            "attrs": [
+                {
+                    "label": "URL",
+                    "attr": "url",
+                    "type": "text",
+                    "description": "URL to an Instagram"
+                }
+            ]
+        },
+        "attributes": []
+    },
+    "Lead": {
+        "ui_args": {
+            "label": "Lead Paragraph",
+            "listItemImage": "<img src=\"https://example.test/wp-content/plugins/uamswp-shortcodes/admin/images/icon-lead.png\" />",
+            "inner_content": {
+                "label": "Lead Paragraph Text",
+                "description": "",
+                "encode": true
+            },
+            "attrs": [
+                {
+                    "label": "Custom CSS classes",
+                    "attr": "customclass",
+                    "type": "text",
+                    "description": "",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "Comma-separated list"
+                    }
+                }
+            ]
+        },
+        "attributes": [
+            {
+                "label": "Custom CSS classes",
+                "attr": "customclass",
+                "type": "text",
+                "description": "",
+                "encode": false,
+                "meta": {
+                    "placeholder": "Comma-separated list"
+                }
+            }
+        ]
+    },
+    "LiveWhale": {
+        "ui_args": {
+            "label": "UAMS Calendar",
+            "listItemImage": "dashicons-calendar-alt",
+            "attrs": [
+                {
+                    "label": "Default View",
+                    "attr": "view",
+                    "type": "select",
+                    "description": "",
+                    "encode": false,
+                    "options": {
+                        "all": "List",
+                        "day": "Day",
+                        "week": "Week",
+                        "month": "Month"
+                    }
+                },
+                {
+                    "label": "Group",
+                    "attr": "group",
+                    "type": "select",
+                    "description": "",
+                    "encode": false,
+                    "options": {
+                        "": "All",
+                        "Admin": "Admin",
+                        "Faculty": "Faculty",
+                        "Main Calendar": "Main Calendar",
+                        "Public": "Public"
+                    }
+                },
+                {
+                    "label": "Event Type(s)",
+                    "attr": "type",
+                    "type": "text",
+                    "description": "",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "Comma-separated list"
+                    }
+                },
+                {
+                    "label": "Audience",
+                    "attr": "audience",
+                    "type": "select",
+                    "description": "",
+                    "encode": false,
+                    "options": {
+                        "": "All",
+                        "Faculty": "Faculty",
+                        "Staff": "Staff",
+                        "Parents": "Parents",
+                        "Students": "Students"
+                    }
+                },
+                {
+                    "label": "Tag(s)",
+                    "attr": "tags",
+                    "type": "text",
+                    "description": "Must be in all tags (AND)",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "Comma-separated list"
+                    }
+                },
+                {
+                    "label": "Exclude Tag(s)",
+                    "attr": "exclude_tags",
+                    "type": "text",
+                    "description": "",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "Comma-separated list"
+                    }
+                },
+                {
+                    "label": "Only Starred",
+                    "attr": "only_starred",
+                    "type": "checkbox",
+                    "description": ""
+                },
+                {
+                    "label": "Include Repeats",
+                    "attr": "include_repeats",
+                    "type": "checkbox",
+                    "description": "Show all instances of repeating/multi-day event"
+                },
+                {
+                    "label": "Max number of items",
+                    "attr": "max",
+                    "type": "number",
+                    "description": "",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "5",
+                        "min": "1",
+                        "step": "1"
+                    }
+                },
+                {
+                    "label": "Custom CSS classes",
+                    "attr": "customclass",
+                    "type": "text",
+                    "description": "",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "Comma-separated list"
+                    }
+                }
+            ]
+        },
+        "attributes": [
+            {
+                "label": "Default View",
+                "attr": "view",
+                "type": "select",
+                "description": "",
+                "encode": false,
+                "options": {
+                    "all": "List",
+                    "day": "Day",
+                    "week": "Week",
+                    "month": "Month"
+                }
+            },
+            {
+                "label": "Group",
+                "attr": "group",
+                "type": "select",
+                "description": "",
+                "encode": false,
+                "options": {
+                    "": "All",
+                    "Admin": "Admin",
+                    "Faculty": "Faculty",
+                    "Main Calendar": "Main Calendar",
+                    "Public": "Public"
+                }
+            },
+            {
+                "label": "Event Type(s)",
+                "attr": "type",
+                "type": "text",
+                "description": "",
+                "encode": false,
+                "meta": {
+                    "placeholder": "Comma-separated list"
+                }
+            },
+            {
+                "label": "Audience",
+                "attr": "audience",
+                "type": "select",
+                "description": "",
+                "encode": false,
+                "options": {
+                    "": "All",
+                    "Faculty": "Faculty",
+                    "Staff": "Staff",
+                    "Parents": "Parents",
+                    "Students": "Students"
+                }
+            },
+            {
+                "label": "Tag(s)",
+                "attr": "tags",
+                "type": "text",
+                "description": "Must be in all tags (AND)",
+                "encode": false,
+                "meta": {
+                    "placeholder": "Comma-separated list"
+                }
+            },
+            {
+                "label": "Exclude Tag(s)",
+                "attr": "exclude_tags",
+                "type": "text",
+                "description": "",
+                "encode": false,
+                "meta": {
+                    "placeholder": "Comma-separated list"
+                }
+            },
+            {
+                "label": "Only Starred",
+                "attr": "only_starred",
+                "type": "checkbox",
+                "description": ""
+            },
+            {
+                "label": "Include Repeats",
+                "attr": "include_repeats",
+                "type": "checkbox",
+                "description": "Show all instances of repeating/multi-day event"
+            },
+            {
+                "label": "Max number of items",
+                "attr": "max",
+                "type": "number",
+                "description": "",
+                "encode": false,
+                "meta": {
+                    "placeholder": "5",
+                    "min": "1",
+                    "step": "1"
+                }
+            },
+            {
+                "label": "Custom CSS classes",
+                "attr": "customclass",
+                "type": "text",
+                "description": "",
+                "encode": false,
+                "meta": {
+                    "placeholder": "Comma-separated list"
+                }
+            }
+        ]
+    },
+    "LiveWhale_Widget": {
+        "ui_args": {
+            "label": "UAMS Calendar Widget",
+            "listItemImage": "dashicons-calendar",
+            "attrs": [
+                {
+                    "label": "ID Number of Widget",
+                    "attr": "id",
+                    "type": "number",
+                    "description": "ex. ID=2  <code>(&lt;div class=\"lwcw\" data-options=\"id=<b>2</b>&format=html\"&gt;)</code>",
+                    "encode": false,
+                    "meta": {
+                        "min": "1",
+                        "step": "1"
+                    }
+                },
+                {
+                    "label": "Custom CSS classes",
+                    "attr": "customclass",
+                    "type": "text",
+                    "description": "",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "Comma-separated list"
+                    }
+                }
+            ]
+        },
+        "attributes": [
+            {
+                "label": "ID Number of Widget",
+                "attr": "id",
+                "type": "number",
+                "description": "ex. ID=2  <code>(&lt;div class=\"lwcw\" data-options=\"id=<b>2</b>&format=html\"&gt;)</code>",
+                "encode": false,
+                "meta": {
+                    "min": "1",
+                    "step": "1"
+                }
+            },
+            {
+                "label": "Custom CSS classes",
+                "attr": "customclass",
+                "type": "text",
+                "description": "",
+                "encode": false,
+                "meta": {
+                    "placeholder": "Comma-separated list"
+                }
+            }
+        ]
+    },
+    "Map": {
+        "ui_args": {
+            "label": "UAMS Map",
+            "listItemImage": "dashicons-location-alt",
+            "attrs": [
+                {
+                    "label": "Building",
+                    "attr": "building",
+                    "type": "select",
+                    "description": "",
+                    "encode": false,
+                    "options": {
+                        "127": "12th St. Clinic",
+                        "116": "Administration West (ADMINW)",
+                        "117": "Barton Research (BART)",
+                        "118": "Biomedical Research Center I (BMR1)",
+                        "119": "Biomedical Research Center II (BMR2)",
+                        "120": "Bioventures (BVENT)",
+                        "121": "Boiler House (BH)",
+                        "122": "Central Building (CENT)",
+                        "123": "College of Public Health (COPH)",
+                        "124": "Computer Building (COMP)",
+                        "125": "Cottage 3 (C3)",
+                        "128": "Distribution Center (DIST)",
+                        "129": "Donald W. Reynolds Institute on Aging (RIOA)",
+                        "126": "Ear Nose Throat (ENT)",
+                        "131": "Education Building South (EDS)",
+                        "130": "Education II (EDII)¬†",
+                        "132": "Family Medical Center (FMC)",
+                        "133": "Freeway Medical Tower (FWAY)",
+                        "134": "Harvey and Bernice Jones Eye Institute (JEI)",
+                        "135": "Hospital (HOSP)",
+                        "136": "I. Dodd Wilson Education Building (IDW)",
+                        "137": "Jackson T. Stephens Spine Institute (JTSSI)",
+                        "138": "Magnetic Resonance Imaging (MRI)",
+                        "139": "Mediplex Apartments (1 unit) (MEDPX)",
+                        "141": "Outpatient Center (OPC)",
+                        "142": "Outpatient Diagnostic Center (OPDC)",
+                        "143": "Paint Shop & Flammable Storage (PAINT)",
+                        "144": "PET (PET)",
+                        "145": "Physical Plant (PP)",
+                        "146": "Psychiatric Research Institute (PRI)",
+                        "147": "Radiation Oncology [ROC] (RADONC)",
+                        "148": "Residence Hall Complex (RHC)",
+                        "149": "Ricks Armory",
+                        "150": "Walker Annex (ANNEX)",
+                        "151": "Ward Tower (WARD)",
+                        "152": "West Central Energy Plant (WCEP)",
+                        "153": "Westmark (WESTM)",
+                        "154": "Winston K. Shorey Building (SHOR)",
+                        "155": "Winthrop P. Rockefeller Cancer Institute (WPRCI)",
+                        "2": "Parking Deck 1 Entrance",
+                        "7": "Parking Deck 1 Entrance",
+                        "3": "Parking Deck 2 Entrance",
+                        "4": "Parking Deck 3 Entrance",
+                        "6": "Stephens Institute Valet Parking"
+                    }
+                },
+                {
+                    "label": "Width",
+                    "attr": "width",
+                    "type": "text",
+                    "description": "Width in % or px (Default 100%)",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "100%"
+                    }
+                },
+                {
+                    "label": "Height",
+                    "attr": "height",
+                    "type": "text",
+                    "description": "Height in px (Defualt 480px)",
+                    "meta": {
+                        "placeholder": "480px"
+                    }
+                },
+                {
+                    "label": "Custom CSS classes",
+                    "attr": "customclass",
+                    "type": "text",
+                    "description": "",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "Comma-separated list"
+                    }
+                }
+            ]
+        },
+        "attributes": [
+            {
+                "label": "Building",
+                "attr": "building",
+                "type": "select",
+                "description": "",
+                "encode": false,
+                "options": {
+                    "127": "12th St. Clinic",
+                    "116": "Administration West (ADMINW)",
+                    "117": "Barton Research (BART)",
+                    "118": "Biomedical Research Center I (BMR1)",
+                    "119": "Biomedical Research Center II (BMR2)",
+                    "120": "Bioventures (BVENT)",
+                    "121": "Boiler House (BH)",
+                    "122": "Central Building (CENT)",
+                    "123": "College of Public Health (COPH)",
+                    "124": "Computer Building (COMP)",
+                    "125": "Cottage 3 (C3)",
+                    "128": "Distribution Center (DIST)",
+                    "129": "Donald W. Reynolds Institute on Aging (RIOA)",
+                    "126": "Ear Nose Throat (ENT)",
+                    "131": "Education Building South (EDS)",
+                    "130": "Education II (EDII)¬†",
+                    "132": "Family Medical Center (FMC)",
+                    "133": "Freeway Medical Tower (FWAY)",
+                    "134": "Harvey and Bernice Jones Eye Institute (JEI)",
+                    "135": "Hospital (HOSP)",
+                    "136": "I. Dodd Wilson Education Building (IDW)",
+                    "137": "Jackson T. Stephens Spine Institute (JTSSI)",
+                    "138": "Magnetic Resonance Imaging (MRI)",
+                    "139": "Mediplex Apartments (1 unit) (MEDPX)",
+                    "141": "Outpatient Center (OPC)",
+                    "142": "Outpatient Diagnostic Center (OPDC)",
+                    "143": "Paint Shop & Flammable Storage (PAINT)",
+                    "144": "PET (PET)",
+                    "145": "Physical Plant (PP)",
+                    "146": "Psychiatric Research Institute (PRI)",
+                    "147": "Radiation Oncology [ROC] (RADONC)",
+                    "148": "Residence Hall Complex (RHC)",
+                    "149": "Ricks Armory",
+                    "150": "Walker Annex (ANNEX)",
+                    "151": "Ward Tower (WARD)",
+                    "152": "West Central Energy Plant (WCEP)",
+                    "153": "Westmark (WESTM)",
+                    "154": "Winston K. Shorey Building (SHOR)",
+                    "155": "Winthrop P. Rockefeller Cancer Institute (WPRCI)",
+                    "2": "Parking Deck 1 Entrance",
+                    "7": "Parking Deck 1 Entrance",
+                    "3": "Parking Deck 2 Entrance",
+                    "4": "Parking Deck 3 Entrance",
+                    "6": "Stephens Institute Valet Parking"
+                }
+            },
+            {
+                "label": "Width",
+                "attr": "width",
+                "type": "text",
+                "description": "Width in % or px (Default 100%)",
+                "encode": false,
+                "meta": {
+                    "placeholder": "100%"
+                }
+            },
+            {
+                "label": "Height",
+                "attr": "height",
+                "type": "text",
+                "description": "Height in px (Defualt 480px)",
+                "meta": {
+                    "placeholder": "480px"
+                }
+            },
+            {
+                "label": "Custom CSS classes",
+                "attr": "customclass",
+                "type": "text",
+                "description": "",
+                "encode": false,
+                "meta": {
+                    "placeholder": "Comma-separated list"
+                }
+            }
+        ]
+    },
+    "PDF": {
+        "ui_args": {
+            "label": "PDF",
+            "listItemImage": "dashicons-media-document",
+            "attrs": [
+                {
+                    "label": "Select or upload PDF",
+                    "attr": "attachment",
+                    "type": "attachment",
+                    "libraryType": "application/pdf"
+                },
+                {
+                    "label": "...or embed from URL",
+                    "attr": "url",
+                    "type": "text"
+                }
+            ]
+        },
+        "attributes": []
+    },
+    "Panel": {
+        "ui_args": {
+            "label": "Collapsible Panel",
+            "listItemImage": "<img src=\"https://example.test/wp-content/plugins/uamswp-shortcodes/admin/images/icon-panel.png\" />",
+            "inner_content": {
+                "label": "Panel Body",
+                "description": "",
+                "encode": true
+            },
+            "attrs": [
+                {
+                    "label": "Panel Heading",
+                    "attr": "heading",
+                    "type": "text",
+                    "description": "",
+                    "encode": false
+                },
+                {
+                    "label": "Heading Type",
+                    "attr": "headingtype",
+                    "type": "radio",
+                    "description": "Headings <a href=\"https://accessibility.oit.ncsu.edu/training/accessibility-handbook/headings.html\" target=\"_blank\">help determine page structure</a>, and are used by screen reading software as landmarks for navigating page content. If you are using this callout as a page title or heading for a section on the page, choose the appropriate heading. Otherwise, choose \"Paragraph.\"",
+                    "encode": false,
+                    "options": {
+                        "p": "Paragraph",
+                        "h4": "Heading 4",
+                        "h3": "Heading 3",
+                        "h2": "Heading 2"
+                    }
+                },
+                {
+                    "label": "Panel Type",
+                    "attr": "type",
+                    "type": "radio",
+                    "description": "",
+                    "encode": false,
+                    "options": {
+                        "panel-default": "Default (10% Gray)",
+                        "panel-primary": "Primary (Wolfpack Red)",
+                        "panel-success": "Success (Genomic Green)",
+                        "panel-info": "Info (Innovation Blue)",
+                        "panel-warning": "Warning (Hunt Yellow)",
+                        "panel-danger": "Danger (Reynolds Red)"
+                    }
+                },
+                {
+                    "label": "Behavior &amp; State",
+                    "attr": "state",
+                    "type": "radio",
+                    "description": "",
+                    "options": {
+                        "static": "Static",
+                        "open": "Collapsible and open when page loads",
+                        "closed": "Collapsible and closed when page loads"
+                    }
+                },
+                {
+                    "label": "Style",
+                    "attr": "style",
+                    "type": "radio",
+                    "description": "",
+                    "options": {
+                        "boostrap": "Classic Bootstrap",
+                        "noborder": "Classic Bootstrap, no border",
+                        "simple": "Simple"
+                    }
+                },
+                {
+                    "label": "Custom CSS classes",
+                    "attr": "customclass",
+                    "type": "text",
+                    "description": "",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "Comma-separated list"
+                    }
+                }
+            ]
+        },
+        "attributes": [
+            {
+                "label": "Panel Heading",
+                "attr": "heading",
+                "type": "text",
+                "description": "",
+                "encode": false
+            },
+            {
+                "label": "Heading Type",
+                "attr": "headingtype",
+                "type": "radio",
+                "description": "Headings <a href=\"https://accessibility.oit.ncsu.edu/training/accessibility-handbook/headings.html\" target=\"_blank\">help determine page structure</a>, and are used by screen reading software as landmarks for navigating page content. If you are using this callout as a page title or heading for a section on the page, choose the appropriate heading. Otherwise, choose \"Paragraph.\"",
+                "encode": false,
+                "options": {
+                    "p": "Paragraph",
+                    "h4": "Heading 4",
+                    "h3": "Heading 3",
+                    "h2": "Heading 2"
+                }
+            },
+            {
+                "label": "Panel Type",
+                "attr": "type",
+                "type": "radio",
+                "description": "",
+                "encode": false,
+                "options": {
+                    "panel-default": "Default (10% Gray)",
+                    "panel-primary": "Primary (Wolfpack Red)",
+                    "panel-success": "Success (Genomic Green)",
+                    "panel-info": "Info (Innovation Blue)",
+                    "panel-warning": "Warning (Hunt Yellow)",
+                    "panel-danger": "Danger (Reynolds Red)"
+                }
+            },
+            {
+                "label": "Behavior &amp; State",
+                "attr": "state",
+                "type": "radio",
+                "description": "",
+                "options": {
+                    "static": "Static",
+                    "open": "Collapsible and open when page loads",
+                    "closed": "Collapsible and closed when page loads"
+                }
+            },
+            {
+                "label": "Style",
+                "attr": "style",
+                "type": "radio",
+                "description": "",
+                "options": {
+                    "boostrap": "Classic Bootstrap",
+                    "noborder": "Classic Bootstrap, no border",
+                    "simple": "Simple"
+                }
+            },
+            {
+                "label": "Custom CSS classes",
+                "attr": "customclass",
+                "type": "text",
+                "description": "",
+                "encode": false,
+                "meta": {
+                    "placeholder": "Comma-separated list"
+                }
+            }
+        ]
+    },
+    "ProgressBar": {
+        "ui_args": {
+            "label": "Progress Bar",
+            "listItemImage": "<img src=\"https://example.test/wp-content/plugins/uamswp-shortcodes/admin/images/icon-progressbar.png\" />",
+            "attrs": [
+                {
+                    "label": "Percentage Complete",
+                    "attr": "complete",
+                    "type": "number",
+                    "description": "Enter the numerical value only (no % sign).",
+                    "encode": false
+                },
+                {
+                    "label": "Progress Bar Type",
+                    "attr": "type",
+                    "type": "radio",
+                    "description": "",
+                    "encode": false,
+                    "options": {
+                        "progress-bar-primary": "Primary / UAMS Red",
+                        "progress-bar-success": "Success / Green",
+                        "progress-bar-info": "Info / Blue",
+                        "progress-bar-warning": "Warning / Yellow",
+                        "progress-bar-danger": "Danger / Orange"
+                    }
+                },
+                {
+                    "label": "Style",
+                    "attr": "style",
+                    "type": "radio",
+                    "description": "",
+                    "encode": false,
+                    "options": {
+                        "default": "Default",
+                        "display-value": "Display Percentage Complete Value",
+                        "progress-striped": "Striped",
+                        "progress-striped active": "Striped and Animated"
+                    }
+                },
+                {
+                    "label": "Custom CSS classes",
+                    "attr": "customclass",
+                    "type": "text",
+                    "description": "",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "Comma-separated list"
+                    }
+                }
+            ]
+        },
+        "attributes": [
+            {
+                "label": "Percentage Complete",
+                "attr": "complete",
+                "type": "number",
+                "description": "Enter the numerical value only (no % sign).",
+                "encode": false
+            },
+            {
+                "label": "Progress Bar Type",
+                "attr": "type",
+                "type": "radio",
+                "description": "",
+                "encode": false,
+                "options": {
+                    "progress-bar-primary": "Primary / UAMS Red",
+                    "progress-bar-success": "Success / Green",
+                    "progress-bar-info": "Info / Blue",
+                    "progress-bar-warning": "Warning / Yellow",
+                    "progress-bar-danger": "Danger / Orange"
+                }
+            },
+            {
+                "label": "Style",
+                "attr": "style",
+                "type": "radio",
+                "description": "",
+                "encode": false,
+                "options": {
+                    "default": "Default",
+                    "display-value": "Display Percentage Complete Value",
+                    "progress-striped": "Striped",
+                    "progress-striped active": "Striped and Animated"
+                }
+            },
+            {
+                "label": "Custom CSS classes",
+                "attr": "customclass",
+                "type": "text",
+                "description": "",
+                "encode": false,
+                "meta": {
+                    "placeholder": "Comma-separated list"
+                }
+            }
+        ]
+    },
+    "Pullquote": {
+        "ui_args": {
+            "label": "Pullquote",
+            "listItemImage": "<img src=\"https://example.test/wp-content/plugins/uamswp-shortcodes/admin/images/icon-pullquote.png\" />",
+            "inner_content": {
+                "label": "Quote Body",
+                "description": "Enter the text that you're quoting. No HTML allowed. <p><strong>NOTE:</strong> Pullquotes are assumed to be visual enhancements only---that is, the text that you're highlighting with a pullquote already appears somewhere in your normal content.</p><p>With that in mind, pullquotes are \"hidden\" from certain assistive technologies (like screenreaders), so as to avoid confusing users with repeated quotes given out of context. Do not enter any quotes that do not appear elsewhere in your post or page text.</p>",
+                "encode": true
+            },
+            "attrs": [
+                {
+                    "label": "Citation",
+                    "attr": "cite",
+                    "type": "text",
+                    "description": "Optional. Enter the name of the person who said the quote.",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "Optional"
+                    }
+                },
+                {
+                    "label": "Text Color",
+                    "attr": "color",
+                    "type": "radio",
+                    "description": "",
+                    "encode": false,
+                    "options": {
+                        "wolfpackred": "Cardinal Red",
+                        "gray90": "90% Gray",
+                        "black": "Black"
+                    }
+                },
+                {
+                    "label": "Alignment",
+                    "attr": "align",
+                    "type": "radio",
+                    "description": "",
+                    "options": {
+                        "alignleft": "Left",
+                        "aligncenter": "Center",
+                        "alignright": "Right"
+                    }
+                },
+                {
+                    "label": "Custom CSS classes",
+                    "attr": "customclass",
+                    "type": "text",
+                    "description": "",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "Comma-separated list"
+                    }
+                }
+            ]
+        },
+        "attributes": [
+            {
+                "label": "Citation",
+                "attr": "cite",
+                "type": "text",
+                "description": "Optional. Enter the name of the person who said the quote.",
+                "encode": false,
+                "meta": {
+                    "placeholder": "Optional"
+                }
+            },
+            {
+                "label": "Text Color",
+                "attr": "color",
+                "type": "radio",
+                "description": "",
+                "encode": false,
+                "options": {
+                    "wolfpackred": "Cardinal Red",
+                    "gray90": "90% Gray",
+                    "black": "Black"
+                }
+            },
+            {
+                "label": "Alignment",
+                "attr": "align",
+                "type": "radio",
+                "description": "",
+                "options": {
+                    "alignleft": "Left",
+                    "aligncenter": "Center",
+                    "alignright": "Right"
+                }
+            },
+            {
+                "label": "Custom CSS classes",
+                "attr": "customclass",
+                "type": "text",
+                "description": "",
+                "encode": false,
+                "meta": {
+                    "placeholder": "Comma-separated list"
+                }
+            }
+        ]
+    },
+    "RSS_Posts": {
+        "ui_args": {
+            "label": "RSS Posts",
+            "listItemImage": "dashicons-rss",
+            "attrs": [
+                {
+                    "label": "RSS Feed URL",
+                    "attr": "feed",
+                    "type": "text",
+                    "description": "Enter an RSS feed URL. <a href=\"https://design.oit.ncsu.edu/docs/ncsu-shortcodes/rss-posts/\" target=\"_blank\">Learn more</a> on the <a href=\"https://design.oit.ncsu.edu/docs/\" target=\"_blank\">OIT Design documentation site</a>.",
+                    "encode": false
+                },
+                {
+                    "label": "Number of Posts to Display",
+                    "attr": "number",
+                    "type": "number",
+                    "description": ""
+                },
+                {
+                    "label": "Display Post Author",
+                    "attr": "author",
+                    "type": "checkbox",
+                    "description": "This will only display authors for content types that support authors."
+                },
+                {
+                    "label": "Display Style",
+                    "attr": "display",
+                    "type": "radio",
+                    "description": "Select a WordPress content type. Some content types may not make sense to embed here, depending on how you use them on your website. <a href=\"https://design.oit.ncsu.edu/docs/ncsu-shortcodes/recent-posts/\" target=\"_blank\">Learn more</a> on the <a href=\"https://design.oit.ncsu.edu/docs/\" target=\"_blank\">OIT Design documentation site</a>.",
+                    "encode": false,
+                    "options": {
+                        "grid": "Grid",
+                        "list": "List"
+                    }
+                },
+                {
+                    "label": "Custom CSS classes",
+                    "attr": "customclass",
+                    "type": "text",
+                    "description": "",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "Comma-separated list"
+                    }
+                }
+            ]
+        },
+        "attributes": [
+            {
+                "label": "RSS Feed URL",
+                "attr": "feed",
+                "type": "text",
+                "description": "Enter an RSS feed URL. <a href=\"https://design.oit.ncsu.edu/docs/ncsu-shortcodes/rss-posts/\" target=\"_blank\">Learn more</a> on the <a href=\"https://design.oit.ncsu.edu/docs/\" target=\"_blank\">OIT Design documentation site</a>.",
+                "encode": false
+            },
+            {
+                "label": "Number of Posts to Display",
+                "attr": "number",
+                "type": "number",
+                "description": ""
+            },
+            {
+                "label": "Display Post Author",
+                "attr": "author",
+                "type": "checkbox",
+                "description": "This will only display authors for content types that support authors."
+            },
+            {
+                "label": "Display Style",
+                "attr": "display",
+                "type": "radio",
+                "description": "Select a WordPress content type. Some content types may not make sense to embed here, depending on how you use them on your website. <a href=\"https://design.oit.ncsu.edu/docs/ncsu-shortcodes/recent-posts/\" target=\"_blank\">Learn more</a> on the <a href=\"https://design.oit.ncsu.edu/docs/\" target=\"_blank\">OIT Design documentation site</a>.",
+                "encode": false,
+                "options": {
+                    "grid": "Grid",
+                    "list": "List"
+                }
+            },
+            {
+                "label": "Custom CSS classes",
+                "attr": "customclass",
+                "type": "text",
+                "description": "",
+                "encode": false,
+                "meta": {
+                    "placeholder": "Comma-separated list"
+                }
+            }
+        ]
+    },
+    "Scribd": {
+        "ui_args": {
+            "label": "Scribd",
+            "listItemImage": "<img src=\"https://example.test/wp-content/plugins/uamswp-shortcodes/assets/images/svg/icon-scribd.svg\" />",
+            "attrs": [
+                {
+                    "label": "URL",
+                    "attr": "url",
+                    "type": "text",
+                    "description": "Full URL to the Scribd document"
+                }
+            ]
+        },
+        "attributes": []
+    },
+    "Script": {
+        "ui_args": {
+            "label": "Script",
+            "listItemImage": "dashicons-media-code",
+            "attrs": [
+                {
+                    "label": "URL",
+                    "attr": "src",
+                    "type": "text",
+                    "description": "Full URL to the script file. Host must be whitelisted."
+                }
+            ]
+        },
+        "attributes": []
+    },
+    "SoundCloud": {
+        "ui_args": {
+            "label": "SoundCloud",
+            "listItemImage": "<img src=\"https://example.test/wp-content/plugins/uamswp-shortcodes/assets/images/svg/icon-soundcloud.svg\" />",
+            "attrs": [
+                {
+                    "label": "URL",
+                    "attr": "url",
+                    "type": "text",
+                    "description": "Full URL to the SoundCloud track."
+                },
+                {
+                    "label": "Type",
+                    "attr": "type",
+                    "type": "select",
+                    "options": {
+                        "simple": "Simple",
+                        "visual": "Visual"
+                    }
+                },
+                {
+                    "label": "Autoplay",
+                    "attr": "autoplay",
+                    "type": "select",
+                    "options": [
+                        "No",
+                        "Yes"
+                    ]
+                }
+            ]
+        },
+        "attributes": []
+    },
+    "TextBox": {
+        "ui_args": {
+            "label": "Text Box",
+            "listItemImage": "dashicons-info",
+            "inner_content": {
+                "label": "Text Box Body",
+                "description": "Main content of your text box. Text and basic HTML tags can be added here.",
+                "encode": true
+            },
+            "attrs": [
+                {
+                    "label": "Background Color",
+                    "attr": "background",
+                    "type": "select",
+                    "description": "See examples of <a href=\"https://design.oit.ncsu.edu/docs/ncsu-shortcodes/alerts/\" target=\"_blank\">each type of alert</a> on the <a href=\"https://design.oit.ncsu.edu/docs/\" target=\"_blank\">OIT Design documentation site</a>.",
+                    "encode": false,
+                    "options": {
+                        "none": "None",
+                        "red": "Red",
+                        "gray": "Gray",
+                        "blue": "Blue",
+                        "image": "Image"
+                    }
+                },
+                {
+                    "label": "Image Background",
+                    "attr": "imagebg",
+                    "type": "attachment",
+                    "description": "Used for image background only.",
+                    "libraryType": [
+                        "image"
+                    ],
+                    "addButton": "Select Image",
+                    "frameTitle": "Select Image"
+                },
+                {
+                    "label": "Text Color",
+                    "attr": "txtcolor",
+                    "type": "radio",
+                    "options": {
+                        "dark": "Dark",
+                        "light": "Light"
+                    },
+                    "description": "Choose the color of the text (Dark text over light colored images or light over darker images)."
+                },
+                {
+                    "label": "Title",
+                    "attr": "titletxt",
+                    "type": "text",
+                    "description": "The title heading of the box"
+                },
+                {
+                    "label": "Fullsreen?",
+                    "attr": "fullscreen",
+                    "type": "checkbox",
+                    "description": "<strong>Note:</strong> This option only works on full width page template (No sidebar). You may get unintended results on pages with sidebar."
+                },
+                {
+                    "label": "Custom CSS classes",
+                    "attr": "customclass",
+                    "type": "text",
+                    "description": "",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "Comma-separated list"
+                    }
+                }
+            ]
+        },
+        "attributes": [
+            {
+                "label": "Background Color",
+                "attr": "background",
+                "type": "select",
+                "description": "See examples of <a href=\"https://design.oit.ncsu.edu/docs/ncsu-shortcodes/alerts/\" target=\"_blank\">each type of alert</a> on the <a href=\"https://design.oit.ncsu.edu/docs/\" target=\"_blank\">OIT Design documentation site</a>.",
+                "encode": false,
+                "options": {
+                    "none": "None",
+                    "red": "Red",
+                    "gray": "Gray",
+                    "blue": "Blue",
+                    "image": "Image"
+                }
+            },
+            {
+                "label": "Image Background",
+                "attr": "imagebg",
+                "type": "attachment",
+                "description": "Used for image background only.",
+                "libraryType": [
+                    "image"
+                ],
+                "addButton": "Select Image",
+                "frameTitle": "Select Image"
+            },
+            {
+                "label": "Text Color",
+                "attr": "txtcolor",
+                "type": "radio",
+                "options": {
+                    "dark": "Dark",
+                    "light": "Light"
+                },
+                "description": "Choose the color of the text (Dark text over light colored images or light over darker images)."
+            },
+            {
+                "label": "Title",
+                "attr": "titletxt",
+                "type": "text",
+                "description": "The title heading of the box"
+            },
+            {
+                "label": "Fullsreen?",
+                "attr": "fullscreen",
+                "type": "checkbox",
+                "description": "<strong>Note:</strong> This option only works on full width page template (No sidebar). You may get unintended results on pages with sidebar."
+            },
+            {
+                "label": "Custom CSS classes",
+                "attr": "customclass",
+                "type": "text",
+                "description": "",
+                "encode": false,
+                "meta": {
+                    "placeholder": "Comma-separated list"
+                }
+            }
+        ]
+    },
+    "ThreeColumn": {
+        "ui_args": {
+            "label": "Row, 3 Columns",
+            "listItemImage": "<img src=\"https://example.test/wp-content/plugins/uamswp-shortcodes/admin/images/icon-threecolumn.png\" />",
+            "attrs": [
+                {
+                    "label": "Column 1",
+                    "attr": "col1",
+                    "type": "textarea",
+                    "description": "Basic HTML supported. Line breaks automatically become new paragraphs.",
+                    "encode": true
+                },
+                {
+                    "label": "Column 2",
+                    "attr": "col2",
+                    "type": "textarea",
+                    "description": "Basic HTML supported. Line breaks automatically become new paragraphs.",
+                    "encode": true
+                },
+                {
+                    "label": "Column 3",
+                    "attr": "col3",
+                    "type": "textarea",
+                    "description": "Basic HTML supported. Line breaks automatically become new paragraphs.",
+                    "encode": true
+                },
+                {
+                    "label": "Column Width Ratio",
+                    "attr": "ratio",
+                    "type": "radio",
+                    "description": "Choose the widths for your columns. On mobile devices, columns stack vertically (left on top of right).",
+                    "encode": false,
+                    "options": {
+                        "third-third-third": "33% | 33% | 33%",
+                        "quarter-quarter-half": "25% | 25% | 50%",
+                        "quarter-half-quarter": "25% | 50% | 25%",
+                        "half-quarter-quarter": "50% | 25% | 25%"
+                    }
+                },
+                {
+                    "label": "Custom CSS classes",
+                    "attr": "customclass",
+                    "type": "text",
+                    "description": "",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "Comma-separated list"
+                    }
+                }
+            ]
+        },
+        "attributes": [
+            {
+                "label": "Column 1",
+                "attr": "col1",
+                "type": "textarea",
+                "description": "Basic HTML supported. Line breaks automatically become new paragraphs.",
+                "encode": true
+            },
+            {
+                "label": "Column 2",
+                "attr": "col2",
+                "type": "textarea",
+                "description": "Basic HTML supported. Line breaks automatically become new paragraphs.",
+                "encode": true
+            },
+            {
+                "label": "Column 3",
+                "attr": "col3",
+                "type": "textarea",
+                "description": "Basic HTML supported. Line breaks automatically become new paragraphs.",
+                "encode": true
+            },
+            {
+                "label": "Column Width Ratio",
+                "attr": "ratio",
+                "type": "radio",
+                "description": "Choose the widths for your columns. On mobile devices, columns stack vertically (left on top of right).",
+                "encode": false,
+                "options": {
+                    "third-third-third": "33% | 33% | 33%",
+                    "quarter-quarter-half": "25% | 25% | 50%",
+                    "quarter-half-quarter": "25% | 50% | 25%",
+                    "half-quarter-quarter": "50% | 25% | 25%"
+                }
+            },
+            {
+                "label": "Custom CSS classes",
+                "attr": "customclass",
+                "type": "text",
+                "description": "",
+                "encode": false,
+                "meta": {
+                    "placeholder": "Comma-separated list"
+                }
+            }
+        ]
+    },
+    "Twitter": {
+        "ui_args": {
+            "label": "Twitter",
+            "listItemImage": "<img src=\"https://example.test/wp-content/plugins/uamswp-shortcodes/assets/images/svg/icon-twitter.svg\" />",
+            "attrs": [
+                {
+                    "label": "URL",
+                    "attr": "url",
+                    "type": "text",
+                    "description": "URL to a tweet"
+                }
+            ]
+        },
+        "attributes": []
+    },
+    "TwoColumn": {
+        "ui_args": {
+            "label": "Row, 2 Columns",
+            "listItemImage": "<img src=\"https://example.test/wp-content/plugins/uamswp-shortcodes/admin/images/icon-twocolumn.png\" />",
+            "attrs": [
+                {
+                    "label": "Column 1",
+                    "attr": "col1",
+                    "type": "textarea",
+                    "description": "Basic HTML supported. Line breaks automatically become new paragraphs.",
+                    "encode": true
+                },
+                {
+                    "label": "Column 2",
+                    "attr": "col2",
+                    "type": "textarea",
+                    "description": "Basic HTML supported. Line breaks automatically become new paragraphs.",
+                    "encode": true
+                },
+                {
+                    "label": "Column Width Ratio",
+                    "attr": "ratio",
+                    "type": "radio",
+                    "description": "Choose the widths for your columns. On mobile devices, columns stack vertically (left on top of right).",
+                    "encode": false,
+                    "options": {
+                        "half-half": "50% | 50%",
+                        "third-twothirds": "33% | 66%",
+                        "quarter-threequarters": "25% | 75%",
+                        "twothirds-third": "66% | 33%",
+                        "threequarters-quarter": "75% | 25%"
+                    }
+                },
+                {
+                    "label": "Custom CSS classes",
+                    "attr": "customclass",
+                    "type": "text",
+                    "description": "",
+                    "encode": false,
+                    "meta": {
+                        "placeholder": "Comma-separated list"
+                    }
+                }
+            ]
+        },
+        "attributes": [
+            {
+                "label": "Column 1",
+                "attr": "col1",
+                "type": "textarea",
+                "description": "Basic HTML supported. Line breaks automatically become new paragraphs.",
+                "encode": true
+            },
+            {
+                "label": "Column 2",
+                "attr": "col2",
+                "type": "textarea",
+                "description": "Basic HTML supported. Line breaks automatically become new paragraphs.",
+                "encode": true
+            },
+            {
+                "label": "Column Width Ratio",
+                "attr": "ratio",
+                "type": "radio",
+                "description": "Choose the widths for your columns. On mobile devices, columns stack vertically (left on top of right).",
+                "encode": false,
+                "options": {
+                    "half-half": "50% | 50%",
+                    "third-twothirds": "33% | 66%",
+                    "quarter-threequarters": "25% | 75%",
+                    "twothirds-third": "66% | 33%",
+                    "threequarters-quarter": "75% | 25%"
+                }
+            },
+            {
+                "label": "Custom CSS classes",
+                "attr": "customclass",
+                "type": "text",
+                "description": "",
+                "encode": false,
+                "meta": {
+                    "placeholder": "Comma-separated list"
+                }
+            }
+        ]
+    },
+    "Vimeo": {
+        "ui_args": {
+            "label": "Vimeo",
+            "listItemImage": "<img src=\"https://example.test/wp-content/plugins/uamswp-shortcodes/assets/images/svg/icon-vimeo.svg\" />",
+            "attrs": [
+                {
+                    "label": "URL",
+                    "attr": "url",
+                    "type": "text",
+                    "description": "Full Vimeo URL"
+                }
+            ]
+        },
+        "attributes": []
+    },
+    "YouTube": {
+        "ui_args": {
+            "label": "YouTube",
+            "listItemImage": "<img src=\"https://example.test/wp-content/plugins/uamswp-shortcodes/assets/images/svg/icon-youtube.svg\" />",
+            "attrs": [
+                {
+                    "label": "URL",
+                    "attr": "url",
+                    "type": "text",
+                    "description": "Full YouTube URL"
+                }
+            ]
+        },
+        "attributes": []
+    },
+    "YouTubeUI": {
+        "ui_args": {
+            "label": "YouTube",
+            "listItemImage": "<img src=\"https://example.test/wp-content/plugins/uamswp-shortcodes/assets/images/svg/icon-youtube.svg\" />",
+            "attrs": [
+                {
+                    "label": "URL",
+                    "attr": "url",
+                    "type": "text",
+                    "description": "Full YouTube URL"
+                }
+            ]
+        },
+        "attributes": []
+    }
+}

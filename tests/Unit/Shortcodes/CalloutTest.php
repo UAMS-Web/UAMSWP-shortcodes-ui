@@ -336,7 +336,7 @@ it('renders a YouTube embed from a youtu.be url', function (): void {
         'fullscreen' => false,
     ]);
 
-    expect($html)->toContain('src="http://www.youtube.com/embed/xyz789?modestbranding=0&autohide=1&showinfo=0"');
+    expect($html)->toContain('<iframe class="embed-responsive-item media-top" src="http://www.youtube.com/embed/xyz789?modestbranding=0&autohide=1&showinfo=0"></iframe>');
 });
 
 it('renders no video for a YouTube url it cannot read', function (): void {

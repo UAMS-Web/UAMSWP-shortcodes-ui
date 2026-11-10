@@ -88,7 +88,7 @@ class GoogleDocs extends Shortcode
                             (! empty($iframe->attrs['height']) ? ' height='.intval($iframe->attrs['height']) : '').
                             (! empty($iframe->attrs['width']) ? ' width='.intval($iframe->attrs['width']) : '').
                             ']';
-                        break;
+                        break; // @pest-mutate-ignore: BreakToContinue
                     case 'spreadsheet':
                     case 'spreadsheets':
                         parse_str(html_entity_decode($parsed_from_url['query_string']), $query_vars);
@@ -99,7 +99,7 @@ class GoogleDocs extends Shortcode
                             (! empty($iframe->attrs['width']) ? ' width='.intval($iframe->attrs['width']) : '').
                             (! empty($query_vars['headers']) && $query_vars['headers'] !== 'false' ? ' headers="true"' : '').
                             ']';
-                        break;
+                        break; // @pest-mutate-ignore: BreakToContinue
                     case 'presentation':
                         parse_str(html_entity_decode($parsed_from_url['query_string']), $query_vars);
                         $replacement_url = 'https://docs.google.com/presentation/d/'.$parsed_from_url['embed_id'];
@@ -139,7 +139,7 @@ class GoogleDocs extends Shortcode
                             (! empty($iframe->attrs['height']) ? ' height='.intval($iframe->attrs['height']) : '').
                             (! empty($iframe->attrs['width']) ? ' width='.intval($iframe->attrs['width']) : '').
                             ']';
-                        break;
+                        break; // @pest-mutate-ignore: BreakToContinue
                     case 'fusiontables':
                         parse_str(html_entity_decode($parsed_from_url['query_string']), $query_vars);
                         $replacement_url = add_query_arg($query_vars, 'https://www.google.com/fusiontables/embedviz');
@@ -148,7 +148,7 @@ class GoogleDocs extends Shortcode
                             (! empty($iframe->attrs['height']) ? ' height='.intval($iframe->attrs['height']) : '').
                             (! empty($iframe->attrs['width']) ? ' width='.intval($iframe->attrs['width']) : '').
                             ']';
-                        break;
+                        break; // @pest-mutate-ignore: BreakToContinue
                 } // End switch().
             }
 

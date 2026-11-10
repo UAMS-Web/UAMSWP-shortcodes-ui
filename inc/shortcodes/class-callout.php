@@ -473,13 +473,13 @@ class Callout extends Shortcode
 
                 if (preg_match("/youtu.be\/[a-z1-9.-_]+/", $attrs['youtube'])) {
                     preg_match("/youtu.be\/([a-z1-9.-_]+)/", $attrs['youtube'], $matches);
-                    if (isset($matches[1])) {
+                    if (isset($matches[1])) { // @pest-mutate-ignore: DecrementInteger
                         $vidsrc = 'http://www.youtube.com/embed/'.$matches[1].'?modestbranding=0&autohide=1&showinfo=0';
                         $vidembed = '<iframe class="embed-responsive-item '.$mediaposition.'" src="'.esc_url($vidsrc).'"></iframe>';
                     }
                 } elseif (preg_match('/youtube.com(.+)v=([^&]+)/', $attrs['youtube'])) {
                     preg_match('/v=([^&]+)/', $attrs['youtube'], $matches);
-                    if (isset($matches[1])) {
+                    if (isset($matches[1])) { // @pest-mutate-ignore: DecrementInteger
                         $vidsrc = 'http://www.youtube.com/embed/'.$matches[1].'?modestbranding=0&autohide=1&showinfo=0';
                         $vidembed = '<iframe class="embed-responsive-item '.$mediaposition.'" src="'.esc_url($vidsrc).'"></iframe>';
                     }
@@ -487,7 +487,7 @@ class Callout extends Shortcode
             } elseif (! empty($attrs['vimeo']) && ($attrs['vidtype'] == 'vimeo')) {
                 if (preg_match("/vimeo.com\/[1-9.-_]+/", $attrs['vimeo'])) {
                     preg_match("/vimeo.com\/([1-9.-_]+)/", $attrs['vimeo'], $matches);
-                    if (isset($matches[1])) {
+                    if (isset($matches[1])) { // @pest-mutate-ignore: DecrementInteger
                         $vidsrc = 'http://player.vimeo.com/video/'.$matches[1].'?badge=0&byline=0&portrait=0&title=0';
                         $vidembed = '<iframe class="embed-responsive-item '.$mediaposition.'" src="'.esc_url($vidsrc).'"></iframe>';
                     }

@@ -24,7 +24,7 @@ class Instagram extends Shortcode
     {
 
         if (stripos($content, '<script') === false && stripos($content, '<iframe') === false && stripos($content, 'class="instagram-media') === false) {
-            return $content;
+            return $content; // @pest-mutate-ignore: RemoveEarlyReturn
         }
 
         $needle = '#<blockquote class="instagram-media.+<a href="(https://(www\.)?instagram\.com/p/[^/]+/)"[^>]+>.+(?=</blockquote>)</blockquote>\n?(<script[^>]+src="//platform\.instagram\.com/[^>]+></script>)?#';

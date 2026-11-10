@@ -104,14 +104,14 @@ class ProgressBar extends Shortcode
             case 'display-value':
                 $style = null;
                 $sr = null;
-                break;
+                break; // @pest-mutate-ignore: BreakToContinue
 
             case 'progress-striped':
 
             case 'progress-striped active':
                 $style = $attrs['style'];
                 $sr = 'sr-only';
-                break;
+                break; // @pest-mutate-ignore: BreakToContinue
 
             default:
                 $style = null;

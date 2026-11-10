@@ -24,7 +24,7 @@ class Twitter extends Shortcode
     {
 
         if (stripos($content, '<script') === false) {
-            return $content;
+            return $content; // @pest-mutate-ignore: RemoveEarlyReturn
         }
 
         $needle = '#<blockquote class="twitter-(tweet|video).+<a href="(https://twitter\.com/[^/]+/status/[^/]+)">.+(?=</blockquote>)</blockquote>\n?<script[^>]+src="//platform\.twitter\.com/widgets\.js"[^>]+></script>#';

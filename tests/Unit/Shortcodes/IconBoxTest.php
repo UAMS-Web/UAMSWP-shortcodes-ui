@@ -95,7 +95,7 @@ it('sanitizes each comma-separated custom class', function (): void {
     expect(IconBox::callback(['type' => 'default', 'customclass' => 'one,t wo!'], 'x'))->toContain('default none one two"');
 });
 
-it('triggers a deprecation for the default null custom class', function (): void {
+it('renders without a deprecation when no custom class is given', function (): void {
     $messages = [];
     set_error_handler(function (int $no, string $str) use (&$messages): bool {
         $messages[] = $str;
@@ -104,12 +104,13 @@ it('triggers a deprecation for the default null custom class', function (): void
     });
 
     try {
-        IconBox::callback([], 'x');
+        $html = IconBox::callback([], 'x');
     } finally {
         restore_error_handler();
     }
 
-    expect($messages)->toHaveCount(1)->and($messages[0])->toContain('explode()');
+    expect($messages)->toBe([])
+        ->and($html)->toBe(IconBox::callback(['customclass' => ''], 'x'));
 });
 
 it('falls back to the defaults when the attributes are not an array', function (): void {
@@ -127,7 +128,7 @@ it('falls back to the defaults when the attributes are not an array', function (
     }
 
     expect($html)->toContain('icon-box-wrapper defualt none ')
-        ->and($messages)->toHaveCount(1);
+        ->and($messages)->toBe([]);
 });
 
 it('describes its Shortcake attributes', function (): void {

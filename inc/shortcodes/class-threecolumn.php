@@ -17,11 +17,11 @@ class ThreeColumn extends Shortcode
      * declare default attributes
      */
     private static array $defaults = [
-        'col1' => null,
-        'col2' => null,
-        'col3' => null,
+        'col1' => '',
+        'col2' => '',
+        'col3' => '',
         'ratio' => 'third-third-third',
-        'customclass' => null,
+        'customclass' => '',
     ];
 
     /**

@@ -95,8 +95,8 @@ class Image_Comparison extends Shortcode
 
         $left_meta = wp_get_attachment_metadata($attrs['left']);
         $right_meta = wp_get_attachment_metadata($attrs['right']);
-        $left_credit = $left_meta['image_meta']['credit'];
-        $right_credit = $right_meta['image_meta']['credit'];
+        $left_credit = $left_meta['image_meta']['credit'] ?? '';
+        $right_credit = $right_meta['image_meta']['credit'] ?? '';
 
         if (! $left_image || ! $right_image) {
             return null;

@@ -17,10 +17,10 @@ class TwoColumn extends Shortcode
      * declare default attributes
      */
     private static array $defaults = [
-        'col1' => null,
-        'col2' => null,
+        'col1' => '',
+        'col2' => '',
         'ratio' => 'half-half',
-        'customclass' => null,
+        'customclass' => '',
     ];
 
     /**

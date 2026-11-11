@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use UAMS_Shortcakes\Shortcodes\Alert;
 use UAMS_Shortcakes\Shortcodes\BaseButton;
 use UAMS_Shortcakes\Shortcodes\Button;

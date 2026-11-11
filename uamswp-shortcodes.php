@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * Plugin Name: UAMSWP Shortcodes UI
  * Version: 0.6.0

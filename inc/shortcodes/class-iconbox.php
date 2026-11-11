@@ -23,7 +23,7 @@ class IconBox extends Shortcode
         'heading' => null,
         'headingicon' => null,
         'url' => null,
-        'customclass' => null,
+        'customclass' => '',
     ];
 
     /**

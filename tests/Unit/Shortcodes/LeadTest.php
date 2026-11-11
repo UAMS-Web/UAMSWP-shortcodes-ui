@@ -52,8 +52,7 @@ it('falls back to the defaults when the attributes are not an array', function (
     }
 
     expect($html)->toBe('<p class="lead ">x</p>')
-        ->and($messages)->toHaveCount(1)
-        ->and($messages[0])->toContain('explode()');
+        ->and($messages)->toBe([]);
 });
 
 it('describes its Shortcake attributes', function (): void {

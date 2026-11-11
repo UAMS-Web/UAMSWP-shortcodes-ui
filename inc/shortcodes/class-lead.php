@@ -17,7 +17,7 @@ class Lead extends Shortcode
      * declare default attributes
      */
     private static array $defaults = [
-        'customclass' => null,
+        'customclass' => '',
     ];
 
     /**

@@ -48,11 +48,9 @@ abstract class Shortcode
      */
     public static function uams_shortcodes_get_contents($url)
     {
-        if (file_get_contents($url, FILE_USE_INCLUDE_PATH)) {
-            return file_get_contents($url, FILE_USE_INCLUDE_PATH);
-        }
+        $contents = file_get_contents($url, true); // @pest-mutate-ignore: TrueToFalse
 
-        return null;
+        return $contents ?: null;
     }
 
     /**

@@ -1,6 +1,6 @@
 name: CI
 
-# The checks this plugin runs on every pull request and on pushes to master.
+# The checks this plugin runs on every pull request, on pushes to master, and weekly on a schedule.
 #
 # The lint and unit chain is the shared one, `UAMS-Web/uams-ci-workflows`, called by the
 # `checks` job. One definition serves every UAMS-Web repository, so this plugin does not
@@ -29,6 +29,10 @@ on:
   push:
     branches: [master]
   workflow_dispatch:
+  # The full mutation pass: a scheduled run mutates everything `composer mutate` covers, which a
+  # pull request never does, so it catches decay no pull request touches. Mondays at 07:00 UTC.
+  schedule:
+    - cron: '0 7 * * 1'
 
 # A new push to a pull request cancels that pull request's stale run. Every other run gets a
 # group of its own, keyed on the commit, so a later push never cancels it.

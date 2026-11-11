@@ -44,10 +44,11 @@ it('falls back to the defaults when the attributes are not an array', function (
     expect(LiveWhale_Widget::callback('', ''))->toContain('data-options="id=&format=html"');
 });
 
-it('currently keeps a stale id global from an earlier call when the id is missing', function (): void {
+it('does not reuse the id of an earlier call when the id is missing', function (): void {
     LiveWhale_Widget::callback(['id' => '3']);
 
-    expect(LiveWhale_Widget::callback([]))->toContain('data-options="id=3&format=html"');
+    expect(LiveWhale_Widget::callback([]))->toContain('data-options="id=&format=html"')
+        ->and($GLOBALS['id'])->toBe('');
 });
 
 it('leaves the customclasses global empty without a custom class', function (): void {
@@ -56,7 +57,7 @@ it('leaves the customclasses global empty without a custom class', function (): 
     expect($GLOBALS['customclasses'])->toBe([]);
 });
 
-it('currently wraps in a div whose class is the string Array when a custom class is given', function (): void {
+it('wraps in a div carrying the sanitized custom classes', function (): void {
     $errors = [];
     set_error_handler(function (int $no, string $message) use (&$errors): bool {
         $errors[] = $message;
@@ -65,15 +66,15 @@ it('currently wraps in a div whose class is the string Array when a custom class
     });
 
     try {
-        $html = LiveWhale_Widget::callback(['id' => '1', 'customclass' => 'a,b']);
+        $html = LiveWhale_Widget::callback(['id' => '1', 'customclass' => 'a,b<x>']);
     } finally {
         restore_error_handler();
     }
 
-    expect($GLOBALS['customclasses'])->toBe(['a', 'b'])
-        ->and($html)->toStartWith('<div class="Array">')
+    expect($GLOBALS['customclasses'])->toBe(['a', 'bx'])
+        ->and($html)->toStartWith('<div class="a bx">')
         ->and($html)->toEndWith('</div>')
-        ->and($errors)->toBe(['Array to string conversion']);
+        ->and($errors)->toBe([]);
 });
 
 it('has a public URL constant for the calendar host', function (): void {

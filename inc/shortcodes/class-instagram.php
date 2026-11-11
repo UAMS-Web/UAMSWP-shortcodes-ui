@@ -43,11 +43,11 @@ class Instagram extends Shortcode
         if ($iframes) {
             $replacements = [];
             foreach ($iframes as $iframe) {
-                if (self::parse_url($iframe->attrs['src'], PHP_URL_HOST) !== 'instagram.com') {
+                if (! in_array(self::parse_url($iframe->attrs['src'], PHP_URL_HOST), ['instagram.com', 'www.instagram.com'], true)) {
                     continue;
                 }
 
-                if (preg_match('#//instagram\.com/p/([^/]+)/embed/?#', $iframe->attrs['src'], $matches)) {
+                if (preg_match('#//(?:www\.)?instagram\.com/p/([^/]+)/embed/?#', $iframe->attrs['src'], $matches)) {
                     $embed_id = $matches[1];
                 } else {
                     continue;

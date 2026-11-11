@@ -106,7 +106,7 @@ it('falls back to the defaults when the attributes are not an array', function (
 
     expect($html)->toContain('<div id="lw_cal">')
         ->and($GLOBALS['defaultview'])->toBe('all')
-        ->and($errors)->toBe(['Undefined array key "include_repeats"']);
+        ->and($errors)->toBe([]);
 });
 
 it('builds the tag filter literal from comma-separated tags', function (): void {
@@ -165,7 +165,7 @@ it('keeps the opening wrapper ahead of the view selector and closes it after the
     [$withClass] = liveWhaleCapture(['customclass' => 'one', 'view' => 'week', 'include_repeats' => false]);
     $without = LiveWhale::callback(['view' => 'week', 'include_repeats' => false]);
 
-    expect($withClass)->toStartWith('<div class="Array"><!-- The Day, Week, Month, All Upcoming Events tabs -->')
+    expect($withClass)->toStartWith('<div class="one"><!-- The Day, Week, Month, All Upcoming Events tabs -->')
         ->and(substr_count($withClass, '</div>'))->toBe(substr_count($without, '</div>') + 1)
         ->and($withClass)->toEndWith('</div></div>')
         ->and($without)->not->toEndWith('</div></div>');
@@ -179,10 +179,10 @@ it('inverts include_repeats into the hide_repeats flag', function (): void {
     expect($GLOBALS['repeats'])->toBe('false');
 });
 
-it('currently warns about an undefined include_repeats key when it is not passed', function (): void {
+it('hides repeats without a warning when include_repeats is not passed', function (): void {
     [$html, $errors] = liveWhaleCapture([]);
 
-    expect($errors)->toBe(['Undefined array key "include_repeats"'])
+    expect($errors)->toBe([])
         ->and($GLOBALS['repeats'])->toBe('true')
         ->and($html)->toContain('lw_cal');
 });
@@ -207,18 +207,18 @@ it('does not touch the max global in month view', function (): void {
     expect($GLOBALS['max'])->toBe('sentinel');
 });
 
-it('currently ignores a width attribute because the default height overwrites it', function (): void {
+it('keeps a width attribute when no height is given', function (): void {
     LiveWhale::callback(['width' => '320px', 'include_repeats' => false]);
 
-    expect($GLOBALS['width'])->toBe(200)
-        ->and($GLOBALS['height'])->toBe('200');
+    expect($GLOBALS['width'])->toBe(320)
+        ->and($GLOBALS['height'])->toBe(200);
 });
 
-it('currently stores the height value in the width global', function (): void {
+it('stores the height value in the height global and the width value in the width global', function (): void {
     LiveWhale::callback(['width' => 300, 'height' => 150, 'include_repeats' => false]);
 
-    expect($GLOBALS['width'])->toBe(150)
-        ->and($GLOBALS['height'])->toBe('200');
+    expect($GLOBALS['width'])->toBe(300)
+        ->and($GLOBALS['height'])->toBe(150);
 });
 
 it('leaves the container unwrapped when no custom class is given', function (): void {
@@ -228,13 +228,13 @@ it('leaves the container unwrapped when no custom class is given', function (): 
         ->and($html)->not->toContain('<div class="');
 });
 
-it('currently wraps in a div whose class is the string Array when a custom class is given', function (): void {
-    [$html, $errors] = liveWhaleCapture(['customclass' => 'one,two', 'include_repeats' => false]);
+it('wraps in a div carrying the sanitized custom classes', function (): void {
+    [$html, $errors] = liveWhaleCapture(['customclass' => 'one,two<x>', 'include_repeats' => false]);
 
-    expect($GLOBALS['customclasses'])->toBe(['one', 'two'])
-        ->and($html)->toStartWith('<div class="Array">')
+    expect($GLOBALS['customclasses'])->toBe(['one', 'twox'])
+        ->and($html)->toStartWith('<div class="one twox">')
         ->and($html)->toEndWith('</div>')
-        ->and($errors)->toBe(['Array to string conversion']);
+        ->and($errors)->toBe([]);
 });
 
 it('prints the footer script from the globals the callback set', function (): void {

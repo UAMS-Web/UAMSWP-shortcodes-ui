@@ -25,7 +25,7 @@ class LiveWhale extends Shortcode
         'tags' => null,
         'exclude_tags' => null,
         'only_starred' => null,
-        'hide_repeats' => true,
+        'include_repeats' => false,
         'max' => 5,
         'width' => 200,
         'height' => 200,
@@ -282,18 +282,18 @@ class LiveWhale extends Shortcode
 
         $height = '200';
         if ($attrs['height']) {
-            $width = intval($attrs['height']);
+            $height = intval($attrs['height']);
         }
 
         if (! empty($attrs['customclass'])) {
-            $customclasses = explode(',', $attrs['customclass']);
+            $customclasses = array_map(sanitize_html_class(...), explode(',', $attrs['customclass']));
         }
 
         $return = '';
 
         if ($customclasses !== []) {
             // @pest-mutate-ignore: ConcatEqualToEqual
-            $return .= '<div class="'.$customclasses.'">';
+            $return .= '<div class="'.implode(' ', $customclasses).'">';
         }
 
         // @pest-mutate-ignore: NotEqualToNotIdentical

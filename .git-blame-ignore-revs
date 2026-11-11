@@ -1,2 +1,7 @@
 # Pint reformat of the first-party PHP (style: format first-party PHP with Pint)
 73fe813dc94ca205c79a4af065a19ab87a6935a6
+
+# Strict types declared in first-party PHP (#111, #112, #107)
+2c3416d7896c0e04027562e7e797420534b5e172
+ba5cb30283708bc767b199d6d71939a114bf77a1
+3288d600a007bbcfa28c6fab57cbeb9da074084a

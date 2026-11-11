@@ -22,7 +22,7 @@ class Panel extends Shortcode
         'type' => 'panel-default',
         'state' => 'static',
         'style' => 'bootstrap',
-        'customclass' => null,
+        'customclass' => '',
     ];
 
     /**
@@ -123,7 +123,9 @@ class Panel extends Shortcode
      */
     public static function callback($attrs, $content = ''): string
     {
-        $attrs = array_merge(self::$defaults, $attrs);
+        $attrs = (is_array($attrs))
+            ? array_merge(self::$defaults, $attrs)
+            : self::$defaults;
 
         // Only headings or p. Otherwise, default to p.
         if (! empty($attrs['headingtype'])) {

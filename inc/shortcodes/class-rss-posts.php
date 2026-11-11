@@ -20,7 +20,8 @@ class RSS_Posts extends Shortcode
         'feed' => null,
         'number' => '3',
         'display' => 'grid',
-        'customclass' => null,
+        'customclass' => '',
+        'author' => false,
     ];
 
     /**
@@ -89,7 +90,9 @@ class RSS_Posts extends Shortcode
      */
     public static function callback($attrs, $content = ''): string
     {
-        $attrs = array_merge(self::$defaults, $attrs);
+        $attrs = (is_array($attrs))
+            ? array_merge(self::$defaults, $attrs)
+            : self::$defaults;
 
         // Only grid or list. Otherwise, default to grid.
         // @pest-mutate-ignore: EqualToIdentical
@@ -126,12 +129,10 @@ class RSS_Posts extends Shortcode
             $output .= 'No items';
         } else {
 
+            $col = 'col-lg-4 col-md-4 col-sm-12 col-xs-12';
             // @pest-mutate-ignore: EqualToIdentical
             if ($attrs['display'] == 'list') {
                 $col = 'col-md-12';
-                // @pest-mutate-ignore: EqualToIdentical
-            } elseif ($attrs['display'] == 'grid') {
-                $col = 'col-lg-4 col-md-4 col-sm-12 col-xs-12';
             }
 
             foreach ($rss_items as $item) {

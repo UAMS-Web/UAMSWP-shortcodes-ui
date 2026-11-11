@@ -23,7 +23,7 @@ class TextBox extends Shortcode
         'txtcolor' => 'dark',
         'titletxt' => null,
         'fullscreen' => false,
-        'customclass' => null,
+        'customclass' => '',
     ];
 
     /**
@@ -112,7 +112,9 @@ class TextBox extends Shortcode
      */
     public static function callback($attrs, $content = ''): string
     {
-        $attrs = array_merge(self::$defaults, $attrs);
+        $attrs = (is_array($attrs))
+            ? array_merge(self::$defaults, $attrs)
+            : self::$defaults;
 
         // Valid types only
         if (! empty($attrs['background'])) {

@@ -120,7 +120,7 @@ it('sanitizes each comma-separated custom class', function (): void {
     expect(Panel::callback(['customclass' => 'one,t wo!'], 'x'))->toContain('class="panel panel-default  one two"');
 });
 
-it('triggers a deprecation for the default null custom class', function (): void {
+it('renders without a deprecation when no custom class is given', function (): void {
     $messages = [];
     set_error_handler(function (int $no, string $str) use (&$messages): bool {
         $messages[] = $str;
@@ -129,16 +129,17 @@ it('triggers a deprecation for the default null custom class', function (): void
     });
 
     try {
-        Panel::callback([], 'x');
+        $html = Panel::callback([], 'x');
     } finally {
         restore_error_handler();
     }
 
-    expect($messages)->toHaveCount(1)->and($messages[0])->toContain('explode()');
+    expect($messages)->toBe([])
+        ->and($html)->toBe(Panel::callback(['customclass' => ''], 'x'));
 });
 
-it('throws a TypeError when WordPress passes an empty string for attributes', function (): void {
-    expect(fn (): string => Panel::callback('', 'x'))->toThrow(TypeError::class);
+it('renders with the defaults when WordPress passes an empty string for attributes', function (): void {
+    expect(Panel::callback('', 'x'))->toBe(Panel::callback([], 'x'));
 });
 
 it('describes its Shortcake attributes', function (): void {

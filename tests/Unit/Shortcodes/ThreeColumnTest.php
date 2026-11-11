@@ -90,21 +90,22 @@ it('renders empty columns when no content is supplied', function (): void {
     expect(substr_count(threeColumnCompact(ThreeColumn::callback(['col1' => '', 'col2' => '', 'col3' => '', 'customclass' => ''])), '<p></p>'))->toBe(3);
 });
 
-it('emits a deprecation when a column or the custom class is missing (current behavior)', function (): void {
+it('renders empty columns without a deprecation when no attribute is given', function (): void {
     $messages = [];
     set_error_handler(function (int $no, string $str) use (&$messages): bool {
         $messages[] = $str;
 
         return true;
-    }, E_DEPRECATED);
+    });
 
     try {
-        ThreeColumn::callback([]);
+        $html = ThreeColumn::callback([]);
     } finally {
         restore_error_handler();
     }
 
-    expect($messages)->not->toBeEmpty();
+    expect($messages)->toBe([])
+        ->and(threeColumnCompact($html))->toBe(threeColumnCompact(ThreeColumn::callback(['col1' => '', 'col2' => '', 'col3' => '', 'customclass' => ''])));
 });
 
 it('describes its Shortcake attributes', function (): void {

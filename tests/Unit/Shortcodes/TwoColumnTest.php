@@ -91,21 +91,22 @@ it('renders empty columns when no content is supplied', function (): void {
         ->and(substr_count($html, '<p></p>'))->toBe(2);
 });
 
-it('emits a deprecation when a column or the custom class is missing (current behavior)', function (): void {
+it('renders empty columns without a deprecation when no attribute is given', function (): void {
     $messages = [];
     set_error_handler(function (int $no, string $str) use (&$messages): bool {
         $messages[] = $str;
 
         return true;
-    }, E_DEPRECATED);
+    });
 
     try {
-        TwoColumn::callback([]);
+        $html = TwoColumn::callback([]);
     } finally {
         restore_error_handler();
     }
 
-    expect($messages)->not->toBeEmpty();
+    expect($messages)->toBe([])
+        ->and(twoColumnCompact($html))->toBe(twoColumnCompact(TwoColumn::callback(['col1' => '', 'col2' => '', 'customclass' => ''])));
 });
 
 it('describes its Shortcake attributes', function (): void {

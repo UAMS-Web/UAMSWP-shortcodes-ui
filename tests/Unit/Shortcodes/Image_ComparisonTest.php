@@ -87,7 +87,7 @@ it('does not enqueue the assets when an attachment has no image source', functio
     expect($this->enqueued)->toBe([]);
 });
 
-it('raises a warning when attachment metadata has no image_meta credit (current behavior)', function (): void {
+it('renders an empty credit without a warning when the attachment metadata has none', function (): void {
     when('wp_get_attachment_metadata')->justReturn(false);
     $errors = [];
     set_error_handler(function (int $no, string $str) use (&$errors): bool {
@@ -97,12 +97,14 @@ it('raises a warning when attachment metadata has no image_meta credit (current 
     });
 
     try {
-        Image_Comparison::callback(['left' => '1', 'right' => '2']);
+        $html = Image_Comparison::callback(['left' => '1', 'right' => '2']);
     } finally {
         restore_error_handler();
     }
 
-    expect($errors)->not->toBeEmpty();
+    expect($errors)->toBe([])
+        ->and($html)->toContain('data-label="Caption 1" data-credit="">')
+        ->and($html)->toContain('data-label="Caption 2" data-credit="">');
 });
 
 it('registers its scripts and styles', function (): void {

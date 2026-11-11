@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UAMS_Shortcakes\Shortcodes;
 
 class PDF extends Shortcode

@@ -203,7 +203,7 @@ it('falls back to three items when number is not all digits', function (string $
     expect($feed->requested)->toBe(3);
 })->with(['abc', '-2', '2.5', '']);
 
-it('sanitizes the display class but leaves the column class unset for an unknown display', function (): void {
+it('sanitizes the display class and uses the grid column class for an unknown display', function (): void {
     when('fetch_feed')->justReturn(rssFeed(rssSampleItems()));
     $messages = [];
     set_error_handler(function (int $no, string $str) use (&$messages): bool {
@@ -219,8 +219,8 @@ it('sanitizes the display class but leaves the column class unset for an unknown
     }
 
     expect($html)->toStartWith('<div class="recent-posts row grid ">')
-        ->toContain('class="recent-post "')
-        ->and($messages)->toContain('Undefined variable $col');
+        ->toContain('class="recent-post col-lg-4 col-md-4 col-sm-12 col-xs-12"')
+        ->and($messages)->toBe([]);
 });
 
 it('sanitizes each comma-separated custom class', function (): void {
@@ -258,7 +258,7 @@ it('fetches the url wp_http_validate_url returns', function (): void {
     RSS_Posts::callback(['feed' => 'https://example.test/feed', 'author' => '', 'customclass' => '']);
 });
 
-it('raises a warning when author is not given with items present', function (): void {
+it('omits the byline without a warning when author is not given', function (): void {
     when('fetch_feed')->justReturn(rssFeed(rssSampleItems()));
     $messages = [];
     set_error_handler(function (int $no, string $str) use (&$messages): bool {
@@ -268,16 +268,17 @@ it('raises a warning when author is not given with items present', function (): 
     });
 
     try {
-        RSS_Posts::callback(['feed' => 'f', 'customclass' => '']);
+        $html = RSS_Posts::callback(['feed' => 'f', 'customclass' => '']);
     } finally {
         restore_error_handler();
     }
 
-    expect($messages)->toContain('Undefined array key "author"');
+    expect($messages)->toBe([])
+        ->and($html)->not->toContain('recent-post-byline');
 });
 
-it('throws a TypeError when WordPress passes an empty string for attributes', function (): void {
-    expect(fn (): string => RSS_Posts::callback('', ''))->toThrow(TypeError::class);
+it('renders with the defaults when WordPress passes an empty string for attributes', function (): void {
+    expect(RSS_Posts::callback('', ''))->toBe('<div class="recent-posts row grid ">No items</div>');
 });
 
 it('describes its Shortcake attributes', function (): void {

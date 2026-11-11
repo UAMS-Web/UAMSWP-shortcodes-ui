@@ -82,19 +82,17 @@ class LiveWhale_Widget extends Shortcode
 
         $customclasses = [];
 
-        if (isset($attrs['id'])) {
-            $id = esc_attr($attrs['id']);
-        }
+        $id = isset($attrs['id']) ? esc_attr($attrs['id']) : '';
 
         if (! empty($attrs['customclass'])) {
-            $customclasses = explode(',', $attrs['customclass']);
+            $customclasses = array_map(sanitize_html_class(...), explode(',', $attrs['customclass']));
         }
 
         $return = '';
 
         if ($customclasses !== []) {
             // @pest-mutate-ignore: ConcatEqualToEqual
-            $return .= '<div class="'.$customclasses.'">';
+            $return .= '<div class="'.implode(' ', $customclasses).'">';
         }
 
         $return .= '

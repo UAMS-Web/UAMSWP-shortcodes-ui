@@ -89,10 +89,10 @@ it('leaves an iframe from another host alone', function (): void {
     expect(Instagram::reversal($content))->toBe($content);
 });
 
-it('currently ignores an iframe on the www host', function (): void {
+it('turns an Instagram iframe on the www host into a shortcode', function (): void {
     $content = '<iframe src="https://www.instagram.com/p/ABC123/embed/"></iframe>';
 
-    expect(Instagram::reversal($content))->toBe($content);
+    expect(Instagram::reversal($content))->toBe('[instagram url="https://instagram.com/p/ABC123/"]');
 });
 
 it('leaves an Instagram iframe whose path is not an embed alone', function (): void {

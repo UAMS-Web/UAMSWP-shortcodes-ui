@@ -12,6 +12,18 @@ Modelled after [Shortcake's Bakery](https://github.com/wp-shortcake/shortcake-ba
 
 This project is also an attempt to improve the extensibility of the original NCSU Shortcodes plugin, and make it easier for 3rd parties to contribute additional shortcodes while maintaining a standardized approach that preserves the integrity of each individual shortcode.
 
+## Credits
+
+Based on NCSU Shortcodes by OIT Design, Brian DeConinck and Chris Deaton.
+
+Modified by UAMS Web Services.
+
+Developers:
+
+- Todd McKee
+- Josh Daugherty
+- Brent Passmore
+
 ## Contributing
 
 See the [wiki](https://github.ncsu.edu/oitdesign/NCSU-Shortcodes/wiki) for guidance on how to contribute proposed shortcodes for inclusion into this project.

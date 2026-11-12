@@ -49,9 +49,9 @@ test('the default Gulp task completes', () => {
   assert.match(build.stdout, /Finished 'default'/);
 });
 
-test('the default task is the only registered task and runs the three build tasks', () => {
+test('the default task is the only registered task and runs the four build tasks', () => {
   assert.equal(tasks.stdout.trim(), 'default');
-  for (const name of ['style', 'admin', 'adminScripts']) {
+  for (const name of ['style', 'admin', 'adminScripts', 'pdfjs']) {
     assert.match(build.stdout, new RegExp(`Finished '${name}'`), name);
   }
 });
@@ -71,6 +71,26 @@ test('adminScripts concatenates admin/js/src into admin/js/build/main.js as comm
 
   assert.ok(built.length > 0);
   assert.equal(built, committed);
+});
+
+/** Every file under a folder, as sorted paths relative to it with forward slashes. */
+function listFiles(folder) {
+  return fs.readdirSync(folder, { recursive: true, withFileTypes: true })
+    .filter((entry) => entry.isFile())
+    .map((entry) => path.relative(folder, path.join(entry.parentPath, entry.name)).split(path.sep).join('/'))
+    .sort();
+}
+
+test('pdfjs copies the pdfjs-dist files into assets/lib/pdfjs exactly as committed', () => {
+  const built = listFiles(path.join(scratch, 'assets/lib/pdfjs'));
+  // index.html is the plugin's own file, not part of the package.
+  const committed = listFiles(path.join(root, 'assets/lib/pdfjs')).filter((file) => file !== 'index.html');
+
+  assert.ok(built.length > 100, `only ${built.length} files were built`);
+  assert.deepEqual(built, committed);
+  for (const file of built) {
+    assertSameBytes(`assets/lib/pdfjs/${file}`);
+  }
 });
 
 test('there is no front-end script task, source or build file', () => {

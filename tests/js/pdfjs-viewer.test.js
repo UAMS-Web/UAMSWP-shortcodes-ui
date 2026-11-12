@@ -4,15 +4,17 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
-const vm = require('node:vm');
+const { pathToFileURL } = require('node:url');
 
 const root = path.resolve(__dirname, '..', '..');
-const dir = path.join(root, 'assets/lib/pdfjs');
-const read = (file) => fs.readFileSync(path.join(dir, file), 'utf8');
+const lib = path.join(root, 'assets/lib/pdfjs');
+const viewerDir = path.join(root, 'assets/pdf-viewer');
+const readLib = (file) => fs.readFileSync(path.join(lib, file), 'utf8');
+const readViewer = (file) => fs.readFileSync(path.join(viewerDir, file), 'utf8');
 
-const library = read('build/pdf.mjs');
-const viewer = read('web/viewer.mjs');
-const page = read('web/viewer.html');
+const library = readLib('build/pdf.mjs');
+const viewer = readViewer('viewer.mjs');
+const page = readViewer('viewer.html');
 
 // First release fixed for CVE-2024-4367, the glyph-path injection through the font matrix.
 const FIRST_FIXED = [4, 2, 67];
@@ -26,63 +28,82 @@ const minimum = (version) => {
   return true;
 };
 
-test('the vendored release is at or after the first one fixed for CVE-2024-4367', () => {
+test('the built pdf.js is at or after the first release fixed for CVE-2024-4367', () => {
   const header = library.match(/pdfjsVersion = (\d+\.\d+\.\d+)/);
   assert.ok(header, 'build/pdf.mjs states its version in the header');
   assert.ok(minimum(header[1]), `pdf.js ${header[1]} is older than ${FIRST_FIXED.join('.')}`);
 });
 
-test('the library, the worker and the viewer agree on one version', () => {
+test('the library, the worker and the viewer components agree on one version', () => {
   const header = library.match(/pdfjsVersion = (\d+\.\d+\.\d+)/)[1];
-  assert.match(library, new RegExp(`const version = "${header.replaceAll('.', '\\.')}";`));
-  assert.match(read('build/pdf.worker.mjs'), new RegExp(`pdfjsVersion = ${header.replaceAll('.', '\\.')}`));
-  assert.match(viewer, new RegExp(`pdfjsVersion = ${header.replaceAll('.', '\\.')}`));
+  const escaped = header.replaceAll('.', '\\.');
+  assert.match(library, new RegExp(`const version = "${escaped}";`));
+  assert.match(readLib('build/pdf.worker.mjs'), new RegExp(`pdfjsVersion = ${escaped}`));
+  assert.match(readLib('web/pdf_viewer.mjs'), new RegExp(`pdfjsVersion = ${escaped}`));
 });
 
-test('no vendored script compiles glyph paths with the Function constructor', () => {
-  for (const file of ['build/pdf.mjs', 'build/pdf.worker.mjs', 'build/pdf.sandbox.mjs', 'build/pdf.renderer.mjs', 'web/viewer.mjs']) {
-    assert.doesNotMatch(read(file), /new Function\s*\(|isEvalSupported/, `${file} builds code from strings`);
+test('the built pdf.js matches the pdfjs-dist version package.json lists', () => {
+  const header = library.match(/pdfjsVersion = (\d+\.\d+\.\d+)/)[1];
+  const listed = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8')).dependencies?.['pdfjs-dist'];
+  assert.ok(listed, 'package.json lists pdfjs-dist as a dependency');
+  const lock = JSON.parse(fs.readFileSync(path.join(root, 'package-lock.json'), 'utf8'));
+  assert.equal(lock.packages['node_modules/pdfjs-dist'].version, header, 'the locked pdfjs-dist is the version built into assets/lib/pdfjs');
+});
+
+test('no built script compiles glyph paths with the Function constructor', () => {
+  for (const file of ['build/pdf.mjs', 'build/pdf.worker.mjs', 'web/pdf_viewer.mjs']) {
+    assert.doesNotMatch(readLib(file), /new Function\s*\(|isEvalSupported/, `${file} builds code from strings`);
   }
 });
 
-test('the viewer page loads the vendored build and viewer modules', () => {
-  assert.match(page, /<script src="\.\.\/build\/pdf\.mjs" type="module"><\/script>/);
+test('the release archive viewer is gone and the first-party page is the only viewer', () => {
+  for (const file of ['web/viewer.html', 'web/viewer.mjs', 'web/viewer.css']) {
+    assert.equal(fs.existsSync(path.join(lib, file)), false, `${file} should not be vendored`);
+  }
   assert.match(page, /<script src="viewer\.mjs" type="module"><\/script>/);
-  assert.ok(fs.existsSync(path.join(dir, 'build/pdf.worker.mjs')), 'the worker the viewer starts is vendored');
+  assert.match(page, /<link rel="stylesheet" href="\.\.\/lib\/pdfjs\/web\/pdf_viewer\.css">/);
 });
 
-/**
- * Pull `validateFileURL` and the hosted-origins list it reads out of the viewer and run it for a page at `location`.
- */
-function validator(location) {
-  const start = viewer.indexOf('const HOSTED_VIEWER_ORIGINS = ');
-  const end = viewer.indexOf('var onFileInputChange', start);
-  assert.ok(start > -1 && end > start, 'validateFileURL is in the viewer');
-  const errors = [];
-  const sandbox = {
-    URL,
-    window: { location },
-    PDFViewerApplication: { _documentError: (key, details) => errors.push([key, details.message]) },
-    Error,
-  };
-  vm.createContext(sandbox);
-  vm.runInContext(`${viewer.slice(start, end)}; this.validateFileURL = validateFileURL;`, sandbox);
-  return { validate: sandbox.validateFileURL, errors };
+test('the viewer imports only files the build writes', () => {
+  const imports = [...viewer.matchAll(/from '(\.[^']+)'/g)].map((match) => match[1]);
+  assert.ok(imports.length >= 3, 'the viewer imports the library, the viewer components and the origin check');
+  for (const specifier of imports) {
+    assert.ok(fs.existsSync(path.resolve(viewerDir, specifier)), `${specifier} exists`);
+  }
+  assert.ok(fs.existsSync(path.join(lib, 'build/pdf.worker.mjs')), 'the worker the viewer starts is built');
+});
+
+async function originCheck() {
+  return (await import(pathToFileURL(path.join(viewerDir, 'file-origin.mjs')).href)).assertSameOrigin;
 }
 
-test('the viewer accepts a file from its own origin', () => {
-  const { validate, errors } = validator('https://example.test/wp-content/plugins/x/assets/lib/pdfjs/web/viewer.html');
-  validate('https://example.test/wp-content/uploads/report.pdf');
-  assert.deepEqual(errors, []);
+const VIEWER = 'https://example.test/wp-content/plugins/x/assets/pdf-viewer/viewer.html?file=a';
+
+test('the origin check accepts a file from the viewer origin', async () => {
+  const assertSameOrigin = await originCheck();
+  assert.doesNotThrow(() => assertSameOrigin('https://example.test/wp-content/uploads/report.pdf', VIEWER));
+  assert.doesNotThrow(() => assertSameOrigin('/wp-content/uploads/report.pdf', VIEWER));
 });
 
-test('the viewer refuses a file from another origin and reports the error', () => {
-  const { validate, errors } = validator('https://example.test/wp-content/plugins/x/assets/lib/pdfjs/web/viewer.html');
-  assert.throws(() => validate('https://elsewhere.test/report.pdf'), /file origin does not match viewer's/);
-  assert.deepEqual(errors, [['pdfjs-loading-error', "file origin does not match viewer's"]]);
+test('the origin check refuses a file on another origin', async () => {
+  const assertSameOrigin = await originCheck();
+  for (const file of [
+    'https://elsewhere.test/report.pdf',
+    'http://example.test/report.pdf',
+    'https://example.test:8443/report.pdf',
+    '//elsewhere.test/report.pdf',
+    'data:application/pdf;base64,AAAA',
+    'javascript:alert(1)',
+  ]) {
+    assert.throws(() => assertSameOrigin(file, VIEWER), /file origin does not match viewer's/, file);
+  }
 });
 
-test('the viewer refuses a scheme-relative file on another host', () => {
-  const { validate } = validator('https://example.test/wp-content/plugins/x/assets/lib/pdfjs/web/viewer.html');
-  assert.throws(() => validate('//elsewhere.test/report.pdf'), /file origin does not match viewer's/);
+test('the viewer runs the origin check before it opens the file', () => {
+  const check = viewer.indexOf('assertSameOrigin(file, window.location.href)');
+  const open = viewer.indexOf('pdfjs.getDocument(');
+  assert.ok(check > -1, 'the viewer calls assertSameOrigin on the file query value');
+  assert.ok(open > -1, 'the viewer opens the document');
+  assert.ok(check < open, 'the check comes before the document is opened');
+  assert.match(viewer.slice(check, open), /return;/, 'a refused file stops the viewer');
 });

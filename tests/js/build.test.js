@@ -49,9 +49,9 @@ test('the default Gulp task completes', () => {
   assert.match(build.stdout, /Finished 'default'/);
 });
 
-test('the default task is the only registered task and runs the four build tasks', () => {
+test('the default task is the only registered task and runs the three build tasks', () => {
   assert.equal(tasks.stdout.trim(), 'default');
-  for (const name of ['style', 'admin', 'frontEndScripts', 'adminScripts']) {
+  for (const name of ['style', 'admin', 'adminScripts']) {
     assert.match(build.stdout, new RegExp(`Finished '${name}'`), name);
   }
 });
@@ -73,10 +73,11 @@ test('adminScripts concatenates admin/js/src into admin/js/build/main.js as comm
   assert.equal(built, committed);
 });
 
-test('frontEndScripts writes nothing because assets/js/src does not exist, and the committed main.js is empty', () => {
+test('there is no front-end script task, source or build file', () => {
+  assert.doesNotMatch(build.stdout, /frontEndScripts/);
   assert.equal(fs.existsSync(path.join(root, 'assets/js/src')), false);
+  assert.equal(fs.existsSync(path.join(root, 'assets/js/build/main.js')), false);
   assert.equal(fs.existsSync(path.join(scratch, 'assets/js/build/main.js')), false);
-  assert.equal(fs.statSync(path.join(root, 'assets/js/build/main.js')).size, 0);
 });
 
 test('the first-difference helper reports where two buffers part', () => {

@@ -125,7 +125,7 @@ class IconBox extends Shortcode
 
         // Valid types only
         if (! empty($attrs['type'])) {
-            $type = (in_array($attrs['type'], ['default', 'boxed', 'framed'])) ? sanitize_html_class($attrs['type']) : 'default';
+            $type = (in_array($attrs['type'], ['boxed', 'framed'])) ? sanitize_html_class($attrs['type']) : 'default';
         } else {
             $type = 'default';
         }

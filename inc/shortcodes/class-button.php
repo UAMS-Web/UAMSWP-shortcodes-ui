@@ -21,11 +21,13 @@ class Button extends Shortcode
      */
     private static array $defaults = [
         'color' => null,
-        'btntext' => null,
+        'text' => '',
         'url' => null,
         'target' => null,
         'size' => null,
         'icon' => null,
+        'type' => null,
+        'newline' => false,
         'customclass' => null,
     ];
 

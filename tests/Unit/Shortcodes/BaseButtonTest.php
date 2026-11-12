@@ -19,8 +19,7 @@ beforeEach(function (): void {
 });
 
 /**
- * Attributes for a complete call: the class reads title and btncontent
- * without defaults, so a call that omits them raises warnings.
+ * Attributes for a complete call.
  *
  * @param  array<string, mixed>  $overrides
  * @return array<string, mixed>
@@ -83,11 +82,11 @@ it('runs the url through esc_url', function (): void {
     expect(BaseButton::callback(baseButtonAttrs(['url' => 'https://example.test/x'])))->toStartWith('<a href="ESCAPED:https://example.test/x"');
 });
 
-it('ignores the btn_content default because the attribute is named btncontent', function (): void {
+it('ignores a btn_content attribute because the content attribute is named btncontent', function (): void {
     expect(BaseButton::callback(baseButtonAttrs(['btn_content' => 'Ignored'])))->toContain('>Go</button>');
 });
 
-it('raises warnings for the title and btncontent keys the defaults omit', function (): void {
+it('renders an empty button without warnings when title and btncontent are omitted', function (): void {
     $messages = [];
     set_error_handler(function (int $no, string $str) use (&$messages): bool {
         $messages[] = $str;
@@ -102,8 +101,7 @@ it('raises warnings for the title and btncontent keys the defaults omit', functi
     }
 
     expect($html)->toBe('<a href="" title="" target=""><button type="button" class=" btn  "></button></a>')
-        ->and($messages)->toContain('Undefined array key "title"')
-        ->and($messages)->toContain('Undefined array key "btncontent"');
+        ->and($messages)->toBe([]);
 });
 
 it('uses the defaults when the attributes are not an array', function (): void {

@@ -21,7 +21,8 @@ class BaseButton extends Shortcode
      */
     private static array $defaults = [
         'color' => null,
-        'btn_content' => null,
+        'btncontent' => '',
+        'title' => '',
         'url' => null,
         'target' => null,
         'size' => null,

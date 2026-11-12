@@ -26,7 +26,7 @@ beforeEach(function (): void {
     ]);
 });
 
-const PDF_VIEWER = 'https://example.test/wp-content/plugins/uamswp-shortcodes/assets/lib/pdfjs/web/viewer.html';
+const PDF_VIEWER = 'https://example.test/wp-content/plugins/uamswp-shortcodes/assets/pdf-viewer/viewer.html';
 
 /**
  * Answer the given filters with fixed values and every other one with its input.
@@ -46,14 +46,14 @@ it('renders nothing without an attachment or url', function (): void {
     expect(PDF::callback([]))->toBe('');
 });
 
-it('embeds an attachment through the PDF.js viewer', function (): void {
+it('embeds an attachment through the first-party PDF viewer', function (): void {
     expect(PDF::callback(['attachment' => '12']))->toBe(
         '<iframe class="uams-shortcodes-responsive" data-true-height="800px" data-true-width="600px" width="600px" height="800px" frameBorder="0" src="'
         .PDF_VIEWER.'?file='.rawurlencode('https://files.test/doc-12.pdf').'"></iframe>'
     );
 });
 
-it('embeds a url through the PDF.js viewer', function (): void {
+it('embeds a url through the first-party PDF viewer', function (): void {
     expect(PDF::callback(['url' => 'https://other.test/a.pdf']))
         ->toContain('src="'.PDF_VIEWER.'?file='.rawurlencode('https://other.test/a.pdf').'"');
 });

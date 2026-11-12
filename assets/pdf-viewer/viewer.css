@@ -1,0 +1,113 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  position: relative;
+  background: #525659;
+  color: #1b1b1b;
+  font: 14px/1.4 system-ui, sans-serif;
+}
+
+.toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 16px;
+  padding: 6px 10px;
+  background: #f4f4f4;
+  border-bottom: 1px solid #c8c8c8;
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+}
+
+.toolbar button,
+.toolbar .button,
+.toolbar input,
+.toolbar select {
+  box-sizing: border-box;
+  min-height: 30px;
+  padding: 2px 8px;
+  border: 1px solid #8f8f9d;
+  border-radius: 4px;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+}
+
+.toolbar button,
+.toolbar .button {
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.toolbar button:hover,
+.toolbar .button:hover {
+  background: #e8e8ec;
+}
+
+.toolbar :focus-visible {
+  outline: 2px solid #0060df;
+  outline-offset: 1px;
+}
+
+.toolbar .page input {
+  width: 4em;
+  text-align: center;
+}
+
+.toolbar .count {
+  white-space: nowrap;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* pdf.js needs a scrolling container that is absolutely positioned. */
+#viewerContainer {
+  position: absolute;
+  top: var(--toolbar-height, 84px);
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+}
+
+#message {
+  position: absolute;
+  top: var(--toolbar-height, 84px);
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 16px;
+  background: #fff3cd;
+  color: #4d3b00;
+  text-align: center;
+}
+
+@media print {
+  .toolbar {
+    display: none;
+  }
+}

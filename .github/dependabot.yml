@@ -1,0 +1,8 @@
+# Dependabot version updates for the npm dependencies, including pdfjs-dist, which the PDF viewer is
+# built from. A bump changes package-lock.json and, after `npx gulp`, the files under assets/lib/pdfjs/.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly

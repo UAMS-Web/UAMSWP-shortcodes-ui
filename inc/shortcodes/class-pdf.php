@@ -112,7 +112,7 @@ class PDF extends Shortcode
             $url = self::asset_proxy_url($url);
         }
 
-        $viewer_url = UAMS_SHORTCAKES_URL_ROOT.'assets/lib/pdfjs/web/viewer.html';
+        $viewer_url = UAMS_SHORTCAKES_URL_ROOT.'assets/pdf-viewer/viewer.html';
         $source = add_query_arg('file', rawurlencode($url), $viewer_url);
 
         return '<iframe class="uams-shortcodes-responsive" data-true-height="800px" data-true-width="600px" width="600px" height="800px" frameBorder="0" src="'.esc_url($source).'"></iframe>';

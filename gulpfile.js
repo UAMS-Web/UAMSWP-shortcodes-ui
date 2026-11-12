@@ -39,6 +39,24 @@ function admin() {
         .pipe(gulp.dest('admin/css'))
 };
 
+// copy the pdf.js files the viewer loads out of the pdfjs-dist package, so a package bump changes
+// only package-lock.json and these generated files (binary files, so no text encoding)
+function pdfjs() {
+    return gulp.src([
+        'build/pdf.mjs',
+        'build/pdf.worker.mjs',
+        'web/pdf_viewer.mjs',
+        'web/pdf_viewer.css',
+        'web/images/**',
+        'cmaps/**',
+        'iccs/**',
+        'standard_fonts/**',
+        'wasm/**',
+        'LICENSE'
+    ], { cwd: 'node_modules/pdfjs-dist', base: 'node_modules/pdfjs-dist', encoding: false })
+        .pipe(gulp.dest('assets/lib/pdfjs'))
+};
+
 function adminScripts() {
     return gulp.src('admin/js/src/**/*.js')
         .pipe(plumber({
@@ -52,5 +70,5 @@ function adminScripts() {
 };
 
 gulp.task('default', gulp.parallel(
-    style, admin, adminScripts
+    style, admin, adminScripts, pdfjs
 ));

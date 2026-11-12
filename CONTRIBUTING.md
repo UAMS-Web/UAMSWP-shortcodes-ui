@@ -61,17 +61,11 @@ npm test                 # listener, embed and Gulp build tests
 npm run test:coverage    # the same, with a line and branch coverage table
 ```
 
-`tests/js/build.test.js` copies the Sass and script sources to a scratch folder, runs the default Gulp task there and compares the output with the committed `assets/css/main.css`, `admin/css/admin.css` and `admin/js/build/main.js`. After a change to a source under `assets/css/sass/`, `admin/css/sass/` or `admin/js/src/`, run `npx gulp` and commit the rebuilt files, or that test fails. The vendored `assets/js/juxtapose.js` is not covered, and `assets/lib/pdfjs/` has its own test (see below).
+`tests/js/build.test.js` copies the Sass and script sources to a scratch folder, runs the default Gulp task there and compares the output with the committed `assets/css/main.css`, `admin/css/admin.css`, `admin/js/build/main.js` and every file under `assets/lib/pdfjs/` except its `index.html`. After a change to a source under `assets/css/sass/`, `admin/css/sass/` or `admin/js/src/`, or to the `pdfjs-dist` version, run `npx gulp` and commit the rebuilt files, or that test fails. The vendored `assets/js/juxtapose.js` is not covered.
 
-### Updating the vendored pdf.js
+### Updating pdf.js
 
-`assets/lib/pdfjs/` holds the pdf.js release archive (the `pdfjs-<version>-dist.zip` asset on [mozilla/pdf.js releases](https://github.com/mozilla/pdf.js/releases)), which Dependabot does not track, so check for a new release when a security advisory names pdf.js and at least once a quarter. To update: download the archive into an empty folder, replace `build/`, `web/` and `LICENSE` with the archive's, delete the `.map` files, keep `index.html`, then run `npm test`. `tests/js/pdfjs-viewer.test.js` checks the version floor, that no script builds code from strings, and that the viewer refuses a `?file=` on another origin. The viewer is ES modules, so the server must send `.mjs` files as JavaScript.
-
-
-Did you mean this?
-  npm test # Test a package
-To see a list of supported npm commands, run:
-  npm help.  checks the version floor, that no script builds code from strings, and that the viewer refuses a  on another origin. The viewer is ES modules, so the server must send  files as JavaScript.
+The PDF viewer is built on the `pdfjs-dist` package, which Dependabot tracks through `.github/dependabot.yml`. `npx gulp` copies the files the viewer loads from `node_modules/pdfjs-dist` into `assets/lib/pdfjs/`, and the first-party page that uses them is `assets/pdf-viewer/`. When Dependabot opens a pull request for a new `pdfjs-dist`, check out its branch, run `npm ci` and `npx gulp`, and commit the changed files under `assets/lib/pdfjs/`. `tests/js/pdfjs-viewer.test.js` then checks the version floor, that the built files match the locked package, that no script builds code from strings, and that the viewer refuses a `?file=` on another origin. The viewer is ES modules, so the server must send `.mjs` files as JavaScript.
 
 ### PHP coverage
 

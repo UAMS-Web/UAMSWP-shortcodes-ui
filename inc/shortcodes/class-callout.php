@@ -40,6 +40,7 @@ class Callout extends Shortcode
         'margin' => 'normal',
         'padding' => 'padding-one',
         'customclass' => null,
+        'fullscreen' => null,
     ];
 
     public static function get_shortcode_ui_args(): array
@@ -393,9 +394,8 @@ class Callout extends Shortcode
             $urlclose = '</div>';
         }
 
+        $customclass = '';
         if (! empty($attrs['customclass'])) {
-            $customclasses = explode(',', $attrs['customclass']);
-            $basic_classes = array_merge($basic_classes, $customclasses);
             $customclass = implode(' ', array_map(sanitize_html_class(...), explode(',', $attrs['customclass'])));
         }
 
@@ -417,6 +417,7 @@ class Callout extends Shortcode
             $alt = null;
         }
 
+        $mediaposition = '';
         // @pest-mutate-ignore: EqualToIdentical
         if ($attrs['mediaposition'] == 'left') {
             $mediaposition = 'media-left';
@@ -442,6 +443,7 @@ class Callout extends Shortcode
             $imgback = null;
         }
 
+        $poster = '';
         if (! empty($attrs['fallbackimg'])) {
             $fallbackimg = wp_get_attachment_image_src($attrs['fallbackimg'])[0];
             $fallbackimgset = wp_get_attachment_image_srcset($attrs['fallbackimg']);
@@ -468,6 +470,7 @@ class Callout extends Shortcode
 
         $vidsrc = null;
         $vidembed = null;
+        $autoplay = '';
 
         if ($attrs['type'] === 'vid') {
 

@@ -51,7 +51,7 @@ class Scribd extends Shortcode
             return '';
         }
 
-        if (! preg_match('#(http|https)://www\.scribd\.com/doc(ument)?/?(\d)+/#', $attrs['url'], $needle)) {
+        if (! preg_match('#^https?://www\.scribd\.com/doc(?:ument)?/(\d+)/#', $attrs['url'], $matches)) {
             if (current_user_can('edit_posts')) {
                 /* Translators: Invalid document error. */
                 return '<div class="uams-shortcodes-error"><p>'.sprintf(esc_html__('Invalid Scribd URL: %s', 'uams_shortcodes'), esc_url($attrs['url'])).'</p></div>';
@@ -60,8 +60,7 @@ class Scribd extends Shortcode
             return '';
         }
 
-        $exploded_url = explode('/', $needle[0]);
-        $id = $exploded_url[4];
+        $id = $matches[1];
 
         $url = 'https://www.scribd.com/embeds/'.$id.'/content?start_page=1&view_mode=scroll&access_key=key-ooxdrkmSg8ieauz9qYXL&show_recommendations=true';
         $out = '<iframe class="scribd_iframe_embed uams-shortcodes-responsive" src="';

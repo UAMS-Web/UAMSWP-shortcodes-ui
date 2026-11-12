@@ -443,6 +443,8 @@ class Callout extends Shortcode
             $imgback = null;
         }
 
+        // Without a fallback image `$poster` only reaches `esc_url()` for markup that is never printed, so no output tells '' from another string.
+        // @pest-mutate-ignore: EmptyStringToNotEmpty
         $poster = '';
         if (! empty($attrs['fallbackimg'])) {
             $fallbackimg = wp_get_attachment_image_src($attrs['fallbackimg'])[0];

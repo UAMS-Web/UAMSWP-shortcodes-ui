@@ -32,7 +32,7 @@ it('falls back to alignleft for an unknown alignment', function (): void {
     expect(Pullquote::callback(['align' => 'bogus', 'customclass' => ''], 'q'))->toContain('class="pullquote alignleft ');
 });
 
-it('falls back to alignleft for the default right value, which is not a valid alignment', function (): void {
+it('uses alignleft, the first alignment option, when none is given', function (): void {
     expect(Pullquote::callback(['customclass' => ''], 'q'))->toContain('pullquote alignleft');
 });
 

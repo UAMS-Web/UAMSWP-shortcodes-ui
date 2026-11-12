@@ -28,14 +28,14 @@ it('renders the default box with a span wrapper and no icon or heading', functio
     expect($html)->toBe('<div class="icon-box-wrapper default none "><div class="icon-box-icon"><span class="icon-wrap"></span></div><div class="icon-box-content"><span class="icon-wrap"></span><div class="icon-box-description"><p>Body</p></div></div></div>');
 });
 
-it('prints the misspelled defualt class for the default type of info', function (): void {
-    expect(IconBox::callback(['customclass' => ''], 'x'))->toContain('icon-box-wrapper defualt none ');
+it('prints the default class when no type is given', function (): void {
+    expect(IconBox::callback(['customclass' => ''], 'x'))->toContain('icon-box-wrapper default none ');
 });
 
-it('keeps each allowed type and misspells the class for an unknown one', function (): void {
+it('keeps each allowed type and falls back to the default class for an unknown one', function (): void {
     expect(IconBox::callback(['type' => 'boxed', 'customclass' => ''], 'x'))->toContain('icon-box-wrapper boxed ')
         ->and(IconBox::callback(['type' => 'framed', 'customclass' => ''], 'x'))->toContain('icon-box-wrapper framed ')
-        ->and(IconBox::callback(['type' => 'bogus', 'customclass' => ''], 'x'))->toContain('icon-box-wrapper defualt ')
+        ->and(IconBox::callback(['type' => 'bogus', 'customclass' => ''], 'x'))->toContain('icon-box-wrapper default ')
         ->and(IconBox::callback(['type' => '', 'customclass' => ''], 'x'))->toContain('icon-box-wrapper default ');
 });
 
@@ -127,7 +127,7 @@ it('falls back to the defaults when the attributes are not an array', function (
         restore_error_handler();
     }
 
-    expect($html)->toContain('icon-box-wrapper defualt none ')
+    expect($html)->toContain('icon-box-wrapper default none ')
         ->and($messages)->toBe([]);
 });
 

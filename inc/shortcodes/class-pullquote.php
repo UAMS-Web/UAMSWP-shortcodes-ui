@@ -21,7 +21,7 @@ class Pullquote extends Shortcode
     private static array $defaults = [
         'cite' => null,
         'color' => 'uamsred',
-        'align' => 'right',
+        'align' => 'alignleft',
         'customclass' => null,
     ];
 

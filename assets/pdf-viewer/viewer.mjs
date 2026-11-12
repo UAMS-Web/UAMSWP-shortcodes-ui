@@ -32,15 +32,17 @@ function followToolbarHeight() {
 async function main() {
   followToolbarHeight();
 
-  const file = new URLSearchParams(window.location.search).get('file');
+  const requested = new URLSearchParams(window.location.search).get('file');
 
-  if (!file) {
+  if (!requested) {
     fail('No PDF was given.');
     return;
   }
 
+  let file;
+
   try {
-    assertSameOrigin(file, window.location.href);
+    file = assertSameOrigin(requested, window.location.href);
   } catch {
     fail('This PDF is on another site, so it cannot be shown here.');
     return;

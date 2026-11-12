@@ -7,12 +7,18 @@
  *
  * @param {string} file The `file` query value.
  * @param {string} viewerAddress The address of the page showing the viewer.
+ * @returns {string} The PDF address as an absolute path on the viewer origin: `pathname` and `search` only,
+ *   so no scheme, host or fragment from the query value is carried forward.
  * @throws {Error} When the PDF is on another origin.
  */
 export function assertSameOrigin(file, viewerAddress) {
   const viewer = new URL(viewerAddress);
 
-  if (new URL(file, viewer).origin !== viewer.origin) {
+  const resolved = new URL(file, viewer);
+
+  if (resolved.origin !== viewer.origin) {
     throw new Error("file origin does not match viewer's");
   }
+
+  return viewer.origin + resolved.pathname + resolved.search;
 }

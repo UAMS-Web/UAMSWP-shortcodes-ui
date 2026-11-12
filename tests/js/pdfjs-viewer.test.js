@@ -81,8 +81,8 @@ const VIEWER = 'https://example.test/wp-content/plugins/x/assets/pdf-viewer/view
 
 test('the origin check accepts a file from the viewer origin', async () => {
   const assertSameOrigin = await originCheck();
-  assert.doesNotThrow(() => assertSameOrigin('https://example.test/wp-content/uploads/report.pdf', VIEWER));
-  assert.doesNotThrow(() => assertSameOrigin('/wp-content/uploads/report.pdf', VIEWER));
+  assert.equal(assertSameOrigin('https://example.test/wp-content/uploads/report.pdf', VIEWER), 'https://example.test/wp-content/uploads/report.pdf');
+  assert.equal(assertSameOrigin('/wp-content/uploads/report.pdf?v=2#page=3', VIEWER), 'https://example.test/wp-content/uploads/report.pdf?v=2');
 });
 
 test('the origin check refuses a file on another origin', async () => {
@@ -100,7 +100,7 @@ test('the origin check refuses a file on another origin', async () => {
 });
 
 test('the viewer runs the origin check before it opens the file', () => {
-  const check = viewer.indexOf('assertSameOrigin(file, window.location.href)');
+  const check = viewer.indexOf('assertSameOrigin(requested, window.location.href)');
   const open = viewer.indexOf('pdfjs.getDocument(');
   assert.ok(check > -1, 'the viewer calls assertSameOrigin on the file query value');
   assert.ok(open > -1, 'the viewer opens the document');

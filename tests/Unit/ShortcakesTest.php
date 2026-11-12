@@ -280,7 +280,7 @@ it('registers its hooks and assets when the instance is first created', function
     });
     when('plugin_dir_url')->justReturn('https://example.test/plugin/');
     Functions\expect('wp_register_style')->once()->with('shortcodes_styles', 'https://example.test/plugin/assets/css/main.css');
-    Functions\expect('wp_register_script')->once()->with('shortcodes_scripts', 'https://example.test/plugin/assets/js/build/main.js');
+    Functions\expect('wp_register_script')->once()->with('shortcodes_scripts', false);
 
     $first = UAMS_Shortcakes::get_instance();
 

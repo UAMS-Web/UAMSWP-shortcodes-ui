@@ -237,7 +237,8 @@ class UAMS_Shortcakes
     private function setup_depencies(): void
     {
         wp_register_style('shortcodes_styles', plugin_dir_url(__DIR__).'assets/css/main.css');
-        wp_register_script('shortcodes_scripts', plugin_dir_url(__DIR__).'assets/js/build/main.js');
+        // No source file: the handle stays registered so a script that lists it as a dependency still loads.
+        wp_register_script('shortcodes_scripts', false);
     }
 
     /*

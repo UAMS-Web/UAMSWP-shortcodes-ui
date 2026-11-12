@@ -39,18 +39,6 @@ function admin() {
         .pipe(gulp.dest('admin/css'))
 };
 
-function frontEndScripts() {
-    return gulp.src('assets/js/src/**/*.js')
-        .pipe(plumber({
-            errorHandler: function (error) {
-                console.log(error.message);
-                this.emit('end');
-            }
-        }))
-        .pipe(concat('main.js'))
-        .pipe(gulp.dest('assets/js/build/'))
-};
-
 function adminScripts() {
     return gulp.src('admin/js/src/**/*.js')
         .pipe(plumber({
@@ -64,5 +52,5 @@ function adminScripts() {
 };
 
 gulp.task('default', gulp.parallel(
-    style, admin, frontEndScripts, adminScripts
+    style, admin, adminScripts
 ));

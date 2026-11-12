@@ -3,10 +3,8 @@
 /**
  * Callout shortcode: the markup `callback()` returns for each type and the Shortcake arguments.
  *
- * `callback()` reads attributes and variables that are not always set (for
- * example `fullscreen` and `$customclass`), so most renders raise PHP warnings
- * today. The tests collect those through `calloutRender()` and pin them where
- * they are part of the current behavior.
+ * The tests collect the PHP errors a render raises through `calloutRender()` and
+ * assert that an ordinary render raises none.
  *
  * @see inc/shortcodes/class-callout.php
  */
@@ -42,8 +40,8 @@ function calloutRender(mixed $attrs = [], string $content = 'Body'): array
 }
 
 /**
- * Drop the warnings every render raises (an unset $customclass, and the
- * Brain Monkey esc_attr stub rejecting null), leaving only unexpected ones.
+ * Drop the deprecation the Brain Monkey esc_attr stub raises for a null
+ * argument, leaving only unexpected errors.
  *
  * @param  list<string>  $errors
  * @return list<string>
@@ -51,7 +49,6 @@ function calloutRender(mixed $attrs = [], string $content = 'Body'): array
 function calloutUnexpected(array $errors): array
 {
     return array_values(array_diff($errors, [
-        'Undefined variable $customclass',
         'htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated',
     ]));
 }
@@ -110,8 +107,7 @@ it('renders the default basic callout', function (): void {
     [$html, $errors] = calloutRender();
 
     expect($html)->toBe('<div class="uams-callout uamsred text-center normal "><div class="inner-container"><div></div><p class=""><p>Body</p></p></div></div><!-- .uams-callout -->')
-        ->and($errors)->toContain('Undefined array key "fullscreen"')
-        ->and($errors)->toContain('Undefined variable $customclass');
+        ->and($errors)->toBe([]);
 });
 
 it('falls back to the defaults when the attributes are not an array', function (): void {
@@ -234,24 +230,25 @@ it('passes the link url through esc_url', function (): void {
     expect($html)->toContain('<a href="ESC[https://example.com/a]" >');
 });
 
-it('adds sanitized custom classes and the raw ones to the basic callout', function (): void {
+it('adds only the sanitized custom classes to the basic callout', function (): void {
     [$html, $errors] = calloutRender(['customclass' => 'one,t wo!', 'fullscreen' => false]);
 
-    expect($html)->toStartWith('<div class="uams-callout uamsred text-center normal one t wo! one two">')
-        ->and(calloutUnexpected($errors))->toBe([]);
+    expect($html)->toStartWith('<div class="uams-callout uamsred text-center normal one two">')
+        ->and($html)->not->toContain('wo!')
+        ->and($errors)->toBe([]);
 });
 
 it('adds the full-width class when fullscreen is set', function (): void {
     [$html] = calloutRender(['customclass' => 'one', 'fullscreen' => true]);
 
-    expect($html)->toStartWith('<div class="uams-callout uamsred text-center normal one one uams-full-width">');
+    expect($html)->toStartWith('<div class="uams-callout uamsred text-center normal one uams-full-width">');
 });
 
-it('adds the full-width class without custom classes and warns about the missing variable', function (): void {
+it('adds the full-width class without custom classes and without a warning', function (): void {
     [$html, $errors] = calloutRender(['fullscreen' => true]);
 
     expect($html)->toStartWith('<div class="uams-callout uamsred text-center normal  uams-full-width">')
-        ->and($errors)->toContain('Undefined variable $customclass');
+        ->and($errors)->toBe([]);
 });
 
 it('renders the image callout with the media position, srcset, alt and caption', function (): void {
@@ -304,11 +301,11 @@ it('falls back to the padding-one class when the image callout padding is emptie
     expect($html)->toContain('<div class="callout-content media-top padding-one">');
 });
 
-it('warns about an undefined media position variable when none is chosen', function (): void {
+it('renders the image callout without a media position class and without a warning when none is chosen', function (): void {
     [$html, $errors] = calloutRender(['type' => 'img', 'fullscreen' => false]);
 
     expect($html)->toContain('callout-media callout-media-img  ')
-        ->and($errors)->toContain('Undefined variable $mediaposition');
+        ->and($errors)->toBe([]);
 });
 
 it('renders a YouTube embed for the video callout from a watch url', function (): void {
@@ -393,7 +390,7 @@ it('renders a self-hosted video with a poster, fallback image and autoplay', fun
         ->and(calloutUnexpected($errors))->toBe([]);
 });
 
-it('warns about an undefined autoplay variable for a self-hosted video without autoplay', function (): void {
+it('renders a self-hosted video without autoplay and without a warning', function (): void {
     [$html, $errors] = calloutRender([
         'type' => 'vid',
         'vidtype' => 'other',
@@ -405,7 +402,7 @@ it('warns about an undefined autoplay variable for a self-hosted video without a
     ]);
 
     expect($html)->toContain('controls >')
-        ->and($errors)->toContain('Undefined variable $autoplay');
+        ->and($errors)->toBe([]);
 });
 
 it('renders no video element when the video callout has no video attributes', function (): void {
@@ -447,7 +444,7 @@ it('renders the background video callout without a video source', function (): v
         ->toContain('<div class="uams-callout-bgvid ')
         ->toContain('<div class="callout-media-wrapper callout-video"><div class="embed-responsive"></div><!-- .embed-responsive --></div>')
         ->toContain('<div class="callout-content-container container light">')
-        ->and($errors)->toContain('Undefined variable $poster');
+        ->and($errors)->toBe([]);
 });
 
 it('renders the background video with a video element when source and fallback are set', function (): void {

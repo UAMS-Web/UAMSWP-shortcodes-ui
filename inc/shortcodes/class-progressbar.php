@@ -121,7 +121,7 @@ class ProgressBar extends Shortcode
         }
 
         // Only integers. Otherwise, default to 50.
-        $complete = (ctype_digit($attrs['complete'])) ? (string) min(100, (int) sanitize_text_field($attrs['complete'])) : '50';
+        $complete = (ctype_digit($attrs['complete'])) ? min(100, $attrs['complete']) : 50;
 
         // Valid types only.
         if (! empty($attrs['type'])) {

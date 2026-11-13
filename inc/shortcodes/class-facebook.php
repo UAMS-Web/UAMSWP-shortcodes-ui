@@ -73,7 +73,7 @@ class Facebook extends Shortcode
             }
 
             /* Pattern for Facebook video embeds */
-            if (preg_match_all('#<div id="fb-root"><\/div><script>[^<]+<\/script><div class="fb-video" [^>]+href=[\'\"][^\'\"]+[\'\"]><div class="fb-xfbml-parse-ignore"><blockquote cite=[\'\"][^\'\"]+[\'\"]><a href=[\'\"]([^\'\"]+)[\'\"]+.*?<\/div><\/div>?#', $content, $matches)) {
+            if (preg_match_all('#<div id="fb-root"><\/div><script>[^<]+<\/script><div class="fb-video" [^>]+href=[\'\"][^\'\"]+[\'\"][^>]*><div class="fb-xfbml-parse-ignore"><blockquote cite=[\'\"][^\'\"]+[\'\"]><a href=[\'\"]([^\'\"]+)[\'\"]+.*?<\/div><\/div>?#', $content, $matches)) {
                 $replacements = [];
                 $shortcode_tag = self::get_shortcode_tag();
                 foreach ($matches[0] as $key => $value) {

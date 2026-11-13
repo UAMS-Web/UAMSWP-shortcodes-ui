@@ -51,7 +51,7 @@ class Twitter extends Shortcode
             return '';
         }
 
-        $needle = '#https?://twitter\.com/([^/]+)/status/([^/]+)#';
+        $needle = '#https?://(?:twitter|x)\.com/([^/]+)/status/([^/]+)#';
         if (preg_match($needle, $attrs['url'], $matches)) {
             $username = $matches[1];
         } else {

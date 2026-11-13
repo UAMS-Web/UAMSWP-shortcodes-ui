@@ -50,12 +50,16 @@ it('returns an empty string for a url that is not a tweet', function (string $ur
     'profile page' => 'https://twitter.com/user',
     'other host' => 'https://example.com/user/status/1',
     'missing id segment' => 'https://twitter.com/user/status/',
-    'x.com host' => 'https://x.com/user/status/1',
 ]);
 
 it('renders the tweet blockquote and widget script', function (): void {
     expect(Twitter::callback(['url' => 'https://twitter.com/uamshealth/status/12345']))
         ->toBe('<blockquote class="twitter-tweet"><a href="https://twitter.com/uamshealth/status/12345">Tweet from @uamshealth</a></blockquote><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>');
+});
+
+it('accepts an x.com url', function (): void {
+    expect(Twitter::callback(['url' => 'https://x.com/uamshealth/status/12345']))
+        ->toBe('<blockquote class="twitter-tweet"><a href="https://x.com/uamshealth/status/12345">Tweet from @uamshealth</a></blockquote><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>');
 });
 
 it('accepts an http url', function (): void {

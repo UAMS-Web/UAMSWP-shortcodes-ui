@@ -1,0 +1,49 @@
+name: CodeQL
+
+# Advanced setup, replacing the repository's CodeQL default setup, which cannot exclude a path.
+# The configuration in `.github/codeql/codeql-config.yml` leaves out the vendored pdf.js under
+# `assets/lib/pdfjs`; everything else is scanned as before, in the same languages.
+#
+# Not a required check: the ruleset requires `CI`, `Attribution footer` and `Closing keywords`.
+# Scan results appear under Security, Code scanning.
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+  workflow_dispatch:
+  # Weekly, so a new query pack reaches code no pull request touches. Mondays at 07:30 UTC.
+  schedule:
+    - cron: '30 7 * * 1'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [actions, javascript-typescript, python]
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: github/codeql-action/init@v4
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: none
+          config-file: ./.github/codeql/codeql-config.yml
+
+      - uses: github/codeql-action/analyze@v4
+        with:
+          category: /language:${{ matrix.language }}

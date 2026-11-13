@@ -128,17 +128,13 @@ it('returns null from uams_shortcodes_get_contents for a missing file and raises
         ->and($warnings)->not->toBeEmpty();
 });
 
-it('exposes the icon collection through its mis-cased getter', function (): void {
-    $icons = ShortcodeProbe::get_icon_collectiOn();
+it('exposes the icon collection through get_icon_collection', function (): void {
+    $icons = ShortcodeProbe::get_icon_collection();
 
     expect($icons['noicon'])->toBe('No Icon')
         ->and($icons['i-twitter'])->toBe('Twitter')
         ->and($icons)->toHaveKeys(['ic-book', 'i-Lamp', 'i-Tools'])
         ->and(count($icons))->toBeGreaterThan(200);
-});
-
-it('resolves get_icon_collection to the same method despite the different casing', function (): void {
-    expect(ShortcodeProbe::get_icon_collection())->toBe(ShortcodeProbe::get_icon_collectiOn());
 });
 
 it('lists the ignored icon names', function (): void {
@@ -312,8 +308,10 @@ it('skips an empty quoted token and keeps a quoted word', function (): void {
     expect(ShortcodeProbe::expose_parse_tag_attributes('"" "word"'))->toBe(['word' => null]);
 });
 
-it('currently drops an attribute whose name is the string 0', function (): void {
-    expect(ShortcodeProbe::expose_parse_tag_attributes("0=\"x\" 0='y' 0=z"))->toBe([]);
+it('keeps an attribute whose name is the string 0', function (): void {
+    expect(ShortcodeProbe::expose_parse_tag_attributes('0="x"'))->toBe([0 => 'x'])
+        ->and(ShortcodeProbe::expose_parse_tag_attributes("0='y'"))->toBe([0 => 'y'])
+        ->and(ShortcodeProbe::expose_parse_tag_attributes('0=z'))->toBe([0 => 'z']);
 });
 
 it('returns an empty array for empty attribute text', function (): void {

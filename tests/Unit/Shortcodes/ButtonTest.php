@@ -19,8 +19,7 @@ beforeEach(function (): void {
 });
 
 /**
- * Attributes for a complete call: the class reads text, type and newline
- * without defaults, so a call that omits them raises warnings.
+ * Attributes for a complete call.
  *
  * @param  array<string, mixed>  $overrides
  * @return array<string, mixed>
@@ -88,7 +87,7 @@ it('runs the url through esc_url', function (): void {
     expect(Button::callback(buttonAttrs(['url' => 'https://example.test/x'])))->toContain('href="ESCAPED:https://example.test/x"');
 });
 
-it('raises warnings for the text, type and newline keys the defaults omit', function (): void {
+it('renders an empty button without warnings when text, type and newline are omitted', function (): void {
     $messages = [];
     set_error_handler(function (int $no, string $str) use (&$messages): bool {
         $messages[] = $str;
@@ -103,11 +102,7 @@ it('raises warnings for the text, type and newline keys the defaults omit', func
     }
 
     expect($html)->toBe('<a class="uams-btn btn    " href="" target=""></a>')
-        ->and($messages)->toBe([
-            'Undefined array key "type"',
-            'Undefined array key "newline"',
-            'Undefined array key "text"',
-        ]);
+        ->and($messages)->toBe([]);
 });
 
 it('uses the defaults when the attributes are not an array', function (): void {

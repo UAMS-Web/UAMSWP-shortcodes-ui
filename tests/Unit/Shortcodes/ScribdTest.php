@@ -56,11 +56,20 @@ it('accepts a document url', function (): void {
         ->toContain('src="https://www.scribd.com/embeds/99/content?');
 });
 
-it('uses an empty id for a doc url whose digits follow the word directly', function (): void {
-    // The slash after "doc" is optional in the pattern, which shifts the explode() index.
-    expect(Scribd::callback(['url' => 'https://www.scribd.com/doc123/x']))
-        ->toContain('src="https://www.scribd.com/embeds//content?');
+it('treats a doc url whose digits follow the word directly as invalid', function (): void {
+    when('current_user_can')->justReturn(false);
+
+    expect(Scribd::callback(['url' => 'https://www.scribd.com/doc123/x']))->toBe('');
 });
+
+it('rejects a Scribd url that is not at the start of the value', function (string $url): void {
+    when('current_user_can')->justReturn(false);
+
+    expect(Scribd::callback(['url' => $url]))->toBe('');
+})->with([
+    'inside a query string' => 'https://example.com/?u=https://www.scribd.com/doc/1/x',
+    'after text' => 'see https://www.scribd.com/doc/1/x',
+]);
 
 it('shows an error to a user who can edit posts when the url is not a Scribd document', function (): void {
     when('current_user_can')->alias(fn (string $cap): bool => $cap === 'edit_posts');

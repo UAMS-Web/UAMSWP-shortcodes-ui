@@ -76,7 +76,7 @@ abstract class Shortcode
      *
      * @return array
      */
-    public static function get_icon_collectiOn()
+    public static function get_icon_collection()
     {
         return [
             'noicon' => 'No Icon',
@@ -594,16 +594,19 @@ abstract class Shortcode
 
         if (preg_match_all($pattern, $text, $match, PREG_SET_ORDER)) {
             foreach ($match as $m) {
-                if (! empty($m[1])) {
-                    $atts[$m[1]] = stripcslashes($m[2]);
-                } elseif (! empty($m[3])) {
-                    $atts[$m[3]] = stripcslashes($m[4]);
-                } elseif (! empty($m[5])) {
-                    $atts[$m[5]] = stripcslashes($m[6]);
-                } elseif (($m[7] ?? '') !== '') {
-                    $atts[$m[7]] = null;
-                } elseif (isset($m[8])) {
-                    $atts[$m[8]] = null;
+                // @pest-mutate-ignore: IncrementInteger
+                [, $dq_name, $dq_value, $sq_name, $sq_value, $bare_name, $bare_value, $quoted, $word] = array_pad($m, 9, '');
+
+                if ($dq_name !== '') {
+                    $atts[$dq_name] = stripcslashes($dq_value);
+                } elseif ($sq_name !== '') {
+                    $atts[$sq_name] = stripcslashes($sq_value);
+                } elseif ($bare_name !== '') {
+                    $atts[$bare_name] = stripcslashes($bare_value);
+                } elseif ($quoted !== '') {
+                    $atts[$quoted] = null;
+                } elseif ($word !== '') {
+                    $atts[$word] = null;
                 }
             }
         }

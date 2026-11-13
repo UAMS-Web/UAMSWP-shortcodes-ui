@@ -67,8 +67,11 @@ it('defaults the completion value to 50 when it is not all digits', function (st
         ->toContain('width: 50%;');
 })->with(['', 'abc', '12.5', '-3', '40%']);
 
-it('does not clamp a completion value above 100 (current behavior)', function (): void {
-    expect(renderProgressBar(['complete' => '250']))->toContain('aria-valuenow="250"');
+it('clamps a completion value above 100 to 100', function (): void {
+    expect(renderProgressBar(['complete' => '250']))
+        ->toContain('aria-valuenow="100"')
+        ->toContain('width: 100%;')
+        ->not->toContain('250');
 });
 
 it('prints an allowed type and falls back to progress-bar-primary for any other', function (): void {

@@ -143,10 +143,10 @@ describe('reversal', function (): void {
         expect(Facebook::reversal($embed))->toBe('[facebook url="https://www.facebook.com/u/videos/1/"]');
     });
 
-    it('leaves a video embed alone when data-href is not the last attribute', function (): void {
+    it('reverses a video embed when data-href is not the last attribute', function (): void {
         $embed = '<div id="fb-root"></div><script>var a = 1;</script><div class="fb-video" data-href="/u/videos/1/" data-width="500"><div class="fb-xfbml-parse-ignore"><blockquote cite="/u/videos/1/"><a href="/u/videos/1/">T</a></blockquote></div></div>';
 
-        expect(Facebook::reversal($embed))->toBe($embed);
+        expect(Facebook::reversal($embed))->toBe('[facebook url="https://www.facebook.com/u/videos/1/"]');
     });
 
     it('turns an iframe embed into a shortcode using the decoded href', function (): void {

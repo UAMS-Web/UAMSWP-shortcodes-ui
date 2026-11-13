@@ -16,7 +16,7 @@
   "author": "OIT Design",
   "license": "MIT",
   "devDependencies": {
-    "clean-css": "^4.2.1",
+    "clean-css": "^5.3.3",
     "gulp": "^5.0.1",
     "gulp-clean-css": "^4.2.0",
     "gulp-coffee": "^3.0.3",

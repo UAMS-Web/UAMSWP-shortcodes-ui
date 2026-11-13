@@ -21,10 +21,11 @@ const sass = require(path.join(root, 'node_modules', 'gulp-sass'))(require(path.
 const sassGlob = require(path.join(root, 'node_modules', 'gulp-sass-glob'));
 const { version } = require(path.join(root, 'node_modules', 'gulp-sass-glob', 'package.json'));
 
-// `0.x` joins `file.base` into the glob pattern with the platform's separator, so on Windows its
-// pattern never matches and it expands nothing. `1.x` normalizes the path and works everywhere.
-const expandsNothing = process.platform === 'win32' && version.startsWith('0.');
-const options = { skip: expandsNothing ? 'gulp-sass-glob 0.x expands no glob on Windows' : false };
+// `0.x` builds its glob as `file.base + pattern` and relies on `file.base` ending in a separator.
+// vinyl 3, which gulp 5 uses, drops that separator, so `0.x` never matches a file and expands
+// nothing on any platform. `1.x` takes the folder from `file.path` and works.
+const expandsNothing = version.startsWith('0.');
+const options = { skip: expandsNothing ? 'gulp-sass-glob 0.x expands no glob under vinyl 3' : false };
 
 const scratch = fs.mkdtempSync(path.join(os.tmpdir(), 'uamswp-shortcodes-sass-glob-'));
 const write = (relativePath, contents) => {

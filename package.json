@@ -28,7 +28,7 @@
     "gulp-sass-glob": "1.1.0",
     "gulp-strip-css-comments": "^3.0.0",
     "jshint": "^2.10.2",
-    "sass": "^1.107.1"
+    "sass": "^1.108.1"
   },
   "overrides": {
     "lodash": "^4.18.0",

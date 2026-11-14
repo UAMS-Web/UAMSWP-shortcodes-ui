@@ -17,3 +17,7 @@
 /admin -export-ignore
 /assets -export-ignore
 /uamswp-shortcodes.php -export-ignore
+
+# An append-only log: two branches that each add an entry keep both sides. The order
+# check (`.claude/skills/decision-log`) catches the misordering and lost separator this can cause.
+docs/DECISIONS.md merge=union

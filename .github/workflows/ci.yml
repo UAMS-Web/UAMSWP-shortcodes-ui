@@ -78,10 +78,26 @@ jobs:
       # Runs the listener and embed tests and builds the Sass and scripts in a scratch copy.
       - run: npm test
 
+  # A plain job beside the shared call: the decision log must stay oldest-first with a blank line
+  # above each entry heading. Listed in the `needs:` of `CI` below.
+  decision-log:
+    name: Decision log order
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      # Prints the entry count it read; exits 1 on a finding and 2 when it could not answer.
+      - run: node .claude/skills/decision-log/scripts/check-decision-log-order.mjs
+
   # The one check a ruleset requires from this workflow. Keep `needs:` naming the call.
   ci:
     name: CI
-    needs: [checks, js]
+    needs: [checks, js, decision-log]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5

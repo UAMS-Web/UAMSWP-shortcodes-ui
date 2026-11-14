@@ -1,7 +1,6 @@
 var gulp = require('gulp'),
     coffee = require('gulp-coffee'),
     plumber = require('gulp-plumber'),
-    rename = require('gulp-rename'),
     concat = require('gulp-concat'),
     sass = require('gulp-sass')(require('sass')),
     sassGlob = require('gulp-sass-glob');

@@ -48,7 +48,7 @@ jobs:
   checks:
     # Pinned to a release tag of the shared chain, never a branch: a change to the chain reaches
     # this plugin only when the tag here moves. v0.9.0 is the first tag that carries the plugin inputs.
-    uses: UAMS-Web/uams-ci-workflows/.github/workflows/ci.yml@v0.9.0
+    uses: UAMS-Web/uams-ci-workflows/.github/workflows/ci.yml@v0.13.0
     with:
       linux-only: true
       mutate-paths: inc

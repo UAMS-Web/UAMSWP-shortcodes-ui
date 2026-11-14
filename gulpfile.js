@@ -1,12 +1,10 @@
 var gulp = require('gulp'),
-    coffee = require('gulp-coffee'),
     plumber = require('gulp-plumber'),
     concat = require('gulp-concat'),
     sass = require('gulp-sass')(require('sass')),
-    sassGlob = require('gulp-sass-glob');
-minifyCss = require('gulp-clean-css'),
-    stripCssComments = require('gulp-strip-css-comments').default,
-    jshint = require('gulp-jshint');
+    sassGlob = require('gulp-sass-glob'),
+    minifyCss = require('gulp-clean-css'),
+    stripCssComments = require('gulp-strip-css-comments').default;
 
 // handle styles
 function style() {

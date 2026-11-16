@@ -9,9 +9,9 @@ declare(strict_types=1);
  * Description: Useful shortcodes for UAMS websites, which can be added using the Shortcake shortcode UI.
  * Author: Todd McKee, MEd, Original: OIT Design, Brian DeConinck, Chris Deaton
  * Author URI: https://www.uams.edu/
- * Requires at least: 4.6
+ * Requires at least: 6.8
  * Requires PHP: 8.2
- * Tested up to: 4.9.9
+ * Tested up to: 6.8
  *
  * @package WordPress
  * @since 0.3.0

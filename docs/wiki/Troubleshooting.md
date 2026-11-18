@@ -8,7 +8,7 @@ Written against v0.7.0.
 - [A shortcode shows on the page as text in brackets](#a-shortcode-shows-on-the-page-as-text-in-brackets)
 - [A PDF shortcode renders nothing](#a-pdf-shortcode-renders-nothing)
 - [An error occurred while loading the PDF](#an-error-occurred-while-loading-the-pdf)
-- [The PDF proxy answers 403 or 502](#the-pdf-proxy-answers-403-or-502)
+- [The PDF still fails with the proxy checked](#the-pdf-still-fails-with-the-proxy-checked)
 
 ## The dashboard says Shortcake is required
 
@@ -52,11 +52,15 @@ The viewer frame appears, but shows `An error occurred while loading the PDF.`
 
 **Cause:** the PDF is on another site that does not send cross-origin (CORS) headers, so the reader's browser refuses to hand it to the viewer.
 
-**Fix:** download the PDF and upload it to the media library, or have a developer switch on the proxy and allow the other site's host ([Embedding a PDF](Embedding-a-PDF.md#through-the-proxy-for-a-pdf-that-refuses-to-embed)), then check **Proxy through local domain?** on the shortcode.
+**Fix:** download the PDF and upload it to the media library. The proxy that would fetch it on the server does not work in v0.7.0 ([Embedding a PDF](Embedding-a-PDF.md#through-the-proxy-for-a-pdf-that-refuses-to-embed)).
 
-## The PDF proxy answers 403 or 502
+## The PDF still fails with the proxy checked
 
-The viewer still fails with the proxy checked, and the browser's network panel shows the `admin-ajax.php?action=uams_shortcodes_asset_proxy` request answering `403` or `502`.
+The browser's network panel shows the `admin-ajax.php?action=uams_shortcodes_asset_proxy` request failing.
+
+**Cause in v0.7.0:** the plugin never loads the proxy, so WordPress has no handler for that request and answers with its stock response for an unknown action ([#160](https://github.com/UAMS-Web/UAMSWP-shortcodes-ui/issues/160)). **Fix:** upload the PDF to the media library.
+
+Once the proxy is loaded, it answers `403` or `502` for the reasons below.
 
 **Cause of a 403:** the proxy is switched off (`uams_shortcodes_pdf_enable_cors_proxy`), the PDF's host is not in `uams_shortcodes_asset_proxy_allowed_hosts`, the address is not an `http` or `https` `.pdf` URL, or the page was cached long enough for its security token to expire.
 

@@ -88,7 +88,7 @@ Every shortcode the plugin registers, with the attributes the Shortcake editor w
 | `textposition` | Text Position (radio) | `top left` (Top Left), `top center` (Top Center), `top right` (Top Right), `middle left` (Middle Left), `middle center` (Middle Center), `middle right` (Middle Right), `bottom left` (Bottom Left), `bottom center` (Bottom Center), `bottom right` (Bottom Right) |
 | `textwidth` | Text Box Width (radio) | `col-lg-3 col-md-3 col-sm-12 col-xs-12` (One-Quarter Width), `col-lg-4 col-md-4 col-sm-12 col-xs-12` (One-Third Width), `col-lg-6 col-md-6 col-sm-12 col-xs-12` (One-Half Width), `col-lg-8 col-md-8 col-sm-12 col-xs-12` (Two-Thirds Width), `col-lg-9 col-md-9 col-sm-12 col-xs-12` (Three-Quarters Width), `col-lg-12 col-md-12 col-sm-12 col-xs-12` (Full-Width) |
 | `margin` | Margins (radio) | `normal` (Normal), `thinmargin` (Thin), `nomargin` (None) |
-| `padding` | Text Padding (radio) | `padding-one` (Normal (1 em)), `padding-two` (Large (2em)), `padding-halve` (Thin (0.5 em)), `padding-none` (None (0 em)) |
+| `padding` | Text Padding (radio) | `padding-one ` (Normal (1 em), written with a trailing space), `padding-two` (Large (2em)), `padding-halve` (Thin (0.5 em)), `padding-none` (None (0 em)) |
 | `fullscreen` | Fullsreen? (checkbox) | `true` when checked |
 | `customclass` | Custom CSS classes (text) | text |
 
@@ -258,4 +258,4 @@ Every shortcode the plugin registers, with the attributes the Shortcake editor w
 
 ## Not registered
 
-The plugin also carries classes for `Facebook`, `GoogleDocs`, `Iframe`, `Instagram`, `Panel`, `RSS_Posts`, `Scribd`, `Script`, `TextBox` and the original `YouTube` shortcode. They are commented out of the registered list in `inc/class-uams-shortcodes.php`, so their tags do nothing on a site unless a site adds the class back through the `uams_shortcodes_shortcode_classes` filter ([Hooks](Hooks.md)).
+The plugin also carries classes for `Facebook`, `GoogleDocs`, `Iframe`, `Instagram`, `Panel`, `RSS_Posts`, `Scribd`, `Script`, `TextBox` and the original `YouTube` shortcode. They are not in the registered list in `inc/class-uams-shortcodes.php` (most are commented out there; `RSS_Posts` is absent), so their tags do nothing on a site unless a site adds the class back through the `uams_shortcodes_shortcode_classes` filter ([Hooks](Hooks.md)).

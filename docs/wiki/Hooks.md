@@ -19,9 +19,11 @@ add_filter('uams_shortcodes_shortcode_tag', function (string $tag, string $class
 
 ## PDF and the asset proxy
 
+**Note:** in v0.7.0 the plugin never loads the asset proxy, so only `uams_shortcodes_pdf_enable_cors_proxy` (which adds the checkbox) and `uams_shortcodes_pdf_asset_proxy_url` (which sets the address the viewer asks) take effect. The three `uams_shortcodes_asset_proxy_*` filters are read by the proxy itself and have no effect until it is loaded ([#160](https://github.com/UAMS-Web/UAMSWP-shortcodes-ui/issues/160)).
+
 | Hook | Type | Receives | Effect |
 | --- | --- | --- | --- |
-| `uams_shortcodes_pdf_enable_cors_proxy` | filter | `bool`, `false` by default | `true` adds the **Proxy through local domain?** option to `[pdf]` and lets the proxy answer. A `proxy` attribute is ignored while this is `false`. |
+| `uams_shortcodes_pdf_enable_cors_proxy` | filter | `bool`, `false` by default | `true` adds the **Proxy through local domain?** option to `[pdf]` and, once the proxy is loaded, lets it answer. A `proxy` attribute is ignored while this is `false`. |
 | `uams_shortcodes_asset_proxy_allowed_hosts` | filter | `list<string>` of host names | The hosts the proxy fetches from. Defaults to the hosts of the site's home, site and uploads URLs. Compared case-insensitively. |
 | `uams_shortcodes_asset_proxy_max_bytes` | filter | `int`, `20971520` (20 MiB) by default | The largest PDF the proxy relays. |
 | `uams_shortcodes_asset_proxy_request_args` | filter | `array` for `wp_safe_remote_get()` | The proxy's request arguments: `timeout` 5, `redirection` 0 and a response size limit. The request stays `wp_safe_remote_get()` whatever is returned. |

@@ -23,7 +23,9 @@ The address must end in `.pdf`; anything else renders nothing.
 
 ## Through the proxy, for a PDF that refuses to embed
 
-The plugin can fetch an external PDF on the server and hand it to the viewer from the site's own address. The proxy is off by default and only a developer can switch it on, from a theme or plugin:
+**Warning:** in v0.7.0 the proxy does not work. The plugin never loads the code that answers its requests, so a proxied PDF fails to load whatever the settings below say ([#160](https://github.com/UAMS-Web/UAMSWP-shortcodes-ui/issues/160)). Until that is fixed, upload the PDF to the media library instead. The rest of this section describes the proxy as written, for when it is loaded.
+
+The proxy fetches an external PDF on the server and hands it to the viewer from the site's own address. It is off by default and only a developer can switch it on, from a theme or plugin:
 
 ```php
 add_filter('uams_shortcodes_pdf_enable_cors_proxy', '__return_true');

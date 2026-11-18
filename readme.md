@@ -12,6 +12,24 @@ Modelled after [Shortcake's Bakery](https://github.com/wp-shortcake/shortcake-ba
 
 This project is also an attempt to improve the extensibility of the original NCSU Shortcodes plugin, and make it easier for 3rd parties to contribute additional shortcodes while maintaining a standardized approach that preserves the integrity of each individual shortcode.
 
+## Documentation
+
+The [wiki](https://github.com/UAMS-Web/UAMSWP-shortcodes-ui/wiki) has a walkthrough, guides, the reference for every shortcode and hook, and troubleshooting. Its pages are kept in [`docs/wiki/`](docs/wiki/) and published from there.
+
+## Requirements
+
+- WordPress 6.8 or later
+- PHP 8.2 or later
+- The [Shortcake (Shortcode UI)](https://wordpress.org/plugins/shortcode-ui/) plugin, active, and the classic editor for its forms
+
+## Installation
+
+1. Install and activate Shortcake (Shortcode UI).
+2. Install this plugin from a [release](https://github.com/UAMS-Web/UAMSWP-shortcodes-ui/releases) download, or from this repository with a deployment tool that installs a GitHub repository as a plugin.
+3. Activate **UAMSWP Shortcodes UI** in **Plugins**.
+
+The elements then appear under **Add Post Element** in the classic editor. The wiki's [first walkthrough](https://github.com/UAMS-Web/UAMSWP-shortcodes-ui/wiki/Adding-your-first-shortcode) inserts one.
+
 ## Credits
 
 Based on NCSU Shortcodes by OIT Design, Brian DeConinck and Chris Deaton.
@@ -26,7 +44,7 @@ Developers:
 
 ## Contributing
 
-See the [wiki](https://github.ncsu.edu/oitdesign/NCSU-Shortcodes/wiki) for guidance on how to contribute proposed shortcodes for inclusion into this project.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the issue-to-merge path, and the wiki's [Adding a shortcode to a site](https://github.com/UAMS-Web/UAMSWP-shortcodes-ui/wiki/Adding-a-shortcode-to-a-site) for how a shortcode class is built.
 
 [NodeJS](https://nodejs.org/en/) is required for properly preparing source files. Afterward, we use Gulp to do the dirty work. 
 

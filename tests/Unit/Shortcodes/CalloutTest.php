@@ -301,6 +301,19 @@ it('falls back to the padding-one class when the image callout padding is emptie
     expect($html)->toContain('<div class="callout-content media-top padding-one">');
 });
 
+it('offers the Normal padding option under a key with no trailing space', function (): void {
+    $padding = array_values(array_filter(Callout::get_attributes(), fn (array $field): bool => $field['attr'] === 'padding'))[0];
+
+    expect(array_keys($padding['options']))->toBe(['padding-one', 'padding-two', 'padding-halve', 'padding-none'])
+        ->and($padding['options'])->toHaveKey('padding-one', 'Normal (1 em)');
+});
+
+it('renders a post saved with the old padding-one value, trailing space included, as before', function (): void {
+    [$html] = calloutRender(['type' => 'img', 'mediaposition' => 'top', 'padding' => 'padding-one ', 'fullscreen' => false]);
+
+    expect($html)->toContain('<div class="callout-content media-top padding-one ">');
+});
+
 it('renders the image callout without a media position class and without a warning when none is chosen', function (): void {
     [$html, $errors] = calloutRender(['type' => 'img', 'fullscreen' => false]);
 

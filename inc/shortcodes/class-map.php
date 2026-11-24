@@ -120,7 +120,7 @@ class Map extends Shortcode
                 'label' => esc_html__('Height', 'uams_shortcodes'),
                 'attr' => 'height',
                 'type' => 'text',
-                'description' => 'Height in px (Defualt 480px)',
+                'description' => 'Height in px (default 480px)',
                 'meta' => [
                     'placeholder' => '480px',
                 ],

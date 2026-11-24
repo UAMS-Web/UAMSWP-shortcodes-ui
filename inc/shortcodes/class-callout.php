@@ -321,7 +321,7 @@ class Callout extends Shortcode
                 'encode' => false,
                 'description' => 'Amount of room around the text',
                 'options' => [
-                    'padding-one ' => 'Normal (1 em)',
+                    'padding-one' => 'Normal (1 em)',
                     'padding-two' => 'Large (2em)',
                     'padding-halve' => 'Thin (0.5 em)',
                     'padding-none' => 'None (0 em)',
@@ -329,7 +329,7 @@ class Callout extends Shortcode
             ],
 
             [
-                'label' => esc_html__('Fullsreen?', 'uams_shortcodes'),
+                'label' => esc_html__('Full screen?', 'uams_shortcodes'),
                 'attr' => 'fullscreen',
                 'type' => 'checkbox',
                 'description' => '<strong>Note:</strong> This option only works on full width page template (No sidebar). You may get unintended results on pages with sidebar.',

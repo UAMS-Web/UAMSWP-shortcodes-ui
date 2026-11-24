@@ -24,7 +24,7 @@
                     }
                 },
                 {
-                    "label": "Dismissable?",
+                    "label": "Dismissible?",
                     "attr": "dismiss",
                     "type": "checkbox",
                     "description": ""
@@ -57,7 +57,7 @@
                 }
             },
             {
-                "label": "Dismissable?",
+                "label": "Dismissible?",
                 "attr": "dismiss",
                 "type": "checkbox",
                 "description": ""
@@ -932,14 +932,14 @@
                     "encode": false,
                     "description": "Amount of room around the text",
                     "options": {
-                        "padding-one ": "Normal (1 em)",
+                        "padding-one": "Normal (1 em)",
                         "padding-two": "Large (2em)",
                         "padding-halve": "Thin (0.5 em)",
                         "padding-none": "None (0 em)"
                     }
                 },
                 {
-                    "label": "Fullsreen?",
+                    "label": "Full screen?",
                     "attr": "fullscreen",
                     "type": "checkbox",
                     "description": "<strong>Note:</strong> This option only works on full width page template (No sidebar). You may get unintended results on pages with sidebar."
@@ -1454,14 +1454,14 @@
                 "encode": false,
                 "description": "Amount of room around the text",
                 "options": {
-                    "padding-one ": "Normal (1 em)",
+                    "padding-one": "Normal (1 em)",
                     "padding-two": "Large (2em)",
                     "padding-halve": "Thin (0.5 em)",
                     "padding-none": "None (0 em)"
                 }
             },
             {
-                "label": "Fullsreen?",
+                "label": "Full screen?",
                 "attr": "fullscreen",
                 "type": "checkbox",
                 "description": "<strong>Note:</strong> This option only works on full width page template (No sidebar). You may get unintended results on pages with sidebar."
@@ -2719,7 +2719,7 @@
                     "label": "Height",
                     "attr": "height",
                     "type": "text",
-                    "description": "Height in px (Defualt 480px)",
+                    "description": "Height in px (default 480px)",
                     "meta": {
                         "placeholder": "480px"
                     }
@@ -2804,7 +2804,7 @@
                 "label": "Height",
                 "attr": "height",
                 "type": "text",
-                "description": "Height in px (Defualt 480px)",
+                "description": "Height in px (default 480px)",
                 "meta": {
                     "placeholder": "480px"
                 }
@@ -3394,7 +3394,7 @@
                     "description": "The title heading of the box"
                 },
                 {
-                    "label": "Fullsreen?",
+                    "label": "Full screen?",
                     "attr": "fullscreen",
                     "type": "checkbox",
                     "description": "<strong>Note:</strong> This option only works on full width page template (No sidebar). You may get unintended results on pages with sidebar."
@@ -3454,7 +3454,7 @@
                 "description": "The title heading of the box"
             },
             {
-                "label": "Fullsreen?",
+                "label": "Full screen?",
                 "attr": "fullscreen",
                 "type": "checkbox",
                 "description": "<strong>Note:</strong> This option only works on full width page template (No sidebar). You may get unintended results on pages with sidebar."

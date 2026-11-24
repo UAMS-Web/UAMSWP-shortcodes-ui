@@ -63,7 +63,7 @@ class Alert extends Shortcode
                 ],
             ],
             [
-                'label' => esc_html__('Dismissable?', 'uams_shortcodes'),
+                'label' => esc_html__('Dismissible?', 'uams_shortcodes'),
                 'attr' => 'dismiss',
                 'type' => 'checkbox',
                 'description' => '',

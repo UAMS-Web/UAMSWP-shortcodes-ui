@@ -91,7 +91,7 @@ class TextBox extends Shortcode
                 'description' => 'The title heading of the box',
             ],
             [
-                'label' => esc_html__('Fullsreen?', 'uams_shortcodes'),
+                'label' => esc_html__('Full screen?', 'uams_shortcodes'),
                 'attr' => 'fullscreen',
                 'type' => 'checkbox',
                 'description' => '<strong>Note:</strong> This option only works on full width page template (No sidebar). You may get unintended results on pages with sidebar.',
